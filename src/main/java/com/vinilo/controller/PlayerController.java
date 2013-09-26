@@ -53,4 +53,9 @@ public class PlayerController {
     public String goToPlayer() {
         return "player";
     }
+    
+    @RequestMapping(value = "/app", method = RequestMethod.GET)
+    public String goApp() {
+        return "app";
+    }
 }
