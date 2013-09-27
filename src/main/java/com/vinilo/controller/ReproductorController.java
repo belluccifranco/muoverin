@@ -1,7 +1,7 @@
 package com.vinilo.controller;
 
 import com.vinilo.model.Cancion;
-import com.vinilo.service.PlayerService;
+import com.vinilo.service.ReproductorService;
 import com.vinilo.service.mega.MegaHandler;
 import java.io.IOException;
 import java.util.List;
@@ -12,20 +12,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class PlayerController {
+public class ReproductorController {
 
     private MegaHandler mh = new MegaHandler("belluccifranco@gmail.com", "mega01");
-    private PlayerService playerService;
+    private ReproductorService reproductorService;
 
     @Autowired
-    public PlayerController(PlayerService playerService) {
-        this.playerService = playerService;
+    public ReproductorController(ReproductorService reproductorService) {
+        this.reproductorService = reproductorService;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String show() {
         try {
-            List<Cancion> canciones = playerService.buscarTodasLasCanciones();
+            List<Cancion> canciones = reproductorService.buscarTodasLasCanciones();
             mh.login();
         } catch (IOException ex) {
             System.out.println(ex);
