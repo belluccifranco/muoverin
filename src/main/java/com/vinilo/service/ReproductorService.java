@@ -3,7 +3,7 @@ package com.vinilo.service;
 import com.vinilo.model.Cancion;
 import java.util.List;
 
-public interface PlayerService {
+public interface ReproductorService {
 
     public List<Cancion> buscarTodasLasCanciones();
 
