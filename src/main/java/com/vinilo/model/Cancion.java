@@ -32,6 +32,9 @@ public class Cancion implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_album")
     private Album album;
+    @ManyToOne
+    @JoinColumn(name = "id_listaDeReproduccion")
+    private ListaDeReproduccion listaDeReproduccion;
 
     public Long getId_cancion() {
         return id_cancion;
@@ -95,6 +98,14 @@ public class Cancion implements Serializable {
 
     public void setAlbum(Album album) {
         this.album = album;
+    }
+
+    public ListaDeReproduccion getListaDeReproduccion() {
+        return listaDeReproduccion;
+    }
+
+    public void setListaDeReproduccion(ListaDeReproduccion listaDeReproduccion) {
+        this.listaDeReproduccion = listaDeReproduccion;
     }
 
     @Override
