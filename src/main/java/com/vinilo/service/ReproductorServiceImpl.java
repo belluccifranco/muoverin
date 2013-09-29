@@ -19,29 +19,29 @@ public class ReproductorServiceImpl implements ReproductorService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Cancion> buscarTodasLasCanciones() {
+    public List<Cancion> buscarTodas() {
         return cancionRepository.buscarTodas();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<Cancion> buscarTodasLasCancionesConDetalles() {
+    public List<Cancion> buscarTodasConDetalles() {
         return cancionRepository.buscarTodasConDetalles();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Cancion buscarCancionPorId(Long id) {
+    public Cancion buscarPorId(Long id) {
         return cancionRepository.buscarPorId(id);
     }
 
     @Override
-    public Cancion guardarCancion(Cancion cancion) {
+    public Cancion guardar(Cancion cancion) {
         return cancionRepository.guardar(cancion);
     }
 
     @Override
-    public void eliminarCancion(Cancion cancion) {
+    public void eliminar(Cancion cancion) {
         cancionRepository.eliminar(cancion);
     }
 }

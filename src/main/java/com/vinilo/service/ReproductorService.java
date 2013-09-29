@@ -5,13 +5,13 @@ import java.util.List;
 
 public interface ReproductorService {
 
-    public List<Cancion> buscarTodasLasCanciones();
+    public List<Cancion> buscarTodas();
 
-    public List<Cancion> buscarTodasLasCancionesConDetalles();
+    public List<Cancion> buscarTodasConDetalles();
 
-    public Cancion buscarCancionPorId(Long id);
+    public Cancion buscarPorId(Long id);
 
-    public Cancion guardarCancion(Cancion cancion);
+    public Cancion guardar(Cancion cancion);
 
-    public void eliminarCancion(Cancion cancion);
+    public void eliminar(Cancion cancion);
 }

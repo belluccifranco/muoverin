@@ -25,7 +25,7 @@ public class ReproductorController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String show() {
         try {
-            List<Cancion> canciones = reproductorService.buscarTodasLasCanciones();
+            List<Cancion> canciones = reproductorService.buscarTodas();
             mh.login();
         } catch (IOException ex) {
             System.out.println(ex);
