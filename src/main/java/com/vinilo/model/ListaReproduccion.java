@@ -9,10 +9,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
-public class ListaDeReproduccion implements Serializable {
+@NamedQueries({
+    @NamedQuery(name = "ListaReproduccion.buscarTodas", query = "SELECT lr FROM ListaReproduccion lr"),
+    @NamedQuery(name = "ListaReproduccion.buscarPorId", query = "SELECT lr FROM ListaReproduccion lr WHERE lr.id_listaDeReproduccion = :id")
+})
+public class ListaReproduccion implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -65,10 +71,10 @@ public class ListaDeReproduccion implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof ListaDeReproduccion)) {
+        if (!(object instanceof ListaReproduccion)) {
             return false;
         }
-        ListaDeReproduccion other = (ListaDeReproduccion) object;
+        ListaReproduccion other = (ListaReproduccion) object;
         if ((this.id_listaDeReproduccion == null && other.id_listaDeReproduccion != null) || (this.id_listaDeReproduccion != null && !this.id_listaDeReproduccion.equals(other.id_listaDeReproduccion))) {
             return false;
         }

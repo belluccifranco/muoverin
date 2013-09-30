@@ -19,7 +19,7 @@ public class CuentaUsuario implements Serializable {
     private int pin;
     private int cantidadIntentos;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cuentaUsuario")
-    private List<ListaDeReproduccion> listasDeReproduccion;
+    private List<ListaReproduccion> listasDeReproduccion;
 
     public Long getId_cuentaUsuario() {
         return id_cuentaUsuario;
@@ -53,11 +53,11 @@ public class CuentaUsuario implements Serializable {
         this.cantidadIntentos = cantidadIntentos;
     }
 
-    public List<ListaDeReproduccion> getListasDeReproduccion() {
+    public List<ListaReproduccion> getListasDeReproduccion() {
         return listasDeReproduccion;
     }
 
-    public void setListasDeReproduccion(List<ListaDeReproduccion> listasDeReproduccion) {
+    public void setListasDeReproduccion(List<ListaReproduccion> listasDeReproduccion) {
         this.listasDeReproduccion = listasDeReproduccion;
     }
 
