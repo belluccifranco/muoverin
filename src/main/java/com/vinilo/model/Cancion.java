@@ -23,17 +23,24 @@ public class Cancion implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_cancion;
+    
     private int nroOrden;
     private String nombre;
+    
     private String duracion;
+    
     private String url;
+    
     private String letra;
+    
     @ManyToOne
     @JoinColumn(name = "id_artista")
     private Artista artista;
+    
     @ManyToOne
     @JoinColumn(name = "id_album")
     private Album album;
+    
     @ManyToMany(mappedBy = "canciones")
     private List<ListaReproduccion> listasReproduccion;
 

@@ -15,9 +15,13 @@ public class CuentaHosting implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_cuentaHosting;
+    
     private String url;
+    
     private String usuario;
+    
     private String password;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cuentaHosting")
     private List<Album> albumes;
 

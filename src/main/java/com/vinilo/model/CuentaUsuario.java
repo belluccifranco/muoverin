@@ -15,9 +15,13 @@ public class CuentaUsuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_cuentaUsuario;
+    
     private String email;
+    
     private int pin;
+    
     private int cantidadIntentos;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cuentaUsuario")
     private List<ListaReproduccion> listasDeReproduccion;
 

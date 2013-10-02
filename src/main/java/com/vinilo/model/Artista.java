@@ -15,7 +15,9 @@ public class Artista implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_artista;
+    
     private String nombre;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "artista")
     private List<Cancion> canciones;
 

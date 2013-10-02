@@ -24,10 +24,13 @@ public class ListaReproduccion implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_listaReproduccion;
+    
     private String nombre;
+    
     @ManyToOne
     @JoinColumn(name = "id_cuentaUsuario")
     private CuentaUsuario cuentaUsuario;
+    
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "listaReproduccion_cancion", joinColumns = {
         @JoinColumn(name = "id_listaReproduccion")}, inverseJoinColumns = {

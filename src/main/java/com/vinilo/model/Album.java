@@ -17,12 +17,17 @@ public class Album implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_album;
+    
     private String nombre;
+    
     private int anio;
+    
     private int cantCanciones;
+    
     @ManyToOne
     @JoinColumn(name = "id_cuentaHosting")
     private CuentaHosting cuentaHosting;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "album")
     private List<Cancion> canciones;
 
