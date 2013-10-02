@@ -8,34 +8,38 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "ListaReproduccion.buscarTodas", query = "SELECT lr FROM ListaReproduccion lr"),
-    @NamedQuery(name = "ListaReproduccion.buscarPorId", query = "SELECT lr FROM ListaReproduccion lr WHERE lr.id_listaDeReproduccion = :id")
+    @NamedQuery(name = "ListaReproduccion.buscarTodas", query = "SELECT lr FROM ListaReproduccion lr JOIN FETCH lr.canciones"),
+    @NamedQuery(name = "ListaReproduccion.buscarPorId", query = "SELECT lr FROM ListaReproduccion lr JOIN FETCH lr.canciones WHERE lr.id_listaReproduccion = :id")
 })
 public class ListaReproduccion implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id_listaDeReproduccion;
+    private Long id_listaReproduccion;
     private String nombre;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "listaDeReproduccion")
-    private List<Cancion> canciones;
     @ManyToOne
     @JoinColumn(name = "id_cuentaUsuario")
     private CuentaUsuario cuentaUsuario;
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "listaReproduccion_cancion", joinColumns = {
+        @JoinColumn(name = "id_listaReproduccion")}, inverseJoinColumns = {
+        @JoinColumn(name = "id_cancion")})
+    private List<Cancion> canciones;
 
-    public Long getId_listaDeReproduccion() {
-        return id_listaDeReproduccion;
+    public Long getId_listaReproduccion() {
+        return id_listaReproduccion;
     }
 
-    public void setId_listaDeReproduccion(Long id_listaDeReproduccion) {
-        this.id_listaDeReproduccion = id_listaDeReproduccion;
+    public void setId_listaReproduccion(Long id_listaReproduccion) {
+        this.id_listaReproduccion = id_listaReproduccion;
     }
 
     public String getNombre() {
@@ -65,7 +69,7 @@ public class ListaReproduccion implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id_listaDeReproduccion != null ? id_listaDeReproduccion.hashCode() : 0);
+        hash += (id_listaReproduccion != null ? id_listaReproduccion.hashCode() : 0);
         return hash;
     }
 
@@ -75,7 +79,7 @@ public class ListaReproduccion implements Serializable {
             return false;
         }
         ListaReproduccion other = (ListaReproduccion) object;
-        if ((this.id_listaDeReproduccion == null && other.id_listaDeReproduccion != null) || (this.id_listaDeReproduccion != null && !this.id_listaDeReproduccion.equals(other.id_listaDeReproduccion))) {
+        if ((this.id_listaReproduccion == null && other.id_listaReproduccion != null) || (this.id_listaReproduccion != null && !this.id_listaReproduccion.equals(other.id_listaReproduccion))) {
             return false;
         }
         return true;

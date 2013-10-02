@@ -1,11 +1,13 @@
 package com.vinilo.model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -32,9 +34,8 @@ public class Cancion implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_album")
     private Album album;
-    @ManyToOne
-    @JoinColumn(name = "id_listaDeReproduccion")
-    private ListaReproduccion listaDeReproduccion;
+    @ManyToMany(mappedBy = "canciones")
+    private List<ListaReproduccion> listasReproduccion;
 
     public Long getId_cancion() {
         return id_cancion;
@@ -100,12 +101,12 @@ public class Cancion implements Serializable {
         this.album = album;
     }
 
-    public ListaReproduccion getListaDeReproduccion() {
-        return listaDeReproduccion;
+    public List<ListaReproduccion> getListasReproduccion() {
+        return listasReproduccion;
     }
 
-    public void setListaDeReproduccion(ListaReproduccion listaDeReproduccion) {
-        this.listaDeReproduccion = listaDeReproduccion;
+    public void setListasReproduccion(List<ListaReproduccion> listasReproduccion) {
+        this.listasReproduccion = listasReproduccion;
     }
 
     @Override

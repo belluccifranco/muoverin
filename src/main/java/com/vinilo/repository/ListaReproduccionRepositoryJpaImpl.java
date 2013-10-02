@@ -28,7 +28,7 @@ public class ListaReproduccionRepositoryJpaImpl implements ListaReproduccionRepo
 
     @Override
     public ListaReproduccion guardar(ListaReproduccion listaReproduccion) {
-        if (listaReproduccion.getId_listaDeReproduccion() == null) {
+        if (listaReproduccion.getId_listaReproduccion() == null) {
             //log.info("Inserting new contact");
             em.persist(listaReproduccion);
         } else {
