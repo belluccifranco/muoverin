@@ -10,9 +10,11 @@
     <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
     <script src="http://www.jplayer.org/latest/js/jquery.jplayer.min.js"></script>
     <script>
-        
+        var playlists = [];
 //<![CDATA[
 $(document).ready(function(){
+
+        var playlists = [];
 
 	$("#jquery_jplayer_1").jPlayer({
 		ready: function (event) {
@@ -30,19 +32,22 @@ $(document).ready(function(){
                     width: "200px"
                 }
 	});
+        
 });
 //]]>
 
     </script>
 </head>
 <body>
-<div data-role="page">
+<div data-role="page" id="playlists-page">
     <div data-role="header" data-position="fixed">
-        <h1>Vinilo</h1>
+        <h1>Mis Listas de Reproducción</h1>
     </div><!-- /header -->
 
     <div data-role="content">
-        
+        <ul data-role="listview" data-filter="true" data-filter-placeholder="Buscar...">
+            <li></li>
+        </ul>
     </div><!-- /content -->
 
     <div data-role="footer" data-position="fixed">
@@ -84,6 +89,26 @@ $(document).ready(function(){
 			</div>
 		</div>
     </div>
+    
+    <script type="text/javascript">
+        (function () {
+            $('#playlists-page').on("pagebeforecreate", function(){
+            $.ajax({
+                url: 'listaReproduccion/1',
+                dataType: 'json',
+                success: function(data) {
+                   console.log(data);
+//                   playlists = data;
+//                   
+//                   var list = "";
+//                   for (var i=0;i< playlists.length;i++) {
+//                       
+//                   }
+                    }
+                });
+            });
+        })(jQuery);
+    </script>
 </div><!-- /page -->
 </body>
 </html>
