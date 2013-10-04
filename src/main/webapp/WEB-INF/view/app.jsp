@@ -9,6 +9,17 @@
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
     <script src="http://www.jplayer.org/latest/js/jquery.jplayer.min.js"></script>
+    
+    <style>
+        .segmented-control { text-align:center; }
+        .segmented-control .ui-controlgroup { margin: 0.2em; }
+        .ui-control-active, .ui-control-inactive { border-style: solid; border-color: gray; }
+        .ui-control-active { background: #BBB; }
+        .ui-control-inactive { background: #DDD; }
+
+        .ui-header .ui-title, .ui-footer .ui-title { margin-right: 0 !important; margin-left: 0 !important; }
+    </style>
+    
     <script>
         var playlists = [];
 //<![CDATA[
@@ -36,17 +47,19 @@ $(document).ready(function(){
 });
 //]]>
 
+
     </script>
+    
 </head>
 <body>
 <div data-role="page" id="playlists-page">
     <div data-role="header" data-position="fixed">
         <h1>Mis Listas de Reproducción</h1>
+        <a href="#search-music-page" data-rel="dialog" data-icon="search" class="ui-btn-right">Buscar</a>
     </div><!-- /header -->
 
     <div data-role="content">
-        <ul data-role="listview" data-filter="true" data-filter-placeholder="Buscar...">
-            <li></li>
+        <ul data-role="listview">
         </ul>
     </div><!-- /content -->
 
@@ -110,5 +123,17 @@ $(document).ready(function(){
         })(jQuery);
     </script>
 </div><!-- /page -->
+
+<div data-role="page" id="search-music-page">
+    <div data-role="header">
+        <h1>Buscador de temas</h1>
+    </div>
+    <div data-role="content">
+        <ul data-role="listview"  data-filter="true" data-filter-placeholder="Ingrese texto a buscar...">
+            
+        </ul>
+    </div>
+</div>
+
 </body>
 </html>
