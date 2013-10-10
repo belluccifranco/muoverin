@@ -8,12 +8,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class ReproductorServiceImpl implements ReproductorService {
+public class CancionServiceImpl implements CancionService {
 
     private CancionRepository cancionRepository;
 
     @Autowired
-    public ReproductorServiceImpl(CancionRepository cancionRepository) {
+    public CancionServiceImpl(CancionRepository cancionRepository) {
         this.cancionRepository = cancionRepository;
     }
 

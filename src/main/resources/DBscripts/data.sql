@@ -1,6 +1,6 @@
 --CUENTAS HOSTING
 INSERT INTO cuentaHosting (id_cuentaHosting, url, usuario, password)
-VALUES (1, 'https://g.api.mega.co.nz', 'belluccifranco@gmail.com', 'mega01');
+VALUES (1, 'https://g.api.mega.co.nz', 'cuentavinilo01@gmail.com', 'Ninguna01');
 
 --CUENTAS USUARIO
 INSERT INTO cuentaUsuario (id_cuentaUsuario, email, pin, cantidadIntentos)
@@ -12,19 +12,26 @@ VALUES (1, 'AC DC');
 
 --ALBUMES
 INSERT INTO album (id_album, nombre, anio, cantCanciones, id_cuentaHosting)
-VALUES (1, 'Black Ice', 2008, 15, 1);
+VALUES (1, 'Highway to Hell', 1979, 10, 1);
 
 --CANCIONES
 INSERT INTO cancion (id_cancion, nroOrden, nombre, duracion, url, letra, id_artista, id_album)
-VALUES (1, 01, 'Rock and Roll Train', '4:21', 'https://mega.co.nz/#!AY4EkCwL!A2GGQlFV0keoyGXHYIarFCiiuUdaIua_qsNhuBQcr68', '', 1, 1);
+VALUES (1, 01, 'Highway to Hell', '', 'https://mega.co.nz/#!ilhghR7D!bXAvBGk_Z-7nFWZeHr0meC5Ce_4yFqHF38AnVmO7gew', '', 1, 1);
 INSERT INTO cancion (id_cancion, nroOrden, nombre, duracion, url, letra, id_artista, id_album)
-VALUES (2, 02, 'Skies On Fire', '3:34', 'https://mega.co.nz/#!wcpwzJAZ!ClvMGB-tyqCJ7RahB67ugzqDOqMcSfQ3owgabxIL1CM', '', 1, 1);
-
---LISTAS DE REPRODUCCION
-INSERT INTO listaReproduccion(id_listaReproduccion, nombre, id_cuentaUsuario)
-VALUES (1, 'My Hard Rock playlist', 1);
-
-INSERT INTO listaReproduccion_cancion(id_listaReproduccion, id_cancion)
-VALUES (1, 1);
-INSERT INTO listaReproduccion_cancion(id_listaReproduccion, id_cancion)
-VALUES (1, 2);
+VALUES (2, 02, 'Girls Got Rhythm', '', 'https://mega.co.nz/#!ipQ1HabR!eFikkFla4rIOqPpCJVgxlCSNaRoQGCadYk17qgBrFFY', '', 1, 1);
+INSERT INTO cancion (id_cancion, nroOrden, nombre, duracion, url, letra, id_artista, id_album)
+VALUES (3, 03, 'Walk All Over You', '', 'https://mega.co.nz/#!u05HDKSC!DauTn0lUVaUOjauoxXXqpk5Y4qYi3wVCA46XLZbontk', '', 1, 1);
+INSERT INTO cancion (id_cancion, nroOrden, nombre, duracion, url, letra, id_artista, id_album)
+VALUES (4, 04, 'Touch Too Much', '', 'https://mega.co.nz/#!yhATDbxL!Ujkb-jqdxc_r5RxNOVls-0Upik15bIiPp_W36hI6uO4', '', 1, 1);
+INSERT INTO cancion (id_cancion, nroOrden, nombre, duracion, url, letra, id_artista, id_album)
+VALUES (5, 05, 'Beating Around The Bush', '', 'https://mega.co.nz/#!DhRw1IjJ!aA30wnfpF7Z97DRRnZrSRHq51VpWoVI1UCj45YH-j4w', '', 1, 1);
+INSERT INTO cancion (id_cancion, nroOrden, nombre, duracion, url, letra, id_artista, id_album)
+VALUES (6, 06, 'Shot Down in Flames', '', 'https://mega.co.nz/#!n8AzSLSb!XJOUBCWK9K6Tux9W6JM_GGTswUQVuutzo2Fb8L2TGpw', '', 1, 1);
+INSERT INTO cancion (id_cancion, nroOrden, nombre, duracion, url, letra, id_artista, id_album)
+VALUES (7, 07, 'Get it Hot', '', 'https://mega.co.nz/#!HshkSBrL!LbhwQz1kgPTSA8i-85rGmBVdEUwJwFIh-isoa7-JYW8', '', 1, 1);
+INSERT INTO cancion (id_cancion, nroOrden, nombre, duracion, url, letra, id_artista, id_album)
+VALUES (8, 08, 'If You Want Blood (You ve Got It)', '', 'https://mega.co.nz/#!esYkBQbQ!FdxakAVWP6A5sHWb4DOCj01i31UPkyMKV0by9Pb6Hps', '', 1, 1);
+INSERT INTO cancion (id_cancion, nroOrden, nombre, duracion, url, letra, id_artista, id_album)
+VALUES (9, 09, 'Love Hungry Man', '', 'https://mega.co.nz/#!XghGjAYB!HMKf-Vt3hB9WICSa0Tak7Xxywo5TsX2FF8NMI8mo7Dk', '', 1, 1);
+INSERT INTO cancion (id_cancion, nroOrden, nombre, duracion, url, letra, id_artista, id_album)
+VALUES (10, 10, 'Night Prowler', '', 'https://mega.co.nz/#!Tw4B0ZjL!WThKG0EqXIvrLeyzWVMT6ia_m1pec3NA18yeTnyBD1A', '', 1, 1);

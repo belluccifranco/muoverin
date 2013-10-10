@@ -25,6 +25,7 @@ public class Cancion implements Serializable {
     private Long id_cancion;
     
     private int nroOrden;
+    
     private String nombre;
     
     private String duracion;

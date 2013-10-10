@@ -11,7 +11,7 @@
     </head>
     <body>
         <audio controls>                        
-            <source src="/vinilo/play">
+            <source src="/vinilo/reproductor/10">
         </audio>
 
         <div id="container">
