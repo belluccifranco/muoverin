@@ -10,55 +10,6 @@
     <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
     <script src="http://www.jplayer.org/latest/js/jquery.jplayer.min.js"></script>
     <script src="/vinilo/resources/scripts/app.js"></script>
-    
-    <style>
-        .segmented-control { text-align:center; }
-        .segmented-control .ui-controlgroup { margin: 0.2em; }
-        .ui-control-active, .ui-control-inactive { border-style: solid; border-color: gray; }
-        .ui-control-active { background: #BBB; }
-        .ui-control-inactive { background: #DDD; }
-
-        .ui-header .ui-title, .ui-footer .ui-title { margin-right: 0 !important; margin-left: 0 !important; }
-    </style>
-    
-    <script>
-        var playlists = [];
-//<![CDATA[
-$(document).ready(function(){
-
-    /*jQuery("#jquery_jplayer_1").jPlayer({
-        swfPath: "http://www.jplayer.org/latest/js/Jplayer.swf",
-        supplied: "mp3",
-        wmode: "window",
-        preload:"auto",
-        autoPlay: true,
-        errorAlerts:false,
-        warningAlerts:false
-    });*/
-
-	$("#jquery_jplayer_1").jPlayer({
-		ready: function (event) {
-			$(this).jPlayer("setMedia", {
-				m4a:"http://www.jplayer.org/audio/m4a/TSP-01-Cro_magnon_man.m4a",
-				oga:"http://www.jplayer.org/audio/ogg/TSP-01-Cro_magnon_man.ogg"
-			});
-		},
-		swfPath: "js",
-		supplied: "m4a, oga",
-		wmode: "window",
-		smoothPlayBar: true,
-		keyEnabled: true,
-                size: {
-                    width: "200px"
-                }
-	});
-        
-});
-//]]>
-
-
-    </script>
-    
 </head>
 <body>
 <div data-role="page" id="playlists-page">
@@ -117,26 +68,6 @@ $(document).ready(function(){
 			</div>
 		</div>-->
     </div>
-    
-    <script type="text/javascript">
-        (function () {
-            $('#playlists-page').on("pagebeforecreate", function(){
-            $.ajax({
-                url: 'listaReproduccion/1',
-                dataType: 'json',
-                success: function(data) {
-                   console.log(data);
-//                   playlists = data;
-//                   
-//                   var list = "";
-//                   for (var i=0;i< playlists.length;i++) {
-//                       
-//                   }
-                    }
-                });
-            });
-        })(jQuery);
-    </script>
 </div><!-- /page -->
 
 <div data-role="page" id="search-music-page">

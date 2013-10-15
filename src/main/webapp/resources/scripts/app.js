@@ -1,4 +1,32 @@
 jQuery(document).ready(function(){
+
+    /*jQuery("#jquery_jplayer_1").jPlayer({
+        swfPath: "http://www.jplayer.org/latest/js/Jplayer.swf",
+        supplied: "mp3",
+        wmode: "window",
+        preload:"auto",
+        autoPlay: true,
+        errorAlerts:false,
+        warningAlerts:false
+    });*/
+
+    $("#jquery_jplayer_1").jPlayer({
+            ready: function (event) {
+                    $(this).jPlayer("setMedia", {
+                            m4a:"http://www.jplayer.org/audio/m4a/TSP-01-Cro_magnon_man.m4a",
+                            oga:"http://www.jplayer.org/audio/ogg/TSP-01-Cro_magnon_man.ogg"
+                    });
+            },
+            swfPath: "js",
+            supplied: "m4a, oga",
+            wmode: "window",
+            smoothPlayBar: true,
+            keyEnabled: true,
+            size: {
+                width: "200px"
+            }
+    });
+
     var lista = [
             {
                     "id_cancion":1,
