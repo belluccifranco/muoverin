@@ -8,11 +8,19 @@ var Playlist = function(listId, playerId) {
 
 Playlist.prototype = function() {
     var playPos = function(pos) {
-
+            if (pos >=0 && pos < this.list.length) {
+                
+            }
         },
         prev = function() {
             if (this.current > 0) {
                 this.current--;
+                playPos.call(this, this.current);
+            }
+        },
+        next = function() {
+            if (this.current < this.list.length-1) {
+                this.current++;
                 playPos.call(this, this.current);
             }
         },        
@@ -29,9 +37,9 @@ Playlist.prototype = function() {
                 this.current = 0;
                 for (var i=0; i<this.list.length; i++) {
                     if (i === this.current) {
-                        innerSongListMarkup += '<li class="ui-btn-active">' + lista[i].artista.nombre + ' - ' + lista[i].nombre + '</li>';
+                        innerSongListMarkup += '<li class="ui-btn-active"><a href="#">' + lista[i].artista.nombre + ' - ' + lista[i].nombre + '</a></li>';
                     } else {
-                        innerSongListMarkup += '<li>' + lista[i].artista.nombre + ' - ' + lista[i].nombre + '</li>';
+                        innerSongListMarkup += '<li><a href="#">' + lista[i].artista.nombre + ' - ' + lista[i].nombre + '</a></li>';
                     }
 
                 }
@@ -68,11 +76,13 @@ Playlist.prototype = function() {
             });
         },
         bindEvents = function() {
-
+            
         };
     return {
         init: init,
-        setList: setList
+        setList: setList,
+        prev: prev,
+        next: next
     };
 }();
 

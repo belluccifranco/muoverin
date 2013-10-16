@@ -1,6 +1,5 @@
 jQuery(document).ready(function(){
     var playlist = new Playlist('main-song-list' ,'jquery_jplayer_1');
-    
 
     var lista = [
             {
@@ -49,18 +48,7 @@ jQuery(document).ready(function(){
                             "canciones":null
                     }
             }
-        ];/*,
-        listContainer = $("#main-song-list");
-    
-    var innerSongListMarkup = '';
-    for (var i=0; i<lista.length; i++) {
-        if (i == 0) {
-            innerSongListMarkup += '<li class="ui-btn-active">' + lista[i].artista.nombre + ' - ' + lista[i].nombre + '</li>';
-        } else {
-            innerSongListMarkup += '<li>' + lista[i].artista.nombre + ' - ' + lista[i].nombre + '</li>';
-        }
+        ];
         
-    }
-    listContainer.html(innerSongListMarkup).listview("refresh");*/
     playlist.setList(lista);
 });
