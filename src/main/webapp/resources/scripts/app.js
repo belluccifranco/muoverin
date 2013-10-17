@@ -51,4 +51,5 @@ jQuery(document).ready(function(){
         ];
         
     playlist.setList(lista);
+    playlist.play();
 });

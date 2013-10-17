@@ -7,10 +7,19 @@ var Playlist = function(listId, playerId) {
 };
 
 Playlist.prototype = function() {
-    var playPos = function(pos) {
+    var baseUrl = 'http://' + window.location.host +"/vinilo/reproductor",
+        playPos = function(pos) {
             if (pos >=0 && pos < this.list.length) {
-                
+                var url = baseUrl + "/" + this.list[pos].id_cancion;
+                console.log(this.player);
+                this.player.jPlayer("setMedia", {
+                    mp3: url
+                });
+                this.player.jPlayer("play");
             }
+        },
+        play = function() {
+            playPos.call(this, this.current);
         },
         prev = function() {
             if (this.current > 0) {
@@ -49,16 +58,18 @@ Playlist.prototype = function() {
             
         },
         init = function() {
-            /*this.player.jPlayer({
-                swfPath: "http://www.jplayer.org/latest/js/Jplayer.swf",
+            this.player.jPlayer({
+                swfPath: "http://www.jplayer.org/2.4.0/js",
                 supplied: "mp3",
                 wmode: "window",
                 preload:"auto",
-                autoPlay: true,
-                errorAlerts:false,
+                autoPlay: false,
+                errorAlerts:true,
                 warningAlerts:false
-            });*/
-            this.player.jPlayer({
+            });
+            
+            
+            /*this.player.jPlayer({
                 ready: function (event) {
                     $(this).jPlayer("setMedia", {
                         m4a:"http://www.jplayer.org/audio/m4a/TSP-01-Cro_magnon_man.m4a",
@@ -73,7 +84,7 @@ Playlist.prototype = function() {
                 size: {
                     width: "200px"
                 }
-            });
+            });*/
         },
         bindEvents = function() {
             
@@ -82,7 +93,8 @@ Playlist.prototype = function() {
         init: init,
         setList: setList,
         prev: prev,
-        next: next
+        next: next,
+        play: play
     };
 }();
 

@@ -16,7 +16,7 @@
 <div data-role="page" id="playlists-page">
     <div data-role="header" data-position="fixed">
         <h1>Canciones</h1>
-        <a href="#search-music-page" data-rel="dialog" data-icon="search" class="ui-btn-right">Buscar</a>
+        <a href="#search-music-page" data-rel="dialog" data-icon="search" data-iconpos="notext" class="ui-btn-right">Buscar</a>
     </div><!-- /header -->
 
     <div data-role="content">
@@ -27,10 +27,20 @@
 
     <div data-role="footer" data-position="fixed">
         <div id="jquery_jplayer_1" class="jp-jplayer"></div>
-        <div  id="jp_container_1" class="jp-audio" style="margin: 0 auto; width: 100px; text-align: center;">
+        <div  id="jp_container_1" class="jp-audio" style="margin: 0 auto; text-align: center;">
             <div class="jp-controls">
-                <a href="javascript:;" class="jp-play" data-role="button" data-inline="true">play</a>
-                <a href="javascript:;" class="jp-pause" data-role="button" data-inline="true">pause</a>
+                <a href="javascript:;" class="jp_prev" data-role="button" data-inline="true" data-theme="b" data-mini="true">
+                    <img alt="play" src="/vinilo/resources/images/prev.png">
+                </a>
+                <a href="javascript:;" class="jp-play" data-role="button" data-inline="true" data-theme="b" data-mini="true">
+                    <img alt="play" src="/vinilo/resources/images/play.png">
+                </a>
+                <a href="javascript:;" class="jp-pause" data-role="button" data-inline="true" data-theme="b" data-mini="true">
+                    <img alt="play" src="/vinilo/resources/images/pause.png">
+                </a>
+                <a href="javascript:;" class="jp_next" data-role="button" data-inline="true" data-theme="b" data-mini="true">
+                    <img alt="play" src="/vinilo/resources/images/next.png">
+                </a>
             </div>
         </div>
 <!--        <div id="jp_container_1" class="jp-audio" style="margin: 0 auto;">
