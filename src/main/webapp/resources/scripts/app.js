@@ -1,55 +1,34 @@
-jQuery(document).ready(function(){
-    var playlist = new Playlist('main-song-list' ,'jquery_jplayer_1');
+var playlist = null;
 
-    var lista = [
+jQuery(document).on('pageinit', '#playlist-page', function(){
+    //alert('yes'); 
+
+    playlist = new PlayUIInterface('main-song-list', {
+            playlistOptions: {
+                autoPlay: false
+            },
+            swfPath: "/vinilo/resources/scripts/jplayer",
+            supplied: "mp3",
+            wmode: "window",
+            preload:"auto",
+            autoPlay: false,
+            keyEnabled: true,
+            errorAlerts:true,
+            warningAlerts:false
+        });
+
+    var list = [
             {
-                    "id_cancion":1,
-                    "nroOrden":1,
-                    "nombre":"Rock and Roll Train",
-                    "duracion":"4:21",
-                    "url":"https://mega.co.nz/#!AY4EkCwL!A2GGQlFV0keoyGXHYIarFCiiuUdaIua_qsNhuBQcr68",
-                    "letra":"",
-                    "artista":{"id_artista":1,"nombre":"AC DC","canciones":null},
-                    "album":{
-                            "id_album":1,
-                            "nombre":"Black Ice",
-                            "anio":2008,
-                            "cantCanciones":15,
-                            "cuentaHosting":{
-                                    "id_cuentaHosting":1,
-                                    "url":"https://g.api.mega.co.nz",
-                                    "usuario":"belluccifranco@gmail.com",
-                                    "password":"mega01",
-                                    "albumes":null
-                            },
-                            "canciones":null
-                    }
+                title: "Rock and Roll Train",
+                artist: "AC DC",
+                mp3: 'http://' + window.location.host +"/vinilo/reproductor/1"
             },
             {
-                    "id_cancion":2,
-                    "nroOrden":2,
-                    "nombre":"Skies On Fire",
-                    "duracion":"3:34",
-                    "url":"https://mega.co.nz/#!wcpwzJAZ!ClvMGB-tyqCJ7RahB67ugzqDOqMcSfQ3owgabxIL1CM",
-                    "letra":"",
-                    "artista":{"id_artista":1,"nombre":"AC DC","canciones":null},
-                    "album":{
-                            "id_album":1,
-                            "nombre":"Black Ice",
-                            "anio":2008,
-                            "cantCanciones":15,
-                            "cuentaHosting":{
-                                    "id_cuentaHosting":1,
-                                    "url":"https://g.api.mega.co.nz",
-                                    "usuario":"belluccifranco@gmail.com",
-                                    "password":"mega01",
-                                    "albumes":null
-                            },
-                            "canciones":null
-                    }
+                title: "Skies On Fire",
+                artist: "AC DC",
+                mp3: 'http://' + window.location.host +"/vinilo/reproductor/2"
             }
         ];
-        
-    playlist.setList(lista);
-    playlist.play();
+    
+    playlist.setPlaylist(list);
 });
