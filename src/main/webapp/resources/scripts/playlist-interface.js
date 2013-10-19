@@ -15,7 +15,6 @@ PlayUIInterface.prototype = function(){
             this.uiList.html('');
         },
         appendToUI = function(list){
-            console.log(list);
             var i = 0,
                 html = '';
             for(;i<list.length;i++) {
@@ -24,13 +23,9 @@ PlayUIInterface.prototype = function(){
             
             this.uiList.append(html);
             refreshUI.call(this);
-            console.log(this.uiList);
         },
         setPlaylist = function(list){
             pl.setPlaylist(list);
-            if (list.length > 0) {
-                pl.select(0);
-            }
             clear.call(this);
             appendToUI.call(this, list);
             this.uiList.children('li').first().addClass("ui-btn-active");
