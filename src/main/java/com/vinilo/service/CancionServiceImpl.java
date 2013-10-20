@@ -21,13 +21,7 @@ public class CancionServiceImpl implements CancionService {
     @Transactional(readOnly = true)
     public List<Cancion> buscarTodas() {
         return cancionRepository.buscarTodas();
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<Cancion> buscarTodasConDetalles() {
-        return cancionRepository.buscarTodasConDetalles();
-    }
+    }    
 
     @Override
     @Transactional(readOnly = true)

@@ -23,7 +23,7 @@ public class CuentaHosting implements Serializable {
     private String password;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cuentaHosting")
-    private List<Album> albumes;
+    private List<Link> links;
 
     public Long getId_cuentaHosting() {
         return id_cuentaHosting;
@@ -57,11 +57,11 @@ public class CuentaHosting implements Serializable {
         this.password = password;
     }
 
-    public List<Album> getAlbumes() {
-        return albumes;
+    public List<Link> getLinks() {
+        return links;
     }
 
-    public void setAlbumes(List<Album> albumes) {
-        this.albumes = albumes;
-    }
+    public void setLinks(List<Link> links) {
+        this.links = links;
+    }    
 }

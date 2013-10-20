@@ -2,6 +2,7 @@ package com.vinilo.model;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,12 +12,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Cancion.buscarTodas", query = "SELECT c FROM Cancion c"),
-    @NamedQuery(name = "Cancion.buscarPorId", query = "SELECT c FROM Cancion c WHERE c.id_cancion = :id"),
-    @NamedQuery(name = "Cancion.buscarTodasConDetalles", query = "SELECT c FROM Cancion c JOIN FETCH c.artista JOIN FETCH c.album")
+    @NamedQuery(name = "Cancion.buscarPorId", query = "SELECT c FROM Cancion c JOIN FETCH c.links WHERE c.id_cancion = :id")
 })
 public class Cancion implements Serializable {
 
@@ -30,8 +31,6 @@ public class Cancion implements Serializable {
     
     private String duracion;
     
-    private String url;
-    
     private String letra;
     
     @ManyToOne
@@ -42,8 +41,11 @@ public class Cancion implements Serializable {
     @JoinColumn(name = "id_album")
     private Album album;
     
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cancion")
+    private List<Link> links;
+    
     @ManyToMany(mappedBy = "canciones")
-    private List<ListaReproduccion> listasReproduccion;
+    private List<ListaReproduccion> listasReproduccion;    
 
     public Long getId_cancion() {
         return id_cancion;
@@ -76,15 +78,7 @@ public class Cancion implements Serializable {
     public void setDuracion(String duracion) {
         this.duracion = duracion;
     }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
+    
     public String getLetra() {
         return letra;
     }
@@ -116,6 +110,14 @@ public class Cancion implements Serializable {
     public void setListasReproduccion(List<ListaReproduccion> listasReproduccion) {
         this.listasReproduccion = listasReproduccion;
     }
+
+    public List<Link> getLinks() {
+        return links;
+    }
+
+    public void setLinks(List<Link> links) {
+        this.links = links;
+    }   
 
     @Override
     public String toString() {

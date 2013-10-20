@@ -17,13 +17,7 @@ public class CancionRepositoryJpaImpl implements CancionRepository {
     public List<Cancion> buscarTodas() {
         List<Cancion> canciones = em.createNamedQuery("Cancion.buscarTodas", Cancion.class).getResultList();
         return canciones;
-    }
-
-    @Override
-    public List<Cancion> buscarTodasConDetalles() {
-        List<Cancion> canciones = em.createNamedQuery("Cancion.buscarTodasConDetalles", Cancion.class).getResultList();
-        return canciones;
-    }
+    }    
 
     @Override
     public Cancion buscarPorId(Long id) {

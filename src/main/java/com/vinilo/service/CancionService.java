@@ -7,8 +7,6 @@ public interface CancionService {
 
     public List<Cancion> buscarTodas();
 
-    public List<Cancion> buscarTodasConDetalles();
-
     public Cancion buscarPorId(Long id);
 
     public Cancion guardar(Cancion cancion);

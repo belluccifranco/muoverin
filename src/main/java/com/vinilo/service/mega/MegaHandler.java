@@ -10,7 +10,7 @@ package com.vinilo.service.mega;
  * Contributors:
  *
  * @NT2005 - initial API and implementation
- *****************************************************************************
+ * ****************************************************************************
  */
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,10 +50,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.io.IOUtils;
 
 public class MegaHandler {
 
-    private String email, password, sid;
+    private String email;
+    private String password;
+    private String sid;
     private int sequence_number;
     private long[] master_key;
     private BigInteger[] rsa_private_key;
@@ -68,7 +71,6 @@ public class MegaHandler {
     }
 
     public int login() throws IOException {
-
         password_aes = MegaCrypt.prepare_key_pw(password);
         String uh = MegaCrypt.stringhash(email, password_aes);
 
@@ -480,7 +482,10 @@ public class MegaHandler {
         return true;
     }
 
-    public void download(String url, String path) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IOException, IllegalBlockSizeException, BadPaddingException, JSONException {
+    public void download(String url, String path)
+            throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException,
+            InvalidAlgorithmParameterException, IOException, IllegalBlockSizeException,
+            BadPaddingException, JSONException {
         //TODO DOWNLOAD mismatch?
         print("Download started");
         String[] s = url.split("!");
@@ -525,9 +530,7 @@ public class MegaHandler {
         int read = 0;
         final byte[] buffer = new byte[32767];
         try {
-
             URLConnection urlConn = new URL(file_url).openConnection();
-
             print(file_url);
             is = urlConn.getInputStream();
             while ((read = is.read(buffer)) > 0) {
@@ -557,21 +560,16 @@ public class MegaHandler {
             InvalidKeyException, InvalidAlgorithmParameterException,
             IOException, IllegalBlockSizeException, BadPaddingException,
             JSONException {
-        // TODO DOWNLOAD mismatch?
-        print("Download started");
+
         String[] s = url.split("!");
         String file_id = s[1];
         byte[] file_key = MegaCrypt.base64_url_decode_byte(s[2]);
 
         int[] intKey = MegaCrypt.aByte_to_aInt(file_key);
         JSONObject json = new JSONObject();
-        try {
-            json.put("a", "g");
-            json.put("g", "1");
-            json.put("p", file_id);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        json.put("a", "g");
+        json.put("g", "1");
+        json.put("p", file_id);
 
         JSONObject file_data = new JSONObject(api_request(json.toString()));
         int[] keyNOnce = new int[]{intKey[0] ^ intKey[4],
@@ -582,8 +580,6 @@ public class MegaHandler {
 
         int[] iiv = new int[]{keyNOnce[4], keyNOnce[5], 0, 0};
         byte[] iv = MegaCrypt.aInt_to_aByte(iiv);
-
-        @SuppressWarnings("unused")
         int file_size = file_data.getInt("s");
         response.setContentLength(file_size);
         String attribs = (file_data.getString("at"));
@@ -599,31 +595,12 @@ public class MegaHandler {
         //FileOutputStream fos = new FileOutputStream(path + File.separator + file_name);
         //final OutputStream cos = new CipherOutputStream(fos, cipher);
         final OutputStream cos = new CipherOutputStream(response.getOutputStream(), cipher);
-        final Cipher decipher = Cipher.getInstance("AES/CTR/NoPadding");
-        decipher.init(Cipher.ENCRYPT_MODE, skeySpec, ivSpec);
-        int read;
-        final byte[] buffer = new byte[32767];
         print("Streaming started at: " + new Date());
-        try {
-            URLConnection urlConn = new URL(file_url).openConnection();
-            print(file_url);
-            is = urlConn.getInputStream();
-            while ((read = is.read(buffer)) > 0) {
-                cos.write(buffer, 0, read);
-                cos.flush();
-            }
-        } catch (Exception ex) {
-            print(ex);
-        }/*finally {
-            try {
-                cos.close();
-                if (is != null) {
-                    is.close();
-                }
-            } finally {
-                fos.close();
-            }
-        }*/
+        URLConnection urlConn = new URL(file_url).openConnection();
+        print(file_url);
+        is = urlConn.getInputStream();
+        IOUtils.copy(is, cos);
+        response.flushBuffer();
         print("Download finished");
     }
 }
