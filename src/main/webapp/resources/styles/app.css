@@ -1,7 +1,24 @@
-.segmented-control { text-align:center; }
-.segmented-control .ui-controlgroup { margin: 0.2em; }
-.ui-control-active, .ui-control-inactive { border-style: solid; border-color: gray; }
-.ui-control-active { background: #BBB; }
-.ui-control-inactive { background: #DDD; }
+.segmented-control {
+    text-align:center;
+}
 
-.ui-header .ui-title, .ui-footer .ui-title { margin-right: 0 !important; margin-left: 0 !important; }
+.segmented-control .ui-controlgroup {
+    margin: 0.2em;
+}
+
+.ui-control-active, .ui-control-inactive {
+    border-style: solid; border-color: gray;
+}
+
+.ui-control-active {
+    background: #BBB;
+}
+
+.ui-control-inactive {
+    background: #DDD;
+}
+
+.ui-header .ui-title, .ui-footer .ui-title {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}
