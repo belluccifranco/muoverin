@@ -29,7 +29,7 @@
     <div data-role="footer" data-position="fixed">
         <div class="jp-video jp-video-270p" id="jp_container_1">
 			<div class="jp-type-playlist">
-				<div class="jp-jplayer" id="jquery_jplayer_1" style="width: 480px; height: 270px;"><img id="jp_poster_0" style="width: 480px; height: 270px; display: inline;" src="http://www.jplayer.org/audio/poster/The_Stark_Palace_640x360.png"><audio id="jp_audio_0" preload="metadata" src="http://www.jplayer.org/audio/ogg/TSP-01-Cro_magnon_man.ogg"></audio><video id="jp_video_0" preload="metadata" style="width: 0px; height: 0px;"></video></div>
+				<div class="jp-jplayer" id="jquery_jplayer_1" ></div>
 				<div class="jp-gui">
 					<div class="jp-interface">
 						<div class="jp-progress">
@@ -41,7 +41,7 @@
 						<div class="jp-duration">04:27</div>
 						<div class="jp-title" style="display: none;">
 							<ul>
-								<li>Cro Magnon Man <span class="jp-artist">by The Stark Palace</span></li>
+								
 							</ul>
 						</div>
 						<div class="jp-controls-holder">
