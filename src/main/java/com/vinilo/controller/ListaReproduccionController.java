@@ -22,7 +22,7 @@ public class ListaReproduccionController {
         return listaReproduccionService.buscarTodas();
     }
     
-    @RequestMapping(value = "/listaReproduccion/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/listasReproduccion/{id}", method = RequestMethod.GET)
     @ResponseBody 
     public ListaReproduccion buscarPorId(@PathVariable Long id) {
         return listaReproduccionService.buscarPorId(id);
