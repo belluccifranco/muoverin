@@ -8,6 +8,7 @@ PlayListUI.prototype = function() {
     var init = function() {
             this.list = [];
             this.current = -1;
+            bindEvents.call(this);
         },
         getUrlObject = function(obj) {
             return { mp3: 'http://' + document.location.host + '/vinilo/reproductor/' + obj.id_cancion }
@@ -68,7 +69,7 @@ PlayListUI.prototype = function() {
             clearUI.call(this);
             var lis = '';
             for (var i=0; i<this.list.length; i++) {
-                lis += '<li><a href="#">' + this.list[i].artista.nombre + ' - ' + this.list[i].nombre + '</a></li>'
+                lis += '<li><a href="#" class="song">' + this.list[i].artista.nombre + ' - ' + this.list[i].nombre + '</a></li>'
             }
             this.uiList.html(lis);
             refreshUI.call(this);
@@ -78,6 +79,17 @@ PlayListUI.prototype = function() {
             if (this.current >= 0 && this.current < this.list.length) {
                 this.uiList.children('li').removeClass("ui-btn-active").eq(this.current).addClass("ui-btn-active");
             }
+        },
+        bindEvents = function(){
+            var self = this,
+                ul = this.uiList;
+            ul.on("click", "a.song", function(){
+                var index = ul.find("a.song").index($(this));
+                self.play(index);
+            });
+            self.player.on($.jPlayer.event.ended, function(){
+                self.next();
+            });
         };
     return {
         init: init,
