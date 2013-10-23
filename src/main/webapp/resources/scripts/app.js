@@ -25,19 +25,27 @@ jQuery(document).on('pageinit', '#playlist-page', function(){
             {"id_cancion":10,"nroOrden":10,"nombre":"Night Prowler","duracion":"","letra":"","artista":{"id_artista":1,"nombre":"AC DC","canciones":null},"album":{"id_album":1,"nombre":"Highway to Hell","anio":1979,"cantCanciones":10,"canciones":null},"links":null,"listasReproduccion":null}
         ];
     
-        $('<button >Set Playlist</button>').appendTo('#playlist-page').click(function(){
+        $('<button >Set Playlist</button>').appendTo('#playlist-page div[data-role="footer"]').click(function(){
             playlist.setPlaylist(list);
         });
         
-        $('<button >Play</button>').appendTo('#playlist-page').click(function(){
+        $('<button >Play</button>').appendTo('#playlist-page div[data-role="footer"]').click(function(){
             playlist.play();
         });
         
-        $('<button >Prev</button>').appendTo('#playlist-page').click(function(){
+        $('<button >Pause</button>').appendTo('#playlist-page div[data-role="footer"]').click(function(){
+            playlist.pause();
+        });
+        
+        $('<button >Stop</button>').appendTo('#playlist-page div[data-role="footer"]').click(function(){
+            playlist.stop();
+        });
+        
+        $('<button >Prev</button>').appendTo('#playlist-page div[data-role="footer"]').click(function(){
             playlist.prev();
         });
         
-        $('<button >Next</button>').appendTo('#playlist-page').click(function(){
+        $('<button >Next</button>').appendTo('#playlist-page div[data-role="footer"]').click(function(){
             playlist.next();
         });
     

@@ -34,13 +34,13 @@ PlayListUI.prototype = function() {
             if (this.current < this.list.length - 1){
                 this.current++;
             }
-            play.call(this);
+            play.call(this, this.current);
         },
         prev = function(){
             if (this.current > 0) {
                 this.current--;
             }
-            play.call(this);
+            play.call(this, this.current);
         }
         stop = function() {
             this.player.jPlayer('stop');
@@ -60,6 +60,7 @@ PlayListUI.prototype = function() {
         init: init,
         play: play,
         pause: pause,
+        stop: stop,
         setPlaylist: setPlaylist,
         prev: prev,
         next: next
