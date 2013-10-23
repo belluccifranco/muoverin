@@ -26,6 +26,7 @@ PlayListUI.prototype = function() {
                 this.player.jPlayer('setMedia', getUrlObject.call(this, this.list[this.current]));
             }
             this.player.jPlayer('play');
+            selectCurrentUI.call(this);
         },
         pause = function(){
             this.player.jPlayer('pause');
@@ -54,6 +55,28 @@ PlayListUI.prototype = function() {
                 console.log(media);
                 this.player.jPlayer('setMedia', media);
                 this.player.jPlayer('load');
+                updateUI.call(this);
+            }
+        },
+        clearUI = function(){
+            this.uiList.html('');
+        },
+        refreshUI = function() {
+            this.uiList.listview("refresh");
+        },
+        updateUI = function() {
+            clearUI.call(this);
+            var lis = '';
+            for (var i=0; i<this.list.length; i++) {
+                lis += '<li><a href="#">' + this.list[i].artista.nombre + ' - ' + this.list[i].nombre + '</a></li>'
+            }
+            this.uiList.html(lis);
+            refreshUI.call(this);
+            selectCurrentUI.call(this);
+        },
+        selectCurrentUI = function(){
+            if (this.current >= 0 && this.current < this.list.length) {
+                this.uiList.children('li').removeClass("ui-btn-active").eq(this.current).addClass("ui-btn-active");
             }
         };
     return {
