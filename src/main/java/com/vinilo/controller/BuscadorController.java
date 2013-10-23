@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class CancionController {
-    
+public class BuscadorController {
+
     private CancionService cancionService;
-    
+
     @Autowired
-    public CancionController(CancionService cancionService) {
+    public BuscadorController(CancionService cancionService) {
         this.cancionService = cancionService;
-    }    
-    
+    }
+
     @RequestMapping(value = "/canciones", method = RequestMethod.GET)
     @ResponseBody
     public List<Cancion> buscarTodasLasCanciones() {
