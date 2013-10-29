@@ -1,17 +1,25 @@
 <!DOCTYPE html>
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Playlist app</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css"/>
-    <!--<link rel="stylesheet" href="http://www.jplayer.org/latest/skin/blue.monday/jplayer.blue.monday.css"/>-->
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
-    <script src="/vinilo/resources/scripts/jplayer/jquery.jplayer.min.js"></script>
-    <script src="/vinilo/resources/scripts/jplayer/add-on/jplayer.playlist.min.js"></script>
-    <script src="/vinilo/resources/scripts/playlist-interface.js"></script>
-    <script src="/vinilo/resources/scripts/app.js"></script>
+    <spring:url value="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" var="CSSjQueryMobile"/>
+    <link rel="stylesheet" href="${CSSjQueryMobile}"/>
+    <spring:url value="/resources/styles/app.css" var="CSSapp"/>
+    <link rel="stylesheet" href="${CSSapp}"/> 
+    <spring:url value="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" var="JSjQuery"/>
+    <script src="${JSjQuery}"></script>
+    <spring:url value="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js" var="JSjQueryMobile"/>
+    <script src="${JSjQueryMobile}"></script>
+    <spring:url value="/resources/scripts/jplayer/jquery.jplayer.min.js" var="JSjplayer" />
+    <script src="${JSjplayer}"></script>
+    <spring:url value="/resources/scripts/playlist-interface.js" var="JSjplayelist" />
+    <script src="${JSjplayelist}"></script>
+    <spring:url value="/resources/scripts/app.js" var="JSapp" />
+    <script src="${JSapp}"></script>
 </head>
 <body>
 <div data-role="page" id="playlist-page">
