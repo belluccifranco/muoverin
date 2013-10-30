@@ -6,7 +6,7 @@
         <meta charset="UTF-8">
         <title>Playlist app</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <spring:url value="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" var="CSSjQueryMobile"/>
+        <spring:url value="/resources/styles/jquery_mobile/jquery.mobile-1.3.2.min.css" var="CSSjQueryMobile"/>
         <link rel="stylesheet" href="${CSSjQueryMobile}"/>
         <spring:url value="/resources/styles/app.css" var="CSSapp"/>
         <link rel="stylesheet" href="${CSSapp}"/> 
