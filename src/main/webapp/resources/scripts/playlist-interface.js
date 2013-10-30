@@ -1,6 +1,7 @@
 var PlayListUI = function(uiListId, jplayerId, jplayerOptions) {
     this.uiList = $('#' + uiListId);
     this.player = $('#' + jplayerId).jPlayer(jplayerOptions);
+    this.loop = false;
     this.init();
 };
 
@@ -35,14 +36,24 @@ PlayListUI.prototype = function() {
         next = function(){
             if (this.current < this.list.length - 1){
                 this.current++;
+                play.call(this, this.current);
+            } else {
+                if (this.loop) {
+                    this.current = 0;
+                    play.call(this, this.current);
+                }
             }
-            play.call(this, this.current);
         },
         prev = function(){
             if (this.current > 0) {
                 this.current--;
+                play.call(this, this.current);
+            } else {
+                if (this.loop) {
+                    this.current = this.list.length - 1;
+                    play.call(this, this.current);
+                }
             }
-            play.call(this, this.current);
         }
         stop = function() {
             this.player.jPlayer('stop');

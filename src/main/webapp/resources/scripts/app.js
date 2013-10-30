@@ -11,6 +11,7 @@ jQuery(document).on('pagebeforecreate', '#playlist-page', function(){
             errorAlerts: true,
             warningAlerts: false
         });
+    playlist.loop = true;
 });
 
 jQuery(document).on('pageinit', '#playlist-page', function(){
