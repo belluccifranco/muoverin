@@ -40,6 +40,7 @@ public class CancionServiceImpl implements CancionService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Cancion> buscarConCriteria(String criteria) {
         return cancionRepository.buscarConCriteria(criteria);
     }
