@@ -1,10 +1,14 @@
 package com.vinilo.repository;
 
 import com.vinilo.model.Cancion;
+import com.vinilo.model.CancionBusquedaCriteria;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -17,7 +21,7 @@ public class CancionRepositoryJpaImpl implements CancionRepository {
     public List<Cancion> buscarTodas() {
         List<Cancion> canciones = em.createNamedQuery("Cancion.buscarTodas", Cancion.class).getResultList();
         return canciones;
-    }    
+    }
 
     @Override
     public Cancion buscarPorId(Long id) {
@@ -45,6 +49,18 @@ public class CancionRepositoryJpaImpl implements CancionRepository {
         em.remove(mergedCancion);
         //log.info("Contact with id: " + contact.getId() + " deleted successfully");
     }
+
+    @Override
+    public List<Cancion> buscarConCriteria(CancionBusquedaCriteria criteria) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Cancion> cq = cb.createQuery(Cancion.class);
+        Root<Cancion> pet = cq.from(Cancion.class);
+        cq.where(cb.equal(pet.get("nombre"), criteria.getNombreCancion()));
+        TypedQuery<Cancion> q = em.createQuery(cq);
+        return q.getResultList();
+    }
+    
+    
     /*
      public void displayAllContactSummary() {
      List result = em
