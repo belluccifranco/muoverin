@@ -59,28 +59,47 @@ jQuery(document).on('pageinit', '#playlist-page', function(){
                 playlist.setPlaylist(data);
             }
         });
+});
+
+jQuery(document).on('pageinit', '#search-music-page', function(){
+    var $this = $(this),
+        $searchInput = $this.find("#song-search-input"),
+        $searchBtn   = $this.find("#song-search-button"),
+        $searchList  = $this.find("#song-search-list");
         
-        /*$('<button >Set Playlist</button>').appendTo('#playlist-page div[data-role="footer"]').click(function(){
-            playlist.setPlaylist(list);
-        });
-        
-        $('<button >Play</button>').appendTo('#playlist-page div[data-role="footer"]').click(function(){
-            playlist.play();
-        });
-        
-        $('<button >Pause</button>').appendTo('#playlist-page div[data-role="footer"]').click(function(){
-            playlist.pause();
-        });
-        
-        $('<button >Stop</button>').appendTo('#playlist-page div[data-role="footer"]').click(function(){
-            playlist.stop();
-        });
-        
-        $('<button >Prev</button>').appendTo('#playlist-page div[data-role="footer"]').click(function(){
-            playlist.prev();
-        });
-        
-        $('<button >Next</button>').appendTo('#playlist-page div[data-role="footer"]').click(function(){
-            playlist.next();
-        });*/
+   $searchBtn.click(function(e){
+      e.preventDefault();
+      
+      var entrada = $searchInput.val();
+      
+      if ($.trim(entrada) === '') {
+          return;
+      }
+      
+      $.ajax({
+	url: '/vinilo/canciones/' + encodeURIComponent(entrada),
+	type: 'get',
+	dataType: 'json',
+	success: function(data) {
+            var lis = '';
+            $.each(data, function(i, v){
+                lis += '<li><a href="#">' + v.artista.nombre + ' - ' + v.nombre + '</a></li>';
+            });
+            
+            $searchList.html(lis).listview("refresh");
+	}
+      });
+   });
+   
+   $searchInput.keyup(function(e){
+       var code = e.keyCode || e.which;
+       if(code == 13) {
+           $searchBtn.click();
+       } 
+   });
+});
+
+jQuery(document).on('pageshow', '#search-music-page', function(){
+    var $searchInput = $(this).find("#song-search-input");
+    $searchInput.focus();
 });

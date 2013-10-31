@@ -48,10 +48,17 @@
             <div data-role="header" data-theme="b">
                 <h1>Buscador de temas</h1>
             </div>
-            <div data-role="content" data-theme="b">
-                <ul data-role="listview"  data-filter="true" data-filter-placeholder="Ingrese texto a buscar...">
-
-                </ul>
+            <div data-role="content" data-theme="c">
+                <label for="search-mini">Search Input:</label>
+                <fieldset class="ui-grid-a" style="margin-bottom: 20px;">
+                    <div class="ui-block-a" style="width: 90%;">
+                        <input type="search" name="search-mini" id="song-search-input" data-mini="true"/>
+                    </div>
+                    <div class="ui-block-b" style="width: 10%;">
+                        <a data-role="button" data-inline="true" data-icon="search" data-iconpos="notext" id="song-search-button">Buscar</a>
+                    </div>
+                </fieldset>
+                <ul id="song-search-list" data-role="listview" data-filter-placeholder="Ingrese texto a buscar..."></ul>
             </div>
         </div>
         <spring:url value="/resources/scripts/jquery-2.0.3.min.js" var="JSjQuery"/>
