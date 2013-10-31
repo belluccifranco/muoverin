@@ -1,13 +1,17 @@
 package com.vinilo.repository;
 
+import com.vinilo.model.Album;
+import com.vinilo.model.Artista;
 import com.vinilo.model.Cancion;
-import com.vinilo.model.CancionBusquedaCriteria;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 
@@ -51,27 +55,20 @@ public class CancionRepositoryJpaImpl implements CancionRepository {
     }
 
     @Override
-    public List<Cancion> buscarConCriteria(CancionBusquedaCriteria criteria) {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Cancion> cq = cb.createQuery(Cancion.class);
-        Root<Cancion> pet = cq.from(Cancion.class);
-        cq.where(cb.equal(pet.get("nombre"), criteria.getNombreCancion()));
-        TypedQuery<Cancion> q = em.createQuery(cq);
-        return q.getResultList();
+    public List<Cancion> buscarConCriteria(String criteria) {
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery<Cancion> query = builder.createQuery(Cancion.class);
+        Root<Cancion> cancion = query.from(Cancion.class);
+        Join<Cancion, Artista> artista = cancion.join("artista");
+        Join<Cancion, Album> album = cancion.join("album");
+
+        List<Predicate> conditions = new ArrayList();
+        conditions.add(builder.like(builder.upper(cancion.<String>get("nombre")), "%" + criteria.toUpperCase() + "%"));
+        conditions.add(builder.like(builder.upper(artista.<String>get("nombre")), "%" + criteria.toUpperCase() + "%"));
+        conditions.add(builder.like(builder.upper(album.<String>get("nombre")), "%" + criteria.toUpperCase() + "%"));
+
+        query.where(builder.or(conditions.toArray(new Predicate[]{})));
+        TypedQuery<Cancion> typedQuery = em.createQuery(query);
+        return typedQuery.getResultList();
     }
-    
-    
-    /*
-     public void displayAllContactSummary() {
-     List result = em
-     .createQuery("select c.firstName, c.lastName, t.telNumber "
-     + "from Contact c left join c.contactTelDetails t "
-     + " where t.telType='Home'").getResultList();
-     int count = 0;
-     for (Iterator i = result.iterator(); i.hasNext();) {
-     Object[] values = (Object[]) i.next();
-     System.out.println(++count + ": " + values[0] + ", "
-     + values[1] + ", " + values[2]);
-     }
-     }*/
 }

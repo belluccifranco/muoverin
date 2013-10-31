@@ -2,27 +2,27 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Playlist app</title>
+    <head>        
+        <title>Vinilo</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <spring:url value="/resources/styles/jquery_mobile/jquery.mobile-1.3.2.min.css" var="CSSjQueryMobile"/>
         <link rel="stylesheet" href="${CSSjQueryMobile}"/>
         <spring:url value="/resources/styles/app.css" var="CSSapp"/>
         <link rel="stylesheet" href="${CSSapp}"/> 
     </head>
+
     <body>
         <div data-role="page" id="playlist-page">
             <div data-role="header" data-position="fixed">
                 <h1>Canciones</h1>
                 <a href="#search-music-page" data-rel="dialog" data-icon="search" data-iconpos="notext" class="ui-btn-right">Buscar</a>
-            </div><!-- /header -->
+            </div>
 
             <div data-role="content">
                 <ul data-role="listview" id="main-song-list">
 
                 </ul>
-            </div><!-- /content -->
+            </div>
 
             <div data-role="footer" data-position="fixed">
                 <div id="jquery_jplayer_1"></div>
@@ -42,14 +42,13 @@
                 </div>
             </div>
 
-        </div><!-- /page -->
+        </div>
 
         <div data-role="page" id="search-music-page">
             <div data-role="header" data-theme="b">
-                <h1>Buscador de temas</h1>
+                <h1>Buscador de canciones</h1>
             </div>
             <div data-role="content" data-theme="c">
-                <label for="search-mini">Search Input:</label>
                 <fieldset class="ui-grid-a" style="margin-bottom: 20px;">
                     <div class="ui-block-a" style="width: 90%;">
                         <input type="search" name="search-mini" id="song-search-input" data-mini="true"/>
@@ -61,6 +60,7 @@
                 <ul id="song-search-list" data-role="listview" data-filter-placeholder="Ingrese texto a buscar..."></ul>
             </div>
         </div>
+
         <spring:url value="/resources/scripts/jquery-2.0.3.min.js" var="JSjQuery"/>
         <script src="${JSjQuery}"></script>
         <spring:url value="/resources/scripts/jquery.mobile-1.3.2.min.js" var="JSjQueryMobile"/>

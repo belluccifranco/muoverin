@@ -1,7 +1,6 @@
 package com.vinilo.repository;
 
 import com.vinilo.model.Cancion;
-import com.vinilo.model.CancionBusquedaCriteria;
 import java.util.List;
 
 public interface CancionRepository {
@@ -13,6 +12,6 @@ public interface CancionRepository {
     public Cancion guardar(Cancion cancion);
 
     public void eliminar(Cancion cancion);
-    
-    public List<Cancion> buscarConCriteria(CancionBusquedaCriteria criteria);
+
+    public List<Cancion> buscarConCriteria(String criteria);
 }

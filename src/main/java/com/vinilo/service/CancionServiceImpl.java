@@ -1,7 +1,6 @@
 package com.vinilo.service;
 
 import com.vinilo.model.Cancion;
-import com.vinilo.model.CancionBusquedaCriteria;
 import com.vinilo.repository.CancionRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,7 @@ public class CancionServiceImpl implements CancionService {
     @Transactional(readOnly = true)
     public List<Cancion> buscarTodas() {
         return cancionRepository.buscarTodas();
-    }    
+    }
 
     @Override
     @Transactional(readOnly = true)
@@ -41,14 +40,7 @@ public class CancionServiceImpl implements CancionService {
     }
 
     @Override
-    public List<Cancion> buscarConCriteria(String entrada) {
-        String[] terminos = entrada.split(" ");
-        CancionBusquedaCriteria criteria = new CancionBusquedaCriteria();
-            for (int i = 0; i < terminos.length; i++) {
-                criteria.setNombreAlbum(terminos[i]);
-                criteria.setNombreArtista(terminos[i]);
-                criteria.setNombreCancion(terminos[i]);
-            }
+    public List<Cancion> buscarConCriteria(String criteria) {
         return cancionRepository.buscarConCriteria(criteria);
     }
 }

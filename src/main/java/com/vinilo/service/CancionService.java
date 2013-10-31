@@ -13,5 +13,5 @@ public interface CancionService {
 
     public void eliminar(Cancion cancion);
     
-    public List<Cancion> buscarConCriteria(String entrada);
+    public List<Cancion> buscarConCriteria(String criteria);
 }
