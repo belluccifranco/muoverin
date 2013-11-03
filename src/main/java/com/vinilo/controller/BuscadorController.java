@@ -5,7 +5,6 @@ import com.vinilo.service.CancionService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,8 +29,8 @@ public class BuscadorController {
     @RequestMapping(value = "/canciones", method = RequestMethod.GET, params = {"criteria", "indice"})
     @ResponseBody
     public List<Cancion> buscarConCriteria(@RequestParam(value = "criteria") String criteria,
-            @RequestParam(value = "indice", defaultValue = "1") int indice) {
+            @RequestParam(value = "indice", defaultValue = "0") int indice) {
 
-        return cancionService.buscarConCriteria(criteria, indice);
+        return cancionService.buscarPorNombreCancionNombreArtistaNormbreAlbum(criteria, indice);
     }
 }
