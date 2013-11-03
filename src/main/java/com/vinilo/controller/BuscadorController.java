@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -25,10 +26,12 @@ public class BuscadorController {
     public List<Cancion> buscarTodasLasCanciones() {
         return cancionService.buscarTodas();
     }
-    
-    @RequestMapping(value = "/canciones/{entrada}", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/canciones", method = RequestMethod.GET, params = {"criteria", "indice"})
     @ResponseBody
-    public List<Cancion> buscarConCriteria(@PathVariable String entrada) {
-        return cancionService.buscarConCriteria(entrada);
+    public List<Cancion> buscarConCriteria(@RequestParam(value = "criteria") String criteria,
+            @RequestParam(value = "indice", defaultValue = "1") int indice) {
+
+        return cancionService.buscarConCriteria(criteria, indice);
     }
 }

@@ -13,5 +13,5 @@ public interface CancionRepository {
 
     public void eliminar(Cancion cancion);
 
-    public List<Cancion> buscarConCriteria(String criteria);
+    public List<Cancion> buscarConCriteria(String criteria, int nroRegistros, int indicePagina);
 }
