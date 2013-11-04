@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CancionServiceImpl implements CancionService {
 
     private CancionRepository cancionRepository;
+    private static final int CANTIDAD_REGISTROS_BUSQUEDA = 3;
 
     @Autowired
     public CancionServiceImpl(CancionRepository cancionRepository) {
@@ -41,7 +42,7 @@ public class CancionServiceImpl implements CancionService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Cancion> buscarConCriteria(String criteria) {
-        return cancionRepository.buscarConCriteria(criteria);
+    public List<Cancion> buscarPorNombreCancionNombreArtistaNormbreAlbum(String criteria, int indicePagina) {
+        return cancionRepository.buscarConCriteria(criteria, CANTIDAD_REGISTROS_BUSQUEDA, indicePagina);
     }
 }

@@ -12,6 +12,6 @@ public interface CancionService {
     public Cancion guardar(Cancion cancion);
 
     public void eliminar(Cancion cancion);
-    
-    public List<Cancion> buscarConCriteria(String criteria);
+
+    public List<Cancion> buscarPorNombreCancionNombreArtistaNormbreAlbum(String criteria, int indicePagina);
 }

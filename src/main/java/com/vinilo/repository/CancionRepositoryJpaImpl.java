@@ -55,20 +55,18 @@ public class CancionRepositoryJpaImpl implements CancionRepository {
     }
 
     @Override
-    public List<Cancion> buscarConCriteria(String criteria) {
+    public List<Cancion> buscarConCriteria(String criteria, int nroRegistros, int indicePagina) {
         CriteriaBuilder builder = em.getCriteriaBuilder();
         CriteriaQuery<Cancion> query = builder.createQuery(Cancion.class);
-        Root<Cancion> cancion = query.from(Cancion.class);
-        Join<Cancion, Artista> artista = cancion.join("artista");
-        Join<Cancion, Album> album = cancion.join("album");
-
-        List<Predicate> conditions = new ArrayList();
-        conditions.add(builder.like(builder.upper(cancion.<String>get("nombre")), "%" + criteria.toUpperCase() + "%"));
-        conditions.add(builder.like(builder.upper(artista.<String>get("nombre")), "%" + criteria.toUpperCase() + "%"));
-        conditions.add(builder.like(builder.upper(album.<String>get("nombre")), "%" + criteria.toUpperCase() + "%"));
-
-        query.where(builder.or(conditions.toArray(new Predicate[]{})));
+        Root<Cancion> cancion = query.from(Cancion.class);        
+        Predicate likeCancion = builder.like(builder.upper(cancion.<String>get("nombre")), "%" + criteria.toUpperCase() + "%");        
+        Predicate likeArtista = builder.like(builder.upper(cancion.get("artista").<String>get("nombre")), "%" + criteria.toUpperCase() + "%");        
+        Predicate likeAlbum = builder.like(builder.upper(cancion.get("album").<String>get("nombre")), "%" + criteria.toUpperCase() + "%");        
+        query.select(cancion);       
+        query.where(builder.or(likeAlbum, likeCancion, likeArtista));
         TypedQuery<Cancion> typedQuery = em.createQuery(query);
+        typedQuery.setMaxResults(nroRegistros);
+        typedQuery.setFirstResult(indicePagina * nroRegistros);
         return typedQuery.getResultList();
     }
 }

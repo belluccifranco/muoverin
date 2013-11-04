@@ -70,19 +70,20 @@ jQuery(document).on('pageinit', '#search-music-page', function(){
    $searchBtn.click(function(e){
       e.preventDefault();
       
-      var entrada = $searchInput.val();
+      var criteria = $searchInput.val();
+      var indice = 0;
       
-      if ($.trim(entrada) === '') {
+      if ($.trim(criteria) === '') {
           return;
       }
       
       $.ajax({
-	url: '/vinilo/canciones/' + encodeURIComponent(entrada),
+	url: '/vinilo/canciones?criteria=' + encodeURIComponent(criteria) + '&indice=' + indice,
 	type: 'get',
 	dataType: 'json',
 	success: function(data) {
             var lis = '';
-            $.each(data, function(i, v){
+            $.each(data, function(i, v){ 
                 lis += '<li><a href="#">' + v.artista.nombre + ' - ' + v.nombre + '</a></li>';
             });
             
