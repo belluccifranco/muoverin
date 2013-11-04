@@ -1,4 +1,5 @@
 var playlist = null;
+var songSearcher = null;
 
 jQuery(document).on('pagebeforecreate', '#playlist-page', function(){
     playlist = new PlayListUI('main-song-list', 'jquery_jplayer_1' , {
@@ -11,7 +12,7 @@ jQuery(document).on('pagebeforecreate', '#playlist-page', function(){
             errorAlerts: true,
             warningAlerts: false
         });
-    playlist.loop = true;
+    playlist.loop = false;
 });
 
 jQuery(document).on('pageinit', '#playlist-page', function(){
@@ -61,34 +62,46 @@ jQuery(document).on('pageinit', '#playlist-page', function(){
         });
 });
 
+jQuery(document).on('pagebeforecreate', '#search-music-page', function(){
+
+});
+
 jQuery(document).on('pageinit', '#search-music-page', function(){
-    var $this = $(this),
+    songSearcher = new SearcherUI({
+         listId: 'song-search-list',
+         inputId: 'song-search-input',
+         buttonId: 'song-search-button',
+    });
+    /*var $this = $(this),
         $searchInput = $this.find("#song-search-input"),
         $searchBtn   = $this.find("#song-search-button"),
-        $searchList  = $this.find("#song-search-list");
+        $searchList  = $this.find("#song-search-list");*/
+
         
-   $searchBtn.click(function(e){
+   /*$searchBtn.click(function(e){
       e.preventDefault();
       
       var criteria = $searchInput.val();
       var indice = 0;
       
       if ($.trim(criteria) === '') {
+          $searchList.html('').listview("refresh");
           return;
       }
       
       $.ajax({
-	url: '/vinilo/canciones?criteria=' + encodeURIComponent(criteria) + '&indice=' + indice,
-	type: 'get',
-	dataType: 'json',
-	success: function(data) {
+        url: '/vinilo/canciones',
+        data: { criteria: criteria, indice: indice },
+        type: 'get',
+        dataType: 'json',
+        success: function(data) {
             var lis = '';
-            $.each(data, function(i, v){ 
+            $.each(data, function(i, v){
                 lis += '<li><a href="#">' + v.artista.nombre + ' - ' + v.nombre + '</a></li>';
             });
-            
+
             $searchList.html(lis).listview("refresh");
-	}
+        }
       });
    });
    
@@ -97,7 +110,7 @@ jQuery(document).on('pageinit', '#search-music-page', function(){
        if(code == 13) {
            $searchBtn.click();
        } 
-   });
+   });*/
 });
 
 jQuery(document).on('pageshow', '#search-music-page', function(){

@@ -49,7 +49,7 @@
                 <h1>Buscador de canciones</h1>
             </div>
             <div data-role="content" data-theme="c">
-                <fieldset class="ui-grid-a" style="margin-bottom: 20px;">
+                <fieldset class="ui-grid-a">
                     <div class="ui-block-a" style="width: 90%;">
                         <input type="search" name="search-mini" id="song-search-input" data-mini="true"/>
                     </div>
@@ -57,6 +57,12 @@
                         <a data-role="button" data-inline="true" data-icon="search" data-iconpos="notext" id="song-search-button">Buscar</a>
                     </div>
                 </fieldset>
+                <div class="segmented-control" style="margin-bottom: 20px;">
+                    <div data-role="controlgroup" data-type="horizontal">
+                        <a href="#" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-mini="true">Anterior</a>
+                        <a href="#" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-mini="true">Siguiente</a>
+                    </div>
+                </div>
                 <ul id="song-search-list" data-role="listview" data-filter-placeholder="Ingrese texto a buscar..."></ul>
             </div>
         </div>
@@ -69,6 +75,8 @@
         <script src="${JSjplayer}"></script>
         <spring:url value="/resources/scripts/playlist-interface.js" var="JSjplayelist" />
         <script src="${JSjplayelist}"></script>
+        <spring:url value="/resources/scripts/searcher.js" var="JSsearcher" />
+        <script src="${JSsearcher}"></script>
         <spring:url value="/resources/scripts/app.js" var="JSapp" />
         <script src="${JSapp}"></script>
     </body>
