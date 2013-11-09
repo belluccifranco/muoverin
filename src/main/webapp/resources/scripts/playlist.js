@@ -5,7 +5,7 @@ $(document).ready(function(){
     soundManager.setup({
         url: '/vinilo/resources/scripts/soundmanager2/swf/',
         //flashVersion: 9,
-        debugFlash : true,
+        //debugFlash : true,
         preferFlash: false,
         onready: function() {
             list = (function(){
