@@ -1,3 +1,67 @@
+soundManager.setup({
+    url: '/vinilo/resources/scripts/soundmanager2/swf/',
+    //flashVersion: 9,
+    //debugFlash : true,
+    preferFlash: false,
+    onready: function() {
+
+    },
+    ontimeout: function() {
+        console.error('No se pudo iniciar SoundManager2');
+    }
+});
+
+var SM2Playlist = function(options) {
+    options = $.isPlainObject(options) ? options : {};
+    this.init(options);
+};
+
+SM2Playlist.prototype = function() {
+    var defaults = {
+
+        },
+        init = function(options) {
+            this.current = -1;
+            this.options = $.extend(this.options, options);
+            this.list = [];
+        },
+        isValidPos = function(pos) {
+            return $.isNumeric(pos) && pos>=0 && pos < this.list.length;
+        },
+        current = function() {
+            if (arguments.length > 0) {
+                var pos = arguments[0];
+                if (isValidPos.call(this, pos)) {
+                    this.current = pos;
+                }
+            } else {
+                return this.current;
+            }
+        },
+        setPlaylist = function(data) {
+            this.current = -1;
+            this.list = $.isArray(data) ? data : [];
+            if (this.list.length > 0) {
+                current.call(this, 0);
+            }
+        },
+        play = function() {
+
+        },
+        pause = function() {
+
+        },
+        stop = function() {
+
+        },
+        prev = function() {
+
+        };
+        return {
+            init: init
+        };
+};
+
 $(document).ready(function(){
     var list = [],
         current = -1;
