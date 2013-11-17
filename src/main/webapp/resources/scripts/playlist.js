@@ -3,9 +3,6 @@ soundManager.setup({
     //flashVersion: 9,
     //debugFlash : true,
     preferFlash: false,
-    onready: function() {
-
-    },
     ontimeout: function() {
         console.error('No se pudo iniciar SoundManager2');
     }
@@ -18,7 +15,7 @@ var SM2Playlist = function(options) {
 
 SM2Playlist.prototype = function() {
     var defaults = {
-
+            loop: false
         },
         init = function(options) {
             this.current = -1;
@@ -28,41 +25,112 @@ SM2Playlist.prototype = function() {
         isValidPos = function(pos) {
             return $.isNumeric(pos) && pos>=0 && pos < this.list.length;
         },
-        current = function() {
-            if (arguments.length > 0) {
-                var pos = arguments[0];
-                if (isValidPos.call(this, pos)) {
-                    this.current = pos;
-                }
-            } else {
-                return this.current;
+        setCurrent = function(pos) {
+            if (isValidPos.call(this, pos)) {
+                this.current = pos;
             }
+        },
+        getCurrent = function() {
+            return this.current;
         },
         setPlaylist = function(data) {
             this.current = -1;
             this.list = $.isArray(data) ? data : [];
             if (this.list.length > 0) {
-                current.call(this, 0);
+                setCurrent.call(this, 0);
             }
         },
-        play = function() {
-
+        play = function(pos) {
+            pos = isValidPos.call(this, pos) ? pos : this.current;
+            if (pos > -1) {
+                setCurrent.call(this, pos);
+                this.list[getCurrent.call(this)]['sound'].play();
+            }
         },
         pause = function() {
-
+            this.list[getCurrent.call(this)]['sound'].pause();
+        },
+        togglePause = function() {
+            console.log(this.list[getCurrent.call(this)]);
+            this.list[getCurrent.call(this)]['sound'].togglePause();
         },
         stop = function() {
-
+            this.list[getCurrent.call(this)]['sound'].stop();
         },
         prev = function() {
-
+            var cur = getCurrent.call(this);
+            if (this.options.loop || cur > 0) {
+                var toGo = cur > 0 ?  cur - 1 : this.list.length - 1;
+                stop.call(this);
+                play.call(this, toGo);
+            }
+        },
+        next = function() {
+            var cur = getCurrent.call(this);
+            console.log(this.options.loop, cur);
+            if (this.options.loop || cur < this.list.length-1) {
+                var toGo = cur < this.list.length-1 ?  cur + 1 : 0;
+                stop.call(this);
+                play.call(this, toGo);
+            }
+        },
+        isPaused = function() {
+            return this.list[getCurrent.call(this)]['sound'].paused;
         };
         return {
-            init: init
+            init: init,
+            setPlaylist: setPlaylist,
+            play: play,
+            pause: pause,
+            togglePause: togglePause,
+            stop: stop,
+            prev: prev,
+            next: next,
+            isPaused: isPaused,
+            getCurrent: getCurrent
         };
-};
+}();
 
 $(document).ready(function(){
+    var playlist = new SM2Playlist({ loop: true });
+
+    soundManager.onready(function(){
+        var list = function(){
+            var res = [];
+            for(var i=1; i<5; i++) {
+                var s = soundManager.createSound({
+                    id: 's' + i,
+                    url: '/vinilo/reproductor/' + i
+                });
+                res.push({
+                    id: i,
+                    url: '/vinilo/reproductor/' + i,
+                    sound: s
+                });
+            }
+            return res;
+        }();
+        playlist.setPlaylist(list);
+    });
+
+    $('.play').on('click', function(){
+        playlist.togglePause();
+        if (playlist.isPaused()) {
+            $(this).html('||')
+        } else {
+            $(this).html('&gt;')
+        }
+    });
+
+    $('.next').on('click', function(){
+        playlist.next();
+    });
+    $('.prev').on('click', function(){
+        playlist.prev();
+    });
+});
+
+/*$(document).ready(function(){
     var list = [],
         current = -1;
 
@@ -135,4 +203,4 @@ $(document).ready(function(){
         playCurrent();
     });
 
-});
+});*/
