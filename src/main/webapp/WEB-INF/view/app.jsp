@@ -25,18 +25,17 @@
             </div>
 
             <div data-role="footer" data-position="fixed">
-                <div id="jquery_jplayer_1"></div>
-                <div id="player_container">
-                    <a class="jp-plui-prev" data-inline="true" data-role="button" href="javascript:;" data-theme="b" data-shadow="false" >
+                <div>
+                    <a data-inline="true" data-role="button" data-theme="b" data-shadow="false" >
                         <img alt="prev" src="/vinilo/resources/images/prev.png">
                     </a>
-                    <a class="jp-plui-play" data-inline="true" data-role="button" href="javascript:;" data-theme="b" data-shadow="false" >
+                    <a data-inline="true" data-role="button" data-theme="b" data-shadow="false" >
                         <img alt="prev" src="/vinilo/resources/images/play.png">
                     </a>
-                    <a class="jp-plui-pause" data-inline="true" data-role="button" href="javascript:;" data-theme="b" data-shadow="false" >
+                    <a data-inline="true" data-role="button" data-theme="b" data-shadow="false" >
                         <img alt="prev" src="/vinilo/resources/images/pause.png">
                     </a>
-                    <a class="jp-plui-next" data-inline="true" data-role="button" href="javascript:;" data-theme="b" data-shadow="false" >
+                    <a data-inline="true" data-role="button" data-theme="b" data-shadow="false" >
                         <img alt="prev" src="/vinilo/resources/images/next.png">
                     </a>
                 </div>

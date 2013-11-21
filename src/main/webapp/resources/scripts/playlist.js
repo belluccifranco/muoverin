@@ -76,6 +76,12 @@ SM2Playlist.prototype = function() {
         },
         isPaused = function() {
             return this.list[getCurrent.call(this)]['sound'].paused;
+        },
+        getLoop = function() {
+            return this.options.loop;
+        },
+        setLoop = function(loop) {
+            this.options.loop = loop;
         };
         return {
             init: init,
@@ -87,48 +93,11 @@ SM2Playlist.prototype = function() {
             prev: prev,
             next: next,
             isPaused: isPaused,
-            getCurrent: getCurrent
+            getCurrent: getCurrent,
+            getLoop: getLoop,
+            setLoop: setLoop
         };
 }();
-
-$(document).ready(function(){
-    var playlist = new SM2Playlist({ loop: true });
-
-    soundManager.onready(function(){
-        var list = function(){
-            var res = [];
-            for(var i=1; i<5; i++) {
-                var s = soundManager.createSound({
-                    id: 's' + i,
-                    url: '/vinilo/reproductor/' + i
-                });
-                res.push({
-                    id: i,
-                    url: '/vinilo/reproductor/' + i,
-                    sound: s
-                });
-            }
-            return res;
-        }();
-        playlist.setPlaylist(list);
-    });
-
-    $('.play').on('click', function(){
-        playlist.togglePause();
-        if (playlist.isPaused()) {
-            $(this).html('||')
-        } else {
-            $(this).html('&gt;')
-        }
-    });
-
-    $('.next').on('click', function(){
-        playlist.next();
-    });
-    $('.prev').on('click', function(){
-        playlist.prev();
-    });
-});
 
 /*$(document).ready(function(){
     var list = [],
