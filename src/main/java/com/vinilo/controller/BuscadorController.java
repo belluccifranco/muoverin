@@ -1,6 +1,7 @@
 package com.vinilo.controller;
 
 import com.vinilo.model.Cancion;
+import com.vinilo.model.Paginacion;
 import com.vinilo.service.CancionService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class BuscadorController {
 
     @RequestMapping(value = "/canciones", method = RequestMethod.GET, params = {"criteria", "indice"})
     @ResponseBody
-    public List<Cancion> buscarConCriteria(@RequestParam(value = "criteria") String criteria,
+    public Paginacion<Cancion> buscarConCriteria(@RequestParam(value = "criteria") String criteria,
             @RequestParam(value = "indice", defaultValue = "0") int indice) {
 
         return cancionService.buscarPorNombreCancionNombreArtistaNormbreAlbum(criteria, indice);

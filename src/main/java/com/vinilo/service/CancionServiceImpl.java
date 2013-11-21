@@ -1,6 +1,7 @@
 package com.vinilo.service;
 
 import com.vinilo.model.Cancion;
+import com.vinilo.model.Paginacion;
 import com.vinilo.repository.CancionRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class CancionServiceImpl implements CancionService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Cancion> buscarPorNombreCancionNombreArtistaNormbreAlbum(String criteria, int indicePagina) {
+    public Paginacion<Cancion> buscarPorNombreCancionNombreArtistaNormbreAlbum(String criteria, int indicePagina) {
         return cancionRepository.buscarConCriteria(criteria, CANTIDAD_REGISTROS_BUSQUEDA, indicePagina);
     }
 }

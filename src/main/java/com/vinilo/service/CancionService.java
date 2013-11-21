@@ -1,6 +1,7 @@
 package com.vinilo.service;
 
 import com.vinilo.model.Cancion;
+import com.vinilo.model.Paginacion;
 import java.util.List;
 
 public interface CancionService {
@@ -13,5 +14,5 @@ public interface CancionService {
 
     public void eliminar(Cancion cancion);
 
-    public List<Cancion> buscarPorNombreCancionNombreArtistaNormbreAlbum(String criteria, int indicePagina);
+    public Paginacion<Cancion> buscarPorNombreCancionNombreArtistaNormbreAlbum(String criteria, int indicePagina);
 }

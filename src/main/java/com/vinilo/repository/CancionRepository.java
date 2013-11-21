@@ -1,6 +1,7 @@
 package com.vinilo.repository;
 
 import com.vinilo.model.Cancion;
+import com.vinilo.model.Paginacion;
 import java.util.List;
 
 public interface CancionRepository {
@@ -13,5 +14,5 @@ public interface CancionRepository {
 
     public void eliminar(Cancion cancion);
 
-    public List<Cancion> buscarConCriteria(String criteria, int nroRegistros, int indicePagina);
+    public Paginacion<Cancion> buscarConCriteria(String criteria, int cantRegistrosPorPagina, int indicePagina);
 }

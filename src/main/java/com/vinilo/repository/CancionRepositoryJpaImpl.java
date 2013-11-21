@@ -1,16 +1,13 @@
 package com.vinilo.repository;
 
-import com.vinilo.model.Album;
-import com.vinilo.model.Artista;
 import com.vinilo.model.Cancion;
-import java.util.ArrayList;
+import com.vinilo.model.Paginacion;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
@@ -55,18 +52,38 @@ public class CancionRepositoryJpaImpl implements CancionRepository {
     }
 
     @Override
-    public List<Cancion> buscarConCriteria(String criteria, int nroRegistros, int indicePagina) {
+    public Paginacion<Cancion> buscarConCriteria(String criteria, int cantRegistrosPorPagina, int indicePagina) {
+        Paginacion<Cancion> paginacion = new Paginacion<Cancion>();
+        paginacion.setPagActual(indicePagina);
+        
         CriteriaBuilder builder = em.getCriteriaBuilder();
         CriteriaQuery<Cancion> query = builder.createQuery(Cancion.class);
-        Root<Cancion> cancion = query.from(Cancion.class);        
-        Predicate likeCancion = builder.like(builder.upper(cancion.<String>get("nombre")), "%" + criteria.toUpperCase() + "%");        
-        Predicate likeArtista = builder.like(builder.upper(cancion.get("artista").<String>get("nombre")), "%" + criteria.toUpperCase() + "%");        
-        Predicate likeAlbum = builder.like(builder.upper(cancion.get("album").<String>get("nombre")), "%" + criteria.toUpperCase() + "%");        
-        query.select(cancion);       
+        Root<Cancion> cancion = query.from(Cancion.class);
+        Predicate likeCancion = builder.like(builder.upper(cancion.<String>get("nombre")), "%" + criteria.toUpperCase() + "%");
+        Predicate likeArtista = builder.like(builder.upper(cancion.get("artista").<String>get("nombre")), "%" + criteria.toUpperCase() + "%");
+        Predicate likeAlbum = builder.like(builder.upper(cancion.get("album").<String>get("nombre")), "%" + criteria.toUpperCase() + "%");
+        query.select(cancion);
         query.where(builder.or(likeAlbum, likeCancion, likeArtista));
         TypedQuery<Cancion> typedQuery = em.createQuery(query);
-        typedQuery.setMaxResults(nroRegistros);
-        typedQuery.setFirstResult(indicePagina * nroRegistros);
-        return typedQuery.getResultList();
+        typedQuery.setMaxResults(cantRegistrosPorPagina);
+        typedQuery.setFirstResult((indicePagina-1) * cantRegistrosPorPagina);
+        List<Cancion> datos = typedQuery.getResultList();
+        paginacion.setDatos(datos);
+        paginacion.setCantRegistrosPagActual(datos.size());
+        
+        CriteriaQuery<Long> countQuery = builder.createQuery(Long.class);
+        countQuery.select(builder.count(countQuery.from(Cancion.class)));
+        countQuery.where(builder.or(likeAlbum, likeCancion, likeArtista));
+        paginacion.setCantRegistrosTotales(em.createQuery(countQuery).getSingleResult());
+        
+        double cantTotal = paginacion.getCantRegistrosTotales();
+        Double resultado = cantTotal/cantRegistrosPorPagina;
+        if (resultado > 1.0) {
+            resultado++;
+        } else {
+            resultado = 1.0;
+        }        
+        paginacion.setCantPaginas(resultado.longValue());        
+        return paginacion;
     }
 }
