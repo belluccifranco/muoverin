@@ -44,7 +44,7 @@
         <property name="jpaVendorAdapter"> 
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" /> 
         </property> 
-        <property name="packagesToScan" value="com.vinilo.model"/> 
+        <property name="packagesToScan" value="com.vinilo.model"/>
         <property name="jpaProperties"> 
             <props> 
                 <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop> 
@@ -67,7 +67,7 @@
     </bean> 
     <tx:annotation-driven transaction-manager="transactionManager" />        
     
-    <!-- Security -->  
+    <!-- Security -->    
     <security:http pattern="/login" security="none"/>
     <security:http pattern="/loginFailed" security="none"/>
     <security:http pattern="/logout" security="none"/>
@@ -79,11 +79,21 @@
         <security:logout logout-success-url="/login" invalidate-session="true"/>
     </security:http>
     
+    <bean id="daoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+        <property name="userDetailsService" ref="userDetailsService"/>
+    </bean>
+    
+    <bean id="authenticationManager" class="org.springframework.security.authentication.ProviderManager">
+        <property name="providers">
+            <list>
+                <ref local="daoAuthenticationProvider"/>
+            </list>
+        </property>
+    </bean>
+    
     <security:authentication-manager>
-        <security:authentication-provider>
-            <security:user-service> 
-                <security:user name="a" password="a" authorities="ROLE_CUSTOMER"/>
-            </security:user-service>
+        <security:authentication-provider user-service-ref="userDetailsService">            
+            <security:password-encoder hash="md5"/>
         </security:authentication-provider>
     </security:authentication-manager>    
 </beans>

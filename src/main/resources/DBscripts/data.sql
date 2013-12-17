@@ -3,8 +3,22 @@ INSERT INTO cuentaHosting (id_cuentaHosting, url, usuario, password)
 VALUES (1, 'https://g.api.mega.co.nz', 'cuentavinilo01@gmail.com', 'Ninguna01');
 
 --CUENTAS USUARIO
-INSERT INTO cuentaUsuario (id_cuentaUsuario, email, pin, cantidadIntentos)
-VALUES (1, 'vinilo@vinilo.com', 12345678, 0);
+INSERT INTO cuentaUsuario (id_cuentaUsuario, nombreUsuario, contrasenia)
+VALUES (1, 'customer@vinilo.com', 'e10adc3949ba59abbe56e057f20f883e');
+INSERT INTO cuentaUsuario (id_cuentaUsuario, nombreUsuario, contrasenia)
+VALUES (2, 'admin@vinilo.com', 'e10adc3949ba59abbe56e057f20f883e');
+
+--ROLES
+INSERT INTO rol (id_rol, rol)
+VALUES (1, 'ROLE_CUSTOMER');
+INSERT INTO rol (id_rol, rol)
+VALUES (2, 'ROLE_ADMIN');
+
+--CUENTAS USUARIO <> ROLES
+INSERT INTO cuentaUsuario_rol (id_cuentaUsuario, id_rol)
+VALUES (1, 1);
+INSERT INTO cuentaUsuario_rol (id_cuentaUsuario, id_rol)
+VALUES (2, 2);
 
 --ARTISTAS
 INSERT INTO artista (id_artista, nombre)
