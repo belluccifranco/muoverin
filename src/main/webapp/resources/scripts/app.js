@@ -6,7 +6,7 @@ jQuery(document).on('pagebeforecreate', '#playlist-page', function(){
         url: '/vinilo/resources/scripts/soundmanager2/swf/',
         //flashVersion: 9,
         //debugFlash : true,
-        preferFlash: false,
+        preferFlash: true,
         ontimeout: function() {
             console.error('No se pudo iniciar SoundManager2');
         }
@@ -26,7 +26,6 @@ jQuery(document).on('pageinit', '#playlist-page', function(){
                 dataType: "json",
                 success: function(data){
                     playlist.setPlaylist(data);
-                    //playlist.play();
                 }
             });
         }
