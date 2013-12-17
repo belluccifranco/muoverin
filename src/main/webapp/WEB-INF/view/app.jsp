@@ -19,23 +19,23 @@
             </div>
 
             <div data-role="content">
-                <ul data-role="listview" id="main-song-list">
+                <ul data-role="listview" id="main-play-list">
 
                 </ul>
             </div>
 
             <div data-role="footer" data-position="fixed">
-                <div>
-                    <a data-inline="true" data-role="button" data-theme="b" data-shadow="false" >
+                <div style="text-align: center;">
+                    <a id="prev" data-inline="true" data-role="button" data-theme="b" data-shadow="false" >
                         <img alt="prev" src="/vinilo/resources/images/prev.png">
                     </a>
-                    <a data-inline="true" data-role="button" data-theme="b" data-shadow="false" >
+                    <a id="play" data-inline="true" data-role="button" data-theme="b" data-shadow="false" >
                         <img alt="prev" src="/vinilo/resources/images/play.png">
                     </a>
-                    <a data-inline="true" data-role="button" data-theme="b" data-shadow="false" >
+                    <a id="pause" class="ui-screen-hidden" data-inline="true" data-role="button" data-theme="b" data-shadow="false" >
                         <img alt="prev" src="/vinilo/resources/images/pause.png">
                     </a>
-                    <a data-inline="true" data-role="button" data-theme="b" data-shadow="false" >
+                    <a id="next" data-inline="true" data-role="button" data-theme="b" data-shadow="false" >
                         <img alt="prev" src="/vinilo/resources/images/next.png">
                     </a>
                 </div>
@@ -70,8 +70,8 @@
         <script src="${JSjQuery}"></script>
         <spring:url value="/resources/scripts/jquery.mobile-1.3.2.min.js" var="JSjQueryMobile"/>
         <script src="${JSjQueryMobile}"></script>
-        <spring:url value="/resources/scripts/jplayer/jquery.jplayer.min.js" var="JSjplayer" />
-        <script src="${JSjplayer}"></script>
+        <spring:url value="/resources/scripts/soundmanager2/soundmanager2-jsmin.js" var="JSsoundManager2" />
+        <script src="${JSsoundManager2}"></script>
         <spring:url value="/resources/scripts/playlist-interface.js" var="JSjplayelist" />
         <script src="${JSjplayelist}"></script>
         <spring:url value="/resources/scripts/searcher.js" var="JSsearcher" />
