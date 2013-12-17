@@ -1,6 +1,7 @@
-package com.vinilo.repository;
+package com.vinilo.repository.jpa;
 
 import com.vinilo.model.ListaReproduccion;
+import com.vinilo.repository.ListaReproduccionRepository;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
