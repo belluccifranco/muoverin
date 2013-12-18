@@ -56,9 +56,4 @@ public class Link implements Serializable {
     public void setCancion(Cancion cancion) {
         this.cancion = cancion;
     }
-
-    @Override
-    public String toString() {
-        return url;
-    }
 }

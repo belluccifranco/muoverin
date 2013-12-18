@@ -8,7 +8,7 @@ public class SimpleGrantedAuthority implements GrantedAuthority {
     private String rol;
 
     public SimpleGrantedAuthority(String rol) {
-        Assert.hasText(rol, "A granted authority textual representation is required");
+        Assert.hasText(rol, "El nombre del rol no debe estar vacio.");
         this.rol = rol;
     }
 

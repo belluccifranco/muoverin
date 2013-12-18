@@ -68,28 +68,4 @@ public class ListaReproduccion implements Serializable {
     public void setCuentaUsuario(CuentaUsuario cuentaUsuario) {
         this.cuentaUsuario = cuentaUsuario;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id_listaReproduccion != null ? id_listaReproduccion.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof ListaReproduccion)) {
-            return false;
-        }
-        ListaReproduccion other = (ListaReproduccion) object;
-        if ((this.id_listaReproduccion == null && other.id_listaReproduccion != null) || (this.id_listaReproduccion != null && !this.id_listaReproduccion.equals(other.id_listaReproduccion))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return nombre;
-    }
 }

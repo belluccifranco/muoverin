@@ -76,23 +76,4 @@ public class CuentaUsuario implements Serializable {
     public void setRoles(List<Rol> roles) {
         this.roles = roles;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id_cuentaUsuario != null ? id_cuentaUsuario.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof CuentaUsuario)) {
-            return false;
-        }
-        CuentaUsuario other = (CuentaUsuario) object;
-        if ((this.id_cuentaUsuario == null && other.id_cuentaUsuario != null) || (this.id_cuentaUsuario != null && !this.id_cuentaUsuario.equals(other.id_cuentaUsuario))) {
-            return false;
-        }
-        return true;
-    }
 }
