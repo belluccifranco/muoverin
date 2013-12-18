@@ -38,9 +38,4 @@ public class ReproductorController {
             //System.out.println(ex);
         }
     }
-
-    @RequestMapping(value = "/sm2test", method = RequestMethod.GET)
-    public String sm2test() {
-        return "sm2test";
-    }
 }
