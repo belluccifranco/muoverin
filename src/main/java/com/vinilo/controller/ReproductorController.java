@@ -34,8 +34,7 @@ public class ReproductorController {
             String urlStorage = cancionService.buscarPorId(idCancion).getLinks().get(0).getUrl();
             mh.streamToOutputStream(urlStorage, response);
         } catch (Exception ex) {
-            //Silenciadas las exceptions
-            //System.out.println(ex);
+            System.out.println(ex);
         }
     }
 

@@ -33,7 +33,7 @@ public class CuentaUsuarioServiceImpl implements UserDetailsService {
         try {
             cuentaUsuario = cuentaUsuarioRepository.buscarUsuarioPorNombre(username);
         } catch (NoResultException ex) {
-            throw new UsernameNotFoundException("Usuario no encontrado!");
+            throw new UsernameNotFoundException("Usuario no encontrado.");
         }
         return this.construirUsuario(cuentaUsuario);
     }
