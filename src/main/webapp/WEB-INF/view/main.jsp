@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <spring:url value="/resources/styles/jquery_mobile/jquery.mobile-1.3.2.min.css" var="CSSjQueryMobile"/>
         <link rel="stylesheet" href="${CSSjQueryMobile}"/>
-        <spring:url value="/resources/styles/app.css" var="CSSapp"/>
+        <spring:url value="/resources/styles/main.css" var="CSSapp"/>
         <link rel="stylesheet" href="${CSSapp}"/> 
     </head>
 
@@ -76,7 +76,7 @@
         <script src="${JSjplayelist}"></script>
         <spring:url value="/resources/scripts/searcher.js" var="JSsearcher" />
         <script src="${JSsearcher}"></script>
-        <spring:url value="/resources/scripts/app.js" var="JSapp" />
+        <spring:url value="/resources/scripts/main.js" var="JSapp" />
         <script src="${JSapp}"></script>
     </body>
 </html>
