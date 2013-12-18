@@ -21,7 +21,7 @@ public class ReproductorController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String iniciar() {
-        return "app";
+        return "main";
     }
 
     @RequestMapping(value = "/reproductor/{idCancion}", method = RequestMethod.GET)
