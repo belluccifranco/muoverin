@@ -91,7 +91,7 @@ PlayListUI.prototype = function() {
             refresh = refresh || true;
             if (isPlayablePos(pos)) {
                 deleteLine(pos);
-                getSound(pos).unload();
+                getSound(pos).destruct();
                 sounds.splice(pos, 1);
             }
             if (refresh) {

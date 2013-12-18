@@ -72,8 +72,8 @@
         <script src="${JSjQueryMobile}"></script>
         <spring:url value="/resources/scripts/soundmanager2/soundmanager2-jsmin.js" var="JSsoundManager2" />
         <script src="${JSsoundManager2}"></script>
-        <spring:url value="/resources/scripts/playlist-interface.js" var="JSjplayelist" />
-        <script src="${JSjplayelist}"></script>
+        <spring:url value="/resources/scripts/playlist.js" var="JSplaylist" />
+        <script src="${JSplaylist}"></script>
         <spring:url value="/resources/scripts/searcher.js" var="JSsearcher" />
         <script src="${JSsearcher}"></script>
         <spring:url value="/resources/scripts/app.js" var="JSapp" />
