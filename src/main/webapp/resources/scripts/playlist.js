@@ -72,8 +72,9 @@ PlayListUI.prototype = function() {
             clearUI();
             refreshUI();
         },
-        addSong = function(obj) {
+        addSong = function(obj, refresh) {
             var sound, soundId, url;
+            refresh = (refresh === undefined) ? true : refresh;
             soundId = 's' + obj['id_cancion'];
             url = '/vinilo/reproductor/' + obj['id_cancion'];
             sound = soundManager.createSound({
@@ -86,9 +87,12 @@ PlayListUI.prototype = function() {
             });
             sounds.push(sound);
             playlistUL.append('<li id="' + soundId + '">' + options.getLineHtml(obj) + '</li>');
+            if (refresh) {
+                refreshUI();
+            }
         },
         removeSong = function(pos, refresh) {
-            refresh = refresh || true;
+            refresh = (refresh === undefined) ? true : refresh;
             if (isPlayablePos(pos)) {
                 deleteLine(pos);
                 getSound(pos).destruct();
@@ -102,7 +106,7 @@ PlayListUI.prototype = function() {
             var i, length;
             clearList();
             for (i=0, length=data.length; i<length; i += 1) {
-                addSong(data[i]);
+                addSong(data[i], false);
             }
             //playlistUL.append(lis);
             refreshUI();
@@ -118,7 +122,6 @@ PlayListUI.prototype = function() {
             return sounds[pos];
         },
         doAction = function(action) {
-            console.log(current, action);
             var sound;
             if (isPlayablePos(current)) {
                 sound = getSound(current);
@@ -208,6 +211,7 @@ PlayListUI.prototype = function() {
         next: next,
         togglePause: togglePause,
         addSong: addSong,
-        removeSong: removeSong
+        removeSong: removeSong,
+        refreshList: refreshUI
     }
 }();

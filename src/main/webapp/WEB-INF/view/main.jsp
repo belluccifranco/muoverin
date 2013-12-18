@@ -56,11 +56,9 @@
                         <a data-role="button" data-inline="true" data-icon="search" data-iconpos="notext" id="song-search-button">Buscar</a>
                     </div>
                 </fieldset>
-                <div class="segmented-control" style="margin-bottom: 20px;">
-                    <div data-role="controlgroup" data-type="horizontal">
-                        <a href="#" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-mini="true">Anterior</a>
-                        <a href="#" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-mini="true">Siguiente</a>
-                    </div>
+                <div id="pager" style="text-align: right; margin-bottom: 20px;">
+                    <button id="song-search-pager-prev-button" data-iconpos="left" data-inline="true" data-icon="arrow-l" data-mini="true">Anterior</button>
+                    <button id="song-search-pager-next-button" data-iconpos="right" data-inline="true" data-icon="arrow-r" data-mini="true">Siguiente</button>
                 </div>
                 <ul id="song-search-list" data-role="listview" data-filter-placeholder="Ingrese texto a buscar..."></ul>
             </div>

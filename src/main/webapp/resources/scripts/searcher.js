@@ -4,10 +4,12 @@ var SearcherUI = function(options) {
 };
 
 SearcherUI.prototype = function(){
-    var defaults = {
+    var self, defaults = {
         listId: null,
         inputId: null,
         buttonId: null,
+        pagerNextButtonId: null,
+        pagerPrevButtonId: null,
         searchUrl: '/vinilo/canciones',
         getLineHtml: function(obj) {
             return '<a href="#">' + obj.artista.nombre + ' - ' + obj.nombre + '</a>';
@@ -20,76 +22,125 @@ SearcherUI.prototype = function(){
             });
         },
         buttonEvents: function($button, searchObj) {
-            console.log($button, searchObj);
             $button.click(function(e){
                 e.preventDefault();
-                searchObj.search(searchObj.uiInput.val(), 0)
+                searchObj.search(searchObj.uiInput.val(), 1)
             });
         },
         setCustomUIEvents: function($listObj) {}
     },
     init = function(options) {
-        this.list = [];
-        this.options = $.extend(defaults, options);
+        self = this;
 
-        this.uiList = typeof(this.options.listId) === 'string' ? $('#' + this.options.listId) : null;
-        this.uiInput = typeof(this.options.inputId) === 'string' ? $('#' + this.options.inputId) : null;
-        this.uiButton = typeof(this.options.buttonId) === 'string' ? $('#' + this.options.buttonId) : null;
+        self.list = [];
+        self.options = $.extend(defaults, options);
 
-        this.page = 0;
+        self.uiList = typeof(self.options.listId) === 'string' ? $('#' + self.options.listId) : null;
+        self.uiInput = typeof(self.options.inputId) === 'string' ? $('#' + self.options.inputId) : null;
+        self.uiButton = typeof(self.options.buttonId) === 'string' ? $('#' + self.options.buttonId) : null;
 
-        bindEvents.call(this);
+        self.searchQuery = '';
+        self.page = 1;
+        self.uiPagerNextButton = typeof(self.options.pagerNextButtonId) === 'string' ? $('#' + self.options.pagerNextButtonId) : null;
+        self.uiPagerPrevButton = typeof(self.options.pagerPrevButtonId) === 'string' ? $('#' + self.options.pagerPrevButtonId) : null;
+
+        self.uiPagerNextButton.attr('disabled', 'disabled');
+        self.uiPagerPrevButton.attr('disabled', 'disabled');
+
+        bindEvents();
+
+        self.pager =  {
+            pagActual: 1,
+            cantRegistrosPagActual: 0,
+            cantPaginas: 0,
+            cantRegistrosTotales: 0
+        }
     },
     clear = function(){
-        this.list.length = 0;
+        self.list.length = 0;
     },
     clearUI = function(){
-        this.uiList.html('');
+        self.uiList.html('');
     },
     refreshUI = function() {
-        this.uiList.listview("refresh");
+        self.uiList.listview("refresh");
     },
     updateUI = function() {
-        if (null === this.uiList) { return; }
+        if (null === self.uiList) { return; }
 
-        clearUI.call(this);
+        clearUI();
         var lis = '';
-        for (var i=0; i<this.list.length; i++) {
-            lis += '<li>' + this.options.getLineHtml(this.list[i]) + '</li>';
+        for (var i=0; i<self.list.length; i++) {
+            lis += '<li>' + self.options.getLineHtml(self.list[i]) + '</li>';
         }
 
-        this.uiList.html(lis);
-        refreshUI.call(this);
+        self.uiList.html(lis);
+        refreshUI();
+    },
+    updatePagerInfo = function(pagerObj) {
+        self.pager = pagerObj;
+        self.uiPagerNextButton.attr('disabled', 'disabled');
+        self.uiPagerPrevButton.attr('disabled', 'disabled');
+        if (self.pager.pagActual < self.pager.cantPaginas) {
+            self.uiPagerNextButton.removeAttr('disabled');
+        }
+        if (self.pager.pagActual > 1) {
+            self.uiPagerPrevButton.removeAttr('disabled');
+        }
     },
     search = function(q, p) {
-        var self = this;
+        self.page = !isNaN(parseInt(p)) ? parseInt(p):1;
 
-        this.page = !isNaN(parseInt(p)) ? parseInt(p):0;
-        q = $.trim(q);
+        if (null !== q) {
+            self.searchQuery = $.trim(q);
+        }
 
-        if (q === '') {
-            clearUI.call(self);
+        if (self.searchQuery === '') {
+            clearUI();
             return;
         }
 
         $.ajax({
             url: self.options.searchUrl,
-            data: { criteria: q, indice: this.page},
+            data: { criteria: self.searchQuery, indice: self.page},
             type: 'get',
             dataType: 'json',
             success: function(data) {
-                self.list = data;
-                updateUI.call(self);
+                self.list = data.datos;
+                updateUI();
+
+                var pager =  {
+                    pagActual: data.pagActual,
+                    cantRegistrosPagActual: data.cantRegistrosPagActual,
+                    cantPaginas: data.cantPaginas,
+                    cantRegistrosTotales: data.cantRegistrosTotales
+                }
+
+                updatePagerInfo(pager);
             }
         });
     },
+    getObject = function(pos) {
+        return self.list[pos];
+    },
     bindEvents = function() {
-        if (null !== this.uiInput) { this.options.inputEvents(this.uiInput ,this); }
-        if (null !== this.uiButton) { this.options.buttonEvents(this.uiButton ,this); }
-        if (null !== this.uiList) { this.options.setCustomUIEvents(this.uiList); }
+        if (null !== self.uiInput) { self.options.inputEvents(self.uiInput ,self); }
+        if (null !== self.uiButton) { self.options.buttonEvents(self.uiButton ,self); }
+        if (null !== self.uiList) { self.options.setCustomUIEvents(self.uiList); }
+        if (null !== self.uiPagerNextButton) {
+            self.uiPagerNextButton.on('click', function(){
+                self.search(null, self.page + 1);
+            });
+        }
+        if (null !== self.uiPagerPrevButton) {
+            self.uiPagerPrevButton.on('click', function(){
+                self.search(null, self.page - 1);
+            });
+        }
     };
     return {
         init: init,
-        search: search
+        search: search,
+        getObject: getObject
     }
 }();
