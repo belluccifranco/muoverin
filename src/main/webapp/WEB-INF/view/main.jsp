@@ -56,7 +56,7 @@
                         <a data-role="button" data-inline="true" data-icon="search" data-iconpos="notext" id="song-search-button">Buscar</a>
                     </div>
                 </fieldset>
-                <div id="pager" style="text-align: right; margin-bottom: 20px;">
+                <div style="text-align: right; margin-bottom: 20px; text-align: center;">
                     <button id="song-search-pager-prev-button" data-iconpos="left" data-inline="true" data-icon="arrow-l" data-mini="true">Anterior</button>
                     <button id="song-search-pager-next-button" data-iconpos="right" data-inline="true" data-icon="arrow-r" data-mini="true">Siguiente</button>
                 </div>

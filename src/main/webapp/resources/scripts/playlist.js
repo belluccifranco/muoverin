@@ -7,7 +7,7 @@ PlayListUI.prototype = function() {
         playButton, pauseButton, nextButton, prevButton,
         sounds = [],
         defaults = {
-            loop: true,
+            loop: false,
             ulId : 'main-play-list',
             selectLineClass: 'ui-btn-active',
             playButtonId: 'play',
