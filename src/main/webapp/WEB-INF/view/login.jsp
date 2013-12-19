@@ -35,11 +35,16 @@
             </c:if>
 
             <form name='f' action="<c:url value='j_spring_security_check'/>" method='POST'>
-                <div class="ui-grid-c">
-                    <div class="ui-block-a"><input type="text"></div>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">USUARIO</div>
                     <div class="ui-block-b"><input type="text"></div>
-                    <div class="ui-block-c"><input type="text"></div>
-                    <div class="ui-block-d"><input type="text"></div>
+                </div>
+                <div>
+                    <label>PIN</label>
+                    <input type="text" data-enhance="false">
+                    <input type="text" data-enhance="false">
+                    <input type="text" data-enhance="false">
+                    <input type="text" data-enhance="false">
                 </div>
                 <table>
                     <tr>
