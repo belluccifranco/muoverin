@@ -133,6 +133,10 @@ PlayListUI.prototype = function() {
             if (isPlayablePos(pos)) {
                 current = pos;
                 selectLine(pos);
+            } else {
+                if (sounds.length > 0) {
+                    current = 0;
+                }
             }
             doAction('play');
         },
@@ -163,7 +167,11 @@ PlayListUI.prototype = function() {
             doAction('pause');
         },
         togglePause = function() {
-            doAction('togglePause');
+            if (!isPlayablePos(current) && sounds.length > 0) {
+                play(0);
+            } else {
+                doAction('togglePause');
+            }
         },
         isPaused = function() {
             if (isPlayablePos(current)) {
