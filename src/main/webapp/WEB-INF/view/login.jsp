@@ -34,28 +34,31 @@
                 </div>
             </c:if>
 
-            <form name='f' action="<c:url value='j_spring_security_check'/>" method='POST'>
-                <div class="ui-grid-a">
-                    <div class="ui-block-a">USUARIO</div>
-                    <div class="ui-block-b"><input type="text"></div>
-                </div>
-                <div>
-                    <label>PIN</label>
-                    <input type="text" data-enhance="false">
-                    <input type="text" data-enhance="false">
-                    <input type="text" data-enhance="false">
-                    <input type="text" data-enhance="false">
-                </div>
-                <table>
+            <form name='f' data-ajax="false" action="<c:url value='j_spring_security_check'/>" method='POST'>
+                <%--<table>
                     <tr>
                         <td>Usuario:</td>
-                        <td><input type='text' name='j_username' value=''>
-                        </td>
+                        <td colspan="4"><input type='text'></td>
                     </tr>
                     <tr>
                         <td>PIN:</td>
-                        <td><input type='password' name='j_password'/>
-                        </td>
+                        <td><input type='password'/></td>
+                        <td><input type='password'/></td>
+                        <td><input type='password'/></td>
+                        <td><input type='password'/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5"><input name="submit" type="submit" value="Ingresar"/></td>
+                    </tr>
+                </table>--%>
+                <table>
+                    <tr>
+                        <td>Usuario:</td>
+                        <td><input type='text' name='j_username' value=''></td>
+                    </tr>
+                    <tr>
+                        <td>PIN:</td>
+                        <td><input type='password' name='j_password'/></td>
                     </tr>
                     <tr>
                         <td colspan='2'><input name="submit" type="submit" value="Ingresar"/>
