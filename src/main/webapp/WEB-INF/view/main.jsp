@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<html>
     <head>        
         <title>Vinilo</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -64,9 +63,9 @@
             </div>
         </div>
 
-        <spring:url value="/resources/scripts/jquery-1.10.2.min.js" var="JSjQuery"/>
+        <spring:url value="/resources/scripts/public/jquery-1.10.2.min.js" var="JSjQuery"/>
         <script src="${JSjQuery}"></script>
-        <spring:url value="/resources/scripts/jquery.mobile-1.3.2.min.js" var="JSjQueryMobile"/>
+        <spring:url value="/resources/scripts/public/jquery.mobile-1.3.2.min.js" var="JSjQueryMobile"/>
         <script src="${JSjQueryMobile}"></script>
         <spring:url value="/resources/scripts/soundmanager2/soundmanager2-jsmin.js" var="JSsoundManager2" />
         <script src="${JSsoundManager2}"></script>
