@@ -68,9 +68,10 @@
     <tx:annotation-driven transaction-manager="transactionManager" />        
     
     <!-- Security -->    
-    <security:http pattern="/login" security="none"/>
+    <security:http pattern="/login" security="none"/>    
     <security:http pattern="/loginFailed" security="none"/>
     <security:http pattern="/logout" security="none"/>
+    <security:http pattern="/resources/scripts/public" security="none"/>
     <security:http auto-config="true">
         <security:form-login login-page="/login"
                              default-target-url="/"
