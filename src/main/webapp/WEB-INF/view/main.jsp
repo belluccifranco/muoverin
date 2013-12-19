@@ -64,7 +64,7 @@
             </div>
         </div>
 
-        <spring:url value="/resources/scripts/jquery-2.0.3.min.js" var="JSjQuery"/>
+        <spring:url value="/resources/scripts/jquery-1.10.2.min.js" var="JSjQuery"/>
         <script src="${JSjQuery}"></script>
         <spring:url value="/resources/scripts/jquery.mobile-1.3.2.min.js" var="JSjQueryMobile"/>
         <script src="${JSjQueryMobile}"></script>

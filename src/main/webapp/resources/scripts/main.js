@@ -48,7 +48,6 @@ jQuery(document).on('pageinit', '#search-music-page', function(){
                 var idx = $(this).index();
                 playlist.addSong(songSearcher.getObject(idx));
                 window.history.back();
-                //playlist.refreshList();
             });
         }
     });

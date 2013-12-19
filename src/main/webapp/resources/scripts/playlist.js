@@ -219,7 +219,6 @@ PlayListUI.prototype = function() {
         next: next,
         togglePause: togglePause,
         addSong: addSong,
-        removeSong: removeSong,
-        refreshList: refreshUI
+        removeSong: removeSong
     }
 }();
