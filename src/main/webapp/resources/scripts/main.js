@@ -44,9 +44,10 @@ jQuery(document).on('pageinit', '#search-music-page', function(){
         pagerNextButtonId: 'song-search-pager-next-button',
         pagerPrevButtonId: 'song-search-pager-prev-button',
         setCustomUIEvents: function($listObj) {
-            $listObj.on('dblclick', '>li', function(){
+            $listObj.on('click', '>li', function(){
                 var idx = $(this).index();
                 playlist.addSong(songSearcher.getObject(idx));
+                window.history.back();
                 //playlist.refreshList();
             });
         }
