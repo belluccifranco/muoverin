@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-    <head>        
-        <title>Vinilo</title>
+    <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <spring:url value="/resources/styles/jquery_mobile/jquery.mobile-1.3.2.min.css" var="CSSjQueryMobile"/>
         <link rel="stylesheet" href="${CSSjQueryMobile}"/>
         <spring:url value="/resources/styles/main.css" var="CSSapp"/>
         <link rel="stylesheet" href="${CSSapp}"/> 
     </head>
-
     <body>
         <div data-role="page" id="playlist-page">
             <div data-role="header" data-position="fixed">
-                <h1>Canciones</h1>
-                <a href="#search-music-page" data-rel="dialog" data-icon="search" data-iconpos="notext" class="ui-btn-right">Buscar</a>
+                <h1><spring:message code="message.canciones"/></h1>
+                <a href="#search-music-page" data-rel="dialog" data-icon="search" data-iconpos="notext" class="ui-btn-right"><spring:message code="message.buscar"/></a>
             </div>
 
             <div data-role="content">
@@ -44,7 +42,7 @@
 
         <div data-role="page" id="search-music-page">
             <div data-role="header" data-theme="b">
-                <h1>Buscador de canciones</h1>
+                <h1><spring:message code="message.buscador"/></h1>
             </div>
             <div data-role="content" data-theme="c">
                 <fieldset class="ui-grid-a">
@@ -56,13 +54,12 @@
                     </div>
                 </fieldset>
                 <div style="text-align: right; margin-bottom: 20px; text-align: center;">
-                    <button id="song-search-pager-prev-button" data-iconpos="left" data-inline="true" data-icon="arrow-l" data-mini="true">Anterior</button>
-                    <button id="song-search-pager-next-button" data-iconpos="right" data-inline="true" data-icon="arrow-r" data-mini="true">Siguiente</button>
+                    <button id="song-search-pager-prev-button" data-iconpos="left" data-inline="true" data-icon="arrow-l" data-mini="true"><spring:message code="message.anterior"/></button>
+                    <button id="song-search-pager-next-button" data-iconpos="right" data-inline="true" data-icon="arrow-r" data-mini="true"><spring:message code="message.siguiente"/></button>
                 </div>
-                <ul id="song-search-list" data-role="listview" data-filter-placeholder="Ingrese texto a buscar..."></ul>
+                <ul id="song-search-list" data-role="listview" data-filter-placeholder=<spring:message code="message.textoBuscador"/>></ul>
             </div>
         </div>
-
         <spring:url value="/resources/scripts/public/jquery-1.10.2.min.js" var="JSjQuery"/>
         <script src="${JSjQuery}"></script>
         <spring:url value="/resources/scripts/public/jquery.mobile-1.3.2.min.js" var="JSjQueryMobile"/>
