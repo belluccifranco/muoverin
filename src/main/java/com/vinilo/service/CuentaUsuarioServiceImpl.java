@@ -1,5 +1,6 @@
 package com.vinilo.service;
 
+import com.vinilo.controller.ReproductorController;
 import com.vinilo.model.CuentaUsuario;
 import com.vinilo.model.Rol;
 import com.vinilo.model.SimpleGrantedAuthority;
@@ -7,6 +8,7 @@ import com.vinilo.repository.CuentaUsuarioRepository;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.NoResultException;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -19,7 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("userDetailsService")
 public class CuentaUsuarioServiceImpl implements UserDetailsService {
 
-    private CuentaUsuarioRepository cuentaUsuarioRepository;
+    private final CuentaUsuarioRepository cuentaUsuarioRepository;
+    private static final Logger logger = Logger.getLogger(CuentaUsuarioServiceImpl.class);
 
     @Autowired
     public CuentaUsuarioServiceImpl(CuentaUsuarioRepository cuentaUsuarioRepository) {
@@ -33,7 +36,8 @@ public class CuentaUsuarioServiceImpl implements UserDetailsService {
         try {
             cuentaUsuario = cuentaUsuarioRepository.buscarUsuarioPorNombre(username);
         } catch (NoResultException ex) {
-            throw new UsernameNotFoundException("Usuario no encontrado.");
+            logger.error(ex.getMessage());
+            throw new UsernameNotFoundException("");            
         }
         return this.construirUsuario(cuentaUsuario);
     }

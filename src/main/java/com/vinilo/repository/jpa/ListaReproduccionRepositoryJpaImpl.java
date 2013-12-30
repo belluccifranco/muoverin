@@ -29,14 +29,11 @@ public class ListaReproduccionRepositoryJpaImpl implements ListaReproduccionRepo
 
     @Override
     public ListaReproduccion guardar(ListaReproduccion listaReproduccion) {
-        if (listaReproduccion.getId_listaReproduccion() == null) {
-            //log.info("Inserting new contact");
+        if (listaReproduccion.getId_listaReproduccion() == null) {            
             em.persist(listaReproduccion);
         } else {
-            em.merge(listaReproduccion);
-            //log.info("Updating existing contact");
-        }
-        //log.info("Contact saved with id: " + contact.getId());
+            em.merge(listaReproduccion);            
+        }        
         return listaReproduccion;
     }
 

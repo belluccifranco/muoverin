@@ -34,22 +34,18 @@ public class CancionRepositoryJpaImpl implements CancionRepository {
 
     @Override
     public Cancion guardar(Cancion cancion) {
-        if (cancion.getId_cancion() == null) {
-            //log.info("Inserting new contact");
+        if (cancion.getId_cancion() == null) {            
             em.persist(cancion);
         } else {
-            em.merge(cancion);
-            //log.info("Updating existing contact");
-        }
-        //log.info("Contact saved with id: " + contact.getId());
+            em.merge(cancion);            
+        }        
         return cancion;
     }
 
     @Override
     public void eliminar(Cancion cancion) {
         Cancion mergedCancion = em.merge(cancion);
-        em.remove(mergedCancion);
-        //log.info("Contact with id: " + contact.getId() + " deleted successfully");
+        em.remove(mergedCancion);        
     }
 
     @Override

@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ListaReproduccionServiceImpl implements ListaReproduccionService {
 
-    private ListaReproduccionRepository listaReproduccionRepository;
+    private final ListaReproduccionRepository listaReproduccionRepository;
 
     @Autowired
     public ListaReproduccionServiceImpl(ListaReproduccionRepository listaReproduccionRepository) {

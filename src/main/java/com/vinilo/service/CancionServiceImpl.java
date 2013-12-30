@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CancionServiceImpl implements CancionService {
 
-    private CancionRepository cancionRepository;
+    private final CancionRepository cancionRepository;
     private static final int CANTIDAD_REGISTROS_BUSQUEDA = 3;
 
     @Autowired
