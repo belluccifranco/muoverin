@@ -1,7 +1,7 @@
 package com.vinilo.repository.jpa;
 
 import com.vinilo.model.ListaReproduccion;
-import com.vinilo.repository.ListaReproduccionRepository;
+import com.vinilo.repository.PlaylistRepository;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -9,26 +9,26 @@ import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ListaReproduccionRepositoryJpaImpl implements ListaReproduccionRepository {
+public class ListaReproduccionRepositoryJpaImpl implements PlaylistRepository {
 
     @PersistenceContext
     private EntityManager em;
 
     @Override
-    public List<ListaReproduccion> buscarTodas() {
+    public List<ListaReproduccion> searchAllPlaylists() {
         List<ListaReproduccion> listasReproduccion = em.createNamedQuery("ListaReproduccion.buscarTodas", ListaReproduccion.class).getResultList();
         return listasReproduccion;
     }
 
     @Override
-    public ListaReproduccion buscarPorId(Long id) {
+    public ListaReproduccion searchById(Long id) {
         TypedQuery<ListaReproduccion> query = em.createNamedQuery("ListaReproduccion.buscarPorId", ListaReproduccion.class);
         query.setParameter("id", id);
         return query.getSingleResult();
     }
 
     @Override
-    public ListaReproduccion guardar(ListaReproduccion listaReproduccion) {
+    public ListaReproduccion save(ListaReproduccion listaReproduccion) {
         if (listaReproduccion.getId_listaReproduccion() == null) {            
             em.persist(listaReproduccion);
         } else {
@@ -38,7 +38,7 @@ public class ListaReproduccionRepositoryJpaImpl implements ListaReproduccionRepo
     }
 
     @Override
-    public void eliminar(ListaReproduccion listaReproduccion) {
+    public void remove(ListaReproduccion listaReproduccion) {
         ListaReproduccion mergedListaReproduccion = em.merge(listaReproduccion);
         em.remove(mergedListaReproduccion);
     }

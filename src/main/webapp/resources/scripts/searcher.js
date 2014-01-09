@@ -10,7 +10,7 @@ SearcherUI.prototype = function(){
         buttonId: null,
         pagerNextButtonId: null,
         pagerPrevButtonId: null,
-        searchUrl: '/vinilo/canciones',
+        searchUrl: '/vinilo/songs',
         getLineHtml: function(obj) {
             return '<a href="#">' + obj.artista.nombre + ' - ' + obj.nombre + '</a>';
             //throw 'Debe especificar la opción getLineHtml (function).';
@@ -102,7 +102,7 @@ SearcherUI.prototype = function(){
 
         $.ajax({
             url: self.options.searchUrl,
-            data: { criteria: self.searchQuery, indice: self.page},
+            data: { criteria: self.searchQuery, index: self.page},
             type: 'get',
             dataType: 'json',
             success: function(data) {

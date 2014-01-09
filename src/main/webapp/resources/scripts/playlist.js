@@ -76,7 +76,7 @@ PlayListUI.prototype = function() {
             var sound, soundId, url;
             refresh = (refresh === undefined) ? true : refresh;
             soundId = 's' + obj['id_cancion'];
-            url = '/vinilo/reproductor/' + obj['id_cancion'];
+            url = '/vinilo/player/' + obj['id_cancion'];
             sound = soundManager.createSound({
                 id: soundId,
                 url: url,
@@ -156,7 +156,7 @@ PlayListUI.prototype = function() {
             var nextPos = current + 1;
             if (current === playlistUL.children('li').length - 1) {
                 if (options.loop) {
-                    nextPos = 0
+                    nextPos = 0;
                 } else {
                     return;
                 }
@@ -220,5 +220,5 @@ PlayListUI.prototype = function() {
         togglePause: togglePause,
         addSong: addSong,
         removeSong: removeSong
-    }
+    };
 }();

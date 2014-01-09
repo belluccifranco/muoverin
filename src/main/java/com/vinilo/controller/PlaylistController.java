@@ -1,7 +1,7 @@
 package com.vinilo.controller;
 
 import com.vinilo.model.ListaReproduccion;
-import com.vinilo.service.ListaReproduccionService;
+import com.vinilo.service.PlaylistService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,20 +11,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class ListaReproduccionController {
+public class PlaylistController {
 
     @Autowired
-    private ListaReproduccionService listaReproduccionService;
+    private PlaylistService listaReproduccionService;
     
-    @RequestMapping(value = "/listasReproduccion", method = RequestMethod.GET)
+    @RequestMapping(value = "/playlist", method = RequestMethod.GET)
     @ResponseBody 
-    public List<ListaReproduccion> buscarTodas() {
-        return listaReproduccionService.buscarTodas();
+    public List<ListaReproduccion> searchAllPlaylists() {
+        return listaReproduccionService.searchAllPlaylists();
     }
     
     @RequestMapping(value = "/listasReproduccion/{id}", method = RequestMethod.GET)
     @ResponseBody 
-    public ListaReproduccion buscarPorId(@PathVariable Long id) {
-        return listaReproduccionService.buscarPorId(id);
+    public ListaReproduccion searchById(@PathVariable Long id) {
+        return listaReproduccionService.searchById(id);
     }
 }
