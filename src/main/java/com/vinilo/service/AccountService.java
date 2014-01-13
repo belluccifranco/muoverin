@@ -1,6 +1,6 @@
 package com.vinilo.service;
 
-import com.vinilo.model.CuentaUsuario;
+import com.vinilo.model.UserAccount;
 
 public interface AccountService {
 
@@ -8,5 +8,5 @@ public interface AccountService {
 
     public void logout();
 
-    public CuentaUsuario save(CuentaUsuario account);
+    public UserAccount save(UserAccount account);
 }

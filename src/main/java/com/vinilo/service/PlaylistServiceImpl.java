@@ -1,6 +1,6 @@
 package com.vinilo.service;
 
-import com.vinilo.model.ListaReproduccion;
+import com.vinilo.model.Playlist;
 import com.vinilo.repository.PlaylistRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,23 +19,23 @@ public class PlaylistServiceImpl implements PlaylistService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<ListaReproduccion> searchAllPlaylists() {
+    public List<Playlist> searchAllPlaylists() {
         return playlistRepository.searchAllPlaylists();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public ListaReproduccion searchById(Long id) {
+    public Playlist searchById(Long id) {
         return playlistRepository.searchById(id);
     }
 
     @Override
-    public ListaReproduccion save(ListaReproduccion playlist) {
+    public Playlist save(Playlist playlist) {
         return playlistRepository.save(playlist);
     }
 
     @Override
-    public void remove(ListaReproduccion playlist) {
+    public void remove(Playlist playlist) {
         playlistRepository.remove(playlist);
     }
 }

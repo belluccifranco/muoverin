@@ -1,7 +1,7 @@
 package com.vinilo.service;
 
-import com.vinilo.model.CuentaUsuario;
-import com.vinilo.model.Rol;
+import com.vinilo.model.UserAccount;
+import com.vinilo.model.UserRole;
 import com.vinilo.model.SimpleGrantedAuthority;
 import com.vinilo.repository.AccountRepository;
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class AccountServiceImpl implements UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        CuentaUsuario account = null;
+        UserAccount account = null;
         try {
             account = accountRepository.searchByName(username);
         } catch (NoResultException ex) {
@@ -41,16 +41,16 @@ public class AccountServiceImpl implements UserDetailsService {
         return this.buildUser(account);
     }
 
-    private User buildUser(CuentaUsuario account) {
-        String username = account.getNombreUsuario();
-        String password = account.getContrasenia();
+    private User buildUser(UserAccount userAccount) {
+        String username = userAccount.getUsername();
+        String password = userAccount.getPassword();
         boolean enabled = true;
         boolean accountNonExpired = true;
         boolean credentialsNonExpired = true;
         boolean accountNonLocked = true;
         List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
-        for (Rol role : account.getRoles()) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(role.getRol()));
+        for (UserRole role : userAccount.getUserRoles()) {
+            grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
         }
         User user = new User(username, password, enabled, accountNonExpired,
                 credentialsNonExpired, accountNonLocked, grantedAuthorities);

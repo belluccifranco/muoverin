@@ -1,7 +1,7 @@
 package com.vinilo.repository.jpa;
 
-import com.vinilo.model.Cancion;
-import com.vinilo.model.Paginacion;
+import com.vinilo.model.Song;
+import com.vinilo.model.Pagination;
 import com.vinilo.repository.SongRepository;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -20,67 +20,67 @@ public class SongRepositoryJpaImpl implements SongRepository {
     private EntityManager em;
 
     @Override
-    public List<Cancion> searchAllSongs() {
-        List<Cancion> songs = em.createNamedQuery("Cancion.buscarTodas", Cancion.class).getResultList();
+    public List<Song> searchAllSongs() {
+        List<Song> songs = em.createNamedQuery("Song.searchAllSongs", Song.class).getResultList();
         return songs;
     }
 
     @Override
-    public Cancion searchById(Long id) {
-        TypedQuery<Cancion> query = em.createNamedQuery("Cancion.buscarPorId", Cancion.class);
+    public Song searchById(Long id) {
+        TypedQuery<Song> query = em.createNamedQuery("Song.searchById", Song.class);
         query.setParameter("id", id);
         return query.getSingleResult();
     }
 
     @Override
-    public Cancion save(Cancion song) {
-        if (song.getId_cancion() == null) {            
+    public Song save(Song song) {
+        if (song.getId_song() == null) {
             em.persist(song);
         } else {
-            em.merge(song);            
-        }        
+            em.merge(song);
+        }
         return song;
     }
 
     @Override
-    public void remove(Cancion song) {
-        Cancion mergedSong = em.merge(song);
-        em.remove(mergedSong);        
+    public void remove(Song song) {
+        Song mergedSong = em.merge(song);
+        em.remove(mergedSong);
     }
 
     @Override
-    public Paginacion<Cancion> searchByCriteria(String criteria, int maxResultsPerPage, int pageIndex) {
-        Paginacion<Cancion> pagination = new Paginacion<Cancion>();
-        pagination.setPagActual(pageIndex);
-        
+    public Pagination<Song> searchByCriteria(String criteria, int maxResultsPerPage, int pageIndex) {
+        Pagination<Song> pagination = new Pagination<Song>();
+        pagination.setCurrentPage(pageIndex);
+
         CriteriaBuilder builder = em.getCriteriaBuilder();
-        CriteriaQuery<Cancion> query = builder.createQuery(Cancion.class);
-        Root<Cancion> song = query.from(Cancion.class);
-        Predicate likeSong = builder.like(builder.upper(song.<String>get("nombre")), "%" + criteria.toUpperCase() + "%");
-        Predicate likeArtist = builder.like(builder.upper(song.get("artista").<String>get("nombre")), "%" + criteria.toUpperCase() + "%");
-        Predicate likeAlbum = builder.like(builder.upper(song.get("album").<String>get("nombre")), "%" + criteria.toUpperCase() + "%");
+        CriteriaQuery<Song> query = builder.createQuery(Song.class);
+        Root<Song> song = query.from(Song.class);
+        Predicate likeSong = builder.like(builder.upper(song.<String>get("name")), "%" + criteria.toUpperCase() + "%");
+        Predicate likeArtist = builder.like(builder.upper(song.get("artist").<String>get("name")), "%" + criteria.toUpperCase() + "%");
+        Predicate likeAlbum = builder.like(builder.upper(song.get("album").<String>get("name")), "%" + criteria.toUpperCase() + "%");
         query.select(song);
         query.where(builder.or(likeAlbum, likeSong, likeArtist));
-        TypedQuery<Cancion> typedQuery = em.createQuery(query);
+        TypedQuery<Song> typedQuery = em.createQuery(query);
         typedQuery.setMaxResults(maxResultsPerPage);
-        typedQuery.setFirstResult((pageIndex-1) * maxResultsPerPage);
-        List<Cancion> data = typedQuery.getResultList();
-        pagination.setDatos(data);
-        pagination.setCantRegistrosPagActual(data.size());
-        
+        typedQuery.setFirstResult((pageIndex - 1) * maxResultsPerPage);
+        List<Song> data = typedQuery.getResultList();
+        pagination.setData(data);
+        pagination.setRowsInCurrentPage(data.size());
+
         CriteriaQuery<Long> countQuery = builder.createQuery(Long.class);
-        countQuery.select(builder.count(countQuery.from(Cancion.class)));
+        countQuery.select(builder.count(countQuery.from(Song.class)));
         countQuery.where(builder.or(likeAlbum, likeSong, likeArtist));
-        pagination.setCantRegistrosTotales(em.createQuery(countQuery).getSingleResult());
-        
-        double total = pagination.getCantRegistrosTotales();
-        Double result = total/maxResultsPerPage;
+        pagination.setTotalRows(em.createQuery(countQuery).getSingleResult());
+
+        double total = pagination.getTotalRows();
+        Double result = total / maxResultsPerPage;
         if (result > 1.0) {
             result++;
         } else {
             result = 1.0;
-        }        
-        pagination.setCantPaginas(result.longValue());        
+        }
+        pagination.setPages(result.longValue());
         return pagination;
     }
 }

@@ -1,7 +1,7 @@
 package com.vinilo.service;
 
-import com.vinilo.model.Cancion;
-import com.vinilo.model.Paginacion;
+import com.vinilo.model.Song;
+import com.vinilo.model.Pagination;
 import com.vinilo.repository.SongRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,29 +21,29 @@ public class SongServiceImpl implements SongService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Cancion> searchAllSongs() {
+    public List<Song> searchAllSongs() {
         return songRepository.searchAllSongs();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Cancion searchById(Long id) {
+    public Song searchById(Long id) {
         return songRepository.searchById(id);
     }
 
     @Override
-    public Cancion save(Cancion cancion) {
+    public Song save(Song cancion) {
         return songRepository.save(cancion);
     }
 
     @Override
-    public void remove(Cancion cancion) {
+    public void remove(Song cancion) {
         songRepository.remove(cancion);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Paginacion<Cancion> searchByCriteria(String criteria, int pageIndex) {
+    public Pagination<Song> searchByCriteria(String criteria, int pageIndex) {
         return songRepository.searchByCriteria(criteria, MAX_ROWS_SEARCH, pageIndex);
     }
 }

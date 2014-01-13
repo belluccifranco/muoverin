@@ -10,27 +10,23 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Album implements Serializable {
+public class Artist implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id_album;
+    private Long id_artist;
 
     private String name;
 
-    private int releaseYear;
-
-    private int numberOfSongs;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "album")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "artist")
     private List<Song> songs;
 
-    public Long getId_album() {
-        return id_album;
+    public Long getId_artist() {
+        return id_artist;
     }
 
-    public void setId_album(Long id_album) {
-        this.id_album = id_album;
+    public void setId_artist(Long id_artist) {
+        this.id_artist = id_artist;
     }
 
     public String getName() {
@@ -39,22 +35,6 @@ public class Album implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getReleaseYear() {
-        return releaseYear;
-    }
-
-    public void setReleaseYear(int releaseYear) {
-        this.releaseYear = releaseYear;
-    }
-
-    public int getNumberOfSongs() {
-        return numberOfSongs;
-    }
-
-    public void setNumberOfSongs(int numberOfSongs) {
-        this.numberOfSongs = numberOfSongs;
     }
 
     public List<Song> getSongs() {

@@ -1,6 +1,6 @@
 package com.vinilo.controller;
 
-import com.vinilo.model.ListaReproduccion;
+import com.vinilo.model.Playlist;
 import com.vinilo.service.PlaylistService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,18 +13,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class PlaylistController {
 
-    @Autowired
     private PlaylistService listaReproduccionService;
-    
+
+    @Autowired
+    public PlaylistController(PlaylistService listaReproduccionService) {
+        this.listaReproduccionService = listaReproduccionService;
+    }
+
     @RequestMapping(value = "/playlist", method = RequestMethod.GET)
-    @ResponseBody 
-    public List<ListaReproduccion> searchAllPlaylists() {
+    @ResponseBody
+    public List<Playlist> searchAllPlaylists() {
         return listaReproduccionService.searchAllPlaylists();
     }
-    
+
     @RequestMapping(value = "/listasReproduccion/{id}", method = RequestMethod.GET)
-    @ResponseBody 
-    public ListaReproduccion searchById(@PathVariable Long id) {
+    @ResponseBody
+    public Playlist searchById(@PathVariable Long id) {
         return listaReproduccionService.searchById(id);
     }
 }

@@ -5,15 +5,15 @@ import org.springframework.util.Assert;
 
 public class SimpleGrantedAuthority implements GrantedAuthority {
 
-    private String rol;
+    private final String roleName;
 
-    public SimpleGrantedAuthority(String rol) {
-        Assert.hasText(rol, "El nombre del rol no debe estar vacio.");
-        this.rol = rol;
+    public SimpleGrantedAuthority(String roleName) {
+        Assert.hasText(roleName, "Role name cannot be null or empty");
+        this.roleName = roleName;
     }
 
     @Override
     public String getAuthority() {
-        return rol;
+        return roleName;
     }
 }

@@ -1,15 +1,15 @@
 package com.vinilo.repository;
 
-import com.vinilo.model.ListaReproduccion;
+import com.vinilo.model.Playlist;
 import java.util.List;
 
 public interface PlaylistRepository {
 
-    public List<ListaReproduccion> searchAllPlaylists();
+    public List<Playlist> searchAllPlaylists();
 
-    public ListaReproduccion searchById(Long id);
+    public Playlist searchById(Long id);
 
-    public ListaReproduccion save(ListaReproduccion playlist);
+    public Playlist save(Playlist playlist);
 
-    public void remove(ListaReproduccion playlist);
+    public void remove(Playlist playlist);
 }

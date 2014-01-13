@@ -1,8 +1,8 @@
 package com.vinilo.repository;
 
-import com.vinilo.model.CuentaUsuario;
+import com.vinilo.model.UserAccount;
 
 public interface AccountRepository {
 
-    public CuentaUsuario searchByName(String name);
+    public UserAccount searchByName(String name);
 }

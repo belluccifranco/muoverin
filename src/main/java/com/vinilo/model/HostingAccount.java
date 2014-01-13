@@ -10,27 +10,27 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class CuentaHosting implements Serializable {
+public class HostingAccount implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id_cuentaHosting;
-    
+    private Long id_hostingAccount;
+
     private String url;
-    
-    private String usuario;
-    
+
+    private String username;
+
     private String password;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cuentaHosting")
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hostingAccount")
     private List<Link> links;
 
-    public Long getId_cuentaHosting() {
-        return id_cuentaHosting;
+    public Long getId_hostingAccount() {
+        return id_hostingAccount;
     }
 
-    public void setId_cuentaHosting(Long id_cuentaHosting) {
-        this.id_cuentaHosting = id_cuentaHosting;
+    public void setId_hostingAccount(Long id_hostingAccount) {
+        this.id_hostingAccount = id_hostingAccount;
     }
 
     public String getUrl() {
@@ -41,12 +41,12 @@ public class CuentaHosting implements Serializable {
         this.url = url;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -63,5 +63,6 @@ public class CuentaHosting implements Serializable {
 
     public void setLinks(List<Link> links) {
         this.links = links;
-    }    
+    }
+
 }

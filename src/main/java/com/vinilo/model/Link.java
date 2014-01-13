@@ -14,16 +14,16 @@ public class Link implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_link;
-    
+
     private String url;
-    
+
     @ManyToOne
-    @JoinColumn(name = "id_cuentaHosting")
-    private CuentaHosting cuentaHosting;
-    
+    @JoinColumn(name = "id_hostingAccount")
+    private HostingAccount hostingAccount;
+
     @ManyToOne
-    @JoinColumn(name = "id_cancion")
-    private Cancion cancion;
+    @JoinColumn(name = "id_song")
+    private Song song;
 
     public Long getId_link() {
         return id_link;
@@ -41,19 +41,20 @@ public class Link implements Serializable {
         this.url = url;
     }
 
-    public CuentaHosting getCuentaHosting() {
-        return cuentaHosting;
+    public HostingAccount getHostingAccount() {
+        return hostingAccount;
     }
 
-    public void setCuentaHosting(CuentaHosting cuentaHosting) {
-        this.cuentaHosting = cuentaHosting;
+    public void setHostingAccount(HostingAccount hostingAccount) {
+        this.hostingAccount = hostingAccount;
     }
 
-    public Cancion getCancion() {
-        return cancion;
+    public Song getSong() {
+        return song;
     }
 
-    public void setCancion(Cancion cancion) {
-        this.cancion = cancion;
+    public void setSong(Song song) {
+        this.song = song;
     }
+
 }

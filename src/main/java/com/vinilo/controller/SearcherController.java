@@ -1,7 +1,7 @@
 package com.vinilo.controller;
 
-import com.vinilo.model.Cancion;
-import com.vinilo.model.Paginacion;
+import com.vinilo.model.Song;
+import com.vinilo.model.Pagination;
 import com.vinilo.service.SongService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +23,13 @@ public class SearcherController {
 
     @RequestMapping(value = "/songs", method = RequestMethod.GET)
     @ResponseBody
-    public List<Cancion> searchAllSongs() {
+    public List<Song> searchAllSongs() {
         return cancionService.searchAllSongs();
     }
 
     @RequestMapping(value = "/songs", method = RequestMethod.GET, params = {"criteria", "index"})
     @ResponseBody
-    public Paginacion<Cancion> searchSongsWithCriteria(@RequestParam(value = "criteria") String criteria,
+    public Pagination<Song> searchSongsWithCriteria(@RequestParam(value = "criteria") String criteria,
             @RequestParam(value = "index", defaultValue = "0") int index) {
 
         return cancionService.searchByCriteria(criteria, index);

@@ -1,18 +1,18 @@
 package com.vinilo.service;
 
-import com.vinilo.model.Cancion;
-import com.vinilo.model.Paginacion;
+import com.vinilo.model.Song;
+import com.vinilo.model.Pagination;
 import java.util.List;
 
 public interface SongService {
 
-    public List<Cancion> searchAllSongs();
+    public List<Song> searchAllSongs();
 
-    public Cancion searchById(Long id);
+    public Song searchById(Long id);
 
-    public Cancion save(Cancion song);
+    public Song save(Song song);
 
-    public void remove(Cancion song);
+    public void remove(Song song);
 
-    public Paginacion<Cancion> searchByCriteria(String criteria, int pageIndex);
+    public Pagination<Song> searchByCriteria(String criteria, int pageIndex);
 }
