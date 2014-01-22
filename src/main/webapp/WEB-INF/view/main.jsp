@@ -13,6 +13,13 @@
             <div data-role="header" data-position="fixed">
                 <h1><spring:message code="message.canciones"/></h1>
                 <a href="#search-music-page" data-rel="dialog" data-icon="search" data-iconpos="notext" class="ui-btn-right"><spring:message code="message.buscar"/></a>
+                <div class="segmented-control ui-bar-d">
+                    <a href="#" id="remove-sound" data-role="button" data-icon="delete" data-iconpos="notext" data-inline="true" style="margin-right: 50px;"></a>
+                    <div data-role="controlgroup" data-type="horizontal" style="display: inline-block;">
+                        <a href="#" id="up-sound" data-role="button" data-icon="arrow-u" data-iconpos="notext"></a>
+                        <a href="#" id="down-sound" data-role="button" data-icon="arrow-d" data-iconpos="notext"></a>
+                    </div>
+                </div>
             </div>
 
             <div data-role="content">
@@ -27,14 +34,21 @@
                         <img alt="prev" src="/vinilo/resources/images/prev.png">
                     </a>
                     <a id="play" data-inline="true" data-role="button" data-theme="b" data-shadow="false" >
-                        <img alt="prev" src="/vinilo/resources/images/play.png">
+                        <img alt="play" src="/vinilo/resources/images/play.png">
                     </a>
                     <a id="pause" class="ui-screen-hidden" data-inline="true" data-role="button" data-theme="b" data-shadow="false" >
-                        <img alt="prev" src="/vinilo/resources/images/pause.png">
+                        <img alt="pause" src="/vinilo/resources/images/pause.png">
+                    </a>
+                    <a id="stop" data-inline="true" data-role="button" data-theme="b" data-shadow="false" >
+                        <img alt="stop" src="/vinilo/resources/images/stop.png">
                     </a>
                     <a id="next" data-inline="true" data-role="button" data-theme="b" data-shadow="false" >
-                        <img alt="prev" src="/vinilo/resources/images/next.png">
+                        <img alt="next" src="/vinilo/resources/images/next.png">
                     </a>
+                    <fieldset data-role="controlgroup" data-type="horizontal" style="display: inline;">
+                        <input type="checkbox" id="loop">
+                        <label for="loop" style="border: 0;"><img alt="loop" title="loop" src="/vinilo/resources/images/repeat.png"></label>
+                    </fieldset>
                 </div>
             </div>
 
@@ -66,8 +80,8 @@
         <script src="${JSjQueryMobile}"></script>
         <spring:url value="/resources/scripts/soundmanager2/soundmanager2-jsmin.js" var="JSsoundManager2" />
         <script src="${JSsoundManager2}"></script>
-        <spring:url value="/resources/scripts/playlist.js" var="JSplaylist" />
-        <script src="${JSplaylist}"></script>
+        <spring:url value="/resources/scripts/playlist2.js" var="JSplaylist2" />
+        <script src="${JSplaylist2}"></script>
         <spring:url value="/resources/scripts/searcher.js" var="JSsearcher" />
         <script src="${JSsearcher}"></script>
         <spring:url value="/resources/scripts/main.js" var="JSapp" />

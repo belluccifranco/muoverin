@@ -6,6 +6,7 @@ jQuery(document).on('pagebeforecreate', '#playlist-page', function() {
         url: '/vinilo/resources/scripts/soundmanager2/swf/',
         //flashVersion: 9,
         //debugFlash : true,
+        //useHTML5Audio: false,
         preferFlash: true,
         ontimeout: function() {
             console.error('Could not start SoundManager2');
@@ -16,20 +17,7 @@ jQuery(document).on('pagebeforecreate', '#playlist-page', function() {
 });
 
 jQuery(document).on('pageinit', '#playlist-page', function() {
-    /*var firstTime = true;
-     soundManager.onready(function(){
-     if (firstTime) {
-     firstTime = false;
-     $.ajax({
-     url: "/vinilo/canciones",
-     type: "get",
-     dataType: "json",
-     success: function(data){
-     playlist.setPlaylist(data);
-     }
-     });
-     }
-     });*/
+
 });
 
 jQuery(document).on('pagebeforecreate', '#search-music-page', function() {
