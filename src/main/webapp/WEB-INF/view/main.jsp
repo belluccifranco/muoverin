@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,8 +12,9 @@
     <body>
         <div data-role="page" id="playlist-page">
             <div data-role="header" data-position="fixed">
+                <a data-ajax="false" href="<c:url value='j_spring_security_logout'/>" data-icon="back" <%--data-iconpos="notext"--%>><spring:message code="message.salir"/></a>
                 <h1><spring:message code="message.canciones"/></h1>
-                <a href="#search-music-page" data-rel="dialog" data-icon="search" data-iconpos="notext" class="ui-btn-right"><spring:message code="message.buscar"/></a>
+                <a href="#search-music-page" data-rel="dialog" data-icon="search" <%--data-iconpos="notext"--%> class="ui-btn-right"><spring:message code="message.buscar"/></a>
                 <div class="segmented-control ui-bar-d">
                     <a href="#" id="remove-sound" data-role="button" data-icon="delete" data-iconpos="notext" data-inline="true" style="margin-right: 50px;"></a>
                     <div data-role="controlgroup" data-type="horizontal" style="display: inline-block;">
@@ -51,7 +53,6 @@
                     </fieldset>
                 </div>
             </div>
-
         </div>
 
         <div data-role="page" id="search-music-page">
