@@ -23,10 +23,14 @@ VALUES (2, 2);
 --ARTISTS
 INSERT INTO artist (id_artist, name)
 VALUES (1, 'AC DC');
+INSERT INTO artist (id_artist, name)
+VALUES (2, 'Led Zeppelin');
 
 --ALBUMS
 INSERT INTO album (id_album, name, releaseYear, numberOfSongs)
 VALUES (1, 'Highway to Hell', 1979, 10);
+INSERT INTO album (id_album, name, releaseYear, numberOfSongs)
+VALUES (2, 'Presense', 1976, 7);
 
 --SONGS
 INSERT INTO song (id_song, track, name, duration, lyric, id_artist, id_album)
@@ -49,6 +53,20 @@ INSERT INTO song (id_song, track, name, duration, lyric, id_artist, id_album)
 VALUES (9, 09, 'Love Hungry Man', '', '', 1, 1);
 INSERT INTO song (id_song, track, name, duration, lyric, id_artist, id_album)
 VALUES (10, 10, 'Night Prowler', '', '', 1, 1);
+INSERT INTO song (id_song, track, name, duration, lyric, id_artist, id_album)
+VALUES (11, 01, 'Achilles Last Stand', '', '', 2, 2);
+INSERT INTO song (id_song, track, name, duration, lyric, id_artist, id_album)
+VALUES (12, 02, 'For Your Life', '', '', 2, 2);
+INSERT INTO song (id_song, track, name, duration, lyric, id_artist, id_album)
+VALUES (13, 03, 'Royal Orleans', '', '', 2, 2);
+INSERT INTO song (id_song, track, name, duration, lyric, id_artist, id_album)
+VALUES (14, 04, 'Nobodys Fault But Mine', '', '', 2, 2);
+INSERT INTO song (id_song, track, name, duration, lyric, id_artist, id_album)
+VALUES (15, 05, 'Candy Store Rock', '', '', 2, 2);
+INSERT INTO song (id_song, track, name, duration, lyric, id_artist, id_album)
+VALUES (16, 06, 'Hots On For Nowhere', '', '', 2, 2);
+INSERT INTO song (id_song, track, name, duration, lyric, id_artist, id_album)
+VALUES (17, 07, 'Tea For One', '', '', 2, 2);
 
 --LINKS
 INSERT INTO link (id_link, url, id_hostingAccount, id_song)
@@ -71,3 +89,17 @@ INSERT INTO link (id_link, url, id_hostingAccount, id_song)
 VALUES (9, 'https://mega.co.nz/#!XghGjAYB!HMKf-Vt3hB9WICSa0Tak7Xxywo5TsX2FF8NMI8mo7Dk', 1, 9);
 INSERT INTO link (id_link, url, id_hostingAccount, id_song)
 VALUES (10, 'https://mega.co.nz/#!Tw4B0ZjL!WThKG0EqXIvrLeyzWVMT6ia_m1pec3NA18yeTnyBD1A', 1, 10);
+INSERT INTO link (id_link, url, id_hostingAccount, id_song)
+VALUES (11, 'https://mega.co.nz/#!OkxT2CQQ!VNGQzxRoTqbVLSGhnrTxjVVX_C1NHHJhjHgDwtzeUx0', 1, 11);
+INSERT INTO link (id_link, url, id_hostingAccount, id_song)
+VALUES (12, 'https://mega.co.nz/#!Osw2WTwD!fl6NTE1LbX7yq20hoLW9d1naZKt3g6ta6O_oucXNVTg', 1, 12);
+INSERT INTO link (id_link, url, id_hostingAccount, id_song)
+VALUES (13, 'https://mega.co.nz/#!20gSAAqa!ZwJG4QRJKJ75GLiueYfATivpz_laKt2Z2LMWQX2esH8', 1, 13);
+INSERT INTO link (id_link, url, id_hostingAccount, id_song)
+VALUES (14, 'https://mega.co.nz/#!v8wCXSIb!fdgHRHilmQW1olzTxZkiLlwkMsIyGZyKz3SwSpOnC8Q', 1, 14);
+INSERT INTO link (id_link, url, id_hostingAccount, id_song)
+VALUES (15, 'https://mega.co.nz/#!614k1BSQ!GzwglVZX0lO99bnl5IQcRArpwCVTYMnn7GERSJgNCyI', 1, 15);
+INSERT INTO link (id_link, url, id_hostingAccount, id_song)
+VALUES (16, 'https://mega.co.nz/#!TtpwiYIT!X9dvM0nA5XBI4nOlObLBOW_vKK52WsFJFG34WT6sSDY', 1, 16);
+INSERT INTO link (id_link, url, id_hostingAccount, id_song)
+VALUES (17, 'https://mega.co.nz/#!e95BlaID!aHdUkANGbgrHpi8eXk_gMUytaDMttmb3o52gwHLiXHU', 1, 17);
