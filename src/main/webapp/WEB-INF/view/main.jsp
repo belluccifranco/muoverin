@@ -41,9 +41,6 @@
                     <a id="pause" class="ui-screen-hidden" data-inline="true" data-role="button" data-theme="b" data-shadow="false" >
                         <img alt="pause" src="/vinilo/resources/images/pause.png">
                     </a>
-                    <a id="stop" data-inline="true" data-role="button" data-theme="b" data-shadow="false" >
-                        <img alt="stop" src="/vinilo/resources/images/stop.png">
-                    </a>
                     <a id="next" data-inline="true" data-role="button" data-theme="b" data-shadow="false" >
                         <img alt="next" src="/vinilo/resources/images/next.png">
                     </a>
