@@ -4,9 +4,11 @@ VALUES (1, 'https://g.api.mega.co.nz', 'cuentavinilo01@gmail.com', 'Ninguna01');
 
 --USER ACCOUNTS
 INSERT INTO userAccount (id_userAccount, username, password)
-VALUES (1, 'customer@vinilo.com', 'e10adc3949ba59abbe56e057f20f883e');
+VALUES (1, 'facundo@vinilo.com', 'e10adc3949ba59abbe56e057f20f883e');
 INSERT INTO userAccount (id_userAccount, username, password)
-VALUES (2, 'admin@vinilo.com', 'e10adc3949ba59abbe56e057f20f883e');
+VALUES (2, 'franco@vinilo.com', 'e10adc3949ba59abbe56e057f20f883e');
+INSERT INTO userAccount (id_userAccount, username, password)
+VALUES (3, 'admin@vinilo.com', 'e10adc3949ba59abbe56e057f20f883e');
 
 --USER ROLES
 INSERT INTO userRole (id_userRole, name)
@@ -18,7 +20,9 @@ VALUES (2, 'ROLE_ADMIN');
 INSERT INTO userAccount_userRole (id_userAccount, id_userRole)
 VALUES (1, 1);
 INSERT INTO userAccount_userRole (id_userAccount, id_userRole)
-VALUES (2, 2);
+VALUES (2, 1);
+INSERT INTO userAccount_userRole (id_userAccount, id_userRole)
+VALUES (3, 2);
 
 --ARTISTS
 INSERT INTO artist (id_artist, name)
