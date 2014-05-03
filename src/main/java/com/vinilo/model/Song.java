@@ -1,5 +1,7 @@
 package com.vinilo.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -13,12 +15,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Song.searchAllSongs", query = "SELECT s FROM Song s"),
     @NamedQuery(name = "Song.searchById", query = "SELECT s FROM Song s JOIN FETCH s.links WHERE s.id_song = :id")
 })
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id_song")
 public class Song implements Serializable {
 
     @Id
@@ -27,20 +32,25 @@ public class Song implements Serializable {
 
     private int track;
 
+    @NotNull
+    @Length(min=1, max=200)
     private String name;
 
     private String duration;
 
     private String lyric;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "id_artist")
     private Artist artist;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "id_album")
     private Album album;
 
+    @NotNull
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "song")
     private List<Link> links;
 

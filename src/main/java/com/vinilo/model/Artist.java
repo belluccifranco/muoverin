@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 public class Artist implements Serializable {
@@ -16,6 +18,8 @@ public class Artist implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_artist;
 
+    @NotNull
+    @Length(min=1, max=200)
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "artist")

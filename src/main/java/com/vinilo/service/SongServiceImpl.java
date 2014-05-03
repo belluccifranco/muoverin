@@ -31,7 +31,8 @@ public class SongServiceImpl implements SongService {
         return songRepository.searchById(id);
     }
 
-    @Override
+    @Override        
+    @Transactional
     public Song save(Song cancion) {
         return songRepository.save(cancion);
     }

@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 public class Link implements Serializable {
@@ -15,6 +17,8 @@ public class Link implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_link;
 
+    @NotNull
+    @Length(min=1, max=200)
     private String url;
 
     @ManyToOne

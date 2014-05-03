@@ -13,22 +13,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class PlaylistController {
 
-    private PlaylistService listaReproduccionService;
+    private final PlaylistService playlistService;
 
     @Autowired
-    public PlaylistController(PlaylistService listaReproduccionService) {
-        this.listaReproduccionService = listaReproduccionService;
+    public PlaylistController(PlaylistService playlistService) {
+        this.playlistService = playlistService;
     }
 
     @RequestMapping(value = "/playlist", method = RequestMethod.GET)
     @ResponseBody
     public List<Playlist> searchAllPlaylists() {
-        return listaReproduccionService.searchAllPlaylists();
+        return playlistService.searchAllPlaylists();
     }
 
     @RequestMapping(value = "/listasReproduccion/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Playlist searchById(@PathVariable Long id) {
-        return listaReproduccionService.searchById(id);
+        return playlistService.searchById(id);
     }
 }

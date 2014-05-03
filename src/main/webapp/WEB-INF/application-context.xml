@@ -19,6 +19,7 @@
     <context:component-scan base-package="com.vinilo.controller" />
     <context:component-scan base-package="com.vinilo.service" />
     <context:component-scan base-package="com.vinilo.repository" />
+    <context:component-scan base-package="com.vinilo.exception" />
     
     <mvc:resources mapping="/resources/**" location="/resources/"/>
     
@@ -60,7 +61,7 @@
     <!-- SECURITY -->
     <security:http pattern="/login" security="none"/>    
     <security:http pattern="/loginFailed" security="none"/>
-    <security:http pattern="/logout" security="none"/>    
+    <security:http pattern="/logout" security="none"/>
     <security:http auto-config="true">
         <security:form-login login-page="/login"
                              default-target-url="/"
@@ -91,8 +92,9 @@
     
     
     <!-- STORAGE -->
-    <beans profile="embedded">
+    <beans profile="H2">
         <jdbc:embedded-database id="dataSource" type="H2"></jdbc:embedded-database>
+        
         <bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"> 
             <property name="dataSource" ref="dataSource" /> 
             <property name="jpaVendorAdapter"> 
@@ -111,10 +113,12 @@
                 </props> 
             </property> 
         </bean>        
+        
         <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"> 
-            <property name="entityManagerFactory" ref="emf"/> 
+            <property name="entityManagerFactory" ref="emf"/>
         </bean> 
-        <tx:annotation-driven transaction-manager="transactionManager" />
+        <tx:annotation-driven />
+        
         <jdbc:initialize-database data-source="dataSource">
             <jdbc:script location="classpath:DBscripts/data.sql"/>
         </jdbc:initialize-database>   
@@ -125,12 +129,13 @@
               p:driverClassName="org.postgresql.Driver"
               p:url="jdbc:postgresql://localhost/vinilo"
               p:username="user"
-              p:password="user"/>    
-        <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
-              p:dataSource-ref="dataSource">
+              p:password="user"/>
+            
+        <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+            <property name="dataSource" ref="dataSource" /> 
             <property name="jpaVendorAdapter">
                 <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>                
-            </property>
+            </property>            
             <property name="packagesToScan" value="com.vinilo.model"/>
             <property name="jpaProperties"> 
                 <props>                
@@ -140,11 +145,15 @@
                     <prop key="hibernate.format_sql">true</prop>                
                 </props> 
             </property> 
-        </bean>        
-        <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" 
-              p:entityManagerFactory-ref="entityManagerFactory"/>    
+        </bean>
+                
+        <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+            <property name="entityManagerFactory" ref="entityManagerFactory"/>
+        </bean>
+        <tx:annotation-driven />
+        
         <jdbc:initialize-database data-source="dataSource">
             <jdbc:script location="classpath:DBscripts/data.sql"/>
-        </jdbc:initialize-database>   
-    </beans>     
+        </jdbc:initialize-database>        
+    </beans>          
 </beans>

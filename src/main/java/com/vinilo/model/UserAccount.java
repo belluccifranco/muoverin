@@ -23,7 +23,7 @@ public class UserAccount implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_userAccount;
-
+    
     private String username;
 
     private String password;

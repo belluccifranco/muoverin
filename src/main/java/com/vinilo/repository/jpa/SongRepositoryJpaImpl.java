@@ -35,7 +35,7 @@ public class SongRepositoryJpaImpl implements SongRepository {
     @Override
     public Song save(Song song) {
         if (song.getId_song() == null) {
-            em.persist(song);
+            em.persist(song);            
         } else {
             em.merge(song);
         }
