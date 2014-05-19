@@ -27,6 +27,11 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>   
     
+    <session-config>
+        <session-timeout>15</session-timeout>        
+        <tracking-mode>COOKIE</tracking-mode>        
+    </session-config>
+    
     <!-- Spring Security -->
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>

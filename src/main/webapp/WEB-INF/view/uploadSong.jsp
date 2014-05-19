@@ -81,25 +81,21 @@
                         <thead>
                             <tr>
                                 <th width="50">Nº</th>
-                                <th width="800">Name</th>
-                                <th width="100">Time</th>                                        
+                                <th width="800">Name</th>                                
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Song name 1</td>
-                                <td>5:30</td>                                        
+                                <td>Song name 1</td>                                                                 
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td>Song name 2</td>
-                                <td>2:25</td>
+                                <td>Song name 2</td>                                
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td>Song name 3</td>
-                                <td>6:00</td>
+                                <td>Song name 3</td>                                
                             </tr>
                         </tbody>
                     </table>                          

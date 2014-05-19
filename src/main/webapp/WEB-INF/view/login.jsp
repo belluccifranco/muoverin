@@ -10,7 +10,7 @@
         <spring:url value="/resources/styles/login.css" var="CSSlogin"/>
         <link rel="stylesheet" href="${CSSlogin}"/>        
     </head>
-    <body <%--onload='document.f.j_username.focus();'--%>>
+    <body onload='document.f.j_username.focus();'>
         <div data-role="page" id="login-page">
             <div data-role="header" data-position="fixed">
                 <h1><spring:message code="message.bienvenida"/></h1>
