@@ -1,14 +1,17 @@
 package com.vinilo.model;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.URL;
 
 @Entity
 public class Link implements Serializable {
@@ -17,17 +20,25 @@ public class Link implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_link;
 
+    @URL
     @NotNull
-    @Length(min=1, max=200)
+    @Length(min = 1, max = 200)
     private String url;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_hostingAccount")
     private HostingAccount hostingAccount;
 
-    @ManyToOne
-    @JoinColumn(name = "id_song")
+    @OneToOne(mappedBy = "link", cascade = CascadeType.ALL)
     private Song song;
+
+    public Link() {
+    }
+
+    public Link(String url, HostingAccount hostingAccount) {        
+        this.url = url;
+        this.hostingAccount = hostingAccount;        
+    }
 
     public Long getId_link() {
         return id_link;

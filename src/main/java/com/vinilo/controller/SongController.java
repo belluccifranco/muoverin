@@ -1,11 +1,15 @@
 package com.vinilo.controller;
 
-import com.vinilo.model.Song;
+import com.vinilo.model.Link;
 import com.vinilo.model.Pagination;
+import com.vinilo.model.Song;
 import com.vinilo.service.SongService;
 import java.util.List;
+import java.util.Set;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
+import javax.validation.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -45,7 +49,7 @@ public class SongController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Song uploadSong(@RequestBody @Valid Song song, HttpServletResponse response, WebRequest webRequest) {
+    public Song uploadSong(@RequestBody @Valid Song song, HttpServletResponse response, WebRequest webRequest) {        
         Song createdSong = songService.save(song);
         response.setStatus(HttpStatus.CREATED.value());
         //response.setHeader("Location", webRequest.getContextPath() + "/song/" + createdSong.getId_song());

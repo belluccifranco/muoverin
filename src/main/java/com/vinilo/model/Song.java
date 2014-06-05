@@ -14,14 +14,15 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Song.searchAllSongs", query = "SELECT s FROM Song s"),
-    @NamedQuery(name = "Song.searchById", query = "SELECT s FROM Song s JOIN FETCH s.links WHERE s.id_song = :id")
+    @NamedQuery(name = "Song.searchById", query = "SELECT s FROM Song s JOIN FETCH s.link WHERE s.id_song = :id")
 })
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id_song")
 public class Song implements Serializable {
@@ -33,29 +34,41 @@ public class Song implements Serializable {
     private int track;
 
     @NotNull
-    @Length(min=1, max=200)
+    @Length(min = 1, max = 200)
     private String name;
-
-    private String duration;
 
     private String lyric;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_artist")
     private Artist artist;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_album")
     private Album album;
 
     @NotNull
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "song")
-    private List<Link> links;
+    @Valid
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_link")
+    private Link link;
 
-    @ManyToMany(mappedBy = "songs")
+    @ManyToMany(mappedBy = "songs", cascade = CascadeType.ALL)
     private List<Playlist> playlists;
+
+    public Song() {
+    }
+
+    public Song(int track, String name, String lyric, Artist artist, Album album, Link link) {
+        this.track = track;
+        this.name = name;
+        this.lyric = lyric;
+        this.artist = artist;
+        this.album = album;
+        this.link = link;        
+    }
 
     public Long getId_song() {
         return id_song;
@@ -79,14 +92,6 @@ public class Song implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDuration() {
-        return duration;
-    }
-
-    public void setDuration(String duration) {
-        this.duration = duration;
     }
 
     public String getLyric() {
@@ -113,12 +118,12 @@ public class Song implements Serializable {
         this.album = album;
     }
 
-    public List<Link> getLinks() {
-        return links;
+    public Link getLink() {
+        return link;
     }
 
-    public void setLinks(List<Link> links) {
-        this.links = links;
+    public void setLink(Link link) {
+        this.link = link;
     }
 
     public List<Playlist> getPlaylists() {

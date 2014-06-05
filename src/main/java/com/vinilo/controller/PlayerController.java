@@ -36,7 +36,7 @@ public class PlayerController {
             response.addHeader("Keep-Alive", "timeout=600"); //600 seg = 10 min
             response.setContentType("audio/mpeg");
             MegaHandler mh = new MegaHandler("a", "a");
-            String urlStorage = songService.searchById(idSong).getLinks().get(0).getUrl();
+            String urlStorage = songService.searchById(idSong).getLink().getUrl();
             mh.streamToOutputStream(urlStorage, response);
 
         } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | InvalidAlgorithmParameterException | IOException | IllegalBlockSizeException | BadPaddingException | JSONException ex) {

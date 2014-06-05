@@ -27,7 +27,7 @@ public class RestExceptionProcessor {
     @ResponseBody
     public ErrorFormInfo handleMethodArgumentNotValid(HttpServletRequest req, MethodArgumentNotValidException ex) {
 
-        String errorMessage = localizeErrorMessage("message.errorCampos");
+        String errorMessage = localizeErrorMessage("message.errorGeneralInfo");
         String errorURL = req.getRequestURL().toString();
 
         ErrorFormInfo errorInfo = new ErrorFormInfo(errorURL, errorMessage);

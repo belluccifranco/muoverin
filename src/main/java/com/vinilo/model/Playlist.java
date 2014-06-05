@@ -27,7 +27,7 @@ public class Playlist implements Serializable {
 
     private String name;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_userAccount")
     private UserAccount userAccount;
 
@@ -36,6 +36,15 @@ public class Playlist implements Serializable {
         @JoinColumn(name = "id_playlist")}, inverseJoinColumns = {
         @JoinColumn(name = "id_song")})
     private List<Song> songs;
+
+    public Playlist() {
+    }
+
+    public Playlist(String name, UserAccount userAccount, List<Song> songs) {        
+        this.name = name;
+        this.userAccount = userAccount;
+        this.songs = songs;
+    }
 
     public Long getId_playlist() {
         return id_playlist;

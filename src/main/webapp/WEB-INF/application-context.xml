@@ -21,6 +21,8 @@
     <context:component-scan base-package="com.vinilo.repository" />
     <context:component-scan base-package="com.vinilo.exception" />
     
+    <bean id="dataPopulator" class="com.vinilo.util.DataPopulator"/>
+    
     <mvc:resources mapping="/resources/**" location="/resources/"/>
     
     <mvc:annotation-driven>
@@ -118,10 +120,6 @@
             <property name="entityManagerFactory" ref="emf"/>
         </bean> 
         <tx:annotation-driven />
-        
-        <jdbc:initialize-database data-source="dataSource">
-            <jdbc:script location="classpath:DBscripts/data.sql"/>
-        </jdbc:initialize-database>   
     </beans>
     
     <beans profile="postgresql">
@@ -150,10 +148,6 @@
         <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
             <property name="entityManagerFactory" ref="entityManagerFactory"/>
         </bean>
-        <tx:annotation-driven />
-        
-        <jdbc:initialize-database data-source="dataSource">
-            <jdbc:script location="classpath:DBscripts/data.sql"/>
-        </jdbc:initialize-database>        
+        <tx:annotation-driven />        
     </beans>          
 </beans>

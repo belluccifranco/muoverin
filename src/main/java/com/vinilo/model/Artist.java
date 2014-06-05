@@ -19,11 +19,18 @@ public class Artist implements Serializable {
     private Long id_artist;
 
     @NotNull
-    @Length(min=1, max=200)
+    @Length(min = 1, max = 200)
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "artist")
+    @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL)
     private List<Song> songs;
+
+    public Artist() {
+    }
+
+    public Artist(String name) {
+        this.name = name;
+    }
 
     public Long getId_artist() {
         return id_artist;

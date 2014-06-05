@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service("userDetailsService")
-public class AccountServiceImpl implements UserDetailsService {
+public class AccountServiceImpl implements UserDetailsService, AccountService {
 
     private final AccountRepository accountRepository;
     private static final Logger logger = Logger.getLogger(AccountServiceImpl.class);
@@ -55,5 +55,11 @@ public class AccountServiceImpl implements UserDetailsService {
         User user = new User(username, password, enabled, accountNonExpired,
                 credentialsNonExpired, accountNonLocked, grantedAuthorities);
         return user;
+    }
+
+    @Override
+    @Transactional
+    public UserAccount save(UserAccount userAccount) {
+        return accountRepository.save(userAccount);
     }
 }

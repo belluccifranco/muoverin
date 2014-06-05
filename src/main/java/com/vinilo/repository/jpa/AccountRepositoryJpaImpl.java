@@ -8,7 +8,7 @@ import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class UserAccountRepositoryJpaImpl implements AccountRepository {
+public class AccountRepositoryJpaImpl implements AccountRepository {
 
     @PersistenceContext
     private EntityManager em;
@@ -18,5 +18,15 @@ public class UserAccountRepositoryJpaImpl implements AccountRepository {
         TypedQuery<UserAccount> query = em.createNamedQuery("UserAccount.searchByName", UserAccount.class);
         query.setParameter("name", name);
         return query.getSingleResult();
+    }
+
+    @Override
+    public UserAccount save(UserAccount userAccount) {
+        if (userAccount.getId_userAccount() == null) {
+            em.persist(userAccount);
+        } else {
+            em.merge(userAccount);
+        }
+        return userAccount;
     }
 }

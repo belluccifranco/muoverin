@@ -22,8 +22,17 @@ public class HostingAccount implements Serializable {
 
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hostingAccount")
+    @OneToMany(mappedBy = "hostingAccount", cascade = CascadeType.ALL)
     private List<Link> links;
+
+    public HostingAccount() {
+    }
+
+    public HostingAccount(String url, String username, String password) {        
+        this.url = url;
+        this.username = username;
+        this.password = password;        
+    }
 
     public Long getId_hostingAccount() {
         return id_hostingAccount;

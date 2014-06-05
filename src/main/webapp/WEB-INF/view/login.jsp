@@ -13,7 +13,7 @@
     <body onload='document.f.j_username.focus();'>
         <div data-role="page" id="login-page">
             <div data-role="header" data-position="fixed">
-                <h1><spring:message code="message.bienvenida"/></h1>
+                <h1><spring:message code="message.welcome"/></h1>
             </div>
 
             <div data-role="content">
@@ -21,21 +21,20 @@
                     <c:if test="${not empty error}">
                         <div class="errorblock">
                             <spring:message code="message.errorLogin"/>
-                            ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
                         </div>
                     </c:if>                
                     <table style="margin: 0 auto;">
                         <tr>
-                            <td><spring:message code="message.usuario"/></td>
+                            <td><spring:message code="message.username"/></td>
                             <td><input type='text' name='j_username' value=''></td>
                         </tr>
                         <tr>
-                            <td><spring:message code="message.contraseña"/></td>
+                            <td><spring:message code="message.password"/></td>
                             <td><input type='password' name='j_password'/></td>
                         </tr>
                         <tr>
                             <td colspan='2'>
-                                <input name="submit" type="submit" data-icon="forward" value=<spring:message code="message.ingresar"/>>
+                                <input name="submit" type="submit" data-icon="forward" value="<spring:message code="message.login"/>">
                             </td>
                         </tr>
                     </table>

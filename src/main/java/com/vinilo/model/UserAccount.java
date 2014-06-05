@@ -23,7 +23,7 @@ public class UserAccount implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_userAccount;
-    
+
     private String username;
 
     private String password;
@@ -34,8 +34,17 @@ public class UserAccount implements Serializable {
         @JoinColumn(name = "id_userRole")})
     private List<UserRole> userRoles;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userAccount")
+    @OneToMany(mappedBy = "userAccount", cascade = CascadeType.ALL)
     private List<Playlist> playlists;
+
+    public UserAccount() {
+    }
+
+    public UserAccount(String username, String password, List<UserRole> userRoles) {
+        this.username = username;
+        this.password = password;
+        this.userRoles = userRoles;
+    }
 
     public Long getId_userAccount() {
         return id_userAccount;

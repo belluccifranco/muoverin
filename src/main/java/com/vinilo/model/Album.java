@@ -19,15 +19,24 @@ public class Album implements Serializable {
     private Long id_album;
 
     @NotNull
-    @Length(min=1, max=200)
+    @Length(min = 1, max = 200)
     private String name;
 
     private int releaseYear;
 
     private int numberOfSongs;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "album")
+    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
     private List<Song> songs;
+
+    public Album() {
+    }
+
+    public Album(String name, int releaseYear, int numberOfSongs) {
+        this.name = name;
+        this.releaseYear = releaseYear;
+        this.numberOfSongs = numberOfSongs;
+    }
 
     public Long getId_album() {
         return id_album;

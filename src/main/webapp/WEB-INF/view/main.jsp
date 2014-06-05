@@ -13,9 +13,9 @@
     <body>
         <div data-role="page" id="playlist-page">
             <div data-role="header" data-position="fixed">
-                <a data-ajax="false" href="<c:url value='j_spring_security_logout'/>" data-icon="back" <%--data-iconpos="notext"--%>><spring:message code="message.salir"/></a>
-                <h1><spring:message code="message.canciones"/></h1>
-                <a href="#search-music-page" data-rel="dialog" data-icon="search" <%--data-iconpos="notext"--%> class="ui-btn-right"><spring:message code="message.buscar"/></a>
+                <a data-ajax="false" href="<c:url value='j_spring_security_logout'/>" data-icon="back" <%--data-iconpos="notext"--%>><spring:message code="message.logout"/></a>
+                <h1><spring:message code="message.songs"/></h1>
+                <a href="#search-music-page" data-rel="dialog" data-icon="search" <%--data-iconpos="notext"--%> class="ui-btn-right"><spring:message code="message.search"/></a>
                 <div class="segmented-control ui-bar-d">
                     <a href="#" id="remove-sound" data-role="button" data-icon="delete" data-iconpos="notext" data-inline="true" style="margin-right: 50px;"></a>
                     <div data-role="controlgroup" data-type="horizontal" style="display: inline-block;">
@@ -55,7 +55,7 @@
 
         <div data-role="page" id="search-music-page">
             <div data-role="header" data-theme="b">
-                <h1><spring:message code="message.buscador"/></h1>
+                <h1><spring:message code="message.searchSong"/></h1>
             </div>
             <div data-role="content" data-theme="c">
                 <fieldset class="ui-grid-a">
@@ -67,10 +67,10 @@
                     </div>
                 </fieldset>
                 <div style="text-align: right; margin-bottom: 20px; text-align: center;">
-                    <button id="song-search-pager-prev-button" data-iconpos="left" data-inline="true" data-icon="arrow-l" data-mini="true"><spring:message code="message.anterior"/></button>
-                    <button id="song-search-pager-next-button" data-iconpos="right" data-inline="true" data-icon="arrow-r" data-mini="true"><spring:message code="message.siguiente"/></button>
+                    <button id="song-search-pager-prev-button" data-iconpos="left" data-inline="true" data-icon="arrow-l" data-mini="true"><spring:message code="message.previous"/></button>
+                    <button id="song-search-pager-next-button" data-iconpos="right" data-inline="true" data-icon="arrow-r" data-mini="true"><spring:message code="message.next"/></button>
                 </div>
-                <ul id="song-search-list" data-role="listview" data-filter-placeholder=<spring:message code="message.textoBuscador"/>></ul>
+                <ul id="song-search-list" data-role="listview"></ul>
             </div>
         </div>
         <spring:url value="/resources/scripts/public/jquery-1.10.2.min.js" var="JSjQuery"/>

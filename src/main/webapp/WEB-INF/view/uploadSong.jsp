@@ -10,7 +10,7 @@
         <title>Upload a song</title>
     </head>
     <body>             
-        <form>            
+        <form data-abide>            
             <div class="label small-12 text-center">
                 <h2>Add new Song</h2>                
             </div>
@@ -20,10 +20,10 @@
                     <label for="track-label" class="right inline">Track Nº:</label>
                 </div>
                 <div class="small-7 columns">
-                    <input type="text" id="track-label" placeholder="">
+                    <input type="text" pattern="integer" id="track-label">
+                    <small class="error"><spring:message code="Integer.song.track"/></small>
                 </div>
                 <div class="small-2 columns">
-
                 </div>
             </div>
 
@@ -32,10 +32,10 @@
                     <label for="name-label" class="right inline">Name:</label>
                 </div>
                 <div class="small-7 columns">
-                    <input type="text" id="name-label" placeholder="">
+                    <input type="text" id="name-label" required>
+                    <small class="error"><spring:message code="NotNull.song.name"/></small>
                 </div>
                 <div class="small-2 columns">
-
                 </div>
             </div>
 
@@ -44,15 +44,16 @@
                     <label for="artist-label" class="right inline">Artist:</label>
                 </div>
                 <div class="small-7 columns">
-                    <select id="artist-label">
+                    <select id="artist-label" required>
                         <option value="husker">AC DC</option>
                         <option value="starbuck">Led Zeppelin</option>
                         <option value="hotdog">The Offpring</option>
                         <option value="apollo">Jimi Hendrix</option>
-                    </select>                            
+                    </select>     
+                    <small class="error"><spring:message code="NotNull.song.artist"/></small>
                 </div>
                 <div class="small-2 columns">
-                    <a href="#" data-reveal-id="newArtistModal">Add !</a>                            
+                    <a href="#" data-reveal-id="newArtistModal">Add !</a>
                 </div>
             </div>
 
@@ -61,11 +62,12 @@
                     <label for="album-label" class="right inline">Album:</label>
                 </div>
                 <div class="small-7 columns">
-                    <select id="album-label">
+                    <select id="album-label" required>
                         <option value="husker">ABC</option>
                         <option value="starbuck">DEF</option>
                         <option value="hotdog">GHI</option>                                
-                    </select>                            
+                    </select> 
+                    <small class="error"><spring:message code="NotNull.song.album"/></small>
                 </div>
                 <div class="small-2 columns">
                     <a href="#" data-reveal-id="newAlbumModal">Add !</a>
@@ -101,7 +103,6 @@
                     </table>                          
                 </div>
                 <div class="small-2 columns">
-
                 </div>
             </div>
 
@@ -110,10 +111,9 @@
                     <label for="lyrics-label" class="right inline">Lyrics:</label>
                 </div>
                 <div class="small-7 columns">
-                    <textarea id="lyrics-label" placeholder=""></textarea>
+                    <textarea id="lyrics-label"></textarea>
                 </div>
                 <div class="small-2 columns">
-
                 </div>                
             </div>
 
@@ -122,10 +122,10 @@
                     <label for="link-label" class="right inline">Link:</label>
                 </div>
                 <div class="small-7 columns">
-                    <input id="link-label" type="text" placeholder="">
+                    <input id="link-label" type="url" required>
+                    <small class="error"><spring:message code="URL.song.link.url"/></small>
                 </div>
                 <div class="small-2 columns">
-
                 </div>
             </div>
 
@@ -153,7 +153,7 @@
         <spring:url value="/resources/scripts/foundation/vendor/jquery.js" var="JSFoundationVendor"/>
         <script src="${JSFoundationVendor}"></script>
         <spring:url value="/resources/scripts/foundation/foundation.min.js" var="JSFoundation"/>
-        <script src="${JSFoundation}"></script>    
+        <script src="${JSFoundation}"></script>
         <spring:url value="/resources/scripts/uploadSong.js" var="uploadSong"/>
         <script src="${uploadSong}"></script>
         <script>
