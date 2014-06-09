@@ -10,7 +10,7 @@ SearcherUI.prototype = function() {
         buttonId: null,
         pagerNextButtonId: null,
         pagerPrevButtonId: null,
-        searchUrl: '/vinilo/songs',
+        searchUrl: '/songs',
         getLineHtml: function(obj) {
             return '<a href="#">' + obj.artist.name + ' - ' + obj.name + '</a>';
             //throw 'Debe especificar la opción getLineHtml (function).';

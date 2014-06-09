@@ -3,7 +3,7 @@ var songSearcher = null;
 
 jQuery(document).on('pagebeforecreate', '#playlist-page', function() {
     soundManager.setup({
-        url: '/vinilo/resources/scripts/soundmanager2/swf/',
+        url: '/resources/scripts/soundmanager2/swf/',
         //flashVersion: 9,
         //debugFlash : true,
         //useHTML5Audio: false,

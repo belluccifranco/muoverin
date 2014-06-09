@@ -34,20 +34,20 @@
             <div data-role="footer" data-position="fixed">
                 <div style="text-align: center;">
                     <a id="prev" data-inline="true" data-role="button" data-theme="b" data-shadow="false" >
-                        <img alt="prev" src="/vinilo/resources/images/prev.png">
+                        <img alt="prev" src="<spring:url value="/resources/images/prev.png"/>">
                     </a>
                     <a id="play" data-inline="true" data-role="button" data-theme="b" data-shadow="false" >
-                        <img alt="play" src="/vinilo/resources/images/play.png">
+                        <img alt="play" src="<spring:url value="/resources/images/play.png"/>">
                     </a>
                     <a id="pause" class="ui-screen-hidden" data-inline="true" data-role="button" data-theme="b" data-shadow="false" >
-                        <img alt="pause" src="/vinilo/resources/images/pause.png">
+                        <img alt="pause" src="<spring:url value="/resources/images/pause.png"/>">
                     </a>
                     <a id="next" data-inline="true" data-role="button" data-theme="b" data-shadow="false" >
-                        <img alt="next" src="/vinilo/resources/images/next.png">
+                        <img alt="next" src="<spring:url value="/resources/images/next.png"/>">
                     </a>
                     <fieldset data-role="controlgroup" data-type="horizontal" style="display: inline;">
                         <input type="checkbox" id="loop">
-                        <label for="loop" style="border: 0;"><img alt="loop" title="loop" src="/vinilo/resources/images/repeat.png"></label>
+                        <label for="loop" style="border: 0;"><img alt="loop" title="loop" src="<spring:url value="/resources/images/repeat.png"/>"></label>
                     </fieldset>
                 </div>
             </div>

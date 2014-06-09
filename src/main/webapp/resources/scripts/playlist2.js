@@ -110,7 +110,7 @@ PlayListUI.prototype = function(){
             var sound, id, url;
             refresh = isUndefined(refresh) ? true : refresh;
             id = 's' + obj['id_song'];
-            url = '/vinilo/player/' + obj['id_song'];
+            url = '/player/' + obj['id_song'];
             sound = soundManager.createSound({
                 id: id,
                 url: url,
