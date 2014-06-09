@@ -150,4 +150,33 @@
         </bean>
         <tx:annotation-driven />        
     </beans>          
+    
+    <beans profile="postgresqlOpenshift">
+        <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
+              p:driverClassName="org.postgresql.Driver"
+              p:url="jdbc:postgresql://${OPENSHIFT_POSTGRESQL_DB_HOST}:${OPENSHIFT_POSTGRESQL_DB_PORT}/${OPENSHIFT_APP_NAME}"
+              p:username="${OPENSHIFT_POSTGRESQL_DB_USERNAME}"
+              p:password="${OPENSHIFT_POSTGRESQL_DB_PASSWORD}"/>       
+        
+        <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+            <property name="dataSource" ref="dataSource" /> 
+            <property name="jpaVendorAdapter">
+                <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>                
+            </property>            
+            <property name="packagesToScan" value="com.vinilo.model"/>
+            <property name="jpaProperties"> 
+                <props>                
+                    <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+                    <prop key="hibernate.show_sql">false</prop> 
+                    <prop key="hibernate.hbm2ddl.auto">create</prop>
+                    <prop key="hibernate.format_sql">true</prop>                
+                </props> 
+            </property> 
+        </bean>
+                
+        <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+            <property name="entityManagerFactory" ref="entityManagerFactory"/>
+        </bean>
+        <tx:annotation-driven />        
+    </beans>
 </beans>

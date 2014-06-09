@@ -13,7 +13,7 @@
     <body onload='document.f.j_username.focus();'>
         <div data-role="page" id="login-page">
             <div data-role="header" data-position="fixed">
-                <h1><spring:message code="message.welcome"/></h1>
+                <h1><spring:message code="message.vinilo"/></h1>
             </div>
 
             <div data-role="content">
