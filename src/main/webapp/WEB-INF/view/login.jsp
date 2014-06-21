@@ -3,12 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <spring:url value="/resources/styles/jquery_mobile/jquery.mobile-1.3.2.min.css" var="CSSjQueryMobile"/>
-        <link rel="stylesheet" href="${CSSjQueryMobile}"/>
+    <head>        
+        <meta name="viewport" content="width=device-width, initial-scale=1">                
         <spring:url value="/resources/styles/login.css" var="CSSlogin"/>
-        <link rel="stylesheet" href="${CSSlogin}"/>        
+        <link rel="stylesheet" href="${CSSlogin}"/>
+        <jsp:include page="fragments/common.jsp"/>
     </head>
     <body onload='document.f.j_username.focus();'>
         <div data-role="page" id="login-page">
@@ -41,10 +40,6 @@
                     <%--<a href="<c:url value="j_spring_security_logout"/>" >Salir</a>--%>
                 </form>
             </div>
-        </div>
-        <spring:url value="/resources/scripts/public/jquery-1.10.2.min.js" var="JSjQuery"/>
-        <script src="${JSjQuery}"></script>
-        <spring:url value="/resources/scripts/public/jquery.mobile-1.3.2.min.js" var="JSjQueryMobile"/>
-        <script src="${JSjQueryMobile}"></script>        
+        </div>        
     </body>
 </html>
