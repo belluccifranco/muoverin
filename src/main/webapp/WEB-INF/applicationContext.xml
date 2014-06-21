@@ -68,6 +68,7 @@
         <security:form-login login-page="/login"
                              default-target-url="/"
                              authentication-failure-url="/loginFailed"/>
+        <security:intercept-url pattern="/resources/images/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <security:intercept-url pattern="/resources/scripts/public/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <security:intercept-url pattern="/resources/styles/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <security:intercept-url pattern="/**" access="ROLE_CUSTOMER"/>
@@ -78,7 +79,7 @@
     </security:http>    
     <bean id="daoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
         <property name="userDetailsService" ref="userDetailsService"/>
-    </bean>    
+    </bean>
     <bean id="authenticationManager" class="org.springframework.security.authentication.ProviderManager">
         <property name="providers">
             <list>
@@ -154,9 +155,9 @@
     <beans profile="postgresqlOpenshift">
         <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
               p:driverClassName="org.postgresql.Driver"
-              p:url="jdbc:postgresql://${OPENSHIFT_POSTGRESQL_DB_HOST}:${OPENSHIFT_POSTGRESQL_DB_PORT}/${OPENSHIFT_APP_NAME}"
-              p:username="${OPENSHIFT_POSTGRESQL_DB_USERNAME}"
-              p:password="${OPENSHIFT_POSTGRESQL_DB_PASSWORD}"/>       
+              p:url="jdbc:postgresql://53953d6d5973cae0d90000a3-dualhead.rhcloud.com:37976/vinilo"
+              p:username="adminyiixne2"
+              p:password="6-e6Vkswikvx"/>
         
         <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
             <property name="dataSource" ref="dataSource" /> 
