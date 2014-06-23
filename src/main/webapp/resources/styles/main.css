@@ -1,3 +1,4 @@
+/*
 .segmented-control {
     text-align:center;
 }
@@ -24,6 +25,122 @@
 }
 
 #player_container {
-    /*display: block;*/
     text-align: center;
 }
+*/
+
+
+/* Small screens: Define mobile styles */
+@media only screen {
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #222;
+        color: white;
+    }
+
+    #container {
+        height: 100%;
+        width: 100%;
+        background: #777;
+        color: white;
+    }
+
+    nav#main-menu {
+        display: none;
+        position: absolute;
+        width: 90%;
+        z-index: 1;
+        /*height: 100%;*/
+        background: #AAA;
+        -webkit-box-shadow: 0px 0px 6px 0px rgba(50, 50, 50, 0.68);
+        -moz-box-shadow: 0px 0px 6px 0px rgba(50, 50, 50, 0.68);
+        box-shadow: 0px 0px 6px 0px rgba(50, 50, 50, 0.68);
+        overflow-y: auto;
+    }
+
+    nav#main-menu h1 {
+        font-size: 1.3rem;
+        padding: 0 5px;
+        margin: 0;
+        font-weight: bold;
+    }
+
+    #main {
+        width: 100%;
+        height: 100%
+    }
+
+    label {
+        color: inherit;
+        font-size: inherit;
+    }
+
+    span#menu-toggle {
+        cursor: pointer;
+        margin-left: 0.3rem;
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+    }
+
+    span#menu-toggle.pressed {
+        background: #AAA;
+        -webkit-box-shadow: inset 0px 0px 18px 3px rgba(0,0,0,0.75);
+        -moz-box-shadow: inset 0px 0px 18px 3px rgba(0,0,0,0.75);
+        box-shadow: inset 0px 0px 18px 3px rgba(0,0,0,0.75);
+    }
+
+    h1.title {
+        margin: 0;
+    }
+
+    div#login-form {
+        margin-top: 2rem;
+    }
+}
+
+@media only screen and (max-width: 40em) { } /* max-width 640px, mobile-only styles, use when QAing mobile issues */
+
+/* Medium screens:; min-width 641px, medium screens */
+@media only screen and (min-width: 40.063em) {
+    #container {
+        max-width: 1024px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    nav#main-menu {
+        display: block !important;
+        width: 30%;
+        z-index: 0;
+        left: 0 !important;
+    }
+
+    #main {
+        position: absolute;
+        width: 70%;
+        right: 0;
+    }
+
+    span#menu-toggle {
+        display: none;
+    }
+}
+
+/* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
+@media only screen and (min-width: 40.063em) and (max-width: 64em) { }
+
+/* Large screens: min-width 1025px, large screens */
+@media only screen and (min-width: 64.063em) { }
+
+/* min-width 1025px and max-width 1440px, use when QAing large screen-only issues */
+@media only screen and (min-width: 64.063em) and (max-width: 90em) { }
+
+/* XLarge screens: min-width 1441px, xlarge screens */
+@media only screen and (min-width: 90.063em) { }
+
+/* min-width 1441px and max-width 1920px, use when QAing xlarge screen-only issues */
+@media only screen and (min-width: 90.063em) and (max-width: 120em) { }
+
+/* XXLarge screens: min-width 1921px, xlarge screens */
+@media only screen and (min-width: 120.063em) { }
+
