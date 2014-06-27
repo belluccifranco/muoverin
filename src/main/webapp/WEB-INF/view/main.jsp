@@ -17,14 +17,13 @@
                 <h1 class="title"><i class="fi-record size2x"></i> Menu</h1>
                 <ul class="list list-hover">
                     <li class="first"><a href="#"><i class="fi-music"></i> &nbsp;Playing</a></li>
-                    <li class="last"><a href="#"><i class="fi-power"></i> &nbsp;Logout</a></li>
+                    <li class="last"><a href="<c:url value='j_spring_security_logout'/>"><i class="fi-power"></i> &nbsp;Logout</a></li>
                 </ul>
             </div>
             <div>
                 <h1 class="title"><i class="fi-star size2x"></i> Playlists</h1>
                 <ul class="list list-hover">
                     <li class="first"><a href="#">Aerosmith</a></li>
-                    <li><a href="#">Counting Crows</a></li>
                     <li><a href="#">Counting Crows</a></li>
                     <li class="last"><a href="#">Brasileras</a></li>
                 </ul>
