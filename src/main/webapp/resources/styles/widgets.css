@@ -1,0 +1,79 @@
+ul.list {
+	list-style-type: none;
+	list-style-position: inside;
+	background: #AAA;
+    color: #000;
+	margin: 0;
+	padding: 5px;
+	font-size: 1.3rem;
+	height: 100%;
+	overflow-y: auto;
+}
+
+ul.list li {
+	margin-bottom: 2px;
+	background: white;
+	padding: 5px 7px 5px 7px;
+	-webkit-box-shadow: 0px 0px 6px 0px rgba(50, 50, 50, 0.68);
+	-moz-box-shadow: 0px 0px 6px 0px rgba(50, 50, 50, 0.68);
+	box-shadow: 0px 0px 6px 0px rgba(50, 50, 50, 0.68);
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+ul.list.list-hover li:hover {
+	background: #888;
+}
+
+ul.list.list-hover li:hover a {
+	color: #C3DFE9;
+}
+
+ul.list li.first {
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+ul.list li.last {
+	-webkit-border-bottom-left-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	-moz-border-radius-bottomright: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+ul.list li.title {
+	text-transform: uppercase;
+	font-size: 1.3rem;
+	font-weight: bold;
+	color: #000;
+	background: #AAA;
+	-webkit-box-shadow: none;
+	-moz-box-shadow:    none;
+	box-shadow:         none;
+}
+
+ul.list li.title:hover {
+	background: #AAA;
+}
+
+ul.list li a {
+	display: block;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.size2x {
+	font-size: 1.3em;
+}
+
+ul.list input {
+	margin: 0
+}

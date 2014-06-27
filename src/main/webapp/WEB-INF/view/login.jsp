@@ -10,37 +10,6 @@
         <jsp:include page="fragments/common.jsp"/>
     </head>
     <body>
-        <%--<div data-role="page" id="login-page">
-            <div data-role="header" data-position="fixed">
-                <h1><spring:message code="message.vinilo"/></h1>
-            </div>
-
-            <div data-role="content">
-                <form name='f' data-ajax="false" action="<c:url value='j_spring_security_check'/>" method='POST' >
-                    <c:if test="${not empty error}">
-                        <div class="errorblock">
-                            <spring:message code="message.errorLogin"/>
-                        </div>
-                    </c:if>
-                    <table style="margin: 0 auto;">
-                        <tr>
-                            <td><spring:message code="message.username"/></td>
-                            <td><input type='text' name='j_username' value=''></td>
-                        </tr>
-                        <tr>
-                            <td><spring:message code="message.password"/></td>
-                            <td><input type='password' name='j_password'/></td>
-                        </tr>
-                        <tr>
-                            <td colspan='2'>
-                                <input name="submit" type="submit" data-icon="forward" value="<spring:message code="message.login"/>">
-                            </td>
-                        </tr>
-                    </table>
-                    &lt;%&ndash;<a href="<c:url value="j_spring_security_logout"/>" >Salir</a>&ndash;%&gt;
-                </form>
-            </div>
-        </div>--%>
         <div id="container">
             <div class="row">
                 <div class="small-12 small-centered medium-5 large-4 columns">
@@ -67,7 +36,6 @@
     <script src="${JSjQuery}"></script>
     <script type="text/javascript">
         (function($){
-            alert('si');
             $('input#username').focus();
         })(jQuery);
     </script>
