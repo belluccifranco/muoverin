@@ -45,6 +45,6 @@
     <!-- Spring Profiles -->
     <context-param>
         <param-name>spring.profiles.active</param-name>
-        <param-value>postgresql</param-value>
+        <param-value>H2</param-value>
     </context-param>
 </web-app>

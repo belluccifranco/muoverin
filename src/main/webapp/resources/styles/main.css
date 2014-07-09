@@ -1,41 +1,10 @@
-/*
-.segmented-control {
-    text-align:center;
-}
-
-.segmented-control .ui-controlgroup {
-    margin: 0.2em;
-}
-
-.ui-control-active, .ui-control-inactive {
-    border-style: solid; border-color: gray;
-}
-
-.ui-control-active {
-    background: #BBB;
-}
-
-.ui-control-inactive {
-    background: #DDD;
-}
-
-.ui-header .ui-title, .ui-footer .ui-title {
-    margin-right: 0 !important;
-    margin-left: 0 !important;
-}
-
-#player_container {
-    text-align: center;
-}
-*/
-
-
 /* Small screens: Define mobile styles */
 @media only screen {
     body {
         font-family: Arial, Helvetica, sans-serif;
         background: #222;
         color: white;
+        /*font-size: 1.5rem;*/
     }
 
     #container {
@@ -43,6 +12,11 @@
         width: 100%;
         background: #777;
         color: white;
+    }
+
+    #main-container {
+        position: relative;
+        height: 100%;
     }
 
     nav#main-menu {
@@ -97,6 +71,23 @@
     div#login-form {
         margin-top: 2rem;
     }
+
+    div#main-searcher {
+        position: absolute;
+        top: 0;
+        width: 90%;
+        right: 0;
+        background: #AAA;
+        -webkit-box-shadow: 0px 0px 6px 0px rgba(50, 50, 50, 0.68);
+        -moz-box-shadow: 0px 0px 6px 0px rgba(50, 50, 50, 0.68);
+        box-shadow: 0px 0px 6px 0px rgba(50, 50, 50, 0.68);
+        overflow-y: auto;
+        height: 100%;
+    }
+
+    .remove-margin-bottom {
+        margin-bottom: 0 !important;
+    }
 }
 
 @media only screen and (max-width: 40em) { } /* max-width 640px, mobile-only styles, use when QAing mobile issues */
@@ -104,7 +95,7 @@
 /* Medium screens:; min-width 641px, medium screens */
 @media only screen and (min-width: 40.063em) {
     #container {
-        max-width: 1024px;
+        /*max-width: 1024px;*/
         margin: 0 auto;
         position: relative;
     }
@@ -124,6 +115,11 @@
 
     span#menu-toggle {
         display: none;
+    }
+
+    div#main-searcher {
+        width: 35rem;
+        z-index: 1;
     }
 }
 
