@@ -8,7 +8,7 @@
     </head>
     <body>
     <div id="container">
-        <h1 class="title"><span id="menu-toggle"><i class="fi-list"></i></span>&nbsp;<i class="fi-record"></i> VINILO</h1>
+        <h1 id="title" class="title"><span id="menu-toggle"><i class="fi-list"></i></span>&nbsp;<i class="fi-record"></i> VINILO</h1>
         <div id="main-container">
             <nav id="main-menu" class="menu">
                 <div>
@@ -60,17 +60,24 @@
                 </ul>
             </div>
             <div id="main-searcher">
-                <div class="row collapse">
-                    <div class="small-10 columns">
-                        <input id="song-search-input" class="remove-margin-bottom" type="text" placeholder="Search Term">
+                <div style="position: relative; height: 100%;">
+                    <div class="row collapse" class="search-form" style="position: absolute; top:0; left: 0; right: 0;">
+                        <div class="small-10 columns">
+                            <input id="song-search-input" class="remove-margin-bottom" type="text" placeholder="Search Term">
+                        </div>
+                        <div class="small-2 columns">
+                            <a href="#" id="song-search-button" class="button postfix remove-margin-bottom"><i class="fi-magnifying-glass"></i></a>
+                        </div>
                     </div>
-                    <div class="small-2 columns">
-                        <a href="#" id="song-search-button" class="button postfix remove-margin-bottom"><i class="fi-magnifying-glass"></i></a>
+                    <div style="position: absolute; top: 2.313rem; left: 0; right: 0; bottom: 4rem;">
+                        <ul class="list search-list" id="song-search-list">
+
+                        </ul>
+                    </div>
+                    <div class="search-dialog" style="position: absolute; bottom: 0; left: 0; right: 0; height: 4rem; background: white;">
+                        <h1>Hola Mundo</h1>
                     </div>
                 </div>
-                <ul class="list" id="song-search-list">
-
-                </ul>
             </div>
         </div>
     </div>

@@ -8,6 +8,7 @@ ul.list {
 	font-size: 1.3rem;
 	height: 100%;
 	overflow-y: auto;
+    overflow-x: hidden;
 }
 
 ul.list li {
@@ -17,9 +18,9 @@ ul.list li {
 	-webkit-box-shadow: 0px 0px 6px 0px rgba(50, 50, 50, 0.68);
 	-moz-box-shadow: 0px 0px 6px 0px rgba(50, 50, 50, 0.68);
 	box-shadow: 0px 0px 6px 0px rgba(50, 50, 50, 0.68);
-	overflow: hidden;
+	/*overflow: hidden;
 	white-space: nowrap;
-	text-overflow: ellipsis;
+	text-overflow: ellipsis;*/
 }
 
 ul.list.list-hover li:hover {
@@ -77,3 +78,18 @@ ul.list li a {
 ul.list input {
 	margin: 0
 }
+
+ul.list.search-list li .item-checkbox {
+    float: left;
+}
+
+ul.list.search-list li .item-info {
+    display: block;
+    margin-left: 1.1rem;
+}
+
+ul.list.search-list li .item-info .other-info{
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+

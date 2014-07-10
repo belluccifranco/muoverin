@@ -5,8 +5,6 @@
 <html>
     <head>        
         <meta name="viewport" content="width=device-width, initial-scale=1">                
-        <spring:url value="/resources/styles/login.css" var="CSSlogin"/>
-        <link rel="stylesheet" href="${CSSlogin}"/>
         <jsp:include page="fragments/common.jsp"/>
     </head>
     <body>

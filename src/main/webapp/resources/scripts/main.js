@@ -7,11 +7,12 @@
             pagerPrevButtonId: null,
             getLineHtml: function(obj) {
                 var itmTpl = '';
-                itmTpl += '<div class="item-img"></div>';
-                itmTpl += '<label><div class="item-info">';
-                itmTpl += '    <div class="other-info ellipsis"><input type="checkbox"> ' + obj.artist.name + ' - ' + obj.album.name + '</div>';
+
+                itmTpl += '<input class="item-checkbox" type="checkbox" id="itmchkbx_' + obj.id_song + '">';
+                itmTpl += '<label class="item-info" for="itmchkbx_' + obj.id_song + '">';
+                itmTpl += '    <div class="other-info ellipsis">' + obj.artist.name + ' - ' + obj.album.name + '</div>';
                 itmTpl += '    <div class="main-info ellipsis">' + obj.name + '</div>';
-                itmTpl += '</div></label>';
+                itmTpl += '</label>';
 
                 return itmTpl;
             }
