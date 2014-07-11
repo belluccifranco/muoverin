@@ -3,8 +3,8 @@
             listId: 'song-search-list',
             inputId: 'song-search-input',
             buttonId: 'song-search-button',
-            pagerNextButtonId: null,
-            pagerPrevButtonId: null,
+            pagerNextButtonId: 'main-searcher-next-button',
+            pagerPrevButtonId: 'main-searcher-prev-button',
             getLineHtml: function(obj) {
                 var itmTpl = '';
 
@@ -36,6 +36,9 @@
         };
 
     app.init();
+
+    //make div touch scroll
+    touchScroll('song-search-list');
 
     soundManager.setup({
         url: '/resources/scripts/soundmanager2/swf',

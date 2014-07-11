@@ -99,7 +99,7 @@ SearcherUI.prototype = function() {
             }
         },
         search = function(q, p) {
-            self.page = !isNaN(parseInt(p)) ? parseInt(p) : 1;
+            self.page = !isNaN(parseInt(p)) || p < 1 ? parseInt(p) : 1;
 
             if (null !== q) {
                 self.searchQuery = $.trim(q);
@@ -116,15 +116,22 @@ SearcherUI.prototype = function() {
                 type: 'get',
                 dataType: 'json',
                 success: function(data) {
-                    var pager = {
+                    var pager;
+                    if (data.data.length > 0) {
+                        pager = {
                             currentPage: data.currentPage,
                             rowsInCurrentPage: data.rowsInCurrentPage,
                             pages: data.pages,
                             totalRows: data.totalRows
                         };
-                    self.list = data.data;
-                    updateUI();
-                    updatePagerInfo(pager);
+                        self.list = data.data;
+                        updateUI();
+                        updatePagerInfo(pager);
+                    } else {
+                        if (self.page > 1) {
+                            self.page -= 1;
+                        }
+                    }
                 }
             });
         },
@@ -148,7 +155,9 @@ SearcherUI.prototype = function() {
             }
             if (null !== self.uiPagerPrevButton) {
                 self.uiPagerPrevButton.on('click', function() {
-                    self.search(null, self.page - 1);
+                    if (self.page > 1) {
+                        self.search(null, self.page - 1);
+                    }
                 });
             }
         };

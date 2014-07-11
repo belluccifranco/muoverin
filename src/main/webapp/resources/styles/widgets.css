@@ -9,6 +9,7 @@ ul.list {
 	height: 100%;
 	overflow-y: auto;
     overflow-x: hidden;
+    /*-webkit-overflow-scrolling: touch;*/
 }
 
 ul.list li {
@@ -85,11 +86,11 @@ ul.list.search-list li .item-checkbox {
 
 ul.list.search-list li .item-info {
     display: block;
-    margin-left: 1.1rem;
+    margin-left: 1.5rem;
 }
 
-ul.list.search-list li .item-info .other-info{
-    font-size: 0.8rem;
+ul.list.search-list li .item-info .other-info {
+    font-size: 0.9rem;
     text-transform: uppercase;
 }
 

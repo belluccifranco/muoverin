@@ -38,7 +38,7 @@
         display: none;
         position: absolute;
         width: 90%;
-        z-index: 1;
+        z-index: 10;
         /*height: 100%;*/
         background: #AAA;
         -webkit-box-shadow: 0px 0px 6px 0px rgba(50, 50, 50, 0.68);
@@ -94,6 +94,55 @@
         box-shadow: 0px 0px 6px 0px rgba(50, 50, 50, 0.68);
         overflow-y: auto;
         bottom: 0;
+    }
+
+    div#main-searcher .search-form {
+        position: absolute;
+        top:0;
+        left: 0;
+        right: 0;
+    }
+
+    div#main-searcher .search-pager {
+        position: absolute;
+        top: 2.315rem;
+        left: 0;
+        right: 0;
+        /*-webkit-box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.3);
+        -moz-box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.3);
+        box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.3);*/
+    }
+
+    div#main-searcher .list-container {
+        position: absolute;
+        top: 4.630rem;
+        left: 0;
+        right: 0;
+        bottom: 3rem;
+    }
+
+    div#main-searcher .search-dialog {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 3rem;
+        background: white;
+        text-align: center;
+        -webkit-box-shadow: 0px -3px 7px 0px rgba(0,0,0,0.3);
+        -moz-box-shadow: 0px -3px 7px 0px rgba(0,0,0,0.3);
+        box-shadow: 0px -3px 7px 0px rgba(0,0,0,0.3);
+    }
+
+    div#main-searcher .search-dialog ul.button-group {
+        margin-top: 0.35rem;
+        margin-bottom: 0;
+        display: inline-block;
+    }
+
+    div#main-searcher .search-dialog ul.button-group a.button {
+        margin-bottom: 0;
+        padding: 0.5rem;
     }
 
     .remove-margin-bottom {

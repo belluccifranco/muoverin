@@ -29,7 +29,7 @@
             </nav>
             <div id="main">
                 <ul class="list">
-                    <li>
+                    <%--<li>
                         <div class="item-img"></div>
                         <div class="item-info">
                             <div class="other-info ellipsis">Counting Crows - August And Everything After</div>
@@ -56,12 +56,12 @@
                             <div class="other-info ellipsis">Aerosmith - Get a grip</div>
                             <div class="main-info ellipsis">Crazy</div>
                         </div>
-                    </li>
+                    </li>--%>
                 </ul>
             </div>
             <div id="main-searcher">
                 <div style="position: relative; height: 100%;">
-                    <div class="row collapse" class="search-form" style="position: absolute; top:0; left: 0; right: 0;">
+                    <div class="row collapse" class="search-form">
                         <div class="small-10 columns">
                             <input id="song-search-input" class="remove-margin-bottom" type="text" placeholder="Search Term">
                         </div>
@@ -69,18 +69,34 @@
                             <a href="#" id="song-search-button" class="button postfix remove-margin-bottom"><i class="fi-magnifying-glass"></i></a>
                         </div>
                     </div>
-                    <div style="position: absolute; top: 2.313rem; left: 0; right: 0; bottom: 4rem;">
+                    <div class="row collapse search-pager">
+                        <div class="small-4 columns">
+                            <a href="#" id="main-searcher-prev-button" class="button prefix remove-margin-bottom"><i class="fi-arrow-left"></i></a>
+                        </div>
+                        <div class="small-4 columns">
+                            <input class="remove-margin-bottom" type="text" disabled="disabled">
+                        </div>
+                        <div class="small-4 columns">
+                            <a href="#" id="main-searcher-next-button" class="button postfix remove-margin-bottom"><i class="fi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="list-container">
                         <ul class="list search-list" id="song-search-list">
 
                         </ul>
                     </div>
-                    <div class="search-dialog" style="position: absolute; bottom: 0; left: 0; right: 0; height: 4rem; background: white;">
-                        <h1>Hola Mundo</h1>
+                    <div class="search-dialog">
+                        <ul class="button-group radius">
+                            <li><a href="#" class="button"><i class="fi-checkbox"></i> Check All</a></li>
+                            <li><a href="#" class="button"><i class="fi-plus"></i> Add selected</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <spring:url value="/resources/scripts/touchscroll.js" var="JSTouchScroll"/>
+    <script src="${JSTouchScroll}"></script>
     <spring:url value="/resources/scripts/public/jquery-1.10.2.min.js" var="JSjQuery"/>
     <script src="${JSjQuery}"></script>
     <spring:url value="/resources/scripts/soundmanager2/soundmanager2-jsmin.js" var="JSsoundManager2" />
