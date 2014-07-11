@@ -87,8 +87,8 @@
                     </div>
                     <div class="search-dialog">
                         <ul class="button-group radius">
-                            <li><a href="#" class="button"><i class="fi-checkbox"></i> Check All</a></li>
-                            <li><a href="#" class="button"><i class="fi-plus"></i> Add selected</a></li>
+                            <li><a id="song-search-checkall-button" href="#" class="button"><i class="fi-checkbox"></i> Check All</a></li>
+                            <li><a id="song-search-add-selected-button" href="#" class="button"><i class="fi-plus"></i> Add selected</a></li>
                         </ul>
                     </div>
                 </div>
@@ -97,8 +97,12 @@
     </div>
     <spring:url value="/resources/scripts/touchscroll.js" var="JSTouchScroll"/>
     <script src="${JSTouchScroll}"></script>
+    <spring:url value="/resources/scripts/public/jquery-2.1.1.min.js" var="JSjQuery"/>
+    <script src="${JSjQuery}"></script>
+<%--
     <spring:url value="/resources/scripts/public/jquery-1.10.2.min.js" var="JSjQuery"/>
     <script src="${JSjQuery}"></script>
+--%>
     <spring:url value="/resources/scripts/soundmanager2/soundmanager2-jsmin.js" var="JSsoundManager2" />
     <script src="${JSsoundManager2}"></script>
     <spring:url value="/resources/scripts/searcher.js" var="JSsearcher" />

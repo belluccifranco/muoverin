@@ -8,20 +8,43 @@
             getLineHtml: function(obj) {
                 var itmTpl = '';
 
-                itmTpl += '<input class="item-checkbox" type="checkbox" id="itmchkbx_' + obj.id_song + '">';
+                itmTpl += '<input class="item-checkbox" type="checkbox" value="' + obj.id_song + '" id="itmchkbx_' + obj.id_song + '">';
                 itmTpl += '<label class="item-info" for="itmchkbx_' + obj.id_song + '">';
                 itmTpl += '    <div class="other-info ellipsis">' + obj.artist.name + ' - ' + obj.album.name + '</div>';
                 itmTpl += '    <div class="main-info ellipsis">' + obj.name + '</div>';
                 itmTpl += '</label>';
 
                 return itmTpl;
+            },
+            setCustomUIEvents: function($listObj) {
+                var $ssChekAllButton = $('#song-search-checkall-button'),
+                    $ssAddSelectedButton = $('#song-search-add-selected-button');
+
+                $ssChekAllButton.on('click', function(e) {
+                    $listObj.find('input[type="checkbox"][class="item-checkbox"]').prop('checked', true);
+                });
+
+                $ssAddSelectedButton.on('click', function(e){
+                    var positions = [];
+                    $listObj.find('input[type="checkbox"][class="item-checkbox"]')
+                        .each(function(i) {
+                            if ($(this).is(':checked')) {
+                                positions.push(i);
+                            }
+                        });
+                    //TODO: code to add to song list.
+                });
             }
         },
         app = {
             elements: {
                 $menuToggle: $('#menu-toggle'),
                 $mainMenu: $('#main-menu'),
-                songSearcher: new SearcherUI(songSearcherOptions)
+                songSearcher: new SearcherUI(songSearcherOptions),
+
+                //current list. I can be playing list or a playlist
+                //to reuse the searcher.
+                currentList: null
             },
             bindEvents: function() {
                 var self = this;
@@ -37,7 +60,7 @@
 
     app.init();
 
-    //make div touch scroll
+    //make touch scroll
     touchScroll('song-search-list');
 
     soundManager.setup({
