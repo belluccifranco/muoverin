@@ -46,6 +46,7 @@
         box-shadow: 0px 0px 6px 0px rgba(50, 50, 50, 0.68);
         overflow-y: auto;
         height: 100%;
+        /*border: 1px solid black;*/
     }
 
     nav#main-menu h1 {
@@ -57,7 +58,10 @@
 
     #main {
         width: 100%;
-        height: 100%
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
     }
 
     label {
@@ -101,29 +105,23 @@
         top:0;
         left: 0;
         right: 0;
-    }
-
-    div#main-searcher .search-pager {
-        position: absolute;
-        top: 2.315rem;
-        left: 0;
-        right: 0;
-        /*-webkit-box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.3);
+        -webkit-box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.3);
         -moz-box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.3);
-        box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.3);*/
+        box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.3);
+        z-index: 1;
     }
 
     div#main-searcher .list-container {
         position: absolute;
-        top: 4.630rem;
+        top: 2.315rem;
         left: 0;
         right: 0;
-        bottom: 3rem;
+        bottom: 5.315rem;;
     }
 
     div#main-searcher .search-dialog {
         position: absolute;
-        bottom: 0;
+        bottom: 2.315rem;;
         left: 0;
         right: 0;
         height: 3rem;
@@ -143,6 +141,14 @@
     div#main-searcher .search-dialog ul.button-group a.button {
         margin-bottom: 0;
         padding: 0.5rem;
+    }
+
+    div#main-searcher .search-pager {
+        position: absolute;
+        /*top: 2.315rem;*/
+        left: 0;
+        right: 0;
+        bottom: 0;
     }
 
     .remove-margin-bottom {
@@ -171,14 +177,16 @@
     nav#main-menu {
         display: block !important;
         width: 30%;
-        z-index: 0;
+        z-index: 1;
         left: 0 !important;
     }
 
     #main {
         position: absolute;
-        width: 70%;
+        left: 30%;
         right: 0;
+        top: 0;
+        bottom: 0;
     }
 
     span#menu-toggle {
