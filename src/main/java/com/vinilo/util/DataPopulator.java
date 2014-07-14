@@ -40,11 +40,11 @@ public class DataPopulator implements InitializingBean {
         customerAccounts.add(userFacundo);
         customerAccounts.add(userFranco);
         roleCustomer.setUserAccounts(customerAccounts);
-        
+
         List<UserAccount> adminAccounts = new ArrayList<>();
         adminAccounts.add(userAdmin);
         roleAdmin.setUserAccounts(adminAccounts);
-        
+
         accountService.save(userFacundo);
         accountService.save(userFranco);
         accountService.save(userAdmin);
@@ -72,7 +72,7 @@ public class DataPopulator implements InitializingBean {
         Link l15 = new Link("https://mega.co.nz/#!614k1BSQ!GzwglVZX0lO99bnl5IQcRArpwCVTYMnn7GERSJgNCyI", ha1);
         Link l16 = new Link("https://mega.co.nz/#!TtpwiYIT!X9dvM0nA5XBI4nOlObLBOW_vKK52WsFJFG34WT6sSDY", ha1);
         Link l17 = new Link("https://mega.co.nz/#!e95BlaID!aHdUkANGbgrHpi8eXk_gMUytaDMttmb3o52gwHLiXHU", ha1);
-        
+
         List<Link> links = new ArrayList<>();
         links.add(l1);
         links.add(l2);
@@ -92,34 +92,48 @@ public class DataPopulator implements InitializingBean {
         links.add(l16);
         links.add(l17);
         ha1.setLinks(links);
-        
+
         //ARTISTS
         Artist acdc = new Artist("AC DC");
+        List<Artist> artistsHighwayToHell = new ArrayList<>();
+        artistsHighwayToHell.add(acdc);
         Artist ledzeppelin = new Artist("Led Zeppelin");
+        List<Artist> artistsPresence = new ArrayList<>();
+        artistsPresence.add(ledzeppelin);
 
         //ALBUM
+        List<Album> acdcAlbumes = new ArrayList<>();
         Album highwayToHell = new Album("Highway to Hell", 1979, 10);
+        acdcAlbumes.add(highwayToHell);
+        List<Album> ledZepplinAlbumes = new ArrayList<>();
         Album presense = new Album("Presense", 1976, 7);
+        ledZepplinAlbumes.add(presense);
+
+        acdc.setAlbums(acdcAlbumes);
+        ledzeppelin.setAlbums(ledZepplinAlbumes);
+
+        highwayToHell.setArtists(artistsHighwayToHell);
+        presense.setArtists(artistsPresence);
 
         //SONGS
-        Song song1 = new Song(1, "Highway to Hell", "", acdc, highwayToHell, l1);
-        Song song2 = new Song(2, "Girls Got Rhythm", "", acdc, highwayToHell, l2);
-        Song song3 = new Song(3, "Walk All Over You", "", acdc, highwayToHell, l3);
-        Song song4 = new Song(4, "Touch Too Much", "", acdc, highwayToHell, l4);
-        Song song5 = new Song(5, "Beating Around The Bush", "", acdc, highwayToHell, l5);
-        Song song6 = new Song(6, "Shot Down in Flames", "", acdc, highwayToHell, l6);
-        Song song7 = new Song(7, "Get it Hot", "", acdc, highwayToHell, l7);
-        Song song8 = new Song(8, "If You Want Blood (You ve Got It)", "", acdc, highwayToHell, l8);
-        Song song9 = new Song(9, "Love Hungry Man", "", acdc, highwayToHell, l9);
-        Song song10 = new Song(10, "Night Prowler", "", acdc, highwayToHell, l10);
+        Song song1 = new Song(1, "Highway to Hell", "", highwayToHell, l1);
+        Song song2 = new Song(2, "Girls Got Rhythm", "", highwayToHell, l2);
+        Song song3 = new Song(3, "Walk All Over You", "", highwayToHell, l3);
+        Song song4 = new Song(4, "Touch Too Much", "", highwayToHell, l4);
+        Song song5 = new Song(5, "Beating Around The Bush", "", highwayToHell, l5);
+        Song song6 = new Song(6, "Shot Down in Flames", "", highwayToHell, l6);
+        Song song7 = new Song(7, "Get it Hot", "", highwayToHell, l7);
+        Song song8 = new Song(8, "If You Want Blood (You ve Got It)", "", highwayToHell, l8);
+        Song song9 = new Song(9, "Love Hungry Man", "", highwayToHell, l9);
+        Song song10 = new Song(10, "Night Prowler", "", highwayToHell, l10);
 
-        Song song11 = new Song(1, "Achilles Last Stand", "", ledzeppelin, presense, l11);
-        Song song12 = new Song(2, "For Your Life", "", ledzeppelin, presense, l12);
-        Song song13 = new Song(3, "Royal Orleans", "", ledzeppelin, presense, l13);
-        Song song14 = new Song(4, "Nobodys Fault But Mine", "", ledzeppelin, presense, l14);
-        Song song15 = new Song(5, "Candy Store Rock", "", ledzeppelin, presense, l15);
-        Song song16 = new Song(6, "Hots On For Nowhere", "", ledzeppelin, presense, l16);
-        Song song17 = new Song(7, "Tea For One", "", ledzeppelin, presense, l17);
+        Song song11 = new Song(1, "Achilles Last Stand", "", presense, l11);
+        Song song12 = new Song(2, "For Your Life", "", presense, l12);
+        Song song13 = new Song(3, "Royal Orleans", "", presense, l13);
+        Song song14 = new Song(4, "Nobodys Fault But Mine", "", presense, l14);
+        Song song15 = new Song(5, "Candy Store Rock", "", presense, l15);
+        Song song16 = new Song(6, "Hots On For Nowhere", "", presense, l16);
+        Song song17 = new Song(7, "Tea For One", "", presense, l17);
 
         l1.setSong(song1);
         l2.setSong(song2);
@@ -137,8 +151,8 @@ public class DataPopulator implements InitializingBean {
         l14.setSong(song14);
         l15.setSong(song15);
         l16.setSong(song16);
-        l17.setSong(song17);
-        
+        l17.setSong(song17);       
+
         List<Song> highwayToHellSongs = new ArrayList<>();
         highwayToHellSongs.add(song1);
         highwayToHellSongs.add(song2);
@@ -150,9 +164,8 @@ public class DataPopulator implements InitializingBean {
         highwayToHellSongs.add(song8);
         highwayToHellSongs.add(song9);
         highwayToHellSongs.add(song10);
-        highwayToHell.setSongs(highwayToHellSongs);    
-        acdc.setSongs(highwayToHellSongs);
-        
+        highwayToHell.setSongs(highwayToHellSongs);        
+
         List<Song> presenseSongs = new ArrayList<>();
         presenseSongs.add(song11);
         presenseSongs.add(song12);
@@ -160,12 +173,11 @@ public class DataPopulator implements InitializingBean {
         presenseSongs.add(song14);
         presenseSongs.add(song15);
         presenseSongs.add(song16);
-        presenseSongs.add(song17);        
-        presense.setSongs(presenseSongs);
-        ledzeppelin.setSongs(presenseSongs);
+        presenseSongs.add(song17);
+        presense.setSongs(presenseSongs);        
 
-        songService.save(song1);        
-        songService.save(song11);        
+        songService.save(song1);
+        songService.save(song11);
     }
 
     @Override

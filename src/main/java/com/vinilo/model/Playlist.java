@@ -16,14 +16,14 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Playlist.searchAllPlaylists", query = "SELECT pl FROM Playlist pl JOIN FETCH pl.songs"),
+    @NamedQuery(name = "Playlist.searchAll", query = "SELECT pl FROM Playlist pl JOIN FETCH pl.songs"),
     @NamedQuery(name = "Playlist.searchById", query = "SELECT pl FROM Playlist pl JOIN FETCH pl.songs WHERE pl.id_playlist = :id")
 })
 public class Playlist implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id_playlist;
+    private long id_playlist;
 
     private String name;
 
@@ -31,10 +31,7 @@ public class Playlist implements Serializable {
     @JoinColumn(name = "id_userAccount")
     private UserAccount userAccount;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name = "playlist_song", joinColumns = {
-        @JoinColumn(name = "id_playlist")}, inverseJoinColumns = {
-        @JoinColumn(name = "id_song")})
+    @ManyToMany(cascade = {CascadeType.ALL})    
     private List<Song> songs;
 
     public Playlist() {
@@ -46,11 +43,11 @@ public class Playlist implements Serializable {
         this.songs = songs;
     }
 
-    public Long getId_playlist() {
+    public long getId_playlist() {
         return id_playlist;
     }
 
-    public void setId_playlist(Long id_playlist) {
+    public void setId_playlist(long id_playlist) {
         this.id_playlist = id_playlist;
     }
 

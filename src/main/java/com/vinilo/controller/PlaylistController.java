@@ -4,11 +4,13 @@ import com.vinilo.model.Playlist;
 import com.vinilo.service.PlaylistService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Controller
 public class PlaylistController {
@@ -21,14 +23,14 @@ public class PlaylistController {
     }
 
     @RequestMapping(value = "/playlist", method = RequestMethod.GET)
-    @ResponseBody
-    public List<Playlist> searchAllPlaylists() {
-        return playlistService.searchAllPlaylists();
+    @ResponseStatus(HttpStatus.OK)
+    public @ResponseBody List<Playlist> searchAll() {
+        return playlistService.searchAll();
     }
 
-    @RequestMapping(value = "/listasReproduccion/{id}", method = RequestMethod.GET)
-    @ResponseBody
-    public Playlist searchById(@PathVariable Long id) {
+    @RequestMapping(value = "/playlist/{id}", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public @ResponseBody Playlist searchById(@PathVariable Long id) {
         return playlistService.searchById(id);
     }
 }

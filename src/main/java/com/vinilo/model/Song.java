@@ -21,7 +21,7 @@ import org.hibernate.validator.constraints.Length;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Song.searchAllSongs", query = "SELECT s FROM Song s"),
+    @NamedQuery(name = "Song.searchAll", query = "SELECT s FROM Song s"),
     @NamedQuery(name = "Song.searchById", query = "SELECT s FROM Song s JOIN FETCH s.link WHERE s.id_song = :id")
 })
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id_song")
@@ -29,7 +29,7 @@ public class Song implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id_song;
+    private long id_song;
 
     private int track;
 
@@ -37,12 +37,7 @@ public class Song implements Serializable {
     @Length(min = 1, max = 200)
     private String name;
 
-    private String lyric;
-
-    @NotNull
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_artist")
-    private Artist artist;
+    private String lyric;    
 
     @NotNull
     @ManyToOne(cascade = CascadeType.ALL)
@@ -61,20 +56,19 @@ public class Song implements Serializable {
     public Song() {
     }
 
-    public Song(int track, String name, String lyric, Artist artist, Album album, Link link) {
+    public Song(int track, String name, String lyric, Album album, Link link) {
         this.track = track;
         this.name = name;
-        this.lyric = lyric;
-        this.artist = artist;
+        this.lyric = lyric;        
         this.album = album;
         this.link = link;        
     }
 
-    public Long getId_song() {
+    public long getId_song() {
         return id_song;
     }
 
-    public void setId_song(Long id_song) {
+    public void setId_song(long id_song) {
         this.id_song = id_song;
     }
 
@@ -100,15 +94,7 @@ public class Song implements Serializable {
 
     public void setLyric(String lyric) {
         this.lyric = lyric;
-    }
-
-    public Artist getArtist() {
-        return artist;
-    }
-
-    public void setArtist(Artist artist) {
-        this.artist = artist;
-    }
+    }   
 
     public Album getAlbum() {
         return album;

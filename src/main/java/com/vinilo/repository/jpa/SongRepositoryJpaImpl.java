@@ -20,13 +20,12 @@ public class SongRepositoryJpaImpl implements SongRepository {
     private EntityManager em;
 
     @Override
-    public List<Song> searchAllSongs() {
-        List<Song> songs = em.createNamedQuery("Song.searchAllSongs", Song.class).getResultList();
-        return songs;
+    public List<Song> searchAll() {
+        return em.createNamedQuery("Song.searchAll", Song.class).getResultList();
     }
 
     @Override
-    public Song searchById(Long id) {
+    public Song searchById(long id) {
         TypedQuery<Song> query = em.createNamedQuery("Song.searchById", Song.class);
         query.setParameter("id", id);
         return query.getSingleResult();
@@ -34,7 +33,7 @@ public class SongRepositoryJpaImpl implements SongRepository {
 
     @Override
     public Song save(Song song) {
-        if (song.getId_song() == null) {
+        if (song.getId_song() == 0) {
             em.persist(song);            
         } else {
             em.merge(song);
@@ -50,7 +49,7 @@ public class SongRepositoryJpaImpl implements SongRepository {
 
     @Override
     public Pagination<Song> searchByCriteria(String criteria, int maxResultsPerPage, int pageIndex) {
-        Pagination<Song> pagination = new Pagination<Song>();
+        Pagination<Song> pagination = new Pagination<>();
         pagination.setCurrentPage(pageIndex);
 
         CriteriaBuilder builder = em.getCriteriaBuilder();

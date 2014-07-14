@@ -44,11 +44,7 @@
                     <label for="artist-label" class="right inline">Artist:</label>
                 </div>
                 <div class="small-7 columns">
-                    <select id="artist-label" required>
-                        <option value="husker">AC DC</option>
-                        <option value="starbuck">Led Zeppelin</option>
-                        <option value="hotdog">The Offpring</option>
-                        <option value="apollo">Jimi Hendrix</option>
+                    <select id="artist-combo" required>                        
                     </select>     
                     <small class="error"><spring:message code="NotNull.song.artist"/></small>
                 </div>
@@ -62,10 +58,7 @@
                     <label for="album-label" class="right inline">Album:</label>
                 </div>
                 <div class="small-7 columns">
-                    <select id="album-label" required>
-                        <option value="husker">ABC</option>
-                        <option value="starbuck">DEF</option>
-                        <option value="hotdog">GHI</option>                                
+                    <select id="album-combo" required>
                     </select> 
                     <small class="error"><spring:message code="NotNull.song.album"/></small>
                 </div>

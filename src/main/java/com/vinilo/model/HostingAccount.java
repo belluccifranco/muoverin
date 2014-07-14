@@ -14,7 +14,7 @@ public class HostingAccount implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id_hostingAccount;
+    private long id_hostingAccount;
 
     private String url;
 
@@ -34,11 +34,11 @@ public class HostingAccount implements Serializable {
         this.password = password;        
     }
 
-    public Long getId_hostingAccount() {
+    public long getId_hostingAccount() {
         return id_hostingAccount;
     }
 
-    public void setId_hostingAccount(Long id_hostingAccount) {
+    public void setId_hostingAccount(long id_hostingAccount) {
         this.id_hostingAccount = id_hostingAccount;
     }
 

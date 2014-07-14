@@ -18,7 +18,7 @@ public class UserRole implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id_userRole;
+    private long id_userRole;
 
     private String name;
 
@@ -32,11 +32,11 @@ public class UserRole implements Serializable {
         this.name = name;
     }
 
-    public Long getId_UserRole() {
+    public long getId_UserRole() {
         return id_userRole;
     }
 
-    public void setId_UserRole(Long id_userRole) {
+    public void setId_UserRole(long id_userRole) {
         this.id_userRole = id_userRole;
     }
 

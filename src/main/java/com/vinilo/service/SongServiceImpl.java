@@ -21,13 +21,13 @@ public class SongServiceImpl implements SongService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Song> searchAllSongs() {
-        return songRepository.searchAllSongs();
+    public List<Song> searchAll() {
+        return songRepository.searchAll();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Song searchById(Long id) {
+    public Song searchById(long id) {
         return songRepository.searchById(id);
     }
 

@@ -1,15 +1,11 @@
 package com.vinilo.controller;
 
-import com.vinilo.model.Link;
 import com.vinilo.model.Pagination;
 import com.vinilo.model.Song;
 import com.vinilo.service.SongService;
 import java.util.List;
-import java.util.Set;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
-import javax.validation.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 
 @Controller
@@ -27,32 +24,29 @@ public class SongController {
     private final SongService songService;
 
     @Autowired
-    public SongController(SongService cancionService) {
-        this.songService = cancionService;
+    public SongController(SongService songService) {
+        this.songService = songService;
     }
 
     @RequestMapping(value = "/songs", method = RequestMethod.GET)
-    @ResponseBody
-    public List<Song> searchAllSongs() {
-        return songService.searchAllSongs();
+    @ResponseStatus(HttpStatus.OK)    
+    public @ResponseBody List<Song> searchAll() {
+        return songService.searchAll();
     }
 
     @RequestMapping(value = "/songs", method = RequestMethod.GET, params = {"criteria", "index"})
-    @ResponseBody
-    public Pagination<Song> searchSongsWithCriteria(@RequestParam(value = "criteria") String criteria,
+    @ResponseStatus(HttpStatus.OK)
+    public @ResponseBody Pagination<Song> searchByCriteria(@RequestParam(value = "criteria") String criteria,
             @RequestParam(value = "index", defaultValue = "0") int index) {
 
         return songService.searchByCriteria(criteria, index);
     }
 
-    @RequestMapping(value = "/song", method = RequestMethod.POST,
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public Song uploadSong(@RequestBody @Valid Song song, HttpServletResponse response, WebRequest webRequest) {        
-        Song createdSong = songService.save(song);
-        response.setStatus(HttpStatus.CREATED.value());
-        //response.setHeader("Location", webRequest.getContextPath() + "/song/" + createdSong.getId_song());
+    @RequestMapping(value="/song", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public @ResponseBody Song upload(@RequestBody @Valid Song song, HttpServletResponse response, WebRequest webRequest) {
+        Song createdSong = songService.save(song);        
+        response.setHeader("Location", webRequest.getContextPath() + "/song/" + createdSong.getId_song());
         return createdSong;
     }
 }

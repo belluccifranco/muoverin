@@ -15,13 +15,13 @@ public class PlaylistRepositoryJpaImpl implements PlaylistRepository {
     private EntityManager em;
 
     @Override
-    public List<Playlist> searchAllPlaylists() {
-        List<Playlist> playlists = em.createNamedQuery("Playlist.searchAllPlaylists", Playlist.class).getResultList();
+    public List<Playlist> searchAll() {
+        List<Playlist> playlists = em.createNamedQuery("Playlist.searchAll", Playlist.class).getResultList();
         return playlists;
     }
 
     @Override
-    public Playlist searchById(Long id) {
+    public Playlist searchById(long id) {
         TypedQuery<Playlist> query = em.createNamedQuery("Playlist.searchById", Playlist.class);
         query.setParameter("id", id);
         return query.getSingleResult();
@@ -29,7 +29,7 @@ public class PlaylistRepositoryJpaImpl implements PlaylistRepository {
 
     @Override
     public Playlist save(Playlist playlist) {
-        if (playlist.getId_playlist() == null) {            
+        if (playlist.getId_playlist() == 0) {            
             em.persist(playlist);
         } else {
             em.merge(playlist);            

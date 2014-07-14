@@ -22,7 +22,7 @@ public class AccountRepositoryJpaImpl implements AccountRepository {
 
     @Override
     public UserAccount save(UserAccount userAccount) {
-        if (userAccount.getId_userAccount() == null) {
+        if (userAccount.getId_userAccount() == 0) {
             em.persist(userAccount);
         } else {
             em.merge(userAccount);

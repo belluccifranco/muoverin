@@ -22,16 +22,13 @@ public class UserAccount implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id_userAccount;
+    private long id_userAccount;
 
     private String username;
 
     private String password;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name = "userAccount_userRole", joinColumns = {
-        @JoinColumn(name = "id_userAccount")}, inverseJoinColumns = {
-        @JoinColumn(name = "id_userRole")})
+    @ManyToMany(cascade = {CascadeType.ALL})    
     private List<UserRole> userRoles;
 
     @OneToMany(mappedBy = "userAccount", cascade = CascadeType.ALL)
@@ -46,11 +43,11 @@ public class UserAccount implements Serializable {
         this.userRoles = userRoles;
     }
 
-    public Long getId_userAccount() {
+    public long getId_userAccount() {
         return id_userAccount;
     }
 
-    public void setId_userAccount(Long id_userAccount) {
+    public void setId_userAccount(long id_userAccount) {
         this.id_userAccount = id_userAccount;
     }
 

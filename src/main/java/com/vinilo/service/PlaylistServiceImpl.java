@@ -19,13 +19,13 @@ public class PlaylistServiceImpl implements PlaylistService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Playlist> searchAllPlaylists() {
-        return playlistRepository.searchAllPlaylists();
+    public List<Playlist> searchAll() {
+        return playlistRepository.searchAll();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Playlist searchById(Long id) {
+    public Playlist searchById(long id) {
         return playlistRepository.searchById(id);
     }
 

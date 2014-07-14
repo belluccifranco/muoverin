@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface SongRepository {
 
-    public List<Song> searchAllSongs();
+    public List<Song> searchAll();
 
-    public Song searchById(Long id);
+    public Song searchById(long id);
 
     public Song save(Song song);
 

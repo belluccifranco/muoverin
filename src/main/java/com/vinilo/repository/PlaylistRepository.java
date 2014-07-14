@@ -5,9 +5,9 @@ import java.util.List;
 
 public interface PlaylistRepository {
 
-    public List<Playlist> searchAllPlaylists();
+    public List<Playlist> searchAll();
 
-    public Playlist searchById(Long id);
+    public Playlist searchById(long id);
 
     public Playlist save(Playlist playlist);
 

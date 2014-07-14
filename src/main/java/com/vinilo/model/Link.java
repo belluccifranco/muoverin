@@ -18,7 +18,7 @@ public class Link implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id_link;
+    private long id_link;
 
     @URL
     @NotNull
@@ -40,11 +40,11 @@ public class Link implements Serializable {
         this.hostingAccount = hostingAccount;        
     }
 
-    public Long getId_link() {
+    public long getId_link() {
         return id_link;
     }
 
-    public void setId_link(Long id_link) {
+    public void setId_link(long id_link) {
         this.id_link = id_link;
     }
 
