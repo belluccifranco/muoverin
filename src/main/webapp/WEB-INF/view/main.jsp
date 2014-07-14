@@ -61,23 +61,12 @@
             </div>
             <div id="main-searcher">
                 <div style="position: relative; height: 100%;">
-                    <div class="row collapse" class="search-form">
+                    <div class="row collapse search-form">
                         <div class="small-10 columns">
                             <input id="song-search-input" class="remove-margin-bottom" type="text" placeholder="Search Term">
                         </div>
                         <div class="small-2 columns">
                             <a href="#" id="song-search-button" class="button postfix remove-margin-bottom"><i class="fi-magnifying-glass"></i></a>
-                        </div>
-                    </div>
-                    <div class="row collapse search-pager">
-                        <div class="small-4 columns">
-                            <a href="#" id="main-searcher-prev-button" class="button prefix remove-margin-bottom"><i class="fi-arrow-left"></i></a>
-                        </div>
-                        <div class="small-4 columns">
-                            <input class="remove-margin-bottom" type="text" disabled="disabled">
-                        </div>
-                        <div class="small-4 columns">
-                            <a href="#" id="main-searcher-next-button" class="button postfix remove-margin-bottom"><i class="fi-arrow-right"></i></a>
                         </div>
                     </div>
                     <div class="list-container">
@@ -90,6 +79,17 @@
                             <li><a id="song-search-checkall-button" href="#" class="button"><i class="fi-checkbox"></i> Check All</a></li>
                             <li><a id="song-search-add-selected-button" href="#" class="button"><i class="fi-plus"></i> Add selected</a></li>
                         </ul>
+                    </div>
+                    <div class="row collapse search-pager">
+                        <div class="small-4 columns">
+                            <a href="#" id="main-searcher-prev-button" class="button prefix remove-margin-bottom"><i class="fi-arrow-left size2x"></i></a>
+                        </div>
+                        <div class="small-4 columns">
+                            <input class="remove-margin-bottom" type="text" disabled="disabled">
+                        </div>
+                        <div class="small-4 columns">
+                            <a href="#" id="main-searcher-next-button" class="button postfix remove-margin-bottom"><i class="fi-arrow-right size2x"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
