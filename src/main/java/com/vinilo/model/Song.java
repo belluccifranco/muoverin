@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,7 +23,9 @@ import org.hibernate.validator.constraints.Length;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Song.searchAll", query = "SELECT s FROM Song s"),
-    @NamedQuery(name = "Song.searchById", query = "SELECT s FROM Song s JOIN FETCH s.link WHERE s.id_song = :id")
+    @NamedQuery(name = "Song.searchById", query = "SELECT s FROM Song s JOIN FETCH s.link WHERE s.id_song = :id"),
+    @NamedQuery(name = "Song.searchByCriteria", query = "SELECT son FROM Song son JOIN son.album alb JOIN alb.artists art WHERE UPPER(son.name) LIKE :songName OR UPPER(son.album.name) LIKE :albumName OR UPPER(art.name) LIKE :artistName"),
+    @NamedQuery(name = "Song.countCriteria", query = "SELECT count(son) FROM Song son JOIN son.album alb JOIN alb.artists art WHERE UPPER(son.name) LIKE :songName OR UPPER(son.album.name) LIKE :albumName OR UPPER(art.name) LIKE :artistName")
 })
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id_song")
 public class Song implements Serializable {
@@ -46,11 +49,11 @@ public class Song implements Serializable {
 
     @NotNull
     @Valid
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_link")
     private Link link;
 
-    @ManyToMany(mappedBy = "songs", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "songs", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Playlist> playlists;
 
     public Song() {
