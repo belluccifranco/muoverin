@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,7 +35,7 @@ public class Album implements Serializable {
 
     private int numberOfSongs;
 
-    @ManyToMany(mappedBy = "albums", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "albums", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Artist> artists;
 
     @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)

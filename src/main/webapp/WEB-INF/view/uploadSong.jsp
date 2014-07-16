@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">     
         <link rel="stylesheet" href="resources/styles/foundation/normalize.css">
         <link rel="stylesheet" href="resources/styles/foundation/foundation.min.css">
         <title>Upload a song</title>

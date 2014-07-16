@@ -1,18 +1,16 @@
 $(document).ready(function() {
     
-    var $cbArtists = $('#artist-combo'),
-    $cbAlbumes = $('#album-combo');
+    var $cbArtists = $('#artist-combo');
+    var $cbAlbumes = $('#album-combo');
     
     loadArtistCombo();
-    //loadAlbumsByArtist($('#artist-combo').val());
+    loadAlbumsByArtist($('#artist-combo').val());
 
     $cbArtists.change(function() {
         loadAlbumsByArtist($cbArtists.val());
-    });
-    $cbArtists.change();
+    });    
 
     function loadArtistCombo() {
-        //var $combo = $('#artist-combo');
         var url = '/artists';
         $.ajax({
             url: url,
@@ -28,9 +26,7 @@ $(document).ready(function() {
         });
     }
 
-
     function loadAlbumsByArtist(id_artist) {
-        //var $combo = $('#album-combo');
         var url = '/albums?id_artist=' + id_artist;
         $.ajax({
             url: url,
