@@ -4,7 +4,6 @@ $(document).ready(function() {
     var $cbAlbumes = $('#album-combo');
     
     loadArtistCombo();
-    loadAlbumsByArtist($('#artist-combo').val());
 
     $cbArtists.change(function() {
         loadAlbumsByArtist($cbArtists.val());
@@ -22,6 +21,7 @@ $(document).ready(function() {
                     options += '<option value="' + artist.id_artist + '">' + artist.name + '</option>';
                 });
                 $cbArtists.html(options);
+                loadAlbumsByArtist($cbArtists.val());
             }
         });
     }
