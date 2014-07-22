@@ -16,7 +16,7 @@
                     <ul class="list list-hover">
                         <li class="first"><a href="#"><i class="fi-music"></i> &nbsp;Playing</a></li>
                         <li class="last"><a href="<spring:url value="upload" />"><i class="fi-upload"></i> &nbsp;Upload Song</a></li>
-                        <li class="last"><a href="<c:url value='j_spring_security_logout'/>"><i class="fi-power"></i> &nbsp;Logout</a></li>
+                        <li class="last"><a href="<spring:url value='j_spring_security_logout'/>"><i class="fi-power"></i> &nbsp;Logout</a></li>
                     </ul>
                 </div>
                 <div>
@@ -29,7 +29,7 @@
                 </div>
             </nav>
             <div id="main">
-                <ul class="list">
+                <ul class="list" style="height: 100%;">
                     <%--<li>
                         <div class="item-img"></div>
                         <div class="item-info">
@@ -61,36 +61,27 @@
                 </ul>
             </div>
             <div id="main-searcher">
-                <div style="position: relative; height: 100%;">
-                    <div class="row collapse search-form">
-                        <div class="small-10 columns">
-                            <input id="song-search-input" class="remove-margin-bottom" type="text" placeholder="Search Term">
+                <div id="song-searcher" class="jq-vinilo-search">
+                    <form class="jq-vinilo-search-form" data-url="<spring:url value='songs'/>">
+                        <div class="row collapse search-form">
+                            <div class="small-10 columns">
+                                <input name="criteria" id="song-search-input" class="remove-margin-bottom" type="text" placeholder="Search Term">
+                            </div>
+                            <div class="small-2 columns">
+                                <a href="#" class="button postfix remove-margin-bottom jq-vinilo-search-form-button"><i class="fi-magnifying-glass"></i></a>
+                            </div>
                         </div>
-                        <div class="small-2 columns">
-                            <a href="#" id="song-search-button" class="button postfix remove-margin-bottom"><i class="fi-magnifying-glass"></i></a>
-                        </div>
-                    </div>
-                    <div class="list-container">
-                        <ul class="list search-list" id="song-search-list">
+                    </form>
+                    <div class="jq-vinilo-search-list-container">
+                        <ul id="song-search-list" class="list search-list jq-vinilo-search-list">
 
                         </ul>
                     </div>
-                    <div class="search-dialog">
+                    <div class="jq-vinilo-search-actions">
                         <ul class="button-group radius">
                             <li><a id="song-search-checkall-button" href="#" class="button"><i class="fi-checkbox"></i> Check All</a></li>
                             <li><a id="song-search-add-selected-button" href="#" class="button"><i class="fi-plus"></i> Add selected</a></li>
                         </ul>
-                    </div>
-                    <div class="row collapse search-pager">
-                        <div class="small-4 columns">
-                            <a href="#" id="main-searcher-prev-button" class="button prefix remove-margin-bottom"><i class="fi-arrow-left size2x"></i></a>
-                        </div>
-                        <div class="small-4 columns">
-                            <input class="remove-margin-bottom" type="text" disabled="disabled">
-                        </div>
-                        <div class="small-4 columns">
-                            <a href="#" id="main-searcher-next-button" class="button postfix remove-margin-bottom"><i class="fi-arrow-right size2x"></i></a>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -100,13 +91,9 @@
     <script src="${JSTouchScroll}"></script>
     <spring:url value="/resources/scripts/public/jquery-2.1.1.min.js" var="JSjQuery"/>
     <script src="${JSjQuery}"></script>
-<%--
-    <spring:url value="/resources/scripts/public/jquery-1.10.2.min.js" var="JSjQuery"/>
-    <script src="${JSjQuery}"></script>
---%>
-    <spring:url value="/resources/scripts/soundmanager2/soundmanager2-jsmin.js" var="JSsoundManager2" />
+    <spring:url value="/resources/scripts/soundmanager2/soundmanager2-nodebug-jsmin.js" var="JSsoundManager2" />
     <script src="${JSsoundManager2}"></script>
-    <spring:url value="/resources/scripts/searcher.js" var="JSsearcher" />
+    <spring:url value="/resources/scripts/jquery-vinilo-search.js" var="JSsearcher" />
     <script src="${JSsearcher}"></script>
     <spring:url value="/resources/scripts/main.js" var="JSapp" />
     <script src="${JSapp}"></script>

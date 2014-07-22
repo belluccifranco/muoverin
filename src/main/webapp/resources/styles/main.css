@@ -100,7 +100,7 @@
         bottom: 0;
     }
 
-    div#main-searcher .search-form {
+    /*div#main-searcher .search-form {
         position: absolute;
         top:0;
         left: 0;
@@ -145,11 +145,11 @@
 
     div#main-searcher .search-pager {
         position: absolute;
-        /*top: 2.315rem;*/
+        *//*top: 2.315rem;*//*
         left: 0;
         right: 0;
         bottom: 0;
-    }
+    }*/
 
     .remove-margin-bottom {
         margin-bottom: 0 !important;
@@ -184,9 +184,9 @@
     #main {
         position: absolute;
         left: 30%;
-        right: 0;
         top: 0;
         bottom: 0;
+        width: 70%;
     }
 
     span#menu-toggle {
