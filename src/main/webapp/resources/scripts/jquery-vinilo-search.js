@@ -85,7 +85,6 @@
 								dataType: 'json',
 								success: function(data) {
 									var length = data.data.length;
-                                    console.log(length);
                                     pages += 1;
 									if (length > 0) {
 										addData(data.data);

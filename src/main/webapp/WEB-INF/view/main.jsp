@@ -72,8 +72,8 @@
                             </div>
                         </div>
                     </form>
-                    <div class="jq-vinilo-search-list-container">
-                        <ul id="song-search-list" class="list search-list jq-vinilo-search-list">
+                    <div id="song-search-list" class="jq-vinilo-search-list-container">
+                        <ul class="list search-list jq-vinilo-search-list">
 
                         </ul>
                     </div>
