@@ -50,7 +50,7 @@
     }
 
     nav#main-menu h1 {
-        font-size: 1.3rem;
+        font-size: 1.7rem;
         padding: 0 5px;
         margin: 0;
         font-weight: bold;
@@ -99,57 +99,6 @@
         overflow-y: auto;
         bottom: 0;
     }
-
-    /*div#main-searcher .search-form {
-        position: absolute;
-        top:0;
-        left: 0;
-        right: 0;
-        -webkit-box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.3);
-        -moz-box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.3);
-        box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.3);
-        z-index: 1;
-    }
-
-    div#main-searcher .list-container {
-        position: absolute;
-        top: 2.315rem;
-        left: 0;
-        right: 0;
-        bottom: 5.315rem;;
-    }
-
-    div#main-searcher .search-dialog {
-        position: absolute;
-        bottom: 2.315rem;;
-        left: 0;
-        right: 0;
-        height: 3rem;
-        background: white;
-        text-align: center;
-        -webkit-box-shadow: 0px -3px 7px 0px rgba(0,0,0,0.3);
-        -moz-box-shadow: 0px -3px 7px 0px rgba(0,0,0,0.3);
-        box-shadow: 0px -3px 7px 0px rgba(0,0,0,0.3);
-    }
-
-    div#main-searcher .search-dialog ul.button-group {
-        margin-top: 0.35rem;
-        margin-bottom: 0;
-        display: inline-block;
-    }
-
-    div#main-searcher .search-dialog ul.button-group a.button {
-        margin-bottom: 0;
-        padding: 0.5rem;
-    }
-
-    div#main-searcher .search-pager {
-        position: absolute;
-        *//*top: 2.315rem;*//*
-        left: 0;
-        right: 0;
-        bottom: 0;
-    }*/
 
     .remove-margin-bottom {
         margin-bottom: 0 !important;

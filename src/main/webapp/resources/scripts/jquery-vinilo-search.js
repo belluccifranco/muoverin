@@ -59,7 +59,7 @@
 							$list.append('<li>' + settings.getDataElementHtml(data[i]) + '</li>');
 						}
 					},
-					search = function() {
+					doSearch = function() {
 						var url = $form.data('url'),
 							hasAllEmptyValues = true,
 							emptyValues = ['', null, undefined],
@@ -98,22 +98,26 @@
 								} 
 							});
 						}
-					};
+                    },
+                    search = function() {
+                        clearData();
+                        $.each($form.serializeArray(), function(k, v) {
+                            searchData[v.name] = v.value;
+                        });
+                        doSearch();
+                    };
 
 				this.getData = getData;
 				this.addData = addData;
 				this.clearData = clearData;
 
 				$form.on('submit', function(e){
+                    search();
 					e.preventDefault();
 					e.stopPropagation();
 				});
 
 				$formButton.on('click', function(e){
-					clearData();
-					$.each($form.serializeArray(), function(k, v) {
-						searchData[v.name] = v.value;
-					});
 					search();
 					e.preventDefault();
 				});
@@ -122,7 +126,7 @@
                     var scrollPosition = $listContainer.scrollTop() + $listContainer.height(),
                         height = $list.outerHeight(true);
                     if (scrollPosition >= height) {
-                        search();
+                        doSearch();
                     }
                 });
 			});

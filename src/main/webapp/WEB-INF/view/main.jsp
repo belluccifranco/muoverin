@@ -8,11 +8,13 @@
     </head>
     <body>
     <div id="container">
-        <h1 id="title" class="title"><span id="menu-toggle"><i class="fi-list"></i></span>&nbsp;<i class="fi-record"></i> VINILO</h1>
+        <h1 id="title" class="title">
+            <span id="menu-toggle"><i class="fi-list"></i></span>&nbsp;<i class="fi-record"></i> VINILO
+        </h1>
         <div id="main-container">
             <nav id="main-menu" class="menu">
                 <div>
-                    <h1 class="title"><i class="fi-record size2x"></i> Menu</h1>
+                    <h1 class="title"><i class="fi-record"></i> Menu</h1>
                     <ul class="list list-hover">
                         <li class="first"><a href="#"><i class="fi-music"></i> &nbsp;Playing</a></li>
                         <li class="last"><a href="<spring:url value="upload" />"><i class="fi-upload"></i> &nbsp;Upload Song</a></li>
@@ -20,7 +22,7 @@
                     </ul>
                 </div>
                 <div>
-                    <h1 class="title"><i class="fi-star size2x"></i> Playlists</h1>
+                    <h1 class="title"><i class="fi-star"></i> Playlists</h1>
                     <ul class="list list-hover">
                         <li class="first"><a href="#">Aerosmith</a></li>
                         <li><a href="#">Counting Crows</a></li>
