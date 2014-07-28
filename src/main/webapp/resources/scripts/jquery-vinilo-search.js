@@ -13,6 +13,7 @@
 					$formButton = $elem.find(settings.formButtonSelector),
 					$list = $elem.find(settings.listSelector),
 					$listContainer = $elem.find(settings.listContainerSelector),
+                    $actionsContainer = $elem.find(settings.actionsContainer),
 					pages = 0,
 					stopSearching = false,
 					getData = function(idx) {
@@ -41,7 +42,7 @@
 						while (jqViniloSearchData.length > 0) {
 							jqViniloSearchData.pop();
 						}
-                        //jqViniloSearchData = [];
+
 						$list.html('');
 						pages = 0;
 						searchData = {};
@@ -129,6 +130,8 @@
                         doSearch();
                     }
                 });
+
+                settings.bindActionsEvents.apply(this, [$actionsContainer, $list]);
 			});
 		}
 	}
@@ -152,9 +155,13 @@
 		formButtonSelector: '.jq-vinilo-search-form-button',
 		listContainerSelector: '.jq-vinilo-search-list-container',
 		listSelector: '.jq-vinilo-search-list',
+        actionsContainer: '.jq-vinilo-search-actions',
 		pageName: 'index',
 		getDataElementHtml: function(dataElement) {
 			throw 'this function must be implemented.';
-		}
+		},
+        bindActionsEvents: function($ac, $list) {
+
+        }
 	};
 })(jQuery);

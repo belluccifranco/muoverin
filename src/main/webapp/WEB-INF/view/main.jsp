@@ -10,6 +10,7 @@
     <div id="container">
         <h1 id="title" class="title">
             <span id="menu-toggle"><i class="fi-list"></i></span>&nbsp;<i class="fi-record"></i> VINILO
+            <span class="right" id="search-toggle"><i class="fi-magnifying-glass"></i></span>
         </h1>
         <div id="main-container">
             <nav id="main-menu" class="menu">
@@ -31,7 +32,7 @@
                 </div>
             </nav>
             <div id="main">
-                <ul class="list" style="height: 100%;">
+                <ul class="list" style="height: 100%;" id="playing-list">
                     <%--<li>
                         <div class="item-img"></div>
                         <div class="item-info">
@@ -81,8 +82,8 @@
                     </div>
                     <div class="jq-vinilo-search-actions">
                         <ul class="button-group radius">
-                            <li><a id="song-search-checkall-button" href="#" class="button"><i class="fi-checkbox"></i> Check All</a></li>
-                            <li><a id="song-search-add-selected-button" href="#" class="button"><i class="fi-plus"></i> Add selected</a></li>
+                            <li><a href="#" class="button check-all-button"><i class="fi-checkbox"></i> Check All</a></li>
+                            <li><a href="#" class="button add-selected-button"><i class="fi-plus"></i> Add selected</a></li>
                         </ul>
                     </div>
                 </div>
@@ -93,10 +94,16 @@
     <script src="${JSTouchScroll}"></script>
     <spring:url value="/resources/scripts/public/jquery-2.1.1.min.js" var="JSjQuery"/>
     <script src="${JSjQuery}"></script>
+    <spring:url value="/resources/scripts/public/jquery-ui.min.js" var="JSjQueryUI"/>
+    <script src="${JSjQueryUI}"></script>
+    <spring:url value="/resources/scripts/public/jquery.ui.touch-punch.min.js" var="JSjQueryUITouchPunch"/>
+    <script src="${JSjQueryUITouchPunch}"></script>
     <spring:url value="/resources/scripts/soundmanager2/soundmanager2-nodebug-jsmin.js" var="JSsoundManager2" />
     <script src="${JSsoundManager2}"></script>
     <spring:url value="/resources/scripts/jquery-vinilo-search.js" var="JSsearcher" />
     <script src="${JSsearcher}"></script>
+    <spring:url value="/resources/scripts/jquery-vinilo-playlist.js" var="JSplaylist" />
+    <script src="${JSplaylist}"></script>
     <spring:url value="/resources/scripts/main.js" var="JSapp" />
     <script src="${JSapp}"></script>
     </body>
