@@ -23,8 +23,13 @@ public class PlaylistRepositoryJpaImpl implements PlaylistRepository {
     @Override
     public Playlist searchById(long id) {
         TypedQuery<Playlist> query = em.createNamedQuery("Playlist.searchById", Playlist.class);
-        query.setParameter("id", id);
-        return query.getSingleResult();
+        query.setParameter("id", id);        
+        List<Playlist> playlists = query.getResultList();        
+        if (playlists.isEmpty()) {
+            return null;
+        } else {
+            return playlists.get(0);
+        }
     }
 
     @Override

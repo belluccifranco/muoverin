@@ -1,7 +1,6 @@
 package com.vinilo.model;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,11 +24,11 @@ public class Link implements Serializable {
     @Length(min = 1, max = 200)
     private String url;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "id_hostingAccount")
     private HostingAccount hostingAccount;
 
-    @OneToOne(mappedBy = "link", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "link")
     private Song song;
 
     public Link() {

@@ -23,17 +23,17 @@ public class AlbumRepositoryJpaImpl implements AlbumRepository {
     public Album searchById(long id) {
         TypedQuery<Album> query = em.createNamedQuery("Album.searchById", Album.class);
         query.setParameter("id", id);
-        return query.getSingleResult();
+        List<Album> albums = query.getResultList();
+        if (albums.isEmpty()) {
+            return null;
+        } else {
+            return albums.get(0);
+        }
     }
 
     @Override
     public Album save(Album album) {
-        if (album.getId_album() == 0) {
-            em.persist(album);
-        } else {
-            em.merge(album);
-        }
-        return album;
+        return em.merge(album);
     }
 
     @Override
@@ -49,4 +49,15 @@ public class AlbumRepositoryJpaImpl implements AlbumRepository {
         return query.getResultList();
     }
 
+    @Override
+    public Album searchByName(String name) {
+        TypedQuery<Album> query = em.createNamedQuery("Album.searchByName", Album.class);
+        query.setParameter("name", name);
+        List<Album> albums = query.getResultList();
+        if (albums.isEmpty()) {
+            return null;
+        } else {
+            return albums.get(0);
+        }
+    }
 }

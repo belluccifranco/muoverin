@@ -65,39 +65,7 @@
                 <div class="small-2 columns">
                     <a href="#" data-reveal-id="newAlbumModal">Add !</a>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="small-3 columns">
-                    <label class="right inline">Tracks:</label>
-                </div>
-                <div class="small-7 columns">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th width="50">Nº</th>
-                                <th width="800">Name</th>                                
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Song name 1</td>                                                                 
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Song name 2</td>                                
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Song name 3</td>                                
-                            </tr>
-                        </tbody>
-                    </table>                          
-                </div>
-                <div class="small-2 columns">
-                </div>
-            </div>
+            </div>            
 
             <div class="row">                
                 <div class="small-3 columns">

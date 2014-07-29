@@ -1,7 +1,8 @@
 package com.vinilo.service;
 
-import com.vinilo.model.Song;
 import com.vinilo.model.Pagination;
+import com.vinilo.model.Song;
+import com.vinilo.repository.AlbumRepository;
 import com.vinilo.repository.SongRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class SongServiceImpl implements SongService {
 
-    private final SongRepository songRepository;
+    private final SongRepository songRepository;    
     private static final int MAX_ROWS_SEARCH = 10;
 
     @Autowired
-    public SongServiceImpl(SongRepository songRepository) {
-        this.songRepository = songRepository;
+    public SongServiceImpl(SongRepository songRepository, AlbumRepository albumRepository) {
+        this.songRepository = songRepository;        
     }
 
     @Override
@@ -33,13 +34,13 @@ public class SongServiceImpl implements SongService {
 
     @Override        
     @Transactional
-    public Song save(Song cancion) {
-        return songRepository.save(cancion);
+    public Song save(Song song) {        
+        return songRepository.save(song);
     }
 
     @Override
-    public void remove(Song cancion) {
-        songRepository.remove(cancion);
+    public void remove(Song song) {
+        songRepository.remove(song);
     }
 
     @Override

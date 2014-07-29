@@ -7,9 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "HostingAccount.searchAll", query = "SELECT ha FROM HostingAccount ha"),
+    @NamedQuery(name = "HostingAccount.searchById", query = "SELECT ha FROM HostingAccount ha WHERE ha.id_hostingAccount = :id"),
+    @NamedQuery(name = "HostingAccount.searchByUsername", query = "SELECT ha FROM HostingAccount ha WHERE ha.username = :username")
+})
 public class HostingAccount implements Serializable {
 
     @Id
@@ -22,7 +29,7 @@ public class HostingAccount implements Serializable {
 
     private String password;
 
-    @OneToMany(mappedBy = "hostingAccount", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "hostingAccount", cascade = CascadeType.REMOVE)
     private List<Link> links;
 
     public HostingAccount() {

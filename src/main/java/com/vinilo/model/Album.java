@@ -12,13 +12,15 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Album.searchAll", query = "SELECT a FROM Album a"),
-    @NamedQuery(name = "Album.searchById", query = "SELECT a FROM Album a WHERE a.id_album = :id"),                                                        
+    @NamedQuery(name = "Album.searchById", query = "SELECT a FROM Album a WHERE a.id_album = :id"),
+    @NamedQuery(name = "Album.searchByName", query = "SELECT a FROM Album a WHERE a.name = :name"),
     @NamedQuery(name = "Album.searchByArtist", query = "SELECT alb FROM Album alb JOIN alb.artists art WHERE art.id_artist = :id_artist")
 })
 public class Album implements Serializable {
@@ -35,10 +37,11 @@ public class Album implements Serializable {
 
     private int numberOfSongs;
 
-    @ManyToMany(mappedBy = "albums", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Valid
+    @ManyToMany(mappedBy = "albums", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private List<Artist> artists;
 
-    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "album")
     private List<Song> songs;
 
     public Album() {

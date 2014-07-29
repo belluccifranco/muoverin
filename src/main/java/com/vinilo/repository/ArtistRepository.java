@@ -8,6 +8,8 @@ public interface ArtistRepository {
     public List<Artist> searchAll();
 
     public Artist searchById(long id);
+    
+    public Artist searchByName(String name);
 
     public Artist save(Artist artist);
 

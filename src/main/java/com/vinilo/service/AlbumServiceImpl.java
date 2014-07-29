@@ -11,12 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class AlbumServiceImpl implements AlbumService {
 
     private final AlbumRepository albumRepository;
-    
+
     @Autowired
     public AlbumServiceImpl(AlbumRepository albumRepository) {
         this.albumRepository = albumRepository;
     }
-    
+
     @Override
     @Transactional(readOnly = true)
     public List<Album> searchAll() {
@@ -44,5 +44,10 @@ public class AlbumServiceImpl implements AlbumService {
     public List<Album> searchByArtist(long id_artist) {
         return albumRepository.searchByArtist(id_artist);
     }
-    
+
+    @Override
+    @Transactional(readOnly = true)
+    public Album searchByName(String name) {
+        return albumRepository.searchByName(name);
+    }
 }

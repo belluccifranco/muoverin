@@ -12,7 +12,8 @@ public interface AlbumService {
     public Album save(Album album);
 
     public void remove(Album album);
-    
+
     public List<Album> searchByArtist(long id_artist);
-    
+
+    public Album searchByName(String name);
 }

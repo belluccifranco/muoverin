@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -16,7 +18,8 @@ import org.hibernate.validator.constraints.Length;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Artist.searchAll", query = "SELECT a FROM Artist a"),
-    @NamedQuery(name = "Artist.searchById", query = "SELECT a FROM Artist a WHERE a.id_artist = :id")    
+    @NamedQuery(name = "Artist.searchById", query = "SELECT a FROM Artist a WHERE a.id_artist = :id"),
+    @NamedQuery(name = "Artist.searchByName", query = "SELECT a FROM Artist a WHERE a.name = :name")
 })
 public class Artist implements Serializable {
 
@@ -28,7 +31,12 @@ public class Artist implements Serializable {
     @Length(min = 1, max = 200)
     private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    private String info;
+
+    @JoinTable(name = "artist_album",
+        joinColumns = {@JoinColumn(name = "id_artist", referencedColumnName = "id_artist")},
+        inverseJoinColumns = {@JoinColumn(name = "id_album", referencedColumnName = "id_album")})
+    @ManyToMany
     private List<Album> albums;
 
     public Artist() {
@@ -52,6 +60,14 @@ public class Artist implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     public List<Album> getAlbums() {

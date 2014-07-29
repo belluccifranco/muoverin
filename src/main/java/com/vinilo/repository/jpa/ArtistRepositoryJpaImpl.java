@@ -13,7 +13,7 @@ public class ArtistRepositoryJpaImpl implements ArtistRepository {
 
     @PersistenceContext
     private EntityManager em;
-    
+
     @Override
     public List<Artist> searchAll() {
         return em.createNamedQuery("Artist.searchAll", Artist.class).getResultList();
@@ -23,17 +23,17 @@ public class ArtistRepositoryJpaImpl implements ArtistRepository {
     public Artist searchById(long id) {
         TypedQuery<Artist> query = em.createNamedQuery("Artist.searchById", Artist.class);
         query.setParameter("id", id);
-        return query.getSingleResult();
+        List<Artist> artists = query.getResultList();
+        if (artists.isEmpty()) {
+            return null;
+        } else {
+            return artists.get(0);
+        }
     }
 
     @Override
     public Artist save(Artist artist) {
-        if (artist.getId_artist() == 0) {
-            em.persist(artist);            
-        } else {
-            em.merge(artist);
-        }
-        return artist;
+        return em.merge(artist);
     }
 
     @Override
@@ -41,5 +41,16 @@ public class ArtistRepositoryJpaImpl implements ArtistRepository {
         Artist mergedArtist = em.merge(artist);
         em.remove(mergedArtist);
     }
-    
+
+    @Override
+    public Artist searchByName(String name) {
+        TypedQuery<Artist> query = em.createNamedQuery("Artist.searchByName", Artist.class);
+        query.setParameter("name", name);
+        List<Artist> artists = query.getResultList();
+        if (artists.isEmpty()) {
+            return null;
+        } else {
+            return artists.get(0);
+        }
+    }
 }

@@ -24,17 +24,17 @@ public class SongRepositoryJpaImpl implements SongRepository {
     public Song searchById(long id) {
         TypedQuery<Song> query = em.createNamedQuery("Song.searchById", Song.class);
         query.setParameter("id", id);
-        return query.getSingleResult();
+        List<Song> songs = query.getResultList();
+        if (songs.isEmpty()) {
+            return null;
+        } else {
+            return songs.get(0);
+        }
     }
 
     @Override
     public Song save(Song song) {
-        if (song.getId_song() == 0) {
-            em.persist(song);            
-        } else {
-            em.merge(song);
-        }
-        return song;
+        return em.merge(song);
     }
 
     @Override
@@ -46,19 +46,19 @@ public class SongRepositoryJpaImpl implements SongRepository {
     @Override
     public Pagination<Song> searchByCriteria(String criteria, int maxResultsPerPage, int pageIndex) {
         Pagination<Song> pagination = new Pagination<>();
-        pagination.setCurrentPage(pageIndex);             
-                
-        criteria = "%"+criteria.toUpperCase()+"%";
+        pagination.setCurrentPage(pageIndex);
+
+        criteria = "%" + criteria.toUpperCase() + "%";
         TypedQuery<Long> countQuery = em.createNamedQuery("Song.countCriteria", Long.class);
         countQuery.setParameter("songName", criteria);
         countQuery.setParameter("albumName", criteria);
-        countQuery.setParameter("artistName", criteria);       
+        countQuery.setParameter("artistName", criteria);
         pagination.setTotalRows(countQuery.getSingleResult());
-        
-        TypedQuery<Song> criteriaQuery = em.createNamedQuery("Song.searchByCriteria", Song.class);        
+
+        TypedQuery<Song> criteriaQuery = em.createNamedQuery("Song.searchByCriteria", Song.class);
         criteriaQuery.setParameter("songName", criteria);
         criteriaQuery.setParameter("albumName", criteria);
-        criteriaQuery.setParameter("artistName", criteria);       
+        criteriaQuery.setParameter("artistName", criteria);
         criteriaQuery.setMaxResults(maxResultsPerPage);
         criteriaQuery.setFirstResult((pageIndex - 1) * maxResultsPerPage);
         List<Song> data = criteriaQuery.getResultList();

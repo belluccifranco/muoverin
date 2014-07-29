@@ -28,10 +28,13 @@ public class UserAccount implements Serializable {
 
     private String password;
 
-    @ManyToMany(cascade = {CascadeType.ALL})    
+    @JoinTable(name = "userAccount_userRole",
+        joinColumns = {@JoinColumn(name = "id_userAccount", referencedColumnName = "id_userAccount")},
+        inverseJoinColumns = {@JoinColumn(name = "id_userRole", referencedColumnName = "id_userRole")})
+    @ManyToMany(cascade = {CascadeType.MERGE})    
     private List<UserRole> userRoles;
 
-    @OneToMany(mappedBy = "userAccount", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "userAccount")
     private List<Playlist> playlists;
 
     public UserAccount() {

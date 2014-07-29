@@ -8,181 +8,219 @@ import com.vinilo.model.Song;
 import com.vinilo.model.UserAccount;
 import com.vinilo.model.UserRole;
 import com.vinilo.service.AccountService;
+import com.vinilo.service.AlbumService;
+import com.vinilo.service.ArtistService;
+import com.vinilo.service.HostingAccountService;
 import com.vinilo.service.SongService;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.beans.factory.InitializingBean;
+import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class DataPopulator implements InitializingBean {
+public class DataPopulator {
+
+    private final SongService songService;
+    private final ArtistService artistService;
+    private final AlbumService albumService;
+    private final AccountService accountService;
+    private final HostingAccountService hostingAccountService;
 
     @Autowired
-    private SongService songService;
+    public DataPopulator(SongService songService, AccountService accountService,
+            HostingAccountService hostingAccountService, ArtistService artistService,
+            AlbumService albumService) {
 
-    @Autowired
-    private AccountService accountService;
+        this.songService = songService;
+        this.accountService = accountService;
+        this.hostingAccountService = hostingAccountService;
+        this.artistService = artistService;
+        this.albumService = albumService;
+    }
 
-    private void loadUsers() {
-        //USER ROLES
+    @PostConstruct
+    public void initialize() {
+        this.insertUsersWithRoles();
+        this.insertHostingAccounts();
+        this.insertArtists();
+        this.insertAlbums();
+        this.insertSongs();
+    }
+
+    private void insertUsersWithRoles() {
         UserRole roleCustomer = new UserRole("ROLE_CUSTOMER");
-        UserRole roleAdmin = new UserRole("ROLE_ADMIN");
-
-        //USER ACCOUNTS
         List<UserRole> customerRoles = new ArrayList<>();
         customerRoles.add(roleCustomer);
         UserAccount userFacundo = new UserAccount("facundo@vinilo.com", "e10adc3949ba59abbe56e057f20f883e", customerRoles);
-        UserAccount userFranco = new UserAccount("franco@vinilo.com", "e10adc3949ba59abbe56e057f20f883e", customerRoles);
-        List<UserRole> adminRoles = new ArrayList<>();
-        adminRoles.add(roleAdmin);
-        UserAccount userAdmin = new UserAccount("admin@vinilo.com", "e10adc3949ba59abbe56e057f20f883e", adminRoles);
-
         List<UserAccount> customerAccounts = new ArrayList<>();
         customerAccounts.add(userFacundo);
-        customerAccounts.add(userFranco);
         roleCustomer.setUserAccounts(customerAccounts);
-
-        List<UserAccount> adminAccounts = new ArrayList<>();
-        adminAccounts.add(userAdmin);
-        roleAdmin.setUserAccounts(adminAccounts);
-
-        accountService.save(userFacundo);
+        userFacundo = accountService.save(userFacundo);
+        customerRoles.clear();
+        customerRoles.add(userFacundo.getUserRoles().get(0));
+        UserAccount userFranco = new UserAccount("franco@vinilo.com", "e10adc3949ba59abbe56e057f20f883e", customerRoles);
+        customerAccounts.clear();
+        customerAccounts.add(userFranco);
+        customerRoles.get(0).setUserAccounts(customerAccounts);
         accountService.save(userFranco);
-        accountService.save(userAdmin);
     }
 
-    private void loadSongs() {
-        //HOSTING ACCOUNTS
-        HostingAccount ha1 = new HostingAccount("https://g.api.mega.co.nz", "cuentavinilo01@gmail.com", "Ninguna01");
+    private void insertHostingAccounts() {
+        HostingAccount hosting1 = new HostingAccount("https://g.api.mega.co.nz", "cuentavinilo01@gmail.com", "Ninguna01");
+        hostingAccountService.save(hosting1);
+    }
 
-        //LINKS
-        Link l1 = new Link("https://mega.co.nz/#!ilhghR7D!bXAvBGk_Z-7nFWZeHr0meC5Ce_4yFqHF38AnVmO7gew", ha1);
-        Link l2 = new Link("https://mega.co.nz/#!ipQ1HabR!eFikkFla4rIOqPpCJVgxlCSNaRoQGCadYk17qgBrFFY", ha1);
-        Link l3 = new Link("https://mega.co.nz/#!u05HDKSC!DauTn0lUVaUOjauoxXXqpk5Y4qYi3wVCA46XLZbontk", ha1);
-        Link l4 = new Link("https://mega.co.nz/#!yhATDbxL!Ujkb-jqdxc_r5RxNOVls-0Upik15bIiPp_W36hI6uO4", ha1);
-        Link l5 = new Link("https://mega.co.nz/#!DhRw1IjJ!aA30wnfpF7Z97DRRnZrSRHq51VpWoVI1UCj45YH-j4w", ha1);
-        Link l6 = new Link("https://mega.co.nz/#!n8AzSLSb!XJOUBCWK9K6Tux9W6JM_GGTswUQVuutzo2Fb8L2TGpw", ha1);
-        Link l7 = new Link("https://mega.co.nz/#!HshkSBrL!LbhwQz1kgPTSA8i-85rGmBVdEUwJwFIh-isoa7-JYW8", ha1);
-        Link l8 = new Link("https://mega.co.nz/#!esYkBQbQ!FdxakAVWP6A5sHWb4DOCj01i31UPkyMKV0by9Pb6Hps", ha1);
-        Link l9 = new Link("https://mega.co.nz/#!XghGjAYB!HMKf-Vt3hB9WICSa0Tak7Xxywo5TsX2FF8NMI8mo7Dk", ha1);
-        Link l10 = new Link("https://mega.co.nz/#!Tw4B0ZjL!WThKG0EqXIvrLeyzWVMT6ia_m1pec3NA18yeTnyBD1A", ha1);
-        Link l11 = new Link("https://mega.co.nz/#!OkxT2CQQ!VNGQzxRoTqbVLSGhnrTxjVVX_C1NHHJhjHgDwtzeUx0", ha1);
-        Link l12 = new Link("https://mega.co.nz/#!Osw2WTwD!fl6NTE1LbX7yq20hoLW9d1naZKt3g6ta6O_oucXNVTg", ha1);
-        Link l13 = new Link("https://mega.co.nz/#!20gSAAqa!ZwJG4QRJKJ75GLiueYfATivpz_laKt2Z2LMWQX2esH8", ha1);
-        Link l14 = new Link("https://mega.co.nz/#!v8wCXSIb!fdgHRHilmQW1olzTxZkiLlwkMsIyGZyKz3SwSpOnC8Q", ha1);
-        Link l15 = new Link("https://mega.co.nz/#!614k1BSQ!GzwglVZX0lO99bnl5IQcRArpwCVTYMnn7GERSJgNCyI", ha1);
-        Link l16 = new Link("https://mega.co.nz/#!TtpwiYIT!X9dvM0nA5XBI4nOlObLBOW_vKK52WsFJFG34WT6sSDY", ha1);
-        Link l17 = new Link("https://mega.co.nz/#!e95BlaID!aHdUkANGbgrHpi8eXk_gMUytaDMttmb3o52gwHLiXHU", ha1);
+    private void insertArtists() {
+        Artist acdc = new Artist("AC DC");
+        Artist ledzeppelin = new Artist("Led Zeppelin");
+        artistService.save(acdc);
+        artistService.save(ledzeppelin);
+    }
+
+    private void insertAlbums() {
+        Album album1 = new Album("Highway to Hell", 1979, 10);
+        List<Album> acdcAlbumes = new ArrayList<>();
+        acdcAlbumes.add(album1);
+        Artist artist1 = artistService.searchByName("AC DC");
+        List<Artist> artistsHighwayToHell = new ArrayList<>();
+        artistsHighwayToHell.add(artist1);
+        artist1.setAlbums(acdcAlbumes);
+        album1.setArtists(artistsHighwayToHell);
+        albumService.save(album1);
+
+        Album album2 = new Album("Presense", 1976, 7);
+        List<Album> ledZepplinAlbumes = new ArrayList<>();
+        ledZepplinAlbumes.add(album2);
+        Artist artist2 = artistService.searchByName("Led Zeppelin");
+        List<Artist> artistsLedZeppelin = new ArrayList<>();
+        artistsLedZeppelin.add(artist2);
+        artist2.setAlbums(ledZepplinAlbumes);
+        album2.setArtists(artistsLedZeppelin);
+        albumService.save(album2);
+    }
+
+    private void insertSongs() {
+        HostingAccount hosting1 = hostingAccountService.searchByUsername("cuentavinilo01@gmail.com");
+
+        Link link1 = new Link("https://mega.co.nz/#!ilhghR7D!bXAvBGk_Z-7nFWZeHr0meC5Ce_4yFqHF38AnVmO7gew", hosting1);
+        Link link2 = new Link("https://mega.co.nz/#!ipQ1HabR!eFikkFla4rIOqPpCJVgxlCSNaRoQGCadYk17qgBrFFY", hosting1);
+        Link link3 = new Link("https://mega.co.nz/#!u05HDKSC!DauTn0lUVaUOjauoxXXqpk5Y4qYi3wVCA46XLZbontk", hosting1);
+        Link link4 = new Link("https://mega.co.nz/#!yhATDbxL!Ujkb-jqdxc_r5RxNOVls-0Upik15bIiPp_W36hI6uO4", hosting1);
+        Link link5 = new Link("https://mega.co.nz/#!DhRw1IjJ!aA30wnfpF7Z97DRRnZrSRHq51VpWoVI1UCj45YH-j4w", hosting1);
+        Link link6 = new Link("https://mega.co.nz/#!n8AzSLSb!XJOUBCWK9K6Tux9W6JM_GGTswUQVuutzo2Fb8L2TGpw", hosting1);
+        Link link7 = new Link("https://mega.co.nz/#!HshkSBrL!LbhwQz1kgPTSA8i-85rGmBVdEUwJwFIh-isoa7-JYW8", hosting1);
+        Link link8 = new Link("https://mega.co.nz/#!esYkBQbQ!FdxakAVWP6A5sHWb4DOCj01i31UPkyMKV0by9Pb6Hps", hosting1);
+        Link link9 = new Link("https://mega.co.nz/#!XghGjAYB!HMKf-Vt3hB9WICSa0Tak7Xxywo5TsX2FF8NMI8mo7Dk", hosting1);
+        Link link10 = new Link("https://mega.co.nz/#!Tw4B0ZjL!WThKG0EqXIvrLeyzWVMT6ia_m1pec3NA18yeTnyBD1A", hosting1);
+        Link link11 = new Link("https://mega.co.nz/#!OkxT2CQQ!VNGQzxRoTqbVLSGhnrTxjVVX_C1NHHJhjHgDwtzeUx0", hosting1);
+        Link link12 = new Link("https://mega.co.nz/#!Osw2WTwD!fl6NTE1LbX7yq20hoLW9d1naZKt3g6ta6O_oucXNVTg", hosting1);
+        Link link13 = new Link("https://mega.co.nz/#!20gSAAqa!ZwJG4QRJKJ75GLiueYfATivpz_laKt2Z2LMWQX2esH8", hosting1);
+        Link link14 = new Link("https://mega.co.nz/#!v8wCXSIb!fdgHRHilmQW1olzTxZkiLlwkMsIyGZyKz3SwSpOnC8Q", hosting1);
+        Link link15 = new Link("https://mega.co.nz/#!614k1BSQ!GzwglVZX0lO99bnl5IQcRArpwCVTYMnn7GERSJgNCyI", hosting1);
+        Link link16 = new Link("https://mega.co.nz/#!TtpwiYIT!X9dvM0nA5XBI4nOlObLBOW_vKK52WsFJFG34WT6sSDY", hosting1);
+        Link link17 = new Link("https://mega.co.nz/#!e95BlaID!aHdUkANGbgrHpi8eXk_gMUytaDMttmb3o52gwHLiXHU", hosting1);
 
         List<Link> links = new ArrayList<>();
-        links.add(l1);
-        links.add(l2);
-        links.add(l3);
-        links.add(l4);
-        links.add(l5);
-        links.add(l6);
-        links.add(l7);
-        links.add(l8);
-        links.add(l9);
-        links.add(l10);
-        links.add(l11);
-        links.add(l12);
-        links.add(l13);
-        links.add(l14);
-        links.add(l15);
-        links.add(l16);
-        links.add(l17);
-        ha1.setLinks(links);
-
-        //ARTISTS
-        Artist acdc = new Artist("AC DC");
-        List<Artist> artistsHighwayToHell = new ArrayList<>();
-        artistsHighwayToHell.add(acdc);
-        Artist ledzeppelin = new Artist("Led Zeppelin");
-        List<Artist> artistsPresence = new ArrayList<>();
-        artistsPresence.add(ledzeppelin);
-
-        //ALBUM
-        List<Album> acdcAlbumes = new ArrayList<>();
-        Album highwayToHell = new Album("Highway to Hell", 1979, 10);
-        acdcAlbumes.add(highwayToHell);
-        List<Album> ledZepplinAlbumes = new ArrayList<>();
-        Album presense = new Album("Presense", 1976, 7);
-        ledZepplinAlbumes.add(presense);
-
-        acdc.setAlbums(acdcAlbumes);
-        ledzeppelin.setAlbums(ledZepplinAlbumes);
-
-        highwayToHell.setArtists(artistsHighwayToHell);
-        presense.setArtists(artistsPresence);
-
-        //SONGS
-        Song song1 = new Song(1, "Highway to Hell", "", highwayToHell, l1);
-        Song song2 = new Song(2, "Girls Got Rhythm", "", highwayToHell, l2);
-        Song song3 = new Song(3, "Walk All Over You", "", highwayToHell, l3);
-        Song song4 = new Song(4, "Touch Too Much", "", highwayToHell, l4);
-        Song song5 = new Song(5, "Beating Around The Bush", "", highwayToHell, l5);
-        Song song6 = new Song(6, "Shot Down in Flames", "", highwayToHell, l6);
-        Song song7 = new Song(7, "Get it Hot", "", highwayToHell, l7);
-        Song song8 = new Song(8, "If You Want Blood (You ve Got It)", "", highwayToHell, l8);
-        Song song9 = new Song(9, "Love Hungry Man", "", highwayToHell, l9);
-        Song song10 = new Song(10, "Night Prowler", "", highwayToHell, l10);
-
-        Song song11 = new Song(1, "Achilles Last Stand", "", presense, l11);
-        Song song12 = new Song(2, "For Your Life", "", presense, l12);
-        Song song13 = new Song(3, "Royal Orleans", "", presense, l13);
-        Song song14 = new Song(4, "Nobodys Fault But Mine", "", presense, l14);
-        Song song15 = new Song(5, "Candy Store Rock", "", presense, l15);
-        Song song16 = new Song(6, "Hots On For Nowhere", "", presense, l16);
-        Song song17 = new Song(7, "Tea For One", "", presense, l17);
-
-        l1.setSong(song1);
-        l2.setSong(song2);
-        l3.setSong(song3);
-        l4.setSong(song4);
-        l5.setSong(song5);
-        l6.setSong(song6);
-        l7.setSong(song7);
-        l8.setSong(song8);
-        l9.setSong(song9);
-        l10.setSong(song10);
-        l11.setSong(song11);
-        l12.setSong(song12);
-        l13.setSong(song13);
-        l14.setSong(song14);
-        l15.setSong(song15);
-        l16.setSong(song16);
-        l17.setSong(song17);       
-
-        List<Song> highwayToHellSongs = new ArrayList<>();
-        highwayToHellSongs.add(song1);
-        highwayToHellSongs.add(song2);
-        highwayToHellSongs.add(song3);
-        highwayToHellSongs.add(song4);
-        highwayToHellSongs.add(song5);
-        highwayToHellSongs.add(song6);
-        highwayToHellSongs.add(song7);
-        highwayToHellSongs.add(song8);
-        highwayToHellSongs.add(song9);
-        highwayToHellSongs.add(song10);
-        highwayToHell.setSongs(highwayToHellSongs);        
-
-        List<Song> presenseSongs = new ArrayList<>();
-        presenseSongs.add(song11);
-        presenseSongs.add(song12);
-        presenseSongs.add(song13);
-        presenseSongs.add(song14);
-        presenseSongs.add(song15);
-        presenseSongs.add(song16);
-        presenseSongs.add(song17);
-        presense.setSongs(presenseSongs);        
-
+        links.add(link1);
+        links.add(link2);
+        links.add(link3);
+        links.add(link4);
+        links.add(link5);
+        links.add(link6);
+        links.add(link7);
+        links.add(link8);
+        links.add(link9);
+        links.add(link10);
+        links.add(link11);
+        links.add(link12);
+        links.add(link13);
+        links.add(link14);
+        links.add(link15);
+        links.add(link16);
+        links.add(link17);
+        hosting1.setLinks(links);
+        
+        Album album1 = albumService.searchByName("Highway to Hell");
+        
+        Song song1 = new Song(1, "Highway to Hell", "", album1, link1);
+        Song song2 = new Song(2, "Girls Got Rhythm", "", album1, link2);
+        Song song3 = new Song(3, "Walk All Over You", "", album1, link3);
+        Song song4 = new Song(4, "Touch Too Much", "", album1, link4);
+        Song song5 = new Song(5, "Beating Around The Bush", "", album1, link5);
+        Song song6 = new Song(6, "Shot Down in Flames", "", album1, link6);
+        Song song7 = new Song(7, "Get it Hot", "", album1, link7);
+        Song song8 = new Song(8, "If You Want Blood (You ve Got It)", "", album1, link8);
+        Song song9 = new Song(9, "Love Hungry Man", "", album1, link9);
+        Song song10 = new Song(10, "Night Prowler", "", album1, link10);
+        
+        link1.setSong(song1);
+        link2.setSong(song2);
+        link3.setSong(song3);
+        link4.setSong(song4);
+        link5.setSong(song5);
+        link6.setSong(song6);
+        link7.setSong(song7);
+        link8.setSong(song8);
+        link9.setSong(song9);
+        link10.setSong(song10);
+        
+        List<Song> album1Songs = new ArrayList<>();
+        album1Songs.add(song1);
+        album1Songs.add(song2);
+        album1Songs.add(song3);
+        album1Songs.add(song4);
+        album1Songs.add(song5);
+        album1Songs.add(song6);
+        album1Songs.add(song7);
+        album1Songs.add(song8);
+        album1Songs.add(song9);
+        album1Songs.add(song10);
+        album1.setSongs(album1Songs);
+        
         songService.save(song1);
-        songService.save(song11);
-    }
+        songService.save(song2);
+        songService.save(song3);
+        songService.save(song4);
+        songService.save(song5);
+        songService.save(song6);
+        songService.save(song7);
+        songService.save(song8);
+        songService.save(song9);
+        songService.save(song10);        
+        
+        Album album2 = albumService.searchByName("Presense");
+        
+        Song song11 = new Song(1, "Achilles Last Stand", "", album2, link11);
+        Song song12 = new Song(2, "For Your Life", "", album2, link12);
+        Song song13 = new Song(3, "Royal Orleans", "", album2, link13);
+        Song song14 = new Song(4, "Nobodys Fault But Mine", "", album2, link14);
+        Song song15 = new Song(5, "Candy Store Rock", "", album2, link15);
+        Song song16 = new Song(6, "Hots On For Nowhere", "", album2, link16);
+        Song song17 = new Song(7, "Tea For One", "", album2, link17);
+        
+        link11.setSong(song11);
+        link12.setSong(song12);
+        link13.setSong(song13);
+        link14.setSong(song14);
+        link15.setSong(song15);
+        link16.setSong(song16);
+        link17.setSong(song17);       
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        this.loadUsers();
-        this.loadSongs();
+        List<Song> album2Songs = new ArrayList<>();
+        album2Songs.add(song11);
+        album2Songs.add(song12);
+        album2Songs.add(song13);
+        album2Songs.add(song14);
+        album2Songs.add(song15);
+        album2Songs.add(song16);
+        album2Songs.add(song17);
+        album2.setSongs(album2Songs);
+
+        songService.save(song11);
+        songService.save(song12);
+        songService.save(song13);
+        songService.save(song14);
+        songService.save(song15);
+        songService.save(song16);
+        songService.save(song17);
     }
 }

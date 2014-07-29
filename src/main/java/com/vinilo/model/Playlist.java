@@ -2,7 +2,6 @@ package com.vinilo.model;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,11 +26,14 @@ public class Playlist implements Serializable {
 
     private String name;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "id_userAccount")
     private UserAccount userAccount;
 
-    @ManyToMany(cascade = {CascadeType.ALL})    
+    @JoinTable(name = "playlist_song",
+        joinColumns = {@JoinColumn(name = "id_playlist", referencedColumnName = "id_playlist")},
+        inverseJoinColumns = {@JoinColumn(name = "id_song", referencedColumnName = "id_song")})
+    @ManyToMany
     private List<Song> songs;
 
     public Playlist() {

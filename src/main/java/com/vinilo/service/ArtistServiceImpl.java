@@ -39,5 +39,11 @@ public class ArtistServiceImpl implements ArtistService {
     public void remove(Artist artist) {
         artistRepository.remove(artist);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Artist searchByName(String name) {
+        return artistRepository.searchByName(name);
+    }
     
 }

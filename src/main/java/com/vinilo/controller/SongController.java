@@ -1,7 +1,9 @@
 package com.vinilo.controller;
 
+import com.vinilo.model.Album;
 import com.vinilo.model.Pagination;
 import com.vinilo.model.Song;
+import com.vinilo.service.AlbumService;
 import com.vinilo.service.SongService;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
@@ -22,10 +24,12 @@ import org.springframework.web.context.request.WebRequest;
 public class SongController {
 
     private final SongService songService;
+    private final AlbumService albumService;
 
     @Autowired
-    public SongController(SongService songService) {
+    public SongController(SongService songService, AlbumService albumService) {
         this.songService = songService;
+        this.albumService = albumService;
     }
 
     @RequestMapping(value = "/songs", method = RequestMethod.GET)
@@ -45,6 +49,9 @@ public class SongController {
     @RequestMapping(value="/song", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public @ResponseBody Song upload(@RequestBody @Valid Song song, HttpServletResponse response, WebRequest webRequest) {
+        Album album = albumService.searchById(song.getAlbum().getId_album());
+        album.getSongs().add(song);
+        song.setAlbum(album);        
         Song createdSong = songService.save(song);        
         response.setHeader("Location", webRequest.getContextPath() + "/song/" + createdSong.getId_song());
         return createdSong;

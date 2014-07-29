@@ -42,18 +42,18 @@ public class Song implements Serializable {
 
     private String lyric;    
 
-    @NotNull
-    @ManyToOne(cascade = CascadeType.ALL)
+    @NotNull    
+    @ManyToOne
     @JoinColumn(name = "id_album")
     private Album album;
 
     @NotNull
     @Valid
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_link")
     private Link link;
 
-    @ManyToMany(mappedBy = "songs", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "songs", fetch = FetchType.LAZY)
     private List<Playlist> playlists;
 
     public Song() {
