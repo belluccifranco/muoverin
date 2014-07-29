@@ -32,7 +32,7 @@
                 </div>
             </nav>
             <div id="main">
-                <ul class="list" style="height: 100%;" id="playing-list">
+                <ul class="list play-list" style="height: 100%;" id="playing-list">
                     <%--<li>
                         <div class="item-img"></div>
                         <div class="item-info">

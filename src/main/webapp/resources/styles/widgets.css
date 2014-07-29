@@ -76,6 +76,12 @@ ul.list li a {
 	font-size: 2em;
 }
 
+.ellipsis {
+    overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
 ul.list input {
 	margin: 0
 }
@@ -147,4 +153,22 @@ ul.list.search-list li .item-info .other-info {
 .jq-vinilo-search .jq-vinilo-search-actions ul.button-group a.button {
     margin-bottom: 0;
     padding: 0.5rem;
+}
+
+ul.play-list li .item-img {
+    float: left;
+}
+
+ul.play-list li .item-info {
+    display: block;
+    margin-left: 2.5rem;
+}
+
+ul.list.play-list li .item-info .other-info {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+ul.list.play-list li .item-info .main-info {
+    font-weight: bold;
 }

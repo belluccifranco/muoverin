@@ -36,7 +36,7 @@
                             data.push(app.elements.$songSearcher.jqViniloSearch('getData', i));
                         }
                     });
-                    //console.log(data);
+
                     if (data.length > 0) {
                         app.elements.$currentList.jqViniloPlayer('addSounds', data);
                         app.elements.$mainSearcher.hide();
@@ -47,10 +47,11 @@
             }
         },
         playingListOptions = {
+            sortableHandleSelector: '.item-img',
             getDataElementHtml: function(obj) {
                 var itmTpl = '';
 
-                itmTpl += '<div class="item-img"></div>';
+                itmTpl += '<div class="item-img"><i class="fi-music size2x"></i></div>';
                 itmTpl += '<div class="item-info">';
                 itmTpl += '    <div class="other-info ellipsis">' + getArtists(obj) + ' - ' + obj.album.name + '</div>';
                 itmTpl += '    <div class="main-info ellipsis">' + obj.name + '</div>';
@@ -92,6 +93,7 @@
 
     //make touch scroll
     touchScroll('song-search-list');
+    touchScroll('playing-list');
 
     soundManager.setup({
         url: '/resources/scripts/soundmanager2/swf',

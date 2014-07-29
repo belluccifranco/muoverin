@@ -382,7 +382,11 @@
                         }
                     },
                     bindEvents = function() {
-                        $elem.sortable();
+                        var emptyValues = [null, undefined, ''];
+
+                        if (emptyValues.indexOf(settings.sortableHandleSelector) < 0) {
+                            $elem.sortable({ handle: ".item-img" });
+                        }
                     };
 
                 this.addSounds = addSounds;
@@ -406,6 +410,7 @@
     }
 
     $.fn.jqViniloPlayer.defaults = {
+        sortableHandleSelector: '',
         getDataElementHtml: function(dataElement) {
             throw 'this function must be implemented.';
         }
