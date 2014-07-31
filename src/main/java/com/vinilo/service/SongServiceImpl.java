@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class SongServiceImpl implements SongService {
 
     private final SongRepository songRepository;    
-    private static final int MAX_ROWS_SEARCH = 10;
+    private static final int MAX_ROWS_SEARCH = 50;
 
     @Autowired
     public SongServiceImpl(SongRepository songRepository, AlbumRepository albumRepository) {

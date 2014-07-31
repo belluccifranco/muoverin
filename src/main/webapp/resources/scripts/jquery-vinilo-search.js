@@ -6,7 +6,8 @@
 			var settings = $.extend(true, {}, $.fn.jqViniloSearch.defaults, options);
 
 			return this.each(function(){
-				var jqViniloSearchData = [],
+				var fetchCount = 50,
+                    jqViniloSearchData = [],
 					searchData = {},
 					$elem = $(this),
 					$form = $elem.find('form' + settings.formSelector),
@@ -90,7 +91,7 @@
 									if (length > 0) {
 										addData(data.data);
 										updateUI(data.data);
-										if (length < 10) {
+										if (length < fetchCount) {
 											stopSearching = true;
 										}
 									} else {
