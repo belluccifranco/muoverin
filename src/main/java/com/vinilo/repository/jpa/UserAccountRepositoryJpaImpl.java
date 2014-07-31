@@ -1,14 +1,14 @@
 package com.vinilo.repository.jpa;
 
 import com.vinilo.model.UserAccount;
-import com.vinilo.repository.AccountRepository;
+import com.vinilo.repository.UserAccountRepository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class AccountRepositoryJpaImpl implements AccountRepository {
+public class UserAccountRepositoryJpaImpl implements UserAccountRepository {
 
     @PersistenceContext
     private EntityManager em;

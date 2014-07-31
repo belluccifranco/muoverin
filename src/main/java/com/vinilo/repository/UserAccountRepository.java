@@ -2,7 +2,7 @@ package com.vinilo.repository;
 
 import com.vinilo.model.UserAccount;
 
-public interface AccountRepository {
+public interface UserAccountRepository {
 
     public UserAccount searchByName(String name);
     

@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "HostingAccount.searchAll", query = "SELECT ha FROM HostingAccount ha"),
-    @NamedQuery(name = "HostingAccount.searchById", query = "SELECT ha FROM HostingAccount ha WHERE ha.id_hostingAccount = :id"),
+    @NamedQuery(name = "HostingAccount.searchById", query = "SELECT ha FROM HostingAccount ha JOIN FETCH ha.links WHERE ha.id_hostingAccount = :id"),
     @NamedQuery(name = "HostingAccount.searchByUsername", query = "SELECT ha FROM HostingAccount ha WHERE ha.username = :username")
 })
 public class HostingAccount implements Serializable {

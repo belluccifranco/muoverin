@@ -2,8 +2,10 @@ $(document).ready(function() {
     
     var $cbArtists = $('#artist-combo');
     var $cbAlbumes = $('#album-combo');
+    var $cbHosting = $('#hosting-combo');
     
     loadArtistCombo();
+    loadHostingCombo();
 
     $cbArtists.change(function() {
         loadAlbumsByArtist($cbArtists.val());
@@ -38,6 +40,22 @@ $(document).ready(function() {
                     options += '<option value="' + album.id_album + '">' + album.name + '</option>';
                 });
                 $cbAlbumes.html(options);
+            }
+        });
+    }
+    
+    function loadHostingCombo() {
+        var url = '/hostings';
+        $.ajax({
+            url: url,
+            type: 'get',
+            dataType: 'json',
+            success: function(data) {
+                var options = '';
+                $.each(data, function(i, hosting) {
+                    options += '<option value="' + hosting.id_hostingAccount + '">' + hosting.username + '</option>';
+                });
+                $cbHosting.html(options);                
             }
         });
     }

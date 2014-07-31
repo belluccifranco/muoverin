@@ -49,7 +49,7 @@
                     <small class="error"><spring:message code="NotNull.song.artist"/></small>
                 </div>
                 <div class="small-2 columns">
-                    <a href="#" data-reveal-id="newArtistModal">Add !</a>
+                    <a href="#" data-reveal-id="newArtistModal">Add!</a>
                 </div>
             </div>
 
@@ -63,7 +63,7 @@
                     <small class="error"><spring:message code="NotNull.song.album"/></small>
                 </div>
                 <div class="small-2 columns">
-                    <a href="#" data-reveal-id="newAlbumModal">Add !</a>
+                    <a href="#" data-reveal-id="newAlbumModal">Add!</a>
                 </div>
             </div>            
 
@@ -76,6 +76,20 @@
                 </div>
                 <div class="small-2 columns">
                 </div>                
+            </div>
+
+            <div class="row">
+                <div class="small-3 columns">
+                    <label for="hosting-label" class="right inline">Hosting:</label>
+                </div>
+                <div class="small-7 columns">
+                    <select id="hosting-combo" required>                        
+                    </select>     
+                    <small class="error"><spring:message code="NotNull.song.link.hostingAccount"/></small>
+                </div>
+                <div class="small-2 columns">
+                    <a href="#" data-reveal-id="newHostingModal">Add!</a>
+                </div>
             </div>
 
             <div class="row">
@@ -104,6 +118,15 @@
 
         <div id="newAlbumModal" class="reveal-modal tiny" data-reveal>
             <h2>Add new Album</h2>
+            <div class="flex-video">
+
+            </div>
+
+            <a class="close-reveal-modal">&#215;</a>
+        </div>
+
+        <div id="newHostingModal" class="reveal-modal tiny" data-reveal>
+            <h2>Add new Hosting</h2>
             <div class="flex-video">
 
             </div>

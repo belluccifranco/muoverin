@@ -24,6 +24,7 @@ public class Link implements Serializable {
     @Length(min = 1, max = 200)
     private String url;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "id_hostingAccount")
     private HostingAccount hostingAccount;

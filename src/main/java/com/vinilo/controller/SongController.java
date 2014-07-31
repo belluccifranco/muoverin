@@ -1,9 +1,11 @@
 package com.vinilo.controller;
 
 import com.vinilo.model.Album;
+import com.vinilo.model.HostingAccount;
 import com.vinilo.model.Pagination;
 import com.vinilo.model.Song;
 import com.vinilo.service.AlbumService;
+import com.vinilo.service.HostingAccountService;
 import com.vinilo.service.SongService;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
@@ -25,11 +27,13 @@ public class SongController {
 
     private final SongService songService;
     private final AlbumService albumService;
+    private final HostingAccountService hostingAccountService;
 
     @Autowired
-    public SongController(SongService songService, AlbumService albumService) {
+    public SongController(SongService songService, AlbumService albumService, HostingAccountService hostingAccountService) {
         this.songService = songService;
         this.albumService = albumService;
+        this.hostingAccountService = hostingAccountService;
     }
 
     @RequestMapping(value = "/songs", method = RequestMethod.GET)
@@ -51,7 +55,10 @@ public class SongController {
     public @ResponseBody Song upload(@RequestBody @Valid Song song, HttpServletResponse response, WebRequest webRequest) {
         Album album = albumService.searchById(song.getAlbum().getId_album());
         album.getSongs().add(song);
-        song.setAlbum(album);        
+        song.setAlbum(album);
+        HostingAccount hosting = hostingAccountService.searchById(song.getLink().getId_link());
+        hosting.getLinks().add(song.getLink());
+        song.getLink().setHostingAccount(hosting);        
         Song createdSong = songService.save(song);        
         response.setHeader("Location", webRequest.getContextPath() + "/song/" + createdSong.getId_song());
         return createdSong;

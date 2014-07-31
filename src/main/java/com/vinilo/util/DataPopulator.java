@@ -7,7 +7,7 @@ import com.vinilo.model.Link;
 import com.vinilo.model.Song;
 import com.vinilo.model.UserAccount;
 import com.vinilo.model.UserRole;
-import com.vinilo.service.AccountService;
+import com.vinilo.service.UserAccountService;
 import com.vinilo.service.AlbumService;
 import com.vinilo.service.ArtistService;
 import com.vinilo.service.HostingAccountService;
@@ -22,11 +22,11 @@ public class DataPopulator {
     private final SongService songService;
     private final ArtistService artistService;
     private final AlbumService albumService;
-    private final AccountService accountService;
+    private final UserAccountService accountService;
     private final HostingAccountService hostingAccountService;
 
     @Autowired
-    public DataPopulator(SongService songService, AccountService accountService,
+    public DataPopulator(SongService songService, UserAccountService accountService,
             HostingAccountService hostingAccountService, ArtistService artistService,
             AlbumService albumService) {
 

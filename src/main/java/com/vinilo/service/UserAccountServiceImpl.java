@@ -3,7 +3,7 @@ package com.vinilo.service;
 import com.vinilo.model.UserAccount;
 import com.vinilo.model.UserRole;
 import com.vinilo.model.SimpleGrantedAuthority;
-import com.vinilo.repository.AccountRepository;
+import com.vinilo.repository.UserAccountRepository;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.NoResultException;
@@ -18,13 +18,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service("userDetailsService")
-public class AccountServiceImpl implements UserDetailsService, AccountService {
+public class UserAccountServiceImpl implements UserDetailsService, UserAccountService {
 
-    private final AccountRepository accountRepository;
-    private static final Logger logger = Logger.getLogger(AccountServiceImpl.class);
+    private final UserAccountRepository accountRepository;
+    private static final Logger logger = Logger.getLogger(UserAccountServiceImpl.class);
 
     @Autowired
-    public AccountServiceImpl(AccountRepository accountRepository) {
+    public UserAccountServiceImpl(UserAccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
 

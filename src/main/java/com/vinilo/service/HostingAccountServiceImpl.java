@@ -20,7 +20,12 @@ public class HostingAccountServiceImpl implements HostingAccountService {
     @Override
     @Transactional(readOnly = true)
     public List<HostingAccount> searchAll() {
-        return hostingAccountRepository.searchAll();
+        List<HostingAccount> hostings = hostingAccountRepository.searchAll();
+        for (HostingAccount hosting : hostings) {
+            hosting.setPassword("");
+            hosting.setUrl("");
+        }
+        return hostings;
     }
 
     @Override
