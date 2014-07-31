@@ -4,8 +4,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
     <head>        
-        <meta name="viewport" content="width=device-width, initial-scale=1">                
-        <jsp:include page="fragments/common.jsp"/>
+        <jsp:include page="fragments/common-header.jsp"/>
+        <title>Vinilo</title>
     </head>
     <body>
         <div id="container">
@@ -30,8 +30,7 @@
             </div>
         </div>
     </body>
-    <spring:url value="/resources/scripts/public/jquery-1.10.2.min.js" var="JSjQuery"/>
-    <script src="${JSjQuery}"></script>
+    <jsp:include page="fragments/common-footer.jsp"/>
     <script type="text/javascript">
         (function($){
             $('input#username').focus();

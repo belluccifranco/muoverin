@@ -3,10 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">     
-        <link rel="stylesheet" href="resources/styles/foundation/normalize.css">
-        <link rel="stylesheet" href="resources/styles/foundation/foundation.min.css">
+        <jsp:include page="fragments/common-header.jsp"/>
         <title>Upload a song</title>
     </head>
     <body>             
@@ -133,11 +130,7 @@
 
             <a class="close-reveal-modal">&#215;</a>
         </div>
-
-        <spring:url value="/resources/scripts/foundation/vendor/jquery.js" var="JSFoundationVendor"/>
-        <script src="${JSFoundationVendor}"></script>
-        <spring:url value="/resources/scripts/foundation/foundation.min.js" var="JSFoundation"/>
-        <script src="${JSFoundation}"></script>
+        <jsp:include page="fragments/common-footer.jsp"/>
         <spring:url value="/resources/scripts/uploadSong.js" var="uploadSong"/>
         <script src="${uploadSong}"></script>
         <script>
