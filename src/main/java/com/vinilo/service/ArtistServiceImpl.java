@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ArtistServiceImpl implements ArtistService {
-    
+
     private final ArtistRepository artistRepository;
 
     @Autowired
@@ -45,5 +45,11 @@ public class ArtistServiceImpl implements ArtistService {
     public Artist searchByName(String name) {
         return artistRepository.searchByName(name);
     }
-    
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Artist> searchByNameLike(String name) {
+        return artistRepository.searchByNameLike(name);
+    }
+
 }

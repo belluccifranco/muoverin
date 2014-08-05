@@ -19,7 +19,8 @@ import org.hibernate.validator.constraints.Length;
 @NamedQueries({
     @NamedQuery(name = "Artist.searchAll", query = "SELECT a FROM Artist a"),
     @NamedQuery(name = "Artist.searchById", query = "SELECT a FROM Artist a WHERE a.id_artist = :id"),
-    @NamedQuery(name = "Artist.searchByName", query = "SELECT a FROM Artist a WHERE a.name = :name")
+    @NamedQuery(name = "Artist.searchByName", query = "SELECT a FROM Artist a WHERE a.name = :name"),
+    @NamedQuery(name = "Artist.searchByNameLike", query = "SELECT a FROM Artist a WHERE UPPER(a.name) LIKE :name")
 })
 public class Artist implements Serializable {
 

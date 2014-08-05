@@ -52,15 +52,14 @@ public class SongController {
 
     @RequestMapping(value="/song", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public @ResponseBody Song upload(@RequestBody @Valid Song song, HttpServletResponse response, WebRequest webRequest) {
+    public void upload(@RequestBody @Valid Song song, HttpServletResponse response, WebRequest webRequest) {
         Album album = albumService.searchById(song.getAlbum().getId_album());
         album.getSongs().add(song);
         song.setAlbum(album);
-        HostingAccount hosting = hostingAccountService.searchById(song.getLink().getId_link());
+        HostingAccount hosting = hostingAccountService.searchById(song.getLink().getHostingAccount().getId_hostingAccount());
         hosting.getLinks().add(song.getLink());
         song.getLink().setHostingAccount(hosting);        
         Song createdSong = songService.save(song);        
-        response.setHeader("Location", webRequest.getContextPath() + "/song/" + createdSong.getId_song());
-        return createdSong;
+        response.setHeader("Location", webRequest.getContextPath() + "/song/" + createdSong.getId_song());        
     }
 }

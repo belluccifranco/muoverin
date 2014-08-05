@@ -53,4 +53,11 @@ public class ArtistRepositoryJpaImpl implements ArtistRepository {
             return artists.get(0);
         }
     }
+
+    @Override
+    public List<Artist> searchByNameLike(String name) {
+        TypedQuery<Artist> query = em.createNamedQuery("Artist.searchByNameLike", Artist.class);        
+        query.setParameter("name", "%" + name.toUpperCase() + "%");
+        return query.getResultList();        
+    }
 }
