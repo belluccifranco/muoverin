@@ -6,10 +6,10 @@
         <jsp:include page="fragments/common-header.jsp"/>
         <title>Upload a song</title>
     </head>
-    <body>             
-        <form data-abide>            
+    <body>
+        <form data-abide>
             <div class="label small-12 text-center">
-                <h2>Add new Song</h2>                
+                <h2>Add new Song</h2>
             </div>
 
             <div class="row">
@@ -41,8 +41,9 @@
                     <label for="artist-label" class="right inline">Artist:</label>
                 </div>
                 <div class="small-7 columns">
-                    <select id="artist-combo" required>                        
-                    </select>     
+                    <%--<select id="artist-combo" required>
+                    </select>--%>
+                    <input type="hidden" id="artist-combo">
                     <small class="error"><spring:message code="NotNull.song.artist"/></small>
                 </div>
                 <div class="small-2 columns">
@@ -56,15 +57,15 @@
                 </div>
                 <div class="small-7 columns">
                     <select id="album-combo" required>
-                    </select> 
+                    </select>
                     <small class="error"><spring:message code="NotNull.song.album"/></small>
                 </div>
                 <div class="small-2 columns">
                     <a href="#" data-reveal-id="newAlbumModal">Add!</a>
                 </div>
-            </div>            
+            </div>
 
-            <div class="row">                
+            <div class="row">
                 <div class="small-3 columns">
                     <label for="lyrics-label" class="right inline">Lyrics:</label>
                 </div>
@@ -72,7 +73,7 @@
                     <textarea id="lyrics-label"></textarea>
                 </div>
                 <div class="small-2 columns">
-                </div>                
+                </div>
             </div>
 
             <div class="row">
@@ -80,8 +81,8 @@
                     <label for="hosting-label" class="right inline">Hosting:</label>
                 </div>
                 <div class="small-7 columns">
-                    <select id="hosting-combo" required>                        
-                    </select>     
+                    <select id="hosting-combo" required>
+                    </select>
                     <small class="error"><spring:message code="NotNull.song.link.hostingAccount"/></small>
                 </div>
                 <div class="small-2 columns">
@@ -133,8 +134,5 @@
         <jsp:include page="fragments/common-footer.jsp"/>
         <spring:url value="/resources/scripts/uploadSong.js" var="uploadSong"/>
         <script src="${uploadSong}"></script>
-        <script>
-            $(document).foundation();
-        </script>
     </body>
 </html>

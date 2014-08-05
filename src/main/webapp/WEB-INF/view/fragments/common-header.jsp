@@ -12,6 +12,8 @@
 <link rel="stylesheet" href="${CSSFoundation}">
 <spring:url value="resources/styles/foundation/foundation-icons/foundation-icons.css" var="CSSFoundationIcons"/>
 <link rel="stylesheet" href="${CSSFoundationIcons}">
+<spring:url value="resources/styles/select2/select2.css" var="CSSSelect2"/>
+<link rel="stylesheet" href="${CSSSelect2}">
 <spring:url value="resources/styles/main.css" var="CSSMain"/>
 <link rel="stylesheet" href="${CSSMain}"/>
 <spring:url value="resources/styles/widgets.css" var="CSSWidgets"/>
