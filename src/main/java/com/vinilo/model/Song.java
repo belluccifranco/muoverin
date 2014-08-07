@@ -34,7 +34,7 @@ public class Song implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id_song;
 
-    private int track;
+    private String track;
 
     @NotNull
     @Length(min = 1, max = 200)
@@ -59,7 +59,7 @@ public class Song implements Serializable {
     public Song() {
     }
 
-    public Song(int track, String name, String lyric, Album album, Link link) {
+    public Song(String track, String name, String lyric, Album album, Link link) {
         this.track = track;
         this.name = name;
         this.lyric = lyric;        
@@ -75,11 +75,11 @@ public class Song implements Serializable {
         this.id_song = id_song;
     }
 
-    public int getTrack() {
+    public String getTrack() {
         return track;
     }
 
-    public void setTrack(int track) {
+    public void setTrack(String track) {
         this.track = track;
     }
 

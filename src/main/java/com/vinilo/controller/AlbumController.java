@@ -22,10 +22,10 @@ public class AlbumController {
         this.albumService = albumService;
     }
 
-    @RequestMapping(value = "/albums", method = RequestMethod.GET, params = {"id_artist"})
+    @RequestMapping(value = "/albums", method = RequestMethod.GET, params = {"artists"})
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody List<Album> searchByArtist(@RequestParam(value = "id_artist") long id_artist) {
-        return albumService.searchByArtist(id_artist);
-    }   
-    
+    public @ResponseBody List<Album> searchByArtist(@RequestParam(value = "artists") List<Long> artists) {
+        return albumService.searchByArtists(artists);
+    }
+
 }

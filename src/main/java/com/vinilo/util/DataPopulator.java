@@ -141,16 +141,16 @@ public class DataPopulator {
         
         Album album1 = albumService.searchByName("Highway to Hell");
         
-        Song song1 = new Song(1, "Highway to Hell", "", album1, link1);
-        Song song2 = new Song(2, "Girls Got Rhythm", "", album1, link2);
-        Song song3 = new Song(3, "Walk All Over You", "", album1, link3);
-        Song song4 = new Song(4, "Touch Too Much", "", album1, link4);
-        Song song5 = new Song(5, "Beating Around The Bush", "", album1, link5);
-        Song song6 = new Song(6, "Shot Down in Flames", "", album1, link6);
-        Song song7 = new Song(7, "Get it Hot", "", album1, link7);
-        Song song8 = new Song(8, "If You Want Blood (You ve Got It)", "", album1, link8);
-        Song song9 = new Song(9, "Love Hungry Man", "", album1, link9);
-        Song song10 = new Song(10, "Night Prowler", "", album1, link10);
+        Song song1 = new Song("1", "Highway to Hell", "", album1, link1);
+        Song song2 = new Song("2", "Girls Got Rhythm", "", album1, link2);
+        Song song3 = new Song("3", "Walk All Over You", "", album1, link3);
+        Song song4 = new Song("4", "Touch Too Much", "", album1, link4);
+        Song song5 = new Song("5", "Beating Around The Bush", "", album1, link5);
+        Song song6 = new Song("6", "Shot Down in Flames", "", album1, link6);
+        Song song7 = new Song("7", "Get it Hot", "", album1, link7);
+        Song song8 = new Song("8", "If You Want Blood (You ve Got It)", "", album1, link8);
+        Song song9 = new Song("9", "Love Hungry Man", "", album1, link9);
+        Song song10 = new Song("10", "Night Prowler", "", album1, link10);
         
         link1.setSong(song1);
         link2.setSong(song2);
@@ -189,13 +189,13 @@ public class DataPopulator {
         
         Album album2 = albumService.searchByName("Presense");
         
-        Song song11 = new Song(1, "Achilles Last Stand", "", album2, link11);
-        Song song12 = new Song(2, "For Your Life", "", album2, link12);
-        Song song13 = new Song(3, "Royal Orleans", "", album2, link13);
-        Song song14 = new Song(4, "Nobodys Fault But Mine", "", album2, link14);
-        Song song15 = new Song(5, "Candy Store Rock", "", album2, link15);
-        Song song16 = new Song(6, "Hots On For Nowhere", "", album2, link16);
-        Song song17 = new Song(7, "Tea For One", "", album2, link17);
+        Song song11 = new Song("1", "Achilles Last Stand", "", album2, link11);
+        Song song12 = new Song("2", "For Your Life", "", album2, link12);
+        Song song13 = new Song("3", "Royal Orleans", "", album2, link13);
+        Song song14 = new Song("4", "Nobodys Fault But Mine", "", album2, link14);
+        Song song15 = new Song("5", "Candy Store Rock", "", album2, link15);
+        Song song16 = new Song("6", "Hots On For Nowhere", "", album2, link16);
+        Song song17 = new Song("7", "Tea For One", "", album2, link17);
         
         link11.setSong(song11);
         link12.setSong(song12);

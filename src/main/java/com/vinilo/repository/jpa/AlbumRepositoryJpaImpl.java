@@ -43,9 +43,10 @@ public class AlbumRepositoryJpaImpl implements AlbumRepository {
     }
 
     @Override
-    public List<Album> searchByArtist(long id_artist) {
+    public List<Album> searchByArtists(List<Long> artists_id) {
         TypedQuery<Album> query = em.createNamedQuery("Album.searchByArtist", Album.class);
-        query.setParameter("id_artist", id_artist);
+        query.setParameter("artists_id", artists_id);
+        query.setParameter("artists_count", (long) artists_id.size());
         return query.getResultList();
     }
 

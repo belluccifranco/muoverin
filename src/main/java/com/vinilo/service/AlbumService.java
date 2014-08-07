@@ -13,7 +13,7 @@ public interface AlbumService {
 
     public void remove(Album album);
 
-    public List<Album> searchByArtist(long id_artist);
+    public List<Album> searchByArtists(List<Long> artists_id);
 
     public Album searchByName(String name);
 }

@@ -40,10 +40,8 @@
                 <div class="small-3 columns">
                     <label for="artist-label" class="right inline">Artist:</label>
                 </div>
-                <div class="small-7 columns">
-                    <%--<select id="artist-combo" required>
-                    </select>--%>
-                    <input type="hidden" id="artist-combo">
+                <div class="small-7 columns">                    
+                    <input type="hidden" id="artist-combo" required>
                     <small class="error"><spring:message code="NotNull.song.artist"/></small>
                 </div>
                 <div class="small-2 columns">

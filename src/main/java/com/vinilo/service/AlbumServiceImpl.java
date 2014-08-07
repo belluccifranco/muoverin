@@ -41,8 +41,9 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public List<Album> searchByArtist(long id_artist) {
-        return albumRepository.searchByArtist(id_artist);
+    @Transactional(readOnly = true)
+    public List<Album> searchByArtists(List<Long> artists_id) {
+        return albumRepository.searchByArtists(artists_id);
     }
 
     @Override
