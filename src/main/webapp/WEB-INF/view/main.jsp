@@ -5,6 +5,8 @@
 <html>
     <head>
         <jsp:include page="fragments/common-header.jsp"/>
+        <spring:url value="resources/styles/rangeslider.css" var="CSSRangeSlider"/>
+        <link rel="stylesheet" href="${CSSRangeSlider}">
         <title>Vinilo</title>
     </head>
     <body>
@@ -33,36 +35,55 @@
                 </div>
             </nav>
             <div id="main">
-                <ul class="list play-list" style="height: 100%;" id="playing-list">
-                    <%--<li>
-                        <div class="item-img"></div>
-                        <div class="item-info">
-                            <div class="other-info ellipsis">Counting Crows - August And Everything After</div>
-                            <div class="main-info ellipsis">Mr. Jones</div>
+                <div class="jq-vinilo-playlist">
+                    <div class="jq-vinilo-playlist-list-container">
+                        <ul class="jq-vinilo-playlist-list list play-list" style="height: 100%;" id="playing-list">
+                            <%--<li>
+                                <div class="item-img"></div>
+                                <div class="item-info">
+                                    <div class="other-info ellipsis">Counting Crows - August And Everything After</div>
+                                    <div class="main-info ellipsis">Mr. Jones</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-img"></div>
+                                <div class="item-info">
+                                    <div class="other-info ellipsis">Counting Crows - August And Everything After</div>
+                                    <div class="main-info ellipsis">Round Here</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-img"></div>
+                                <div class="item-info">
+                                    <div class="other-info ellipsis">Aerosmith - Get a grip</div>
+                                    <div class="main-info ellipsis">Get a grip</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-img"></div>
+                                <div class="item-info">
+                                    <div class="other-info ellipsis">Aerosmith - Get a grip</div>
+                                    <div class="main-info ellipsis">Crazy</div>
+                                </div>
+                            </li>--%>
+                        </ul>
+                    </div>
+                    <div class="jq-vinilo-playlist-controls">
+                        <div class="row">
+                            <div class="small-12 large-6 columns">
+                                <input type="range" id="sound-progress" value="50">
+                            </div>
+                            <div class="small-12 large-6 columns">
+                                <ul class="button-group radius">
+                                    <li><a href="#" class="button size1_5x"><i class="fi-previous"></i></a></li>
+                                    <li><a href="#" class="button size1_5x"><i class="fi-play"></i></a></li>
+                                    <li><a href="#" class="button size1_5x"><i class="fi-pause"></i></a></li>
+                                    <li><a href="#" class="button size1_5x"><i class="fi-next"></i></a></li>
+                                </ul>
+                            </div>
                         </div>
-                    </li>
-                    <li>
-                        <div class="item-img"></div>
-                        <div class="item-info">
-                            <div class="other-info ellipsis">Counting Crows - August And Everything After</div>
-                            <div class="main-info ellipsis">Round Here</div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="item-img"></div>
-                        <div class="item-info">
-                            <div class="other-info ellipsis">Aerosmith - Get a grip</div>
-                            <div class="main-info ellipsis">Get a grip</div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="item-img"></div>
-                        <div class="item-info">
-                            <div class="other-info ellipsis">Aerosmith - Get a grip</div>
-                            <div class="main-info ellipsis">Crazy</div>
-                        </div>
-                    </li>--%>
-                </ul>
+                    </div>
+                </div>
             </div>
             <div id="main-searcher">
                 <div id="song-searcher" class="jq-vinilo-search">
@@ -92,11 +113,18 @@
         </div>
     </div>
     <jsp:include page="fragments/common-footer.jsp"/>
+    <spring:url value="/resources/scripts/public/rangeslider.min.js" var="JSRangeSlider" />
+    <script src="${JSRangeSlider}"></script>
     <spring:url value="/resources/scripts/jquery-vinilo-search.js" var="JSsearcher" />
     <script src="${JSsearcher}"></script>
     <spring:url value="/resources/scripts/jquery-vinilo-playlist.js" var="JSplaylist" />
     <script src="${JSplaylist}"></script>
     <spring:url value="/resources/scripts/main.js" var="JSapp" />
     <script src="${JSapp}"></script>
+    <script type="text/javascript">
+        (function($){
+            var $sp = $('#sound-progress').rangeslider({polyfill: false});
+        })(jQuery);
+    </script>
     </body>
 </html>

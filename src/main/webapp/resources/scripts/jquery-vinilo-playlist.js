@@ -87,7 +87,7 @@
     var Order = function(options) {
         options = options || {};
         this.init(options);
-    }
+    };
 
     Order.prototype = function() {
         var current = -1,
@@ -205,7 +205,7 @@
     var Playlist = function(options) {
         options = options || {};
         this.init(options);
-    }
+    };
 
     Playlist.prototype = function() {
         var self,
@@ -236,7 +236,7 @@
                 }
             },
             buffer = new Buffer({
-                //size: 3,
+                size: 3,
                 onBeforeAdd: function(id) {
                     console.log('added: "' + id + '"');
                 },
@@ -299,7 +299,7 @@
             setBuffer = function() {
                 var ids = [], i, id, url;
 
-                //ids.push(order.getPrev());
+                ids.push(order.getPrev());
                 ids.push(order.getCurrent());
                 ids.push(order.getNext());
                 buffer.removeNotIn(ids);
@@ -367,6 +367,10 @@
                             return window.location.origin + '/player/' + obj.id_cancion;
                         }
                     }),
+                    addSound = function(sound) {
+                        $elem.append('<li>' + settings.getDataElementHtml(sound) + '</li>');
+                        pl.addSound(sound);
+                    },
                     addSounds = function(data){
                         var toAdd = [], i;
                         if (typeof data === 'undefined' || $.isFunction(data)) {
@@ -378,14 +382,14 @@
                             toAdd.push(data);
                         }
                         for (i = 0; i < toAdd.length; i += 1) {
-                            $elem.append('<li>' + settings.getDataElementHtml(toAdd[i]) + '</li>');
+                            addSound(toAdd[i]);
                         }
                     },
                     bindEvents = function() {
                         var emptyValues = [null, undefined, ''];
 
                         if (emptyValues.indexOf(settings.sortableHandleSelector) < 0) {
-                            $elem.sortable({ handle: ".item-img" });
+                            $elem.sortable({ handle: settings.sortableHandleSelector });
                         }
                     };
 
@@ -410,7 +414,7 @@
     }
 
     $.fn.jqViniloPlayer.defaults = {
-        sortableHandleSelector: '',
+        sortableHandleSelector: '.item-img',
         getDataElementHtml: function(dataElement) {
             throw 'this function must be implemented.';
         }
