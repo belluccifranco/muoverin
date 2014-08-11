@@ -96,7 +96,7 @@
     touchScroll('#playing-list', '.item-img');
 
     soundManager.setup({
-        url: '/resources/scripts/soundmanager2/swf',
+        url: '/resources/scripts/public/soundmanager2/swf',
         preferFlash: true,
         onready: function() {
             //console.log('sm2 ready');

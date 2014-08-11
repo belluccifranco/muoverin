@@ -13,7 +13,11 @@
     <div id="container">
         <h1 id="title" class="title">
             <span id="menu-toggle"><i class="fi-list"></i></span>&nbsp;<i class="fi-record"></i> VINILO
-            <span class="right" id="search-toggle"><i class="fi-magnifying-glass"></i></span>
+            <id class="toolbar">
+                <ul class="button-group radius" id="main-toolbar">
+                    <li><a id="search-toggle" class="button prev size1_5x"><i class="fi-magnifying-glass"></i></a></li>
+                </ul>
+            </id>
         </h1>
         <div id="main-container">
             <nav id="main-menu" class="menu">
@@ -70,15 +74,15 @@
                     </div>
                     <div class="jq-vinilo-playlist-controls">
                         <div class="row">
-                            <div class="small-12 large-6 columns">
+                            <div class="small-12 large-6 columns" style="padding-top: 1rem;">
                                 <input type="range" id="sound-progress" value="50">
                             </div>
                             <div class="small-12 large-6 columns">
                                 <ul class="button-group radius">
-                                    <li><a href="#" class="button size1_5x"><i class="fi-previous"></i></a></li>
-                                    <li><a href="#" class="button size1_5x"><i class="fi-play"></i></a></li>
-                                    <li><a href="#" class="button size1_5x"><i class="fi-pause"></i></a></li>
-                                    <li><a href="#" class="button size1_5x"><i class="fi-next"></i></a></li>
+                                    <li><a href="#" class="button size1_5x prev"><i class="fi-previous"></i></a></li>
+                                    <li><a href="#" class="button size1_5x play"><i class="fi-play"></i></a></li>
+                                    <li><a href="#" class="button size1_5x pause"><i class="fi-pause"></i></a></li>
+                                    <li><a href="#" class="button size1_5x next"><i class="fi-next"></i></a></li>
                                 </ul>
                             </div>
                         </div>

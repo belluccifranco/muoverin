@@ -87,6 +87,7 @@
     }
 
     div#main-searcher {
+        display: none;
         position: absolute;
         top: 0;
         width: 90%;
@@ -101,6 +102,25 @@
 
     .remove-margin-bottom {
         margin-bottom: 0 !important;
+    }
+
+
+    .toolbar {
+        position: fixed;
+        display: inline-block;
+        right: 0.2rem;
+        text-align: right;
+    }
+
+    .toolbar ul.button-group {
+        margin-top: 0.2rem;
+        margin-bottom: 0;
+        display: inline-block;
+    }
+
+    .toolbar ul.button-group a.button, .toolbar ul.button-group button {
+        margin-bottom: 0;
+        padding: 0.3rem 1rem 0.2rem 1rem;
     }
 }
 
