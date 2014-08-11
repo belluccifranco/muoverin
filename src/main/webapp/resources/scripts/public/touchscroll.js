@@ -14,36 +14,46 @@ function isTouchDevice(){
 	}
 }
 
-function touchScroll(id){
+function touchScroll(elementSelector, exclusionSelector) {
     if(isTouchDevice()){ //if touch events exist...
-		var el=document.getElementById(id);
-		var scrollStartPosY=0;
-		var scrollStartPosX=0;
+        var $el = $(elementSelector),
+            scrollStartPosY= 0, scrollStartPosX= 0;
 
-		document.getElementById(id).addEventListener("touchstart", function(event) {
-			scrollStartPosY=this.scrollTop+event.touches[0].pageY;
+        function isExcluded(target) {
+            var $resultElements, $excludedElements;
+            if (exclusionSelector) {
+                $excludedElements = $el.find(exclusionSelector);
+                if ($excludedElements.length > 0) {
+                    $resultElements = $excludedElements.has(target);
+                    return $resultElements.length > 0;
+                }
+            }
+            return false;
+        }
+
+        $el.on('touchstart', function(e){
+            if (isExcluded(e.target)) {
+                return;
+            }
+            scrollStartPosY=this.scrollTop+event.touches[0].pageY;
 			scrollStartPosX=this.scrollLeft+event.touches[0].pageX;
-			//event.preventDefault(); // Keep this remarked so you can click on buttons and links in the div
-		},false);
+        });
 
-		document.getElementById(id).addEventListener("touchmove", function(event) {
-			// These if statements allow the full page to scroll (not just the div) if they are
-			// at the top of the div scroll or the bottom of the div scroll
-			// The -5 and +5 below are in case they are trying to scroll the page sideways
-			// but their finger moves a few pixels down or up.  The event.preventDefault() function
-			// will not be called in that case so that the whole page can scroll.
-
-			if ((this.scrollTop < this.scrollHeight-this.offsetHeight &&
+        $el.on('touchmove', function (e) {
+            if (isExcluded(e.target)) {
+                return;
+            }
+            if ((this.scrollTop < this.scrollHeight-this.offsetHeight &&
 				this.scrollTop+event.touches[0].pageY < scrollStartPosY-5) ||
 				(this.scrollTop != 0 && this.scrollTop+event.touches[0].pageY > scrollStartPosY+5))
-					event.preventDefault();	
+					event.preventDefault();
 			if ((this.scrollLeft < this.scrollWidth-this.offsetWidth &&
 				this.scrollLeft+event.touches[0].pageX < scrollStartPosX-5) ||
 				(this.scrollLeft != 0 && this.scrollLeft+event.touches[0].pageX > scrollStartPosX+5))
-					event.preventDefault();	
+					event.preventDefault();
 			this.scrollTop=scrollStartPosY-event.touches[0].pageY;
 			this.scrollLeft=scrollStartPosX-event.touches[0].pageX;
-		},false);
+        });
 	}
 }
 

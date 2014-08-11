@@ -92,8 +92,8 @@
     app.init();
 
     //make touch scroll
-    touchScroll('song-search-list');
-    touchScroll('playing-list');
+    touchScroll('#song-search-list');
+    touchScroll('#playing-list', '.item-img');
 
     soundManager.setup({
         url: '/resources/scripts/soundmanager2/swf',
