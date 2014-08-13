@@ -9,6 +9,8 @@ public interface SongRepository {
     public List<Song> searchAll();
 
     public Song searchById(long id);
+    
+    public Song searchByName(String name);
 
     public Song save(Song song);
 

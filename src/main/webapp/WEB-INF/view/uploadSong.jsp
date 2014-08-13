@@ -41,7 +41,7 @@
                     <label for="artist-label" class="right inline">Artist:</label>
                 </div>
                 <div class="small-7 columns">                    
-                    <input type="hidden" id="artist-combo" required>
+                    <input type="hidden" id="artist-combo">
                     <small class="error"><spring:message code="NotNull.song.artist"/></small>
                 </div>
                 <div class="small-2 columns">

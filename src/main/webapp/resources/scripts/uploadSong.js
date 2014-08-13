@@ -1,5 +1,6 @@
 $(document).ready(function() {
-
+    var $cbAlbumes = $('#album-combo');
+    var $cbHosting = $('#hosting-combo');
     var $cbArtists = $('#artist-combo'),
             $artistsS2Configs = {
                 width: '100%',
@@ -60,41 +61,29 @@ $(document).ready(function() {
 
     $cbArtists.select2($artistsS2Configs);
 
-    var $cbAlbumes = $('#album-combo');
-    var $cbHosting = $('#hosting-combo');
+    $cbArtists.on("change", function(e) {
+        loadAlbumsByArtists(e.val);
+    });
 
-    /*function loadArtistCombo() {
-     var url = '/artists';
-     $.ajax({
-     url: url,
-     type: 'get',
-     dataType: 'json',
-     success: function(data) {
-     var options = '';
-     $.each(data, function(i, artist) {
-     options += '<option value="' + artist.id_artist + '">' + artist.name + '</option>';
-     });
-     $cbArtists.html(options);
-     loadAlbumsByArtist($cbArtists.val());
-     }
-     });
-     }
-     
-     function loadAlbumsByArtist(id_artist) {
-     var url = '/albums?id_artist=' + id_artist;
-     $.ajax({
-     url: url,
-     type: 'get',
-     dataType: 'json',
-     success: function(data) {
-     var options = '';
-     $.each(data, function(i, album) {
-     options += '<option value="' + album.id_album + '">' + album.name + '</option>';
-     });
-     $cbAlbumes.html(options);
-     }
-     });
-     }*/
+    function loadAlbumsByArtists(id_artists) {
+        if (id_artists.length === 0) {
+            $cbAlbumes.html('');
+        } else {
+            var url = '/albums?artists=' + id_artists.toString();
+            $.ajax({
+                url: url,
+                type: 'get',
+                dataType: 'json',
+                success: function(data) {
+                    var options = '';
+                    $.each(data, function(i, album) {
+                        options += '<option value="' + album.id_album + '">' + album.name + '</option>';
+                    });
+                    $cbAlbumes.html(options);
+                }
+            });
+        }
+    }
 
     function loadHostingCombo() {
         var url = '/hostings';

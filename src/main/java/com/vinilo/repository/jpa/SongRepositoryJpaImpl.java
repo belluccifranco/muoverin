@@ -75,4 +75,16 @@ public class SongRepositoryJpaImpl implements SongRepository {
         pagination.setPages(result.longValue());
         return pagination;
     }
+
+    @Override
+    public Song searchByName(String name) {
+        TypedQuery<Song> query = em.createNamedQuery("Song.searchByName", Song.class);
+        query.setParameter("name", name);
+        List<Song> songs = query.getResultList();
+        if (songs.isEmpty()) {
+            return null;
+        } else {
+            return songs.get(0);
+        }
+    }
 }

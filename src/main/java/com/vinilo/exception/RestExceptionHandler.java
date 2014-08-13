@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
-public class RestExceptionProcessor {
+public class RestExceptionHandler {
 
     @Autowired
     private MessageSource messageSource;
@@ -26,6 +26,24 @@ public class RestExceptionProcessor {
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ErrorFormInfo handleMethodArgumentNotValid(HttpServletRequest req, MethodArgumentNotValidException ex) {
+
+        String errorMessage = localizeErrorMessage("message.errorGeneralInfo");
+        String errorURL = req.getRequestURL().toString();
+
+        ErrorFormInfo errorInfo = new ErrorFormInfo(errorURL, errorMessage);
+
+        BindingResult result = ex.getBindingResult();
+        List<FieldError> fieldErrors = result.getFieldErrors();
+
+        errorInfo.getFieldErrors().addAll(populateFieldErrors(fieldErrors));
+
+        return errorInfo;
+    }
+    
+    @ExceptionHandler(BusinessValidationException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ErrorFormInfo handleBusinessValidation(HttpServletRequest req, BusinessValidationException ex) {
 
         String errorMessage = localizeErrorMessage("message.errorGeneralInfo");
         String errorURL = req.getRequestURL().toString();

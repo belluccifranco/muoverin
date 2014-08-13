@@ -2,7 +2,6 @@ package com.vinilo.service;
 
 import com.vinilo.model.Pagination;
 import com.vinilo.model.Song;
-import com.vinilo.repository.AlbumRepository;
 import com.vinilo.repository.SongRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ public class SongServiceImpl implements SongService {
     private static final int MAX_ROWS_SEARCH = 50;
 
     @Autowired
-    public SongServiceImpl(SongRepository songRepository, AlbumRepository albumRepository) {
+    public SongServiceImpl(SongRepository songRepository) {
         this.songRepository = songRepository;        
     }
 
