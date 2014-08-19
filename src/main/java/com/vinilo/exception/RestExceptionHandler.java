@@ -26,35 +26,22 @@ public class RestExceptionHandler {
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ErrorFormInfo handleMethodArgumentNotValid(HttpServletRequest req, MethodArgumentNotValidException ex) {
-
-        String errorMessage = localizeErrorMessage("message.errorGeneralInfo");
-        String errorURL = req.getRequestURL().toString();
-
-        ErrorFormInfo errorInfo = new ErrorFormInfo(errorURL, errorMessage);
-
-        BindingResult result = ex.getBindingResult();
-        List<FieldError> fieldErrors = result.getFieldErrors();
-
-        errorInfo.getFieldErrors().addAll(populateFieldErrors(fieldErrors));
-
-        return errorInfo;
+        return buildErrorFormInfo(req, ex.getBindingResult());
     }
-    
+
     @ExceptionHandler(BusinessValidationException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ErrorFormInfo handleBusinessValidation(HttpServletRequest req, BusinessValidationException ex) {
+        return buildErrorFormInfo(req, ex.getBindingResult());
+    }
 
+    public ErrorFormInfo buildErrorFormInfo(HttpServletRequest req, BindingResult result) {
         String errorMessage = localizeErrorMessage("message.errorGeneralInfo");
         String errorURL = req.getRequestURL().toString();
-
         ErrorFormInfo errorInfo = new ErrorFormInfo(errorURL, errorMessage);
-
-        BindingResult result = ex.getBindingResult();
         List<FieldError> fieldErrors = result.getFieldErrors();
-
         errorInfo.getFieldErrors().addAll(populateFieldErrors(fieldErrors));
-
         return errorInfo;
     }
 

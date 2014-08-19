@@ -10,7 +10,7 @@ public interface SongRepository {
 
     public Song searchById(long id);
     
-    public Song searchByName(String name);
+    public Song searchByNameAndAlbum(String name, long id_album);
 
     public Song save(Song song);
 

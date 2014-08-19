@@ -103,5 +103,63 @@ $(document).ready(function() {
 
     loadHostingCombo();
 
+    $("#uploadSongForm").submit(function(event) {
+        var name = $("#name").val();
+        var id_album = $("#album-combo").val();
+        var url = $("#url").val();
+        var id_hosting = $("#hosting-combo").val();
+        /*var songJson =
+                {   "name": name,
+                    "album": {
+                        "id_album": id_album
+                    },
+                    "link": {
+                        "url": url,
+                        "hostingAccount": {
+                            "id_hostingAccount": id_hosting
+                        }
+                    }
+                };*/       
+        
+        var songJson = {};
+        if (name !== "") {
+            songJson.name = name;            
+        }        
+        if (id_album !== null) {
+            songJson.album = {};
+            songJson.album.id_album = id_album;            
+        }
+        songJson.link = {};        
+        if (url !== "") {
+            songJson.link.url = url;            
+        }
+        if (id_hosting !== null) {
+            songJson.link.hostingAccount = {};
+            songJson.link.hostingAccount.id_hostingAccount = id_hosting;            
+        }        
+
+        $.ajax({
+            url: "/song",
+            data: JSON.stringify(songJson),
+            type: "POST",
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Content-Type", "application/json");
+            },
+            success: function() {
+                $("#title-band").html("Song was created");
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                var respBody = $.parseJSON(jqXHR.responseText);
+
+                $.each(respBody.fieldErrors, function(index, errEntity) {
+                    errEntity.fieldName = errEntity.fieldName.replace(".", "-");
+                    var errorTag = $("#" + errEntity.fieldName + "-error");
+                    errorTag.text(errEntity.fieldError);
+                });
+            }
+        });
+        event.preventDefault();
+    });
+
     $(document).foundation();
 });

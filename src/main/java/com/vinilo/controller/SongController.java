@@ -1,6 +1,5 @@
 package com.vinilo.controller;
 
-import com.vinilo.exception.BusinessValidationException;
 import com.vinilo.model.Album;
 import com.vinilo.model.HostingAccount;
 import com.vinilo.model.Pagination;
@@ -8,7 +7,6 @@ import com.vinilo.model.Song;
 import com.vinilo.service.AlbumService;
 import com.vinilo.service.HostingAccountService;
 import com.vinilo.service.SongService;
-import com.vinilo.service.SongValidator;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -32,9 +30,6 @@ public class SongController {
     private final AlbumService albumService;
     private final HostingAccountService hostingAccountService;
     
-    @Autowired
-    private SongValidator songValidator;
-
     @Autowired
     public SongController(SongService songService, AlbumService albumService, HostingAccountService hostingAccountService) {
         this.songService = songService;
@@ -64,13 +59,7 @@ public class SongController {
         song.setAlbum(album);
         HostingAccount hosting = hostingAccountService.searchById(song.getLink().getHostingAccount().getId_hostingAccount());
         hosting.getLinks().add(song.getLink());
-        song.getLink().setHostingAccount(hosting);        
-                
-        songValidator.validate(song, result);
-        if (result.hasErrors()) {
-            throw new BusinessValidationException(result);
-        }
-        
+        song.getLink().setHostingAccount(hosting);       
         Song createdSong = songService.save(song);        
         response.setHeader("Location", webRequest.getContextPath() + "/song/" + createdSong.getId_song());        
     }

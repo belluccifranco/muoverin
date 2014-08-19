@@ -26,7 +26,7 @@ import org.hibernate.validator.constraints.Length;
 })
 public class Album implements Serializable {
 
-    @Id
+    @Id    
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id_album;
 

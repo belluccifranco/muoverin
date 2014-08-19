@@ -6,9 +6,9 @@
         <jsp:include page="fragments/common-header.jsp"/>
         <title>Upload a song</title>
     </head>
-    <body>
-        <form data-abide>
-            <div class="label small-12 text-center">
+    <body>        
+        <form id="uploadSongForm" data-abide>
+            <div id="title-band" class="label small-12 text-center">
                 <h2>Add new Song</h2>
             </div>
 
@@ -17,8 +17,8 @@
                     <label for="track-label" class="right inline">Track Nº:</label>
                 </div>
                 <div class="small-7 columns">
-                    <input type="text" pattern="integer" id="track-label">
-                    <small class="error"><spring:message code="Integer.song.track"/></small>
+                    <input id="track" type="text" pattern="integer">
+                    <small id="track-error" class="error"><spring:message code="Integer.song.track"/></small>
                 </div>
                 <div class="small-2 columns">
                 </div>
@@ -29,8 +29,8 @@
                     <label for="name-label" class="right inline">Name:</label>
                 </div>
                 <div class="small-7 columns">
-                    <input type="text" id="name-label" required>
-                    <small class="error"><spring:message code="NotNull.song.name"/></small>
+                    <input id="name" type="text" required>
+                    <small id="name-error" class="error"><spring:message code="NotNull.song.name"/></small>
                 </div>
                 <div class="small-2 columns">
                 </div>
@@ -41,8 +41,8 @@
                     <label for="artist-label" class="right inline">Artist:</label>
                 </div>
                 <div class="small-7 columns">                    
-                    <input type="hidden" id="artist-combo">
-                    <small class="error"><spring:message code="NotNull.song.artist"/></small>
+                    <input id="artist-combo" type="hidden">
+                    <small id="artist-error" class="error"><spring:message code="NotNull.song.artist"/></small>
                 </div>
                 <div class="small-2 columns">
                     <a href="#" data-reveal-id="newArtistModal">Add!</a>
@@ -56,7 +56,7 @@
                 <div class="small-7 columns">
                     <select id="album-combo" required>
                     </select>
-                    <small class="error"><spring:message code="NotNull.song.album"/></small>
+                    <small id="album-error" class="error"><spring:message code="NotNull.song.album"/></small>
                 </div>
                 <div class="small-2 columns">
                     <a href="#" data-reveal-id="newAlbumModal">Add!</a>
@@ -68,7 +68,7 @@
                     <label for="lyrics-label" class="right inline">Lyrics:</label>
                 </div>
                 <div class="small-7 columns">
-                    <textarea id="lyrics-label"></textarea>
+                    <textarea id="lyrics"></textarea>
                 </div>
                 <div class="small-2 columns">
                 </div>
@@ -81,7 +81,7 @@
                 <div class="small-7 columns">
                     <select id="hosting-combo" required>
                     </select>
-                    <small class="error"><spring:message code="NotNull.song.link.hostingAccount"/></small>
+                    <small id="link-hostingAccount-error" class="error"><spring:message code="NotNull.song.link.hostingAccount"/></small>
                 </div>
                 <div class="small-2 columns">
                     <a href="#" data-reveal-id="newHostingModal">Add!</a>
@@ -93,14 +93,14 @@
                     <label for="link-label" class="right inline">Link:</label>
                 </div>
                 <div class="small-7 columns">
-                    <input id="link-label" type="url" required>
-                    <small class="error"><spring:message code="URL.song.link.url"/></small>
+                    <input id="url" type="url" required>
+                    <small id="link-url-error" class="error"><spring:message code="URL.song.link.url"/></small>
                 </div>
                 <div class="small-2 columns">
                 </div>
             </div>
 
-            <a href="#" id="save-button" class="button small expand">Save!</a>
+                <input id="save-button" class="button small expand" type="submit" value="Save!"/>
         </form>
 
         <div id="newArtistModal" class="reveal-modal tiny" data-reveal>

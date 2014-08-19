@@ -77,9 +77,10 @@ public class SongRepositoryJpaImpl implements SongRepository {
     }
 
     @Override
-    public Song searchByName(String name) {
-        TypedQuery<Song> query = em.createNamedQuery("Song.searchByName", Song.class);
+    public Song searchByNameAndAlbum(String name, long id_album) {
+        TypedQuery<Song> query = em.createNamedQuery("Song.searchByNameAndAlbum", Song.class);
         query.setParameter("name", name);
+        query.setParameter("id_album", id_album);
         List<Song> songs = query.getResultList();
         if (songs.isEmpty()) {
             return null;

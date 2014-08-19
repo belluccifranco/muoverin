@@ -21,7 +21,7 @@ public class Link implements Serializable {
 
     @URL
     @NotNull
-    @Length(min = 1, max = 200)
+    @Length(min = 1, max = 250)
     private String url;
 
     @NotNull

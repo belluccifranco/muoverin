@@ -23,7 +23,7 @@ import org.hibernate.validator.constraints.Length;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Song.searchAll", query = "SELECT s FROM Song s"),
-    @NamedQuery(name = "Song.searchByName", query = "SELECT s FROM Song s WHERE s.name = :name"),
+    @NamedQuery(name = "Song.searchByNameAndAlbum", query = "SELECT s FROM Song s WHERE s.name = :name AND s.album.id_album = :id_album"),
     @NamedQuery(name = "Song.searchById", query = "SELECT s FROM Song s JOIN FETCH s.link WHERE s.id_song = :id"),
     @NamedQuery(name = "Song.searchByCriteria", query = "SELECT son FROM Song son JOIN son.album alb JOIN alb.artists art WHERE UPPER(son.name) LIKE :songName OR UPPER(son.album.name) LIKE :albumName OR UPPER(art.name) LIKE :artistName"),
     @NamedQuery(name = "Song.countCriteria", query = "SELECT count(son) FROM Song son JOIN son.album alb JOIN alb.artists art WHERE UPPER(son.name) LIKE :songName OR UPPER(son.album.name) LIKE :albumName OR UPPER(art.name) LIKE :artistName")

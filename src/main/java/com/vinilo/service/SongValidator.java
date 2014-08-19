@@ -13,8 +13,8 @@ public class SongValidator {
     private SongRepository songRepository;  
 
     public void validate(Song song, Errors errors) {
-        //name
-        if (songRepository.searchByName(song.getName()) != null) {
+        
+        if (songRepository.searchByNameAndAlbum(song.getName(), song.getAlbum().getId_album()) != null) {
             errors.rejectValue("name", "Duplicate");
         }
     }
