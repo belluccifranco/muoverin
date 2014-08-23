@@ -225,7 +225,7 @@
                     return 's' + obj.id_cancion;
                 },
                 getSoundUrl: function(obj) {
-                    return 'http://' + window.location.host + ':9966/vinilo/player/' + obj.id_cancion;
+                    return 'http://' + window.location.host + ':9966/player/' + obj.id_cancion;
                 },
                 onSoundFinish: function() {
                     next();
@@ -384,7 +384,8 @@
                             return 's' + obj.id_song;
                         },
                         getSoundUrl: function(obj) {
-                            return window.location.origin + '/player/' + obj.id_song;
+                            var baseUrl = window.location.protocol + '//' + window.location.host;
+                            return baseUrl + '/player/' + obj.id_song;
                         },
                         onPlay: function() {
                             $playButton.hide();
