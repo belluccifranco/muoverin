@@ -79,10 +79,10 @@
                             </div>
                             <div class="small-12 large-6 columns">
                                 <ul class="button-group radius">
-                                    <li><a href="#" class="button size1_5x prev"><i class="fi-previous"></i></a></li>
-                                    <li><a href="#" class="button size1_5x play"><i class="fi-play"></i></a></li>
-                                    <li><a href="#" class="button size1_5x pause"><i class="fi-pause"></i></a></li>
-                                    <li><a href="#" class="button size1_5x next"><i class="fi-next"></i></a></li>
+                                    <li><a href="#" id="jqvp-prev" class="button size1_5x prev"><i class="fi-previous"></i></a></li>
+                                    <li><a href="#" id="jqvp-play" class="button size1_5x play"><i class="fi-play"></i></a></li>
+                                    <li><a href="#" id="jqvp-pause" class="button size1_5x pause"><i class="fi-pause"></i></a></li>
+                                    <li><a href="#" id="jqvp-next" class="button size1_5x next"><i class="fi-next"></i></a></li>
                                 </ul>
                             </div>
                         </div>

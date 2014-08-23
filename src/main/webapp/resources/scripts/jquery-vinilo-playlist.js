@@ -178,8 +178,16 @@
                     data.splice(to, 0, el);
                     if (from === current) {
                         current = to;
+                    } else {
+                        if (to <= current && from > current) {
+                            current++;
+                        }
+                        if (from < current && to >= current) {
+                            current--;
+                        }
                     }
                 }
+                console.log(data, current);
             };
 
         return {
@@ -222,21 +230,13 @@
                 onSoundFinish: function() {
                     next();
                 },
-                onPlay: function() {
-
-                },
-                onPause: function() {
-
-                },
-                onResume: function() {
-
-                },
-                onStop: function() {
-
-                }
+                onPlay: function() {},
+                onPause: function() {},
+                onResume: function() {},
+                onStop: function() {}
             },
             buffer = new Buffer({
-                size: 3,
+                size: 2,
                 onBeforeAdd: function(id) {
                     console.log('added: "' + id + '"');
                 },
@@ -281,6 +281,8 @@
                 id = options.getSoundId(soundData);
                 url = options.getSoundUrl(soundData);
 
+                console.log(id, url);
+
                 data[id] = { id: id, url: url, data: soundData };
                 order.add(id);
             },
@@ -299,7 +301,7 @@
             setBuffer = function() {
                 var ids = [], i, id, url;
 
-                ids.push(order.getPrev());
+                //ids.push(order.getPrev());
                 ids.push(order.getCurrent());
                 ids.push(order.getNext());
                 buffer.removeNotIn(ids);
@@ -313,6 +315,13 @@
                     }
                 }
             },
+            isPaused = function() {
+                var id = order.getCurrent();
+                if (id !== null) {
+                    return soundManager.getSoundById(id).paused;
+                }
+                return false;
+            },
             doAction = function(action) {
                 var id = order.getCurrent();
                 if (id !== null) {
@@ -325,9 +334,16 @@
             togglePause = function() {
                 doAction('togglePause');
             },
-            play = function() {
+            play = function(pos) {
+                if (typeof pos !== 'undefined') {
+                    order.setCurrentPos(pos);
+                }
                 setBuffer();
-                doAction('play');
+                if (isPaused()) {
+                    togglePause();
+                } else {
+                    doAction('play');
+                }
             },
             prev = function() {
                 stop();
@@ -338,6 +354,9 @@
                 stop();
                 order.next();
                 play();
+            },
+            getOrder = function() {
+                return order;
             };
 
         return {
@@ -349,7 +368,8 @@
             togglePause: togglePause,
             play: play,
             prev: prev,
-            next: next
+            next: next,
+            getOrder: getOrder
         }
     }();
 
@@ -358,18 +378,42 @@
             var settings = $.extend(true, {}, $.fn.jqViniloPlayer.defaults, options);
 
             return this.each(function(){
-                var $elem = $(this),
+                var $elem = $(this), $playButton, $pauseButton, $prevButton, $nextButton,
                     pl = new Playlist({
                         getSoundId: function(obj) {
-                            return 's' + obj.id_cancion;
+                            return 's' + obj.id_song;
                         },
                         getSoundUrl: function(obj) {
-                            return window.location.origin + '/player/' + obj.id_cancion;
+                            return window.location.origin + '/player/' + obj.id_song;
+                        },
+                        onPlay: function() {
+                            $playButton.hide();
+                            $pauseButton.show();
+                            setPlaying();
+                        },
+                        onPause: function() {
+                            $pauseButton.hide();
+                            $playButton.show();
+                        },
+                        onResume: function() {
+                            $playButton.hide();
+                            $pauseButton.show();
+                        },
+                        onStop: function() {
+
                         }
                     }),
+                    isEmpty = function(variable) {
+                        var emptyValues = [null, undefined, ''];
+
+                        return emptyValues.indexOf(variable) >= 0;
+                    },
                     addSound = function(sound) {
                         $elem.append('<li>' + settings.getDataElementHtml(sound) + '</li>');
                         pl.addSound(sound);
+                    },
+                    removeSound = function(pos) {
+
                     },
                     addSounds = function(data){
                         var toAdd = [], i;
@@ -385,12 +429,67 @@
                             addSound(toAdd[i]);
                         }
                     },
-                    bindEvents = function() {
-                        var emptyValues = [null, undefined, ''];
-
-                        if (emptyValues.indexOf(settings.sortableHandleSelector) < 0) {
-                            $elem.sortable({ handle: settings.sortableHandleSelector });
+                    setSelected = function($li) {
+                        $elem.find('> li').removeClass('selected');
+                        $li.addClass('selected');
+                    },
+                    setPlaying =function() {
+                        var pos = pl.getOrder().getCurrentPos();
+                        if (pos > -1) {
+                            $elem.find('li').removeClass('playing').eq(pos).addClass('playing');
                         }
+                    },
+                    bindEvents = function() {
+                        var oldPosition = -1;
+                        if (!isEmpty(settings.sortableHandleSelector)) {
+                            $elem.sortable({
+                                handle: settings.sortableHandleSelector,
+                                start: function( event, ui ) {
+                                    oldPosition = ui.item.index()
+                                },
+                                update: function( event, ui ) {
+                                    var newPostition = ui.item.index();
+                                    pl.getOrder().move(oldPosition, newPostition);
+                                }
+                            });
+                        }
+
+                        if (!isEmpty(settings.playButtonSelector)) {
+                            $playButton = $(settings.playButtonSelector);
+                            $playButton.on('click', function(e) {
+                                pl.play();
+                                e.preventDefault();
+                            });
+                        }
+
+                        if (!isEmpty(settings.pauseButtonSelector)) {
+                            $pauseButton = $(settings.pauseButtonSelector);
+                            $pauseButton.hide();
+                            $pauseButton.on('click', function(e){
+                                pl.togglePause();
+                                e.preventDefault();
+                            });
+                        }
+
+                        if (!isEmpty(settings.prevButtonSelector)) {
+                            $prevButton = $(settings.prevButtonSelector);
+                            $prevButton.on('click', function(e){
+                                pl.prev();
+                                e.preventDefault();
+                            });
+                        }
+
+                        if (!isEmpty(settings.nextButtonSelector)) {
+                            $nextButton = $(settings.nextButtonSelector);
+                            $nextButton.on('click', function(e){
+                                pl.next();
+                                e.preventDefault();
+                            })
+                        }
+
+                        $elem.on('mousedown', '> li', function() {
+                            setSelected($(this));
+                        });
                     };
 
                 this.addSounds = addSounds;
@@ -415,6 +514,10 @@
 
     $.fn.jqViniloPlayer.defaults = {
         sortableHandleSelector: '.item-img',
+        playButtonSelector: null,
+        pauseButtonSelector: null,
+        prevButtonSelector: null,
+        nextButtonSelector: null,
         getDataElementHtml: function(dataElement) {
             throw 'this function must be implemented.';
         }

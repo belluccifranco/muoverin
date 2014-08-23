@@ -48,6 +48,10 @@
         },
         playingListOptions = {
             sortableHandleSelector: '.item-img',
+            playButtonSelector: '#jqvp-play',
+            pauseButtonSelector: '#jqvp-pause',
+            prevButtonSelector: '#jqvp-prev',
+            nextButtonSelector: '#jqvp-next',
             getDataElementHtml: function(obj) {
                 var itmTpl = '';
 
@@ -69,7 +73,7 @@
                 $songSearcher: $('#song-searcher').jqViniloSearch(songSearcherOptions),
                 $playingList: $('#playing-list').jqViniloPlayer(playingListOptions),
 
-                //current list. I can be playing list or a playlist
+                //current list. It can be playing list or a playlist
                 //to reuse the searcher.
                 $currentList: null
             },
