@@ -18,6 +18,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
 
 @Entity
@@ -35,15 +36,16 @@ public class Song implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id_song;
 
+    @Pattern(regexp = "^\\s*\\d*\\s*$")
     private String track;
 
     @NotNull
     @Length(min = 1, max = 200)
     private String name;
 
-    private String lyric;    
+    private String lyric;
 
-    @NotNull    
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "id_album")
     private Album album;
@@ -63,9 +65,9 @@ public class Song implements Serializable {
     public Song(String track, String name, String lyric, Album album, Link link) {
         this.track = track;
         this.name = name;
-        this.lyric = lyric;        
+        this.lyric = lyric;
         this.album = album;
-        this.link = link;        
+        this.link = link;
     }
 
     public long getId_song() {
@@ -98,7 +100,7 @@ public class Song implements Serializable {
 
     public void setLyric(String lyric) {
         this.lyric = lyric;
-    }   
+    }
 
     public Album getAlbum() {
         return album;

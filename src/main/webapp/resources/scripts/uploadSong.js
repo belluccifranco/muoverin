@@ -104,6 +104,7 @@ $(document).ready(function() {
     loadHostingCombo();
 
     $("#uploadSongForm").submit(function(event) {
+        var track = $("#track").val();
         var name = $("#name").val();
         var id_album = $("#album-combo").val();
         var url = $("#url").val();
@@ -136,7 +137,8 @@ $(document).ready(function() {
         if (id_hosting !== null) {
             songJson.link.hostingAccount = {};
             songJson.link.hostingAccount.id_hostingAccount = id_hosting;            
-        }        
+        }
+        songJson.track = track;
 
         $.ajax({
             url: "/song",
