@@ -5,6 +5,8 @@
 <html>
     <head>        
         <jsp:include page="fragments/common-header.jsp"/>
+        <spring:url value="resources/styles/main.css" var="CSSMain"/>
+        <link rel="stylesheet" href="${CSSMain}"/>
         <title>Vinilo</title>
     </head>
     <body>

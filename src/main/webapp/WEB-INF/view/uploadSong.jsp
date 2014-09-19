@@ -7,6 +7,11 @@
         <spring:url value="resources/styles/uploadSong.css" var="CSSUploadSong"/>
         <link rel="stylesheet" href="${CSSUploadSong}">
         <title>Upload a song</title>
+        <style>
+            .select2-container-multi .select2-choices .select2-search-field input {
+                margin: -1px;
+            }
+        </style>
     </head>
     <body>        
         <form id="uploadSongForm" data-abide>
@@ -29,17 +34,29 @@
 
                 <div>
                     <label for="artist-label">Artist:</label>
-                    <input id="artist-combo" type="hidden">
-                    <small id="artist-error" class="error"><spring:message code="NotNull.song.artist"/></small>
-                    <a href="#" data-reveal-id="newArtistModal">Add!</a>
+                    <div class="row collapse">
+                        <div class="small-10 columns">
+                            <input id="artist-combo" type="hidden" required>
+                            <small id="artist-error" class="error"><spring:message code="NotNull.song.artist"/></small>
+                        </div>
+                        <div class="small-2 columns">
+                            <a href="#" class="button postfix" data-reveal-id="newArtistModal"><i class="fi-plus"></i> Add</a>
+                        </div>
+                    </div>
                 </div>
 
                 <div>
                     <label for="album-label">Album:</label>
-                    <select id="album-combo" required>
-                    </select>
-                    <small id="album-error" class="error"><spring:message code="NotNull.song.album"/></small>
-                    <a href="#" data-reveal-id="newAlbumModal">Add!</a>
+                    <div class="row collapse">
+                        <div class="small-10 columns">
+                            <select id="album-combo" required>
+                            </select>
+                            <small id="album-error" class="error"><spring:message code="NotNull.song.album"/></small>
+                        </div>
+                        <div class="small-2 columns">
+                            <a href="#" class="button postfix" data-reveal-id="newAlbumModal"><i class="fi-plus"></i> Add</a>
+                        </div>
+                    </div>
                 </div>
 
                 <div>
@@ -49,10 +66,17 @@
 
                 <div>
                     <label for="hosting-label">Hosting:</label>
-                    <select id="hosting-combo" required>
-                    </select>
-                    <small id="link-hostingAccount-error" class="error"><spring:message code="NotNull.song.link.hostingAccount"/></small>
-                    <a href="#" data-reveal-id="newHostingModal">Add!</a>
+                    <div class="row collapse">
+                        <div class="small-10 columns">
+                            <select id="hosting-combo" required>
+                            </select>
+                            <small id="link-hostingAccount-error" class="error"><spring:message code="NotNull.song.link.hostingAccount"/></small>
+                        </div>
+                        <div class="small-2 columns">
+                            <%--<a href="#" class="button postfix">Go</a>--%>
+                            <a href="#" class="button postfix" data-reveal-id="newHostingModal"><i class="fi-plus"></i> Add</a>
+                        </div>
+                    </div>
                 </div>
 
                 <div>
