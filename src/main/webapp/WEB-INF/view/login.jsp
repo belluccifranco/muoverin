@@ -7,7 +7,7 @@
         <jsp:include page="fragments/common-header.jsp"/>
         <spring:url value="resources/styles/main.css" var="CSSMain"/>
         <link rel="stylesheet" href="${CSSMain}"/>
-        <title>Vinilo</title>
+        <title><spring:message code="message.muoverin" /></title>
     </head>
     <body>
         <div id="container">
@@ -16,7 +16,7 @@
                     <div id="login-form">
                         <h1 class="title text-center" style="text-transform: uppercase;">
                         <%--<i class="fi-record"></i>--%>
-                        <img src="resources/images/vinilo.png" alt="logo" style="width: 64px;"> <spring:message code="message.vinilo"/>
+                        <img src="resources/images/vinilo.png" alt="logo" style="width: 64px;"> <spring:message code="message.muoverin" />
                         </h1>
                         <c:if test="${not empty error}">
                             <div class="alert-box alert radius">

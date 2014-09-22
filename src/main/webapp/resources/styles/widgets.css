@@ -200,7 +200,7 @@ ul.list.play-list li .item-info .main-info {
     top: 0;
     left: 0;
     right: 0;
-    bottom: 7rem;
+    bottom: 4rem;
 }
 
 .jq-vinilo-playlist .jq-vinilo-playlist-list {
@@ -209,7 +209,7 @@ ul.list.play-list li .item-info .main-info {
 
 .jq-vinilo-playlist .jq-vinilo-playlist-controls  {
     position: absolute;
-    height: 6.5rem;
+    height: 3.5rem;
     left: 0.5rem;
     right: 0.5rem;
     bottom: 0;
@@ -218,7 +218,7 @@ ul.list.play-list li .item-info .main-info {
 }
 
 .jq-vinilo-playlist .jq-vinilo-playlist-controls ul.button-group {
-    margin-top: 1rem;
+    margin-top: 0.3rem;
     margin-bottom: 0;
     display: inline-block;
 }

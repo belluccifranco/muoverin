@@ -11,17 +11,17 @@
         <link rel="stylesheet" href="${CSSWidgets}"/>
         <%--<spring:url value="resources/styles/rangeslider.css" var="CSSRangeSlider"/>
         <link rel="stylesheet" href="${CSSRangeSlider}">--%>
-        <title>Vinilo</title>
+        <title><spring:message code="message.muoverin" /></title>
     </head>
     <body>
     <div id="container">
         <h1 id="title" class="title">
-            <span id="menu-toggle"><i class="fi-list"></i></span>&nbsp;<i class="fi-record"></i> VINILO
-            <id class="toolbar">
-                <ul class="button-group radius" id="main-toolbar">
-                    <li><a id="search-toggle" class="button prev size1_5x"><i class="fi-magnifying-glass"></i></a></li>
-                </ul>
-            </id>
+            <div class="title-main">
+                <span id="menu-toggle"><i class="fi-list"></i></span><i class="fi-record"></i>&nbsp;<spring:message code="message.muoverin" />
+            </div>
+            <div class="toolbar">
+                <a class="toolbar-button" id="search-toggle"><i class="fi-magnifying-glass"></i></a>
+            </div>
         </h1>
         <div id="main-container">
             <nav id="main-menu" class="menu">

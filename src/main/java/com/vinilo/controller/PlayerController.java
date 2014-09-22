@@ -41,6 +41,7 @@ public class PlayerController {
 
         } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | InvalidAlgorithmParameterException | IOException | IllegalBlockSizeException | BadPaddingException | JSONException ex) {
             logger.error(ex.getMessage());
-        }
+            logger.error(ex.getCause().toString());
+        } finally {}
     }
 }

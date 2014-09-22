@@ -39,7 +39,7 @@
 
                     if (data.length > 0) {
                         app.elements.$currentList.jqViniloPlayer('addSounds', data);
-                        app.elements.$mainSearcher.hide();
+                        app.toggleSearcher();
                     }
 
                     e.preventDefault();
@@ -77,13 +77,22 @@
                 //to reuse the searcher.
                 $currentList: null
             },
+            toggleSearcher: function() {
+                var self = this;
+                self.elements.$mainSearcher.toggle();
+                if (self.elements.$mainSearcher.is(':visible')) {
+                    self.elements.$searchToggle.addClass('pressed');
+                } else {
+                    self.elements.$searchToggle.removeClass('pressed');
+                }
+            },
             bindEvents: function() {
                 var self = this;
                 self.elements.$menuToggle.on('click', function(){
                     self.elements.$mainMenu.toggle();
                 });
-                self.elements.$searchToggle.on('click', function(){
-                    self.elements.$mainSearcher.toggle();
+                self.elements.$searchToggle.on('click', function() {
+                    self.toggleSearcher();
                 });
             },
             init: function() {

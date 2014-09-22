@@ -18,15 +18,16 @@
         top: 0;
         left: 0;
         right: 0;
-        height: 2.65rem;
+        height: 3rem;
     }
 
     h1.title {
         margin: 0;
+        font-size: 2rem;
     }
 
     #main-container {
-        top: 2.65rem;
+        top: 3rem;
         bottom: 0;
         left: 0;
         right: 0;
@@ -104,23 +105,62 @@
         margin-bottom: 0 !important;
     }
 
+    .title-main {
+        float: left;
+        display: inline-block;
+        width: 2px;
+        white-space: nowrap;
+    }
 
     .toolbar {
-        position: fixed;
+        float: right;
         display: inline-block;
-        right: 0.2rem;
+        right: 0;
         text-align: right;
     }
 
-    .toolbar ul.button-group {
-        margin-top: 0.2rem;
-        margin-bottom: 0;
+    .toolbar > .toolbar-button {
+        padding: 0 0.5em;
         display: inline-block;
+        font-size: 1.7rem;
+        margin-right: 0.5rem;
+        color: #FFF;
+        /*background: #AAA;*/
+        -webkit-border-top-left-radius: 5px;
+        -webkit-border-top-right-radius: 5px;
+        -webkit-border-bottom-right-radius: 5px;
+        -webkit-border-bottom-left-radius: 5px;
+        -moz-border-radius-topleft: 5px;
+        -moz-border-radius-topright: 5px;
+        -moz-border-radius-bottomright: 5px;
+        -moz-border-radius-bottomleft: 5px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+        background: #3498db;
+        background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+        background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+        background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+        background-image: -o-linear-gradient(top, #3498db, #2980b9);
+        background-image: linear-gradient(to bottom, #3498db, #2980b9);
     }
 
-    .toolbar ul.button-group a.button, .toolbar ul.button-group button {
-        margin-bottom: 0;
-        padding: 0.3rem 1rem 0.2rem 1rem;
+    .toolbar > .toolbar-button {
+        background: #3cb0fd;
+        background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    }
+
+    .toolbar > .toolbar-button.pressed {
+        background: #0980ca;
+        background-image: none;
+        -webkit-box-shadow: inset 0px 0px 23px 4px rgba(0,0,0,0.75);
+        -moz-box-shadow: inset 0px 0px 23px 4px rgba(0,0,0,0.75);
+        box-shadow: inset 0px 0px 23px 4px rgba(0,0,0,0.75);
     }
 }
 
@@ -132,6 +172,11 @@
         /*max-width: 1024px;*/
         margin: 0 auto;
         position: relative;
+    }
+
+    h1.title {
+        margin: 0;
+        font-size: 2.70rem;
     }
 
     h1#title {
@@ -164,6 +209,14 @@
     div#main-searcher {
         width: 35rem;
         z-index: 1;
+    }
+
+    .toolbar {
+        margin-top: -0.26rem;
+    }
+
+    .toolbar > .toolbar-button {
+        font-size: 2rem;
     }
 }
 
