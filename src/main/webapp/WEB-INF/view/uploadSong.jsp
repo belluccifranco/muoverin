@@ -9,34 +9,34 @@
         <title>Upload a song</title>
         <style>
             .select2-container-multi .select2-choices .select2-search-field input {
-                margin: -1px;
+                margin-bottom: -3px;
             }
         </style>
     </head>
     <body>        
-        <form id="uploadSongForm" data-abide>
+        <form id="uploadSongForm" data-abide="ajax">
             <div id="title-band" class="label small-12 text-center">
                 <h2>Add new Song</h2>
             </div>
 
             <div class="small-12 small-centered medium-5 large-4 columns">
                 <div>
-                    <label for="track-label">Track Nº:</label>
-                    <input id="track" type="text" pattern="integer">
+                    <label for="track">Track Nº:</label>
+                    <input id="track" name="track" type="text" pattern="integer">
                     <small id="track-error" class="error"><spring:message code="Integer.song.track"/></small>
                 </div>
 
                 <div>                
-                    <label for="name-label">Name:</label>
-                    <input id="name" type="text" required>
+                    <label for="name">Name:</label>
+                    <input id="name" name="name" type="text" required>
                     <small id="name-error" class="error"><spring:message code="NotNull.song.name"/></small>
                 </div>
 
                 <div>
-                    <label for="artist-label">Artist:</label>
+                    <label for="artist-combo">Artist:</label>
                     <div class="row collapse">
                         <div class="small-10 columns">
-                            <input id="artist-combo" type="hidden" required>
+                            <input id="artist-combo" name="artist-combo" type="hidden" required>
                             <small id="artist-error" class="error"><spring:message code="NotNull.song.artist"/></small>
                         </div>
                         <div class="small-2 columns">
@@ -46,10 +46,10 @@
                 </div>
 
                 <div>
-                    <label for="album-label">Album:</label>
+                    <label for="album-combo">Album:</label>
                     <div class="row collapse">
                         <div class="small-10 columns">
-                            <select id="album-combo" required>
+                            <select id="album-combo" name="album-combo" required>
                             </select>
                             <small id="album-error" class="error"><spring:message code="NotNull.song.album"/></small>
                         </div>
@@ -60,28 +60,27 @@
                 </div>
 
                 <div>
-                    <label for="lyrics-label">Lyrics:</label>                
-                    <textarea id="lyrics" maxlength="255" rows="5"></textarea>
+                    <label for="lyrics">Lyrics:</label>
+                    <textarea id="lyrics" name="lyrics" maxlength="255" rows="5"></textarea>
                 </div>
 
                 <div>
-                    <label for="hosting-label">Hosting:</label>
+                    <label for="hosting-combo">Hosting:</label>
                     <div class="row collapse">
                         <div class="small-10 columns">
-                            <select id="hosting-combo" required>
+                            <select id="hosting-combo" name="hosting-combo" required>
                             </select>
                             <small id="link-hostingAccount-error" class="error"><spring:message code="NotNull.song.link.hostingAccount"/></small>
                         </div>
                         <div class="small-2 columns">
-                            <%--<a href="#" class="button postfix">Go</a>--%>
                             <a href="#" class="button postfix" data-reveal-id="newHostingModal"><i class="fi-plus"></i> Add</a>
                         </div>
                     </div>
                 </div>
 
                 <div>
-                    <label for="link-label">Link:</label>
-                    <input id="url" type="url" required>
+                    <label for="url">Link:</label>
+                    <input id="url" name="url" type="url" required>
                     <small id="link-url-error" class="error"><spring:message code="URL.song.link.url"/></small>
                 </div>
 
