@@ -110,8 +110,9 @@
 
     soundManager.setup({
         url: '/resources/scripts/public/soundmanager2/swf',
-        useHTML5Audio: false,
-        //preferFlash: true,
+        flashVersion: 9,
+        //useHTML5Audio: false,
+        preferFlash: true,
         onready: function() {
             //console.log('sm2 ready');
         }
