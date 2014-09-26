@@ -25,7 +25,7 @@
                         </c:if>
                         <form  name="f" action="<c:url value='j_spring_security_check'/>" method="POST">
                             <label for="username"><spring:message code="message.username"/> </label>
-                            <input type="text" id="username" name="j_username" value="">
+                            <input type="email" id="username" name="j_username" value="">
                             <label for="pass"><spring:message code="message.password"/> </label>
                             <input type='password' name='j_password'/>
                             <input class="button radius" name="submit" type="submit" data-icon="forward" value="<spring:message code="message.login"/>">

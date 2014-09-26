@@ -50,18 +50,25 @@ public class DataPopulator {
         UserRole roleCustomer = new UserRole("ROLE_CUSTOMER");
         List<UserRole> customerRoles = new ArrayList<>();
         customerRoles.add(roleCustomer);
-        UserAccount userFacundo = new UserAccount("facundo@vinilo.com", "e10adc3949ba59abbe56e057f20f883e", customerRoles);
+        UserAccount userFacundo = new UserAccount("fssl2004@gmail.com", "e10adc3949ba59abbe56e057f20f883e", customerRoles);
         List<UserAccount> customerAccounts = new ArrayList<>();
         customerAccounts.add(userFacundo);
         roleCustomer.setUserAccounts(customerAccounts);
         userFacundo = accountService.save(userFacundo);
         customerRoles.clear();
         customerRoles.add(userFacundo.getUserRoles().get(0));
-        UserAccount userFranco = new UserAccount("franco@vinilo.com", "e10adc3949ba59abbe56e057f20f883e", customerRoles);
+        UserAccount userFranco = new UserAccount("belluccifranco@gmail.com", "e10adc3949ba59abbe56e057f20f883e", customerRoles);
         customerAccounts.clear();
         customerAccounts.add(userFranco);
         customerRoles.get(0).setUserAccounts(customerAccounts);
         accountService.save(userFranco);
+        customerRoles.clear();
+        customerRoles.add(userFacundo.getUserRoles().get(0));
+        UserAccount userTest = new UserAccount("test@test.com", "e10adc3949ba59abbe56e057f20f883e", customerRoles);
+        customerAccounts.clear();
+        customerAccounts.add(userTest);
+        customerRoles.get(0).setUserAccounts(customerAccounts);
+        accountService.save(userTest);
     }
 
     private void insertHostingAccounts() {
