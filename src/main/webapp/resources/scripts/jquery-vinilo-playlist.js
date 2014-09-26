@@ -187,7 +187,6 @@
                         }
                     }
                 }
-                console.log(data, current);
             };
 
         return {
@@ -238,11 +237,11 @@
             buffer = new Buffer({
                 size: 2,
                 onBeforeAdd: function(id) {
-                    console.log('added: "' + id + '"');
+                    //console.log('added: "' + id + '"');
                 },
                 onAfterRemove: function(id) {
                     soundManager.destroySound(id);
-                    console.log('removing: "' + id + '"');
+                    //console.log('removing: "' + id + '"');
                     //console.log((soundManager.getMemoryUse()/1024/1024).toFixed(2));
                 }
             }),
@@ -281,8 +280,6 @@
                 id = options.getSoundId(soundData);
                 url = options.getSoundUrl(soundData);
 
-                console.log(id, url);
-
                 data[id] = { id: id, url: url, data: soundData };
                 order.add(id);
             },
@@ -303,7 +300,7 @@
 
                 //ids.push(order.getPrev());
                 ids.push(order.getCurrent());
-                ids.push(order.getNext());
+                //ids.push(order.getNext());
                 buffer.removeNotIn(ids);
 
                 for (i = 0; i < ids.length; i += 1) {
@@ -322,6 +319,20 @@
                 }
                 return false;
             },
+            isStopped = function() {
+                var id = order.getCurrent();
+                if (id !== null) {
+                    return soundManager.getSoundById(id).playState === 0;
+                }
+                return false;
+            },
+            isPlaying = function() {
+                var id = order.getCurrent();
+                if (id !== null) {
+                    return soundManager.getSoundById(id).playState === 1;
+                }
+                return false;
+            },
             doAction = function(action) {
                 var id = order.getCurrent();
                 if (id !== null) {
@@ -334,16 +345,24 @@
             togglePause = function() {
                 doAction('togglePause');
             },
+            playTimeout,
             play = function(pos) {
                 if (typeof pos !== 'undefined') {
                     order.setCurrentPos(pos);
                 }
-                setBuffer();
-                if (isPaused()) {
-                    togglePause();
-                } else {
-                    doAction('play');
+                if (playTimeout) {
+                    clearInterval(playTimeout);
                 }
+
+                playTimeout = setTimeout(function(){
+                    setBuffer();
+                    if (isPaused()) {
+                        togglePause();
+                    } else {
+                        doAction('play');
+                    }
+                }, 1000);
+
             },
             prev = function() {
                 stop();
@@ -369,7 +388,10 @@
             play: play,
             prev: prev,
             next: next,
-            getOrder: getOrder
+            getOrder: getOrder,
+            isPaused: isPaused,
+            isStopped: isStopped,
+            isPlaying: isPlaying
         }
     }();
 
@@ -442,6 +464,7 @@
                     },
                     bindEvents = function() {
                         var oldPosition = -1;
+
                         if (!isEmpty(settings.sortableHandleSelector)) {
                             $elem.sortable({
                                 handle: settings.sortableHandleSelector,
@@ -491,6 +514,29 @@
                         $elem.on('mousedown', '> li', function() {
                             setSelected($(this));
                         });
+
+                        //doubletap
+                        var muCount = 0, muTimeout;
+                        $elem.on('touchend', '> li', function(e) {
+                            muCount += 1;
+
+                            if (muCount > 1) {
+                                $(this).trigger('doubletap', e);
+                            }
+
+                            muTimeout = setTimeout(function(){
+                                muCount = 0;
+                                clearTimeout(muTimeout);
+                            }, 300);
+
+                            e.preventDefault();
+                        });
+
+                        $elem.on('dblclick doubletap', '> li', function(e) {
+                            pl.stop();
+                            pl.play($(this).index());
+                            e.preventDefault();
+                        });
                     };
 
                 this.addSounds = addSounds;
@@ -511,7 +557,7 @@
         } else {
             $.error( 'Method ' +  methodOrOptions + ' does not exist on jQuery.jqViniloSearch' );
         }
-    }
+    };
 
     $.fn.jqViniloPlayer.defaults = {
         sortableHandleSelector: '.item-img',
