@@ -158,9 +158,9 @@
     <beans profile="postgresqlOpenshift">
         <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
               p:driverClassName="org.postgresql.Driver"
-              p:url="jdbc:postgresql://53953d6d5973cae0d90000a3-dualhead.rhcloud.com:37976/vinilo"
-              p:username="adminyiixne2"
-              p:password="6-e6Vkswikvx"/>
+              p:url="jdbc:postgresql://541e00814382ec9d6d000383-dualhead.rhcloud.com:54826/muoverin"
+              p:username="adminrfw4vsm"
+              p:password="g2tapKq3BQgE"/>
         
         <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
             <property name="dataSource" ref="dataSource" /> 
