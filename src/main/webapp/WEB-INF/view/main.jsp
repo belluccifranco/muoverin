@@ -17,10 +17,23 @@
     <div id="container">
         <h1 id="title" class="title">
             <div class="title-main">
-                <span id="menu-toggle"><i class="fi-list"></i></span><i class="fi-record"></i>&nbsp;<spring:message code="message.muoverin" />
+                <span id="menu-toggle"><i class="fi-list"></i></span><span id="title-text"><spring:message code="message.muoverin" /></span>
             </div>
             <div class="toolbar">
-                <a class="toolbar-button" id="search-toggle"><i class="fi-magnifying-glass"></i></a>
+                <a class="toolbar-button" id="search-toggle">
+                    <i class="fi-magnifying-glass"></i>
+                </a>
+            </div>
+            <div class="toolbar">
+                <a class="toolbar-button without-margin-right" href="#" id="jqvp-prev" class="button size1_5x prev">
+                    <i class="fi-previous"></i>
+                </a><a class="toolbar-button without-margin-right" href="#" id="jqvp-play" class="button size1_5x play">
+                    <i class="fi-play"></i>
+                </a><a class="toolbar-button without-margin-right hide" href="#" id="jqvp-pause" class="button size1_5x pause">
+                    <i class="fi-pause"></i>
+                </a><a class="toolbar-button" href="#" id="jqvp-next" class="button size1_5x next">
+                    <i class="fi-next"></i>
+                </a>
             </div>
         </h1>
         <div id="main-container">
@@ -47,21 +60,6 @@
                     <div class="jq-vinilo-playlist-list-container">
                         <ul class="jq-vinilo-playlist-list list play-list" style="height: 100%;" id="playing-list">
                         </ul>
-                    </div>
-                    <div class="jq-vinilo-playlist-controls">
-                        <div class="row">
-                            <%--<div class="small-12 large-6 columns" style="padding-top: 1rem;">
-                                <input type="range" id="sound-progress" value="50">
-                            </div>--%>
-                            <div class="small-12 <%--large-6--%> large-12 columns">
-                                <ul class="button-group radius">
-                                    <li><a href="#" id="jqvp-prev" class="button size1_5x prev"><i class="fi-previous"></i></a></li>
-                                    <li><a href="#" id="jqvp-play" class="button size1_5x play"><i class="fi-play"></i></a></li>
-                                    <li><a href="#" id="jqvp-pause" class="button size1_5x pause"><i class="fi-pause"></i></a></li>
-                                    <li><a href="#" id="jqvp-next" class="button size1_5x next"><i class="fi-next"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
