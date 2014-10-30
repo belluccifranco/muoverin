@@ -23,7 +23,7 @@
     
     <bean id="dataPopulator" class="com.vinilo.util.DataPopulator"/>
     
-    <mvc:resources mapping="/resources/**" location="/resources/"/>
+    <mvc:resources mapping="/resources/**" location="/resources/"/>    
     
     <mvc:annotation-driven>
         <mvc:message-converters>
@@ -61,7 +61,8 @@
     
     
     <!-- SECURITY -->
-    <security:http pattern="/login" security="none"/>    
+    <security:http pattern="/player/**" security="none"/>
+    <security:http pattern="/login" security="none"/>        
     <security:http pattern="/loginFailed" security="none"/>
     <security:http pattern="/logout" security="none"/>    
     <security:http auto-config="true" entry-point-ref="authenticationEntryPoint">
@@ -113,7 +114,7 @@
                     <prop key="hibernate.max_fetch_depth">3</prop> 
                     <prop key="hibernate.jdbc.fetch_size">50</prop> 
                     <prop key="hibernate.jdbc.batch_size">10</prop> 
-                    <prop key="hibernate.show_sql">true</prop> 
+                    <prop key="hibernate.show_sql">false</prop> 
                     <prop key="hibernate.hbm2ddl.auto">create</prop>
                     <prop key="hibernate.format_sql">true</prop>
                 </props> 
