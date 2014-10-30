@@ -1,17 +1,5 @@
 package com.vinilo.service.mega;
 
-/**
- * *****************************************************************************
- * Copyright (c) 2013 Ale46. All rights reserved. This program and the
- * accompanying materials are made available under the terms of the GNU Public
- * License v3.0 which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
- *
- * Contributors:
- *
- * @NT2005 - initial API and implementation
- * ****************************************************************************
- */
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
@@ -23,12 +11,20 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import org.apache.log4j.Logger;
 
 public class MegaCrypt {
 
     private static final char[] CA = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".toCharArray();
     private static final int[] IA = new int[256];
+    private static final Logger logger = Logger.getLogger(MegaCrypt.class);
 
     static {
         Arrays.fill(IA, -1);
@@ -82,8 +78,8 @@ public class MegaCrypt {
             Cipher cipher = Cipher.getInstance("AES/CBC/NOPADDING");
             cipher.init(Cipher.ENCRYPT_MODE, keySpec, ivSpec);
             output = cipher.doFinal(data);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | InvalidAlgorithmParameterException | IllegalBlockSizeException | BadPaddingException e) {
+            logger.error(e.getMessage());
         }
         return output;
     }
@@ -95,7 +91,7 @@ public class MegaCrypt {
             byte[] encrypt = aes_cbc_encrypt(data, key);
             return str_to_a32(new String(encrypt, "ISO-8859-1"));
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         return new long[0];
     }
@@ -109,8 +105,8 @@ public class MegaCrypt {
             Cipher cipher = Cipher.getInstance("AES/CBC/NOPADDING");
             cipher.init(Cipher.DECRYPT_MODE, keySpec, ivSpec);
             output = cipher.doFinal(data);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | InvalidAlgorithmParameterException | IllegalBlockSizeException | BadPaddingException e) {
+            logger.error(e.getMessage());
         }
         return output;
     }
@@ -122,7 +118,7 @@ public class MegaCrypt {
             byte[] decrypt = aes_cbc_decrypt(data, key);
             return str_to_a32(new String(decrypt, "ISO-8859-1"));
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         return new long[0];
     }
@@ -160,7 +156,7 @@ public class MegaCrypt {
     }
 
     public static String a32_to_str(long[] data) {
-        byte[] part = null;
+        byte[] part;
         StringBuilder builder = new StringBuilder();
         ByteBuffer bb = ByteBuffer.allocate(8);
         for (int i = 0; i < data.length; i++) {
@@ -179,7 +175,7 @@ public class MegaCrypt {
         try {
             data = new String(base64_url_encode_byte((data.getBytes("ISO-8859-1")), true), "ISO-8859-1");
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         data = data.replaceAll("\\+", "-");
         data = data.replaceAll("/", "_");
@@ -187,16 +183,6 @@ public class MegaCrypt {
         return data;
     }
 
-    /*
-     * public static String base64_url_decode(String data) { data =
-     * data.replaceAll("-", "\\+"); data = data.replaceAll("_", "/"); data =
-     * data.replaceAll(",", ""); //for (int i = 0;i<4-(data.length()%4);++i)
-     * data += "==";
-     * 
-     * try { return new String(Base64.decodeBase64(data.getBytes("ISO-8859-1")),
-     * "ISO-8859-1"); } catch (UnsupportedEncodingException e) {
-     * e.printStackTrace(); } return ""; }
-     */
     public static String a32_to_base64(long[] a) {
         return base64_url_encode(a32_to_str(a));
     }
@@ -217,7 +203,7 @@ public class MegaCrypt {
                     attributes.getBytes("ISO-8859-1"), a32_to_str(key)
                     .getBytes("ISO-8859-1")), "ISO-8859-1");
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         return "";
     }
@@ -240,8 +226,7 @@ public class MegaCrypt {
         return res;
     }
 
-    public final static String base64_url_decode(String str)
-            throws UnsupportedEncodingException {
+    public final static String base64_url_decode(String str) throws UnsupportedEncodingException {
         return new String((base64_url_decode_byte(str)), "ISO-8859-1");
     }
 

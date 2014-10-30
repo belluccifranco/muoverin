@@ -2,16 +2,9 @@ package com.vinilo.controller;
 
 import com.vinilo.service.SongService;
 import com.vinilo.service.mega.MegaHandler;
-import java.io.IOException;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
-import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,18 +23,19 @@ public class PlayerController {
     }
 
     @RequestMapping(value = "/player/{idSong}", method = RequestMethod.GET)
-    public void playSong(@PathVariable Long idSong, HttpServletResponse response) {
+    public void playSong(@PathVariable Long idSong, HttpServletResponse response, HttpServletRequest request) {
         try {
-            response.addHeader("Connection", "Keep-Alive");
-            response.addHeader("Keep-Alive", "timeout=600"); //600 seg = 10 min
-            response.setContentType("audio/mpeg");
-            MegaHandler mh = new MegaHandler("a", "a");
+            MegaHandler mh = new MegaHandler();
             String urlStorage = songService.searchById(idSong).getLink().getUrl();
-            mh.streamToOutputStream(urlStorage, response);
+            response.setContentType("audio/mpeg");
+            int contentLength = mh.getContentLength(urlStorage);
+            response.setContentLength(contentLength);            
+            response.setHeader("Accept-Ranges", "bytes");
+            response.setHeader("Content-Range", "bytes 0-" + (contentLength - 1) + "/" + contentLength);
+            mh.downloadToOutputStream(urlStorage, response.getOutputStream());
 
-        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | InvalidAlgorithmParameterException | IOException | IllegalBlockSizeException | BadPaddingException | JSONException ex) {
-            logger.error(ex.getMessage());
-            logger.error(ex.getCause().toString());
-        } finally {}
+        } catch (Exception ex) {
+            logger.error(ex);
+        }
     }
 }

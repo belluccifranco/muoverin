@@ -1,17 +1,5 @@
 package com.vinilo.service.mega;
 
-/**
- * *****************************************************************************
- * Copyright (c) 2013 Ale46. All rights reserved. This program and the
- * accompanying materials are made available under the terms of the GNU Public
- * License v3.0 which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
- *
- * Contributors:
- *
- * @NT2005 - initial API and implementation
- * ****************************************************************************
- */
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,53 +22,49 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 
-
 import java.math.BigInteger;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
-import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
+import java.security.spec.InvalidKeySpecException;
 import java.security.spec.RSAPrivateKeySpec;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
-import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.IOUtils;
+import org.apache.log4j.Logger;
 
 public class MegaHandler {
 
-    private String email;
-    private String password;
     private String sid;
     private int sequence_number;
     private long[] master_key;
     private BigInteger[] rsa_private_key;
     private long[] password_aes;
-    HashMap<String, long[]> user_keys = new HashMap<String, long[]>();
+    HashMap<String, long[]> user_keys = new HashMap<>();
+    private static final Logger logger = Logger.getLogger(MegaHandler.class);
 
-    public MegaHandler(String email, String password) {
-        this.email = email;
-        this.password = password;
+    public MegaHandler() {
         Random rg = new Random();
         sequence_number = rg.nextInt(Integer.MAX_VALUE);
     }
 
-    public int login() throws IOException {
-        password_aes = MegaCrypt.prepare_key_pw(password);
-        String uh = MegaCrypt.stringhash(email, password_aes);
+    public int login(MegaUser megaUser) throws IOException {
+
+        password_aes = MegaCrypt.prepare_key_pw(megaUser.getPassword());
+        String uh = MegaCrypt.stringhash(megaUser.getEmail(), password_aes);
 
         JSONObject json = new JSONObject();
         try {
             json.put("a", "us");
-            json.put("user", email);
+            json.put("user", megaUser.getEmail());
             json.put("uh", uh);
         } catch (JSONException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
         while (true) {
@@ -95,7 +79,7 @@ public class MegaHandler {
                     break;
                 }
             } catch (JSONException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
         }
 
@@ -108,7 +92,7 @@ public class MegaHandler {
         try {
             master_key_b64 = json.getString("k");
         } catch (JSONException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         if (master_key_b64 == null || master_key_b64.isEmpty()) {
             return -1;
@@ -122,7 +106,7 @@ public class MegaHandler {
             try {
                 encrypted_rsa_private_key_b64 = json.getString("privk");
             } catch (JSONException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
 
             long[] encrypted_rsa_private_key = MegaCrypt.base64_to_a32(encrypted_rsa_private_key_b64);
@@ -140,13 +124,13 @@ public class MegaHandler {
             try {
                 encrypted_sid = MegaCrypt.mpi_to_int(MegaCrypt.base64_url_decode(json.getString("csid")));
             } catch (JSONException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
 
             BigInteger modulus = this.rsa_private_key[0].multiply(this.rsa_private_key[1]);
             BigInteger privateExponent = this.rsa_private_key[2];
 
-            BigInteger sid = null;
+            BigInteger sid;
             try {
                 PrivateKey privateKey = KeyFactory.getInstance("RSA").generatePrivate(new RSAPrivateKeySpec(modulus, privateExponent));
                 Cipher cipher = Cipher.getInstance("RSA/ECB/NoPadding");
@@ -158,8 +142,8 @@ public class MegaHandler {
                     return -2;  // lets get a new seession
                 }
                 sid = new BigInteger(cipher.doFinal(encrypted_sid.toByteArray()));
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (NoSuchAlgorithmException | InvalidKeySpecException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException e) {
+                logger.error(e.getMessage());
                 return -1;
             }
 
@@ -171,7 +155,7 @@ public class MegaHandler {
                 byte[] sidsnohex = MegaCrypt.decodeHexString(sidS);
                 this.sid = MegaCrypt.base64_url_encode(new String(sidsnohex, "ISO-8859-1").substring(0, 43));
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
                 return -1;
             }
         }
@@ -185,7 +169,7 @@ public class MegaHandler {
             json.put("u", email);
             json.put("l", 1);
         } catch (JSONException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         return api_request(json.toString());
     }
@@ -197,7 +181,7 @@ public class MegaHandler {
             json.put("xfer", 1);
 
         } catch (JSONException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
         return new JSONObject(api_request(json.toString())).getLong("mstrg");
@@ -208,7 +192,7 @@ public class MegaHandler {
         try {
             json.put("a", "ug");
         } catch (JSONException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         return api_request(json.toString());
     }
@@ -220,15 +204,15 @@ public class MegaHandler {
             json.put("c", "1");
 
         } catch (JSONException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
         String files = api_request(json.toString());
         // TODO check for negativ error
         //print(json.toString());
-        ArrayList<MegaFile> megaFiles = new ArrayList<MegaFile>();
+        ArrayList<MegaFile> megaFiles = new ArrayList<>();
 
-        JSONArray array = null;
+        JSONArray array;
         try {
             json = new JSONObject(files);
             array = json.getJSONArray("f");
@@ -238,7 +222,7 @@ public class MegaHandler {
 
             }
         } catch (JSONException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
             return null;
         }
         return megaFiles;
@@ -275,7 +259,6 @@ public class MegaHandler {
                         k[1] = keys_a32[1] ^ keys_a32[5];
                         k[2] = keys_a32[2] ^ keys_a32[6];
                         k[3] = keys_a32[3] ^ keys_a32[7];
-
 
                     } else {
                         k[0] = keys_a32[0];
@@ -343,13 +326,13 @@ public class MegaHandler {
                         k[3] = keys_a32S[3] ^ keys_a32S[7];
                         file.setDirectory(true);
 
-
                     }/*else{
                      k = keys_a32S;
 
                      file.setDirectory(true);
 
                      }*/
+
                     file.setKey(k);
 
                     file.setAttributes(MegaCrypt.decrypt_attr(attributes, k));
@@ -368,37 +351,37 @@ public class MegaHandler {
             }
             return file;
         } catch (JSONException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
         //file.setAttributes(jsonFile.toString());
         return file;
     }
 
-    public String get_url(MegaFile f) {
+    public String get_url(MegaFile megaFile) {
 
-        if (f.getHandle() == null || f.getKey() == null) {
+        if (megaFile.getHandle() == null || megaFile.getKey() == null) {
             return "Error";
         }
         JSONObject json = new JSONObject();
         try {
             json.put("a", "l");
-            json.put("n", f.getHandle());
+            json.put("n", megaFile.getHandle());
 
         } catch (JSONException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
         String public_handle = api_request(json.toString());
         if (public_handle.equals("-11")) {
             return "Shared file, no public url";
         }
-        return "https://mega.co.nz/#!" + public_handle.substring(1, public_handle.length() - 1) + "!" + MegaCrypt.a32_to_base64(f.getKey());
+        return "https://mega.co.nz/#!" + public_handle.substring(1, public_handle.length() - 1) + "!" + MegaCrypt.a32_to_base64(megaFile.getKey());
 
     }
 
     private String api_request(String data) {
-        HttpURLConnection connection = null;
+        HttpURLConnection connection;
         try {
             String urlString = "https://g.api.mega.co.nz/cs?id=" + sequence_number;
             if (sid != null) {
@@ -421,7 +404,7 @@ public class MegaHandler {
                 wr.flush();
                 wr.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             } finally { //in this case, we are ensured to close the output stream
                 if (out != null) {
                     out.close();
@@ -432,13 +415,15 @@ public class MegaHandler {
             StringBuffer response = new StringBuffer();
             try {
                 BufferedReader rd = new BufferedReader(new InputStreamReader(in));
-                String line = "";
+                String line;
                 while ((line = rd.readLine()) != null) {
                     response.append(line);
                 }
                 rd.close(); //close the reader
+
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
+
             } finally {  //in this case, we are ensured to close the input stream
                 if (in != null) {
                     in.close();
@@ -447,15 +432,14 @@ public class MegaHandler {
 
             return response.toString().substring(1, response.toString().length() - 1);
 
-
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
         return "";
     }
 
-    public static boolean isInteger(String string) {
+    public boolean isInteger(String string) {
         if (string == null || string.isEmpty()) {
             return false;
         }
@@ -482,12 +466,22 @@ public class MegaHandler {
         return true;
     }
 
-    public void download(String url, String path)
-            throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException,
-            InvalidAlgorithmParameterException, IOException, IllegalBlockSizeException,
-            BadPaddingException, JSONException {
-        //TODO DOWNLOAD mismatch?
-        print("Download started");
+    public int getContentLength(String url) throws JSONException {
+        String[] s = url.split("!");
+        String file_id = s[1];
+
+        JSONObject json = new JSONObject();
+        json.put("a", "g");
+        json.put("g", "1");
+        json.put("p", file_id);
+
+        JSONObject file_data = new JSONObject(api_request(json.toString()));
+        int file_size = file_data.getInt("s");
+        return file_size;
+    }
+
+    public void downloadToFile(String url, String path) throws Exception {
+        logger.info("Download started");
         String[] s = url.split("!");
         String file_id = s[1];
         byte[] file_key = MegaCrypt.base64_url_decode_byte(s[2]);
@@ -499,7 +493,7 @@ public class MegaHandler {
             json.put("g", "1");
             json.put("p", file_id);
         } catch (JSONException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
         JSONObject file_data = new JSONObject(api_request(json.toString()));
@@ -509,13 +503,10 @@ public class MegaHandler {
         int[] iiv = new int[]{keyNOnce[4], keyNOnce[5], 0, 0};
         byte[] iv = MegaCrypt.aInt_to_aByte(iiv);
 
-        @SuppressWarnings("unused")
-        int file_size = file_data.getInt("s");
         String attribs = (file_data.getString("at"));
         attribs = new String(MegaCrypt.aes_cbc_decrypt(MegaCrypt.base64_url_decode_byte(attribs), key));
 
         String file_name = attribs.substring(10, attribs.lastIndexOf("\""));
-        print(file_name);
         final IvParameterSpec ivSpec = new IvParameterSpec(iv);
         final SecretKeySpec skeySpec = new SecretKeySpec(key, "AES");
         Cipher cipher = Cipher.getInstance("AES/CTR/nopadding");
@@ -527,11 +518,10 @@ public class MegaHandler {
         final OutputStream cos = new CipherOutputStream(fos, cipher);
         final Cipher decipher = Cipher.getInstance("AES/CTR/NoPadding");
         decipher.init(Cipher.ENCRYPT_MODE, skeySpec, ivSpec);
-        int read = 0;
+        int read;
         final byte[] buffer = new byte[32767];
         try {
-            URLConnection urlConn = new URL(file_url).openConnection();
-            print(file_url);
+            URLConnection urlConn = new URL(file_url).openConnection();            
             is = urlConn.getInputStream();
             while ((read = is.read(buffer)) > 0) {
                 cos.write(buffer, 0, read);
@@ -543,24 +533,14 @@ public class MegaHandler {
                     is.close();
                 }
             } finally {
-                if (fos != null) {
-                    fos.close();
-                }
+                fos.close();
             }
         }
-        print("Download finished");
+
+        logger.info("Download finished");
     }
 
-    public static void print(Object o) {
-        System.out.println(o);
-    }
-
-    public void streamToOutputStream(String url, HttpServletResponse response)
-            throws NoSuchAlgorithmException, NoSuchPaddingException,
-            InvalidKeyException, InvalidAlgorithmParameterException,
-            IOException, IllegalBlockSizeException, BadPaddingException,
-            JSONException {
-
+    public void downloadToOutputStream(String url, OutputStream output) throws Exception {
         String[] s = url.split("!");
         String file_id = s[1];
         byte[] file_key = MegaCrypt.base64_url_decode_byte(s[2]);
@@ -575,32 +555,38 @@ public class MegaHandler {
         int[] keyNOnce = new int[]{intKey[0] ^ intKey[4],
             intKey[1] ^ intKey[5], intKey[2] ^ intKey[6],
             intKey[3] ^ intKey[7], intKey[4], intKey[5]};
-        byte[] key = MegaCrypt.aInt_to_aByte(keyNOnce[0], keyNOnce[1],
-                keyNOnce[2], keyNOnce[3]);
-
+        byte[] key = MegaCrypt.aInt_to_aByte(keyNOnce[0], keyNOnce[1], keyNOnce[2], keyNOnce[3]);
         int[] iiv = new int[]{keyNOnce[4], keyNOnce[5], 0, 0};
         byte[] iv = MegaCrypt.aInt_to_aByte(iiv);
-        int file_size = file_data.getInt("s");
-        response.setContentLength(file_size);
         String attribs = (file_data.getString("at"));
         attribs = new String(MegaCrypt.aes_cbc_decrypt(MegaCrypt.base64_url_decode_byte(attribs), key));
         String file_name = attribs.substring(10, attribs.lastIndexOf("\""));
-        print(file_name);
         final IvParameterSpec ivSpec = new IvParameterSpec(iv);
         final SecretKeySpec skeySpec = new SecretKeySpec(key, "AES");
         Cipher cipher = Cipher.getInstance("AES/CTR/nopadding");
         cipher.init(Cipher.ENCRYPT_MODE, skeySpec, ivSpec);
-        InputStream is;
         String file_url = file_data.getString("g");
-        //FileOutputStream fos = new FileOutputStream(path + File.separator + file_name);
-        //final OutputStream cos = new CipherOutputStream(fos, cipher);
-        final OutputStream cos = new CipherOutputStream(response.getOutputStream(), cipher);
-        print("Streaming started at: " + new Date());
-        URLConnection urlConn = new URL(file_url).openConnection();
-        print(file_url);
-        is = urlConn.getInputStream();
-        IOUtils.copy(is, cos);
-        response.flushBuffer();
-        print("Download finished");
+        InputStream inputStream = null;
+        CipherOutputStream cipherOutputStream = null;
+
+        try {
+            URL urlMEGA = new URL(file_url);
+            URLConnection urlConn = urlMEGA.openConnection();
+            inputStream = urlConn.getInputStream();
+            cipherOutputStream = new CipherOutputStream(output, cipher);
+            logger.info("Downloading file: " + file_name);
+            IOUtils.copy(inputStream, cipherOutputStream);
+
+        } finally {
+            if (inputStream != null) {
+                inputStream.close();
+            }
+
+            if (cipherOutputStream != null) {
+                cipherOutputStream.close();
+            }
+        }
+        logger.info("Download finished");
     }
+
 }
