@@ -2,7 +2,6 @@ package com.vinilo.controller;
 
 import com.vinilo.service.SongService;
 import com.vinilo.service.mega.MegaHandler;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ public class PlayerController {
     }
 
     @RequestMapping(value = "/player/{idSong}", method = RequestMethod.GET)
-    public void playSong(@PathVariable Long idSong, HttpServletResponse response, HttpServletRequest request) {
+    public void playSong(@PathVariable Long idSong, HttpServletResponse response) {
         try {
             MegaHandler mh = new MegaHandler();
             String urlStorage = songService.searchById(idSong).getLink().getUrl();
