@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function() {    
     var $cbAlbumes = $('#album-combo');
     var $cbHosting = $('#hosting-combo');
     var $cbArtists = $('#artist-combo'),
@@ -148,7 +148,8 @@ $(document).ready(function() {
                 xhr.setRequestHeader("Content-Type", "application/json");
             },
             success: function() {
-                $("#title-band").html("Song was created");
+                $("#mainContainer").prepend('<div data-alert class="alert-box success radius">Song was saved!<a href="#" class="close">&times;</a></div>').foundation();
+                $(window).scrollTop(0);
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 var respBody = $.parseJSON(jqXHR.responseText);
