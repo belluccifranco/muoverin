@@ -1,4 +1,4 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
@@ -6,13 +6,13 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 
-<spring:url value="resources/styles/foundation/normalize.css" var="CSSNormalize"/>
-<link rel="stylesheet" href="${CSSNormalize}">
-<spring:url value="resources/styles/foundation/foundation.min.css" var="CSSFoundation"/>
-<link rel="stylesheet" href="${CSSFoundation}">
-<spring:url value="resources/styles/foundation/foundation-icons/foundation-icons.css" var="CSSFoundationIcons"/>
-<link rel="stylesheet" href="${CSSFoundationIcons}">
-<spring:url value="resources/styles/select2/select2.css" var="CSSSelect2"/>
-<link rel="stylesheet" href="${CSSSelect2}">
 
-<link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon"/>
+<link rel="stylesheet" href="<c:url value="/resources/styles/foundation/normalize.css"/>">
+
+<link rel="stylesheet" href="<c:url value="/resources/styles/foundation/foundation.min.css"/>">
+
+<link rel="stylesheet" href="<c:url value="/resources/styles/foundation/foundation-icons/foundation-icons.css"/>">
+
+<link rel="stylesheet" href="<c:url value="/resources/styles/select2/select2.css"/>">
+
+<link rel="shortcut icon" href="/resources/images/favicon.ico" type="image/x-icon"/>

@@ -4,13 +4,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
     <head>
-        <jsp:include page="fragments/common-header.jsp"/>
-        <spring:url value="resources/styles/main.css" var="CSSMain"/>
-        <link rel="stylesheet" href="${CSSMain}"/>
-        <spring:url value="resources/styles/widgets.css" var="CSSWidgets"/>
-        <link rel="stylesheet" href="${CSSWidgets}"/>
-        <%--<spring:url value="resources/styles/rangeslider.css" var="CSSRangeSlider"/>
-        <link rel="stylesheet" href="${CSSRangeSlider}">--%>
+        <jsp:include page="fragments/common-header.jsp"/>        
+        <link rel="stylesheet" href="<c:url value="/resources/styles/main.css"/>">
+        <link rel="stylesheet" href="<c:url value="/resources/styles/widgets.css"/>">
         <title><spring:message code="message.muoverin" /></title>
     </head>
     <body>
@@ -90,19 +86,9 @@
             </div>
         </div>
     </div>
-    <jsp:include page="fragments/common-footer.jsp"/>
-    <spring:url value="/resources/scripts/public/rangeslider.min.js" var="JSRangeSlider" />
-    <script src="${JSRangeSlider}"></script>
-    <spring:url value="/resources/scripts/jquery-vinilo-search.js" var="JSsearcher" />
-    <script src="${JSsearcher}"></script>
-    <spring:url value="/resources/scripts/jquery-vinilo-playlist.js" var="JSplaylist" />
-    <script src="${JSplaylist}"></script>
-    <spring:url value="/resources/scripts/main.js" var="JSapp" />
-    <script src="${JSapp}"></script>
-    <script type="text/javascript">
-        (function($){
-            var $sp = $('#sound-progress').rangeslider({polyfill: false});
-        })(jQuery);
-    </script>
+    <jsp:include page="fragments/common-footer.jsp"/>    
+    <script src="<c:url value="/resources/scripts/jquery-vinilo-search.js"/>"></script>
+    <script src="<c:url value="/resources/scripts/jquery-vinilo-playlist.js"/>"></script>
+    <script src="<c:url value="/resources/scripts/main.js"/>"></script>        
     </body>
 </html>

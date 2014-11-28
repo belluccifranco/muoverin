@@ -1,17 +1,12 @@
 <!DOCTYPE html>
-<%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
     <head>
         <jsp:include page="fragments/common-header.jsp"/>
-        <spring:url value="resources/styles/uploadSong.css" var="CSSUploadSong"/>
-        <link rel="stylesheet" href="${CSSUploadSong}">
-        <title>Upload a song</title>
-        <style>
-            .select2-container-multi .select2-choices .select2-search-field input {
-                margin-bottom: -3px;
-            }
-        </style>
+        <link rel="stylesheet" href="<c:url value="/resources/styles/uploadSong.css"/>">
+        <title>Upload a song</title>        
     </head>
     <body>        
         <form id="uploadSongForm" data-abide="ajax">
@@ -126,8 +121,7 @@
                 <a class="close-reveal-modal">&#215;</a>
             </div>
 
-            <jsp:include page="fragments/common-footer.jsp"/>
-            <spring:url value="/resources/scripts/uploadSong.js" var="uploadSong"/>        
-            <script src="${uploadSong}"></script>        
+            <jsp:include page="fragments/common-footer.jsp"/>            
+            <script src="<c:url value="/resources/scripts/uploadSong.js"/>"></script>
     </body>
 </html>
