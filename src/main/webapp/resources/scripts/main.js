@@ -75,7 +75,8 @@
 
                 //current list. It can be playing list or a playlist
                 //to reuse the searcher.
-                $currentList: null
+                $currentList: null,
+                $main: $('#main')
             },
             toggleMenu: function() {
                 var self = this;
@@ -103,11 +104,26 @@
                 self.elements.$searchToggle.on('click', function() {
                     self.toggleSearcher();
                 });
+                self.elements.$mainMenu.on('click', 'a#upload', function(e){
+                    var url = $(this).attr('href');
+                    e.preventDefault();
+                    app.addView(url);
+                    app.toggleMenu();
+                });
             },
             init: function() {
                 var self = this;
                 self.bindEvents();
                 self.elements.$currentList = self.elements.$playingList;
+            },
+            addView: function(url) {
+                $.ajax({
+                    url: url,
+                    dataType: 'html',
+                    success: function(data) {
+                        app.elements.$main.html(data);
+                    }
+                });
             }
         };
 
