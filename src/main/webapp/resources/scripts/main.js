@@ -77,6 +77,15 @@
                 //to reuse the searcher.
                 $currentList: null
             },
+            toggleMenu: function() {
+                var self = this;
+                self.elements.$mainMenu.toggle();
+                if (self.elements.$mainMenu.is(':visible')) {
+                    self.elements.$menuToggle.addClass('pressed');
+                } else {
+                    self.elements.$menuToggle.removeClass('pressed');
+                }
+            },
             toggleSearcher: function() {
                 var self = this;
                 self.elements.$mainSearcher.toggle();
@@ -89,7 +98,7 @@
             bindEvents: function() {
                 var self = this;
                 self.elements.$menuToggle.on('click', function(){
-                    self.elements.$mainMenu.toggle();
+                    self.toggleMenu();
                 });
                 self.elements.$searchToggle.on('click', function() {
                     self.toggleSearcher();
