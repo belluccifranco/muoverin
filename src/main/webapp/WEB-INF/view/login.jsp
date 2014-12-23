@@ -32,11 +32,8 @@
                 </div>
             </div>
         </div>
+        <jsp:include page="fragments/common-footer.jsp"/>
+        <script src="<c:url value="/resources/scripts/public/login.js"/>"></script>
     </body>
-    <jsp:include page="fragments/common-footer.jsp"/>
-    <script type="text/javascript">
-        (function ($) {
-            $('input#username').focus();
-        })(jQuery);
-    </script>
+
 </html>
