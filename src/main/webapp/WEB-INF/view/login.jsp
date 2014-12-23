@@ -13,9 +13,8 @@
             <div class="row">
                 <div class="small-12 small-centered medium-5 large-4 columns">
                     <div id="login-form">
-                        <h1 class="title text-center" style="text-transform: uppercase;">
-                        <%--<i class="fi-record"></i>--%>
-                        <img src="resources/images/vinilo.png" alt="logo" style="width: 64px;"> <spring:message code="message.muoverin" />
+                        <h1 class="title text-center">
+                            <img src="resources/images/vinilo.png" alt="logo" style="width: 64px;"> <spring:message code="message.muoverin" />
                         </h1>
                         <c:if test="${not empty error}">
                             <div class="alert-box alert radius">
@@ -36,7 +35,7 @@
     </body>
     <jsp:include page="fragments/common-footer.jsp"/>
     <script type="text/javascript">
-        (function($){
+        (function ($) {
             $('input#username').focus();
         })(jQuery);
     </script>
