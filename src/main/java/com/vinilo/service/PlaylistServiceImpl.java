@@ -13,8 +13,8 @@ public class PlaylistServiceImpl implements PlaylistService {
     private final PlaylistRepository playlistRepository;
 
     @Autowired
-    public PlaylistServiceImpl(PlaylistRepository playlist) {
-        this.playlistRepository = playlist;
+    public PlaylistServiceImpl(PlaylistRepository playlistRepository) {
+        this.playlistRepository = playlistRepository;
     }
 
     @Override
