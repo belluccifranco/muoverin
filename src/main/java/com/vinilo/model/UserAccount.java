@@ -16,7 +16,9 @@ import javax.persistence.OneToMany;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "UserAccount.searchByName", query = "SELECT ua FROM UserAccount ua JOIN FETCH ua.userRoles WHERE ua.username = :name")
+    @NamedQuery(name = "UserAccount.searchByName", query = "SELECT ua FROM UserAccount ua JOIN FETCH ua.userRoles WHERE ua.username = :name"),
+    @NamedQuery(name = "UserAccount.searchAll", query = "SELECT ua FROM UserAccount ua"),
+    @NamedQuery(name = "UserAccount.searchById", query = "SELECT ua FROM UserAccount ua JOIN FETCH ua.userRoles WHERE ua.id_userAccount = :id")
 })
 public class UserAccount implements Serializable {
 

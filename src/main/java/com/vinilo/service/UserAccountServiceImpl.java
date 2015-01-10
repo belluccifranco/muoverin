@@ -36,7 +36,7 @@ public class UserAccountServiceImpl implements UserDetailsService, UserAccountSe
             account = accountRepository.searchByName(username);
         } catch (NoResultException ex) {
             logger.error(ex.getMessage());
-            throw new UsernameNotFoundException("");            
+            throw new UsernameNotFoundException("");
         }
         return this.buildUser(account);
     }
@@ -61,5 +61,22 @@ public class UserAccountServiceImpl implements UserDetailsService, UserAccountSe
     @Transactional
     public UserAccount save(UserAccount userAccount) {
         return accountRepository.save(userAccount);
+    }
+
+    @Override
+    public void remove(UserAccount userAccount) {
+        accountRepository.remove(userAccount);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<UserAccount> searchAll() {
+        return accountRepository.searchAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public UserAccount searchById(long id) {
+        return accountRepository.searchById(id);
     }
 }

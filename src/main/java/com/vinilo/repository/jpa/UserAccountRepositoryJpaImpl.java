@@ -2,6 +2,7 @@ package com.vinilo.repository.jpa;
 
 import com.vinilo.model.UserAccount;
 import com.vinilo.repository.UserAccountRepository;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -24,4 +25,28 @@ public class UserAccountRepositoryJpaImpl implements UserAccountRepository {
     public UserAccount save(UserAccount userAccount) {
         return em.merge(userAccount);
     }
+
+    @Override
+    public void remove(UserAccount userAccount) {
+        UserAccount mergedUserAccount = em.merge(userAccount);
+        em.remove(mergedUserAccount);
+    }
+
+    @Override
+    public List<UserAccount> searchAll() {
+        return em.createNamedQuery("UserAccount.searchAll", UserAccount.class).getResultList();
+    }
+
+    @Override
+    public UserAccount searchById(long id) {
+        TypedQuery<UserAccount> query = em.createNamedQuery("UserAccount.searchById", UserAccount.class);
+        query.setParameter("id", id);
+        List<UserAccount> userAccounts = query.getResultList();
+        if (userAccounts.isEmpty()) {
+            return null;
+        } else {
+            return userAccounts.get(0);
+        }
+    }
+
 }

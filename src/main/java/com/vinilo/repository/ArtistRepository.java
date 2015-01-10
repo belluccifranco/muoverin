@@ -3,17 +3,10 @@ package com.vinilo.repository;
 import com.vinilo.model.Artist;
 import java.util.List;
 
-public interface ArtistRepository {
+public interface ArtistRepository extends BaseRepository<Artist> {
 
-    public List<Artist> searchAll();
-
-    public Artist searchById(long id);
-    
     public Artist searchByName(String name);
-    
+
     public List<Artist> searchByNameLike(String name);
 
-    public Artist save(Artist artist);
-
-    public void remove(Artist artist);
 }

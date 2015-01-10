@@ -3,17 +3,9 @@ package com.vinilo.repository;
 import com.vinilo.model.Album;
 import java.util.List;
 
-public interface AlbumRepository {
+public interface AlbumRepository extends BaseRepository<Album> {
 
-    public List<Album> searchAll();
-
-    public Album searchById(long id);
-
-    public Album save(Album album);
-
-    public void remove(Album album);
-    
     public List<Album> searchByArtists(List<Long> artists_id);
-    
+
     public Album searchByName(String name);
 }
