@@ -30,7 +30,7 @@ public class PlaylistController {
 
     @RequestMapping(value = "/playlist/{id}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody Playlist searchById(@PathVariable Long id) {
+    public @ResponseBody Playlist searchById(@PathVariable long id) {
         return playlistService.searchById(id);
     }
 }

@@ -23,8 +23,7 @@ public class HostingAccountController {
 
     @RequestMapping(value = "/hostings", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody
-    List<HostingAccount> searchAllHostingAccounts() {
+    public @ResponseBody List<HostingAccount> searchAllHostingAccounts() {
         return hostingAccountService.searchAll();
     }
 }

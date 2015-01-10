@@ -22,7 +22,7 @@ public class PlayerController {
     }
 
     @RequestMapping(value = "/player/{idSong}", method = RequestMethod.GET)
-    public void playSong(@PathVariable Long idSong, HttpServletResponse response) {
+    public void playSong(@PathVariable long idSong, HttpServletResponse response) {
         try {
             MegaHandler mh = new MegaHandler();
             String urlStorage = songService.searchById(idSong).getLink().getUrl();
