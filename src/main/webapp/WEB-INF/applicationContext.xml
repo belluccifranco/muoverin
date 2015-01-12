@@ -17,12 +17,12 @@
         
     <context:annotation-config/> 
     <context:property-placeholder/>        
-    <context:component-scan base-package="com.vinilo.controller" />
-    <context:component-scan base-package="com.vinilo.service" />
-    <context:component-scan base-package="com.vinilo.repository" />
-    <context:component-scan base-package="com.vinilo.exception" />
+    <context:component-scan base-package="com.muoverin.controller" />
+    <context:component-scan base-package="com.muoverin.service" />
+    <context:component-scan base-package="com.muoverin.repository" />
+    <context:component-scan base-package="com.muoverin.exception" />
     
-    <bean id="dataPopulator" class="com.vinilo.util.DataPopulator"/>
+    <bean id="dataPopulator" class="com.muoverin.util.DataPopulator"/>
     
     <mvc:resources mapping="/resources/**" location="/resources/"/>    
     
@@ -31,7 +31,7 @@
             <!-- Use the HibernateAware mapper instead of the default -->
             <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
                 <property name="objectMapper">
-                    <bean class="com.vinilo.util.HibernateAwareObjectMapper" />
+                    <bean class="com.muoverin.util.HibernateAwareObjectMapper" />
                 </property>
             </bean>
         </mvc:message-converters>
@@ -83,7 +83,7 @@
         </security:authentication-provider>
     </security:authentication-manager>  
     
-    <bean id="authenticationEntryPoint" class="com.vinilo.util.AjaxAwareAuthenticationEntryPoint">
+    <bean id="authenticationEntryPoint" class="com.muoverin.util.AjaxAwareAuthenticationEntryPoint">
         <constructor-arg name="loginUrl" value="/login"/>
     </bean>
     
@@ -96,7 +96,7 @@
             <property name="jpaVendorAdapter"> 
                 <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" /> 
             </property> 
-            <property name="packagesToScan" value="com.vinilo.model"/>
+            <property name="packagesToScan" value="com.muoverin.model"/>
             <property name="jpaProperties"> 
                 <props> 
                     <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop> 
@@ -119,7 +119,7 @@
     <beans profile="postgresql">
         <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
               p:driverClassName="org.postgresql.Driver"
-              p:url="jdbc:postgresql://localhost/vinilo"
+              p:url="jdbc:postgresql://localhost/muoverin"
               p:username="user"
               p:password="user"/>
             
@@ -128,7 +128,7 @@
             <property name="jpaVendorAdapter">
                 <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>                
             </property>            
-            <property name="packagesToScan" value="com.vinilo.model"/>
+            <property name="packagesToScan" value="com.muoverin.model"/>
             <property name="jpaProperties"> 
                 <props>                
                     <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
@@ -157,7 +157,7 @@
             <property name="jpaVendorAdapter">
                 <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>                
             </property>            
-            <property name="packagesToScan" value="com.vinilo.model"/>
+            <property name="packagesToScan" value="com.muoverin.model"/>
             <property name="jpaProperties"> 
                 <props>                
                     <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
