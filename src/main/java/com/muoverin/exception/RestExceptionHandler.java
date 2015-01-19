@@ -37,28 +37,28 @@ public class RestExceptionHandler {
     }
 
     public ErrorFormInfo buildErrorFormInfo(HttpServletRequest req, BindingResult result) {
-        String errorMessage = localizeErrorMessage("message.errorGeneralInfo");
+        String errorMessage = localizeErrorMessage("message-errorGeneralInfo");
         String errorURL = req.getRequestURL().toString();
-        ErrorFormInfo errorInfo = new ErrorFormInfo(errorURL, errorMessage);
+        ErrorFormInfo errorFormInfo = new ErrorFormInfo(errorURL, errorMessage, result.getObjectName());        
         List<FieldError> fieldErrors = result.getFieldErrors();
-        errorInfo.getFieldErrors().addAll(populateFieldErrors(fieldErrors));
-        return errorInfo;
+        errorFormInfo.getFieldErrors().addAll(populateFieldErrors(fieldErrors));
+        return errorFormInfo;
     }
 
     public List<FieldErrorDTO> populateFieldErrors(List<FieldError> fieldErrorList) {
         List<FieldErrorDTO> fieldErrors = new ArrayList<>();
-        StringBuilder errorMessage = new StringBuilder("");
+        StringBuilder errorMessage = new StringBuilder("");        
 
         for (FieldError fieldError : fieldErrorList) {
-            errorMessage.append(fieldError.getCode()).append(".");
-            errorMessage.append(fieldError.getObjectName()).append(".");
-            errorMessage.append(fieldError.getField());
-
+            String formattedField;
+            errorMessage.append(fieldError.getCode()).append("-");
+            errorMessage.append(fieldError.getObjectName()).append("-");
+            formattedField = fieldError.getField().replace(".", "-");
+            errorMessage.append(formattedField);            
             String localizedErrorMsg = localizeErrorMessage(errorMessage.toString());
-
-            fieldErrors.add(new FieldErrorDTO(fieldError.getField(), localizedErrorMsg));
+            fieldErrors.add(new FieldErrorDTO(formattedField, localizedErrorMsg));
             errorMessage.delete(0, errorMessage.capacity());
-        }
+        }        
         return fieldErrors;
     }
 

@@ -7,14 +7,16 @@ public class ErrorFormInfo {
 
     private String url;
     private String message;
+    private String objectName;
     private List<FieldErrorDTO> fieldErrors = new ArrayList<>();
 
     public ErrorFormInfo() {
     }
 
-    public ErrorFormInfo(String url, String message) {
+    public ErrorFormInfo(String url, String message, String objectName) {
         this.url = url;
         this.message = message;
+        this.objectName = objectName;
     }
 
     public ErrorFormInfo(List<FieldErrorDTO> fieldErrors, String url, String message) {
@@ -37,6 +39,14 @@ public class ErrorFormInfo {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getObjectName() {
+        return objectName;
+    }
+
+    public void setObjectName(String objectName) {
+        this.objectName = objectName;
     }
 
     public List<FieldErrorDTO> getFieldErrors() {

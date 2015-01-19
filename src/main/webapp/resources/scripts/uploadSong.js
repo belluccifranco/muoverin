@@ -1,33 +1,33 @@
-$(document).ready(function() {    
-    var $cbAlbumes = $('#album-combo');
-    var $cbHosting = $('#hosting-combo');
-    var $cbArtists = $('#artist-combo'),
-            $artistsS2Configs = {
-                width: '100%',
-                multiple: true,
-                minimumInputLength: 2,
-                placeholder: 'Select Artists...'
-            },
-    artistsUrl = '/artists',
-            formatArtistDataForS2 = function(obj) {
-                return {
-                    id: obj.id_artist,
-                    text: obj.name
-                }
-            };
+$(document).ready(function () {
+    var $cbArtists = $('#song-artist');
+    var $cbAlbumes = $('#song-album');
+    var $cbHosting = $('#song-link-hostingAccount');
+    var artistsUrl = '/artists';
+    var $artistsS2Configs = {
+        width: '100%',
+        multiple: true,
+        minimumInputLength: 2,
+        placeholder: 'Select Artists...'
+    };
+    var formatArtistDataForS2 = function (obj) {
+        return {
+            id: obj.id_artist,
+            text: obj.name
+        }
+    };
 
     $artistsS2Configs = $.extend($artistsS2Configs, {
         ajax: {
             url: artistsUrl,
             dataType: 'json',
-            data: function(term, page) {
+            data: function (term, page) {
                 return {
                     criteria: term
                 };
             },
-            results: function(data, page) {
+            results: function (data, page) {
                 return {
-                    results: function() {
+                    results: function () {
                         var ret = [], i;
                         for (i = 0; i < data.length; i++) {
                             ret.push(formatArtistDataForS2(data[i]));
@@ -37,14 +37,14 @@ $(document).ready(function() {
                 };
             }
         },
-        initSelection: function(element, callback) {
+        initSelection: function (element, callback) {
             var id = $(element).val();
             if (id !== "") {
                 $.ajax({
                     url: url,
                     data: {id: id.split(',')},
                     dataType: "json"
-                }).done(function(data) {
+                }).done(function (data) {
                     var ret = [], i;
                     for (i = 0; i < data.length; i++) {
                         ret.push(formatArtistDataForS2(data[i]));
@@ -61,7 +61,7 @@ $(document).ready(function() {
 
     $cbArtists.select2($artistsS2Configs);
 
-    $cbArtists.on("change", function(e) {
+    $cbArtists.on("change", function (e) {
         loadAlbumsByArtists(e.val);
     });
 
@@ -74,9 +74,9 @@ $(document).ready(function() {
                 url: url,
                 type: 'get',
                 dataType: 'json',
-                success: function(data) {
+                success: function (data) {
                     var options = '';
-                    $.each(data, function(i, album) {
+                    $.each(data, function (i, album) {
                         options += '<option value="' + album.id_album + '">' + album.name + '</option>';
                     });
                     $cbAlbumes.html(options);
@@ -91,9 +91,9 @@ $(document).ready(function() {
             url: url,
             type: 'get',
             dataType: 'json',
-            success: function(data) {
+            success: function (data) {
                 var options = '';
-                $.each(data, function(i, hosting) {
+                $.each(data, function (i, hosting) {
                     options += '<option value="' + hosting.id_hostingAccount + '">' + hosting.username + '</option>';
                 });
                 $cbHosting.html(options);
@@ -101,68 +101,89 @@ $(document).ready(function() {
         });
     }
 
-    loadHostingCombo();
+    $("#uploadSongForm").on('submit', function (event) {
+        var track = $("#song-track").val();
+        var name = $("#song-name").val();
+        var id_album = $("#song-album").val();
+        var id_hosting = $("#song-link-hostingAccount").val();
+        var url = $("#song-link-url").val();
 
-    $("#uploadSongForm").submit(function(event) {
-        var track = $("#track").val();
-        var name = $("#name").val();
-        var id_album = $("#album-combo").val();
-        var url = $("#url").val();
-        var id_hosting = $("#hosting-combo").val();
-        /*var songJson =
-                {   "name": name,
-                    "album": {
-                        "id_album": id_album
-                    },
-                    "link": {
-                        "url": url,
-                        "hostingAccount": {
-                            "id_hostingAccount": id_hosting
-                        }
-                    }
-                };*/       
-        
         var songJson = {};
         if (name !== "") {
-            songJson.name = name;            
-        }        
+            songJson.name = name;
+        }
         if (id_album !== null) {
             songJson.album = {};
-            songJson.album.id_album = id_album;            
+            songJson.album.id_album = id_album;
         }
-        songJson.link = {};        
+        songJson.link = {};
         if (url !== "") {
-            songJson.link.url = url;            
+            songJson.link.url = url;
         }
         if (id_hosting !== null) {
             songJson.link.hostingAccount = {};
-            songJson.link.hostingAccount.id_hostingAccount = id_hosting;            
+            songJson.link.hostingAccount.id_hostingAccount = id_hosting;
         }
         songJson.track = track;
 
         $.ajax({
             url: "/song",
             data: JSON.stringify(songJson),
-            type: "POST",
-            beforeSend: function(xhr) {
+            type: "post",
+            beforeSend: function (xhr) {
                 xhr.setRequestHeader("Content-Type", "application/json");
             },
-            success: function() {
+            success: function () {
                 $("#mainContainer").prepend('<div data-alert class="alert-box success radius">Song was saved!<a href="#" class="close">&times;</a></div>').foundation();
                 $(window).scrollTop(0);
             },
-            error: function(jqXHR, textStatus, errorThrown) {
-                var respBody = $.parseJSON(jqXHR.responseText);
-
-                $.each(respBody.fieldErrors, function(index, errEntity) {
-                    errEntity.fieldName = errEntity.fieldName.replace(".", "-");
-                    var errorTag = $("#" + errEntity.fieldName + "-error");
-                    errorTag.text(errEntity.fieldError);
-                });
+            error: function (jqXHR, textStatus, errorThrown) {
+                var errorFormInfo = $.parseJSON(jqXHR.responseText);
+                populateCustomFieldErrors(errorFormInfo);
             }
         });
         event.preventDefault();
     });
 
+    $("#artistForm").on('submit', function (event) {
+        var name = $("#artist-name").val();
+        var info = $("#artist-info").val();
+
+        var artistJson = {};
+        if (name !== "") {
+            artistJson.name = name;
+        }
+        if (info !== "") {
+            artistJson.info = info;
+        }
+
+        $.ajax({
+            url: "/artist",
+            data: JSON.stringify(artistJson),
+            type: "post",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Content-Type", "application/json");
+            },
+            success: function () {
+                $('#newArtistModal').foundation('reveal', 'close');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                var errorFormInfo = $.parseJSON(jqXHR.responseText);
+                populateCustomFieldErrors(errorFormInfo);
+            }
+        });
+        event.preventDefault();
+    });
+
+    function populateCustomFieldErrors(errorFormInfo) {
+        $.each(errorFormInfo.fieldErrors, function (index, fieldErrorDTO) {
+            var errorTag = $("#" + errorFormInfo.objectName + "-" + fieldErrorDTO.fieldName + "-error");
+            errorTag.text(fieldErrorDTO.fieldError);
+            errorTag.closest('div').addClass("error");
+
+        });
+    }
+
+    loadHostingCombo();
     $(document).foundation();
 });

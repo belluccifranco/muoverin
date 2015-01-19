@@ -43,8 +43,6 @@ public class Song implements Serializable {
     @Length(min = 1, max = 200)
     private String name;
 
-    private String lyric;
-
     @NotNull
     @ManyToOne
     @JoinColumn(name = "id_album")
@@ -62,10 +60,9 @@ public class Song implements Serializable {
     public Song() {
     }
 
-    public Song(String track, String name, String lyric, Album album, Link link) {
+    public Song(String track, String name, Album album, Link link) {
         this.track = track;
         this.name = name;
-        this.lyric = lyric;
         this.album = album;
         this.link = link;
     }
@@ -92,14 +89,6 @@ public class Song implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getLyric() {
-        return lyric;
-    }
-
-    public void setLyric(String lyric) {
-        this.lyric = lyric;
     }
 
     public Album getAlbum() {
