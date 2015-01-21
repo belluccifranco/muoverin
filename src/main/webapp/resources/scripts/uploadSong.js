@@ -27,13 +27,13 @@ $(document).ready(function () {
             },
             results: function (data, page) {
                 return {
-                    results: function () {
+                    results: (function () {
                         var ret = [], i;
-                        for (i = 0; i < data.length; i++) {
+                        for (i = 0; i < data.length; i += 1) {
                             ret.push(formatArtistDataForS2(data[i]));
                         }
                         return ret;
-                    }()
+                    }())
                 };
             }
         },
