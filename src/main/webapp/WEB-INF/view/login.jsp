@@ -11,7 +11,7 @@
     <body>
         <div id="container">
             <div class="row">
-                <div class="small-12 small-centered medium-5 large-4 columns">
+                <div class="small-12 small-centered medium-6 large-4 columns">
                     <div id="login-form">
                         <h1 class="title text-center">
                             <img src="resources/images/vinilo.png" alt="logo" style="width: 64px;"> <spring:message code="message-muoverin" />
