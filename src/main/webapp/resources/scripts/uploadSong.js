@@ -1,8 +1,9 @@
 $(document).ready(function () {
-    var $cbArtists = $('#song-artist');
-    var $cbAlbumes = $('#song-album');
-    var $cbHosting = $('#song-link-hostingAccount');
-    var artistsUrl = '/artists';
+    var $cbArtistsInSong = $('#song-artist'),
+            $cbArtistsInAlbum = $('#album-artist'),
+            $cbAlbumes = $('#song-album'),
+            $cbHosting = $('#song-link-hostingAccount'),
+            artistsUrl = '/artists';
     var $artistsS2Configs = {
         width: '100%',
         multiple: true,
@@ -15,6 +16,51 @@ $(document).ready(function () {
             text: obj.name
         }
     };
+
+    function loadAlbumsByArtists(id_artists) {
+        if (id_artists.length === 0) {
+            $cbAlbumes.html('');
+        } else {
+            var url = '/albums?artists=' + id_artists.toString();
+            $.ajax({
+                url: url,
+                type: 'get',
+                dataType: 'json',
+                success: function (data) {
+                    var options = '';
+                    $.each(data, function (i, album) {
+                        options += '<option value="' + album.id_album + '">' + album.name + '</option>';
+                    });
+                    $cbAlbumes.html(options);
+                }
+            });
+        }
+    }
+
+    function loadHostingCombo() {
+        var url = '/hostings';
+        $.ajax({
+            url: url,
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+                var options = '';
+                $.each(data, function (i, hosting) {
+                    options += '<option value="' + hosting.id_hostingAccount + '">' + hosting.username + '</option>';
+                });
+                $cbHosting.html(options);
+            }
+        });
+    }
+
+    function populateCustomFieldErrors(errorFormInfo) {
+        $.each(errorFormInfo.fieldErrors, function (index, fieldErrorDTO) {
+            var errorTag = $("#" + errorFormInfo.objectName + "-" + fieldErrorDTO.fieldName + "-error");
+            errorTag.text(fieldErrorDTO.fieldError);
+            errorTag.closest('div').addClass("error");
+
+        });
+    }
 
     $artistsS2Configs = $.extend($artistsS2Configs, {
         ajax: {
@@ -58,48 +104,12 @@ $(document).ready(function () {
             }
         }
     });
+    $cbArtistsInSong.select2($artistsS2Configs);
+    $cbArtistsInAlbum.select2($artistsS2Configs);
 
-    $cbArtists.select2($artistsS2Configs);
-
-    $cbArtists.on("change", function (e) {
+    $cbArtistsInSong.on("change", function (e) {
         loadAlbumsByArtists(e.val);
     });
-
-    function loadAlbumsByArtists(id_artists) {
-        if (id_artists.length === 0) {
-            $cbAlbumes.html('');
-        } else {
-            var url = '/albums?artists=' + id_artists.toString();
-            $.ajax({
-                url: url,
-                type: 'get',
-                dataType: 'json',
-                success: function (data) {
-                    var options = '';
-                    $.each(data, function (i, album) {
-                        options += '<option value="' + album.id_album + '">' + album.name + '</option>';
-                    });
-                    $cbAlbumes.html(options);
-                }
-            });
-        }
-    }
-
-    function loadHostingCombo() {
-        var url = '/hostings';
-        $.ajax({
-            url: url,
-            type: 'get',
-            dataType: 'json',
-            success: function (data) {
-                var options = '';
-                $.each(data, function (i, hosting) {
-                    options += '<option value="' + hosting.id_hostingAccount + '">' + hosting.username + '</option>';
-                });
-                $cbHosting.html(options);
-            }
-        });
-    }
 
     $("#uploadSongForm").on('submit', function (event) {
         var track = $("#song-track").val();
@@ -166,6 +176,7 @@ $(document).ready(function () {
             },
             success: function () {
                 $('#newArtistModal').foundation('reveal', 'close');
+                $('#artistForm')[0].reset();
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 var errorFormInfo = $.parseJSON(jqXHR.responseText);
@@ -175,14 +186,37 @@ $(document).ready(function () {
         event.preventDefault();
     });
 
-    function populateCustomFieldErrors(errorFormInfo) {
-        $.each(errorFormInfo.fieldErrors, function (index, fieldErrorDTO) {
-            var errorTag = $("#" + errorFormInfo.objectName + "-" + fieldErrorDTO.fieldName + "-error");
-            errorTag.text(fieldErrorDTO.fieldError);
-            errorTag.closest('div').addClass("error");
+    $("#albumForm").on('submit', function (event) {
+        
+        var name = $("#album-name").val();
+        var releaseYear = $("#album-releaseYear").val();
 
+        var artistJson = {};
+        if (name !== "") {
+            artistJson.name = name;
+        }
+        if (releaseYear !== "") {
+            artistJson.info = releaseYear;
+        }
+
+        $.ajax({
+            url: "/artist",
+            data: JSON.stringify(artistJson),
+            type: "post",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Content-Type", "application/json");
+            },
+            success: function () {
+                $('#newArtistModal').foundation('reveal', 'close');
+                $('#artistForm')[0].reset();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                var errorFormInfo = $.parseJSON(jqXHR.responseText);
+                populateCustomFieldErrors(errorFormInfo);
+            }
         });
-    }
+        event.preventDefault();
+    });
 
     loadHostingCombo();
     $(document).foundation();

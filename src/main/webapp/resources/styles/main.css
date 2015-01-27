@@ -1,16 +1,19 @@
 /* Small screens: Define mobile styles */
 @media only screen {
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-        background: #222;
-        color: white;
-    }
-
     #container {
         height: 100%;
         width: 100%;
         background: #777;
         color: white;
+    }
+
+    .reveal-modal {
+        background: #777;
+    }
+
+    h2 {
+        color: white;
+        text-align: center;
     }
 
     h1#title {
@@ -69,7 +72,7 @@
     }
 
     label {
-        color: inherit;
+        color: white;
         font-size: inherit;
     }
 
@@ -165,7 +168,7 @@
         -moz-box-shadow: inset 0px 0px 23px 4px rgba(0,0,0,0.75);
         box-shadow: inset 0px 0px 23px 4px rgba(0,0,0,0.75);*/
     }
-    
+
     .without-margin-right {
         margin-right: 0 !important;
     }

@@ -14,8 +14,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
-
 
 @Entity
 @NamedQueries({
@@ -26,7 +26,7 @@ import org.hibernate.validator.constraints.Length;
 })
 public class Album implements Serializable {
 
-    @Id    
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id_album;
 
@@ -34,9 +34,8 @@ public class Album implements Serializable {
     @Length(min = 1, max = 200)
     private String name;
 
-    private int releaseYear;
-
-    private int numberOfSongs;
+    @Pattern(regexp = "^\\s*\\d*\\s*$")
+    private String releaseYear;
 
     @Valid
     @ManyToMany(mappedBy = "albums", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
@@ -48,10 +47,9 @@ public class Album implements Serializable {
     public Album() {
     }
 
-    public Album(String name, int releaseYear, int numberOfSongs) {
+    public Album(String name, String releaseYear) {
         this.name = name;
         this.releaseYear = releaseYear;
-        this.numberOfSongs = numberOfSongs;
     }
 
     public long getId_album() {
@@ -70,20 +68,12 @@ public class Album implements Serializable {
         this.name = name;
     }
 
-    public int getReleaseYear() {
+    public String getReleaseYear() {
         return releaseYear;
     }
 
-    public void setReleaseYear(int releaseYear) {
+    public void setReleaseYear(String releaseYear) {
         this.releaseYear = releaseYear;
-    }
-
-    public int getNumberOfSongs() {
-        return numberOfSongs;
-    }
-
-    public void setNumberOfSongs(int numberOfSongs) {
-        this.numberOfSongs = numberOfSongs;
     }
 
     public List<Artist> getArtists() {

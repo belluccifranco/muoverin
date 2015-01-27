@@ -84,7 +84,7 @@ public class DataPopulator {
     }
 
     private void insertAlbums() {
-        Album album1 = new Album("Highway to Hell", 1979, 10);
+        Album album1 = new Album("Highway to Hell", "1979");
         List<Album> acdcAlbumes = new ArrayList<>();
         acdcAlbumes.add(album1);
         Artist artist1 = artistService.searchByName("AC DC");
@@ -94,7 +94,7 @@ public class DataPopulator {
         album1.setArtists(artistsHighwayToHell);
         albumService.save(album1);
 
-        Album album2 = new Album("Presense", 1976, 7);
+        Album album2 = new Album("Presense", "1976");
         List<Album> ledZepplinAlbumes = new ArrayList<>();
         ledZepplinAlbumes.add(album2);
         Artist artist2 = artistService.searchByName("Led Zeppelin");
