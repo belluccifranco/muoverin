@@ -142,7 +142,7 @@
 
                 //Devuelvo la vista activa al holder de vistas
                 if ('' !== main.elements.activeViewId) {
-                    main.elements.views[main.elements.activeViewId].appendTo(main.elements.$viewsHolder);
+                    main.elements.views[main.elements.activeViewId].addClass('hide').appendTo(main.elements.$viewsHolder);
                 }
 
                 //cargo la vista que indico.
