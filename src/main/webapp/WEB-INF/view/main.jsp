@@ -37,7 +37,7 @@
                     <div>
                         <h1 class="title"><i class="fi-record"></i> Menu</h1>
                         <ul class="list list-hover">
-                            <li class="first"><a href="#"><i class="fi-music"></i> &nbsp;Playing</a></li>
+                            <li class="first"><a id="playing-list-button" href="#"><i class="fi-music"></i> &nbsp;Playing</a></li>
                             <li><a id="upload"><i class="fi-upload"></i> &nbsp;Upload a Song</a></li>
                             <li class="last"><a href="<spring:url value='j_spring_security_logout'/>"><i class="fi-power"></i> &nbsp;Logout</a></li>
                         </ul>
@@ -52,12 +52,6 @@
                     </div>
                 </nav>
                 <div id="main">
-                    <div class="jq-vinilo-playlist">
-                        <div class="jq-vinilo-playlist-list-container">
-                            <ul class="jq-vinilo-playlist-list list play-list" style="height: 100%;" id="playing-list">
-                            </ul>
-                        </div>
-                    </div>
                 </div>
                 <div id="main-searcher">
                     <div id="song-searcher" class="jq-vinilo-search">
@@ -86,7 +80,10 @@
                 </div>
             </div>
         </div>
-        <jsp:include page="uploadSong.jsp"/>
+        <div class="hide" id="viewsHolder">
+            <jsp:include page="playingList.jsp"/>
+            <jsp:include page="uploadSong.jsp"/>
+        </div>
         <jsp:include page="fragments/common-footer.jsp"/>
         <script src="<c:url value="/resources/scripts/jquery-vinilo-search.js"/>"></script>
         <script src="<c:url value="/resources/scripts/jquery-vinilo-playlist.js"/>"></script>

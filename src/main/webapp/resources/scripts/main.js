@@ -74,7 +74,10 @@
                 //current list. It can be playing list or a playlist
                 //to reuse the searcher.
                 $currentList: null,
-                $main: $('#main')
+                $main: $('#main'),
+                $viewsHolder: $('#viewsHolder'),
+                activeViewId: '',
+                views: []
             },
             toggleMenu: function () {
                 var self = this;
@@ -107,18 +110,48 @@
                     main.addView("uploadSong");
                     main.toggleMenu();
                 });
+                self.elements.$mainMenu.on('click', 'a#playing-list-button', function (e) {
+                    e.preventDefault();
+                    main.addView("playingList");
+                    main.toggleMenu();
+                });
             },
             init: function () {
                 var self = this;
                 self.bindEvents();
                 self.elements.$currentList = self.elements.$playingList;
+                self.addView('playingList');
             },
             addView: function (id_view) {
-                //find the div and put in $main
-                //remove hide class
-                var view = $("#" + id_view);
-                main.elements.$main.html(view);
-                view.removeClass("hide");
+                var hashedView;
+                //si la vista que quiero cargar es la vista activa no hago nada.
+                if (id_view === main.elements.activeViewId) {
+                    return;
+                }
+
+                //si la vista no esta en el array de views, y si existe en el markup
+                //la agrego al array de views
+                if (main.elements.views[id_view] === undefined) {
+                    hashedView = $("#" + id_view);
+                    if (hashedView.length > 0) {
+                        main.elements.views[id_view] = hashedView;
+                    } else {
+                        throw ['view "', id_view, '" does not exist.'].join('');
+                    }
+                }
+
+                //Devuelvo la vista activa al holder de vistas
+                if ('' !== main.elements.activeViewId) {
+                    main.elements.views[main.elements.activeViewId].appendTo(main.elements.$viewsHolder);
+                }
+
+                //cargo la vista que indico.
+                main.elements.views[id_view].appendTo(main.elements.$main);
+                main.elements.views[id_view].removeClass("hide");
+                main.elements.activeViewId = id_view;
+
+                /*main.elements.$main.html(view);
+                view.removeClass("hide");*/
             }
         };
 
