@@ -71,12 +71,12 @@
         right: 0;
         bottom: 3rem;
         overflow-y: auto;
-    }
-
-    label {
+    }       
+    
+    label {        
         color: white;
         font-size: inherit;
-    }
+    }    
 
     span#menu-toggle {
         cursor: pointer;
