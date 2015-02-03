@@ -123,35 +123,31 @@
                 self.addView('playingList');
             },
             addView: function (id_view) {
-                var hashedView;
-                //si la vista que quiero cargar es la vista activa no hago nada.
+                var hashedView;                
+                //if the view that I want to switch is the active view, nothing happen.
                 if (id_view === main.elements.activeViewId) {
                     return;
                 }
-
-                //si la vista no esta en el array de views, y si existe en el markup
-                //la agrego al array de views
+                
+                //if the view isn't in the views array and if it exist in markup, I add it to the views array.
                 if (main.elements.views[id_view] === undefined) {
                     hashedView = $("#" + id_view);
                     if (hashedView.length > 0) {
                         main.elements.views[id_view] = hashedView;
                     } else {
-                        throw ['view "', id_view, '" does not exist.'].join('');
+                        return;
                     }
                 }
-
-                //Devuelvo la vista activa al holder de vistas
+                
+                //return the active view to the views holder.
                 if ('' !== main.elements.activeViewId) {
                     main.elements.views[main.elements.activeViewId].addClass('hide').appendTo(main.elements.$viewsHolder);
                 }
-
-                //cargo la vista que indico.
+                
+                //load selected view
                 main.elements.views[id_view].appendTo(main.elements.$main);
                 main.elements.views[id_view].removeClass("hide");
-                main.elements.activeViewId = id_view;
-
-                /*main.elements.$main.html(view);
-                view.removeClass("hide");*/
+                main.elements.activeViewId = id_view;               
             }
         };
 
