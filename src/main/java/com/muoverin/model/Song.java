@@ -23,11 +23,13 @@ import org.hibernate.validator.constraints.Length;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Song.searchAll", query = "SELECT s FROM Song s"),
-    @NamedQuery(name = "Song.searchByNameAndAlbum", query = "SELECT s FROM Song s WHERE s.name = :name AND s.album.id_album = :id_album"),
-    @NamedQuery(name = "Song.searchById", query = "SELECT s FROM Song s JOIN FETCH s.link WHERE s.id_song = :id"),
-    @NamedQuery(name = "Song.searchByCriteria", query = "SELECT son FROM Song son JOIN son.album alb JOIN alb.artists art WHERE UPPER(son.name) LIKE :songName OR UPPER(son.album.name) LIKE :albumName OR UPPER(art.name) LIKE :artistName"),
-    @NamedQuery(name = "Song.countCriteria", query = "SELECT count(son) FROM Song son JOIN son.album alb JOIN alb.artists art WHERE UPPER(son.name) LIKE :songName OR UPPER(son.album.name) LIKE :albumName OR UPPER(art.name) LIKE :artistName")
+    @NamedQuery(name = "Song.allSongs", query = "SELECT s FROM Song s"),
+    @NamedQuery(name = "Song.songByNameAndAlbum", query = "SELECT s FROM Song s WHERE UPPER(s.name) = :name AND s.album.id_album = :id_album"),
+    @NamedQuery(name = "Song.songById", query = "SELECT s FROM Song s JOIN FETCH s.link WHERE s.id_song = :id"),
+    @NamedQuery(name = "Song.songsByCriteria", query = "SELECT son FROM Song son JOIN son.album alb JOIN alb.artists art "
+            + "WHERE UPPER(son.name) LIKE :songName OR UPPER(son.album.name) LIKE :albumName OR UPPER(art.name) LIKE :artistName"),
+    @NamedQuery(name = "Song.countCriteria", query = "SELECT count(son) FROM Song son JOIN son.album alb JOIN alb.artists art "
+            + "WHERE UPPER(son.name) LIKE :songName OR UPPER(son.album.name) LIKE :albumName OR UPPER(art.name) LIKE :artistName")
 })
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id_song")
 public class Song implements Serializable {

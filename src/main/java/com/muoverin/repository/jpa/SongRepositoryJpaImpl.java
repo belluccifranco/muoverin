@@ -17,12 +17,12 @@ public class SongRepositoryJpaImpl implements SongRepository {
 
     @Override
     public List<Song> searchAll() {
-        return em.createNamedQuery("Song.searchAll", Song.class).getResultList();
+        return em.createNamedQuery("Song.allSongs", Song.class).getResultList();
     }
 
     @Override
     public Song searchById(long id) {
-        TypedQuery<Song> query = em.createNamedQuery("Song.searchById", Song.class);
+        TypedQuery<Song> query = em.createNamedQuery("Song.songById", Song.class);
         query.setParameter("id", id);
         List<Song> songs = query.getResultList();
         if (songs.isEmpty()) {
@@ -55,7 +55,7 @@ public class SongRepositoryJpaImpl implements SongRepository {
         countQuery.setParameter("artistName", criteria);
         pagination.setTotalRows(countQuery.getSingleResult());
 
-        TypedQuery<Song> criteriaQuery = em.createNamedQuery("Song.searchByCriteria", Song.class);
+        TypedQuery<Song> criteriaQuery = em.createNamedQuery("Song.songsByCriteria", Song.class);
         criteriaQuery.setParameter("songName", criteria);
         criteriaQuery.setParameter("albumName", criteria);
         criteriaQuery.setParameter("artistName", criteria);
@@ -78,8 +78,8 @@ public class SongRepositoryJpaImpl implements SongRepository {
 
     @Override
     public Song searchByNameAndAlbum(String name, long id_album) {
-        TypedQuery<Song> query = em.createNamedQuery("Song.searchByNameAndAlbum", Song.class);
-        query.setParameter("name", name);
+        TypedQuery<Song> query = em.createNamedQuery("Song.songByNameAndAlbum", Song.class);
+        query.setParameter("name", name.toUpperCase());
         query.setParameter("id_album", id_album);
         List<Song> songs = query.getResultList();
         if (songs.isEmpty()) {
