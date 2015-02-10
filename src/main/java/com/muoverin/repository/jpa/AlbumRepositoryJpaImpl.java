@@ -16,12 +16,12 @@ public class AlbumRepositoryJpaImpl implements AlbumRepository {
 
     @Override
     public List<Album> searchAll() {
-        return em.createNamedQuery("Album.searchAll", Album.class).getResultList();
+        return em.createNamedQuery("Album.allAlbums", Album.class).getResultList();
     }
 
     @Override
     public Album searchById(long id) {
-        TypedQuery<Album> query = em.createNamedQuery("Album.searchById", Album.class);
+        TypedQuery<Album> query = em.createNamedQuery("Album.albumById", Album.class);
         query.setParameter("id", id);
         List<Album> albums = query.getResultList();
         if (albums.isEmpty()) {
@@ -44,7 +44,7 @@ public class AlbumRepositoryJpaImpl implements AlbumRepository {
 
     @Override
     public List<Album> searchByArtists(List<Long> artists_id) {
-        TypedQuery<Album> query = em.createNamedQuery("Album.searchByArtist", Album.class);
+        TypedQuery<Album> query = em.createNamedQuery("Album.albumsByArtists", Album.class);
         query.setParameter("artists_id", artists_id);
         query.setParameter("artists_count", (long) artists_id.size());
         return query.getResultList();
@@ -52,8 +52,22 @@ public class AlbumRepositoryJpaImpl implements AlbumRepository {
 
     @Override
     public Album searchByName(String name) {
-        TypedQuery<Album> query = em.createNamedQuery("Album.searchByName", Album.class);
+        TypedQuery<Album> query = em.createNamedQuery("Album.albumByName", Album.class);
         query.setParameter("name", name);
+        List<Album> albums = query.getResultList();
+        if (albums.isEmpty()) {
+            return null;
+        } else {
+            return albums.get(0);
+        }
+    }
+
+    @Override
+    public Album searchByNameAndArtists(String name, List<Long> artists_id) {
+        TypedQuery<Album> query = em.createNamedQuery("Album.albumByNameAndArtists", Album.class);
+        query.setParameter("name", name);
+        query.setParameter("artists_id", artists_id);
+        query.setParameter("artists_count", (long) artists_id.size());
         List<Album> albums = query.getResultList();
         if (albums.isEmpty()) {
             return null;

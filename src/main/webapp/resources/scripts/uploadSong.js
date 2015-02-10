@@ -1,6 +1,6 @@
 $(document).ready(function () {
     var $cbArtistsInSong = $('#song-artist'),
-            $cbArtistsInAlbum = $('#album-artist'),
+            $cbArtistsInAlbum = $('#album-artists'),
             $cbAlbumes = $('#song-album'),
             $cbHosting = $('#song-link-hostingAccount'),
             artistsUrl = '/artists';
@@ -112,11 +112,11 @@ $(document).ready(function () {
     });
 
     $("#uploadSongForm").on('submit', function (event) {
-        var track = $("#song-track").val();
-        var name = $("#song-name").val();
-        var id_album = $("#song-album").val();
-        var id_hosting = $("#song-link-hostingAccount").val();
-        var url = $("#song-link-url").val();
+        var track = $("#song-track").val(),
+                name = $("#song-name").val(),
+                id_album = $("#song-album").val(),
+                id_hosting = $("#song-link-hostingAccount").val(),
+                url = $("#song-link-url").val();
 
         var songJson = {};
         if (name !== "") {
@@ -140,9 +140,7 @@ $(document).ready(function () {
             url: "/song",
             data: JSON.stringify(songJson),
             type: "post",
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("Content-Type", "application/json");
-            },
+            contentType: 'application/json',
             success: function () {
                 $("#mainContainer").prepend('<div data-alert class="alert-box success radius">Song was saved!<a href="#" class="close">&times;</a></div>').foundation();
                 $(window).scrollTop(0);
@@ -156,8 +154,8 @@ $(document).ready(function () {
     });
 
     $("#artistForm").on('submit', function (event) {
-        var name = $("#artist-name").val();
-        var info = $("#artist-info").val();
+        var name = $("#artist-name").val(),
+                info = $("#artist-info").val();
 
         var artistJson = {};
         if (name !== "") {
@@ -171,9 +169,7 @@ $(document).ready(function () {
             url: "/artist",
             data: JSON.stringify(artistJson),
             type: "post",
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("Content-Type", "application/json");
-            },
+            contentType: 'application/json',
             success: function () {
                 $('#newArtistModal').foundation('reveal', 'close');
                 $('#artistForm')[0].reset();
@@ -187,28 +183,33 @@ $(document).ready(function () {
     });
 
     $("#albumForm").on('submit', function (event) {
-        
-        var name = $("#album-name").val();
-        var releaseYear = $("#album-releaseYear").val();
+        var artists = $("#album-artists").select2("val"),
+                name = $("#album-name").val(),
+                releaseYear = $("#album-releaseYear").val();
 
-        var artistJson = {};
+        var albumJson = {};
+        if (artists !== "") {
+            albumJson.artists = [];
+            for (i = 0; i < artists.length; i++) {
+                var artistObj = {id_artist: artists[i]};
+                albumJson.artists[i] = artistObj;
+            }
+        }
         if (name !== "") {
-            artistJson.name = name;
+            albumJson.name = name;
         }
         if (releaseYear !== "") {
-            artistJson.info = releaseYear;
+            albumJson.releaseYear = releaseYear;
         }
 
         $.ajax({
-            url: "/artist",
-            data: JSON.stringify(artistJson),
+            url: "/album",
+            data: JSON.stringify(albumJson),
             type: "post",
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("Content-Type", "application/json");
-            },
+            contentType: 'application/json',
             success: function () {
-                $('#newArtistModal').foundation('reveal', 'close');
-                $('#artistForm')[0].reset();
+                $('#newAlbumModal').foundation('reveal', 'close');
+                $('#albumForm')[0].reset();
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 var errorFormInfo = $.parseJSON(jqXHR.responseText);

@@ -1,18 +1,20 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
 <div id="newAlbumModal" class="reveal-modal tiny" data-reveal>
     <h2>Add new Album</h2>    
     <div>
         <form id="albumForm" data-abide>
             <div class="small-12">
                 <div>
-                    <label for="album-artist">Artist:</label>                        
-                    <input id="album-artist" type="hidden" required>
-                    <small id="album-artist-error" class="error"><spring:message code="NotNull-song-artist"/></small>
+                    <label for="album-artists">Artist:</label>                        
+                    <input id="album-artists" type="hidden" required>
+                    <small id="album-artists-error" class="error"><spring:message code="NotNull-song-artist"/></small>
                 </div>
 
                 <div>                
                     <label for="album-name">Name:</label>
                     <input id="album-name" type="text" required>
-                    <small id="album-name-error" class="error"><spring:message code="NotNull-song-album-name"/></small>
+                    <small id="album-name-error" class="error"><spring:message code="NotNull-album-name"/></small>
                 </div>
 
                 <div>

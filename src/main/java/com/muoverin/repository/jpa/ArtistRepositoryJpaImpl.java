@@ -16,12 +16,12 @@ public class ArtistRepositoryJpaImpl implements ArtistRepository {
 
     @Override
     public List<Artist> searchAll() {
-        return em.createNamedQuery("Artist.searchAll", Artist.class).getResultList();
+        return em.createNamedQuery("Artist.allAlbums", Artist.class).getResultList();
     }
 
     @Override
     public Artist searchById(long id) {
-        TypedQuery<Artist> query = em.createNamedQuery("Artist.searchById", Artist.class);
+        TypedQuery<Artist> query = em.createNamedQuery("Artist.artistById", Artist.class);
         query.setParameter("id", id);
         List<Artist> artists = query.getResultList();
         if (artists.isEmpty()) {
@@ -44,7 +44,7 @@ public class ArtistRepositoryJpaImpl implements ArtistRepository {
 
     @Override
     public Artist searchByName(String name) {
-        TypedQuery<Artist> query = em.createNamedQuery("Artist.searchByName", Artist.class);
+        TypedQuery<Artist> query = em.createNamedQuery("Artist.artistByName", Artist.class);
         query.setParameter("name", name);
         List<Artist> artists = query.getResultList();
         if (artists.isEmpty()) {
@@ -56,7 +56,7 @@ public class ArtistRepositoryJpaImpl implements ArtistRepository {
 
     @Override
     public List<Artist> searchByNameLike(String name) {
-        TypedQuery<Artist> query = em.createNamedQuery("Artist.searchByNameLike", Artist.class);        
+        TypedQuery<Artist> query = em.createNamedQuery("Artist.artistByNameLike", Artist.class);        
         query.setParameter("name", "%" + name.toUpperCase() + "%");
         return query.getResultList();        
     }

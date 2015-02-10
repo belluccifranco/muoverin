@@ -1,3 +1,5 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
 <div id="newArtistModal" class="reveal-modal tiny" data-reveal>
     <h2>Add new Artist</h2>
     <div>
