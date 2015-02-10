@@ -21,7 +21,7 @@ import org.hibernate.validator.constraints.Length;
 @NamedQueries({
     @NamedQuery(name = "Album.allAlbums", query = "SELECT a FROM Album a"),
     @NamedQuery(name = "Album.albumById", query = "SELECT a FROM Album a JOIN FETCH a.songs WHERE a.id_album = :id"),
-    @NamedQuery(name = "Album.albumByName", query = "SELECT a FROM Album a WHERE a.name = :name"),
+    @NamedQuery(name = "Album.albumByName", query = "SELECT a FROM Album a WHERE UPPER(a.name) = :name"),
     @NamedQuery(name = "Album.albumsByArtists", query = "SELECT alb FROM Album alb JOIN alb.artists art "
             + "WHERE art.id_artist IN (:artists_id) "
             + "AND alb.id_album IN (SELECT alb2.id_album "
@@ -29,7 +29,7 @@ import org.hibernate.validator.constraints.Length;
             + "GROUP BY alb2 HAVING count(art2) = :artists_count) "
             + "GROUP BY alb HAVING count(art) = :artists_count"),
     @NamedQuery(name = "Album.albumByNameAndArtists", query = "SELECT alb FROM Album alb JOIN alb.artists art "
-            + "WHERE art.id_artist IN (:artists_id) AND alb.name = :name "
+            + "WHERE art.id_artist IN (:artists_id) AND UPPER(alb.name) = :name "
             + "AND alb.id_album IN (SELECT alb2.id_album "
             + "FROM Album alb2 JOIN alb2.artists art2 "
             + "GROUP BY alb2 HAVING count(art2) = :artists_count) "

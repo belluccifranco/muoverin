@@ -53,7 +53,7 @@ public class AlbumRepositoryJpaImpl implements AlbumRepository {
     @Override
     public Album searchByName(String name) {
         TypedQuery<Album> query = em.createNamedQuery("Album.albumByName", Album.class);
-        query.setParameter("name", name);
+        query.setParameter("name", name.toUpperCase());
         List<Album> albums = query.getResultList();
         if (albums.isEmpty()) {
             return null;
@@ -65,7 +65,7 @@ public class AlbumRepositoryJpaImpl implements AlbumRepository {
     @Override
     public Album searchByNameAndArtists(String name, List<Long> artists_id) {
         TypedQuery<Album> query = em.createNamedQuery("Album.albumByNameAndArtists", Album.class);
-        query.setParameter("name", name);
+        query.setParameter("name", name.toUpperCase());
         query.setParameter("artists_id", artists_id);
         query.setParameter("artists_count", (long) artists_id.size());
         List<Album> albums = query.getResultList();
