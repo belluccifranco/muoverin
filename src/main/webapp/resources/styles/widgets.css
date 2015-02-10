@@ -2,7 +2,6 @@ ul.list {
     list-style-type: none;
     list-style-position: inside;
     background: #AAA;
-    color: #000;
     margin: 0;
     padding: 5px;
     font-size: 1.3rem;
@@ -10,11 +9,12 @@ ul.list {
     overflow-y: auto;
     overflow-x: hidden;
     /*-webkit-overflow-scrolling: touch;*/
+    color: #FFF;
 }
 
 ul.list li {
     margin-bottom: 2px;
-    background: #777;
+    background: #555;
     padding: 5px 7px 5px 7px;
     -webkit-box-shadow: 0px 0px 6px 0px rgba(50, 50, 50, 0.68);
     -moz-box-shadow: 0px 0px 6px 0px rgba(50, 50, 50, 0.68);
@@ -24,13 +24,14 @@ ul.list li {
     text-overflow: ellipsis;*/
 }
 
-ul.list.list-hover li:hover {
-    background: #888;
+ul.list.list-hover li:hover, ul.list.list-hover li.selected {
+    background: #CCC;
+    color: #000;
 }
 
-ul.list.list-hover li:hover a {
-    color: #C3DFE9;
-}
+/*ul.list.list-hover li:hover a {
+
+}*/
 
 ul.list li.first {
     -webkit-border-top-left-radius: 5px;
@@ -70,10 +71,15 @@ ul.list li a {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    color: inherit;
 }
 
 .size1_5x {
     font-size: 1.5em;
+}
+
+.size1_7x {
+    font-size: 1.7em;
 }
 
 .size2x {
@@ -108,17 +114,18 @@ ul.play-list li .item-img {
     float: left;
 }
 
+ul.play-list li.playing {
+    background: #AAEEFF;
+    color: #333;
+}
+
 ul.play-list li.selected {
     background: #0066CC !important;
     color: white;
 }
 
-ul.play-list li.playing {
-    background: #AAEEFF;
-}
-
 ul.play-list li.selected.playing {
-    border: 0.5rem solid #AAEEFF;
+    border: 0.4rem solid #AAEEFF;
 }
 
 ul.play-list li .item-info {

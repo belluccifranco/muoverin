@@ -4,7 +4,7 @@
 
 <div id="uploadSong" class="hide">
     <form id="uploadSongForm" data-abide="ajax">                               
-        <div id="mainContainer" class="small-12 small-centered medium-5 large-4 columns">
+        <div id="mainContainer" class="small-12 small-centered medium-10 large-8 columns">
             <div>
                 <label for="song-track">Track Nº:</label>
                 <input id="song-track" type="text" pattern="integer">

@@ -55,7 +55,7 @@
             nextButtonSelector: '#jqvp-next',
             getDataElementHtml: function (obj) {
                 var itmTpl = '';
-                itmTpl += '<div class="item-img"><i class="fi-music size2x"></i></div>';
+                itmTpl += '<div class="item-img"><i class="fi-music size1_7x"></i></div>';
                 itmTpl += '<div class="item-info">';
                 itmTpl += '    <div class="other-info ellipsis">' + getArtists(obj) + ' - ' + obj.album.name + '</div>';
                 itmTpl += '    <div class="main-info ellipsis">' + obj.name + '</div>';
@@ -109,11 +109,15 @@
                     e.preventDefault();
                     main.addView("uploadSong");
                     main.toggleMenu();
+                    $(this).closest('li').siblings().removeClass('selected')
+                        .end().addClass('selected');
                 });
                 self.elements.$mainMenu.on('click', 'a#playing-list-button', function (e) {
                     e.preventDefault();
                     main.addView("playingList");
                     main.toggleMenu();
+                    $(this).closest('li').siblings().removeClass('selected')
+                        .end().addClass('selected');
                 });
             },
             init: function () {
@@ -123,12 +127,12 @@
                 self.addView('playingList');
             },
             addView: function (id_view) {
-                var hashedView;                
+                var hashedView;
                 //if the view that I want to switch is the active view, nothing happen.
                 if (id_view === main.elements.activeViewId) {
                     return;
                 }
-                
+
                 //if the view isn't in the views array and if it exist in markup, I add it to the views array.
                 if (main.elements.views[id_view] === undefined) {
                     hashedView = $("#" + id_view);
@@ -138,16 +142,16 @@
                         return;
                     }
                 }
-                
+
                 //return the active view to the views holder.
                 if ('' !== main.elements.activeViewId) {
                     main.elements.views[main.elements.activeViewId].addClass('hide').appendTo(main.elements.$viewsHolder);
                 }
-                
+
                 //load selected view
                 main.elements.views[id_view].appendTo(main.elements.$main);
                 main.elements.views[id_view].removeClass("hide");
-                main.elements.activeViewId = id_view;               
+                main.elements.activeViewId = id_view;
             }
         };
 

@@ -37,7 +37,7 @@
                     <div>
                         <h1 class="title"><i class="fi-record"></i> Menu</h1>
                         <ul class="list list-hover">
-                            <li class="first"><a id="playing-list-button" href="#"><i class="fi-music"></i> &nbsp;Playing</a></li>
+                            <li class="first selected"><a id="playing-list-button" href="#"><i class="fi-music"></i> &nbsp;Playing</a></li>
                             <li><a id="upload"><i class="fi-upload"></i> &nbsp;Upload a Song</a></li>
                             <li class="last"><a href="<spring:url value='j_spring_security_logout'/>"><i class="fi-power"></i> &nbsp;Logout</a></li>
                         </ul>
