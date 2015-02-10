@@ -45,7 +45,7 @@ public class ArtistRepositoryJpaImpl implements ArtistRepository {
     @Override
     public Artist searchByName(String name) {
         TypedQuery<Artist> query = em.createNamedQuery("Artist.artistByName", Artist.class);
-        query.setParameter("name", name);
+        query.setParameter("name", name.toUpperCase());
         List<Artist> artists = query.getResultList();
         if (artists.isEmpty()) {
             return null;
