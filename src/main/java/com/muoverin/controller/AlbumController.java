@@ -10,18 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 
-@Controller
+@RestController
 public class AlbumController {
 
     private final AlbumService albumService;
@@ -35,16 +33,16 @@ public class AlbumController {
 
     @RequestMapping(value = "/albums", method = RequestMethod.GET, params = {"artists"})
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody List<Album> searchByArtist(@RequestParam(value = "artists") List<Long> artists) {
+    public List<Album> searchByArtist(@RequestParam(value = "artists") List<Long> artists) {
         return albumService.searchByArtists(artists);
     }
 
-    @RequestMapping(value = "/album", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/album", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public void addNew(@RequestBody @Valid Album album, HttpServletResponse response, WebRequest webRequest, BindingResult result) {
         List<Artist> artists = new ArrayList<>();
         for (Artist artist : album.getArtists()) {
-            Artist art = artistService.searchById(artist.getId_artist());             
+            Artist art = artistService.searchById(artist.getId_artist());
             art.getAlbums().add(album);
             artists.add(art);
         }

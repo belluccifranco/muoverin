@@ -3,6 +3,10 @@ $(document).ready(function () {
             $cbArtistsInAlbum = $('#album-artists'),
             $cbAlbumes = $('#song-album'),
             $cbHosting = $('#song-link-hostingAccount'),
+            $songForm = $("#songForm"),
+            $artistForm = $("#artistForm"),
+            $albumForm = $("#albumForm"),
+            $hostingForm = $("#hostingForm"),
             artistsUrl = '/artists';
     var $artistsS2Configs = {
         width: '100%',
@@ -86,8 +90,7 @@ $(document).ready(function () {
         initSelection: function (element, callback) {
             var id = $(element).val();
             if (id !== "") {
-                $.ajax({
-                    url: url,
+                $.ajax({                    
                     data: {id: id.split(',')},
                     dataType: "json"
                 }).done(function (data) {
@@ -107,34 +110,20 @@ $(document).ready(function () {
     $cbArtistsInSong.select2($artistsS2Configs);
     $cbArtistsInAlbum.select2($artistsS2Configs);
 
-    $cbArtistsInSong.on("change", function (e) {
-        loadAlbumsByArtists(e.val);
+    $cbArtistsInSong.on("change", function (event) {
+        loadAlbumsByArtists(event.val);
     });
 
-    $("#uploadSongForm").on('submit', function (event) {
-        var track = $("#song-track").val(),
-                name = $("#song-name").val(),
-                id_album = $("#song-album").val(),
-                id_hosting = $("#song-link-hostingAccount").val(),
-                url = $("#song-link-url").val();
-
+    $songForm.on('submit', function (event) {
         var songJson = {};
-        if (name !== "") {
-            songJson.name = name;
-        }
-        if (id_album !== null) {
-            songJson.album = {};
-            songJson.album.id_album = id_album;
-        }
+        songJson.name = $("#song-name").val();
+        songJson.album = {};
+        songJson.album.id_album = $("#song-album").val();
         songJson.link = {};
-        if (url !== "") {
-            songJson.link.url = url;
-        }
-        if (id_hosting !== null) {
-            songJson.link.hostingAccount = {};
-            songJson.link.hostingAccount.id_hostingAccount = id_hosting;
-        }
-        songJson.track = track;
+        songJson.link.url = $("#song-link-url").val();
+        songJson.link.hostingAccount = {};
+        songJson.link.hostingAccount.id_hostingAccount = $("#song-link-hostingAccount").val();
+        songJson.track = $("#song-track").val();
 
         $.ajax({
             url: "/song",
@@ -143,6 +132,7 @@ $(document).ready(function () {
             contentType: 'application/json',
             success: function () {
                 $("#mainContainer").prepend('<div data-alert class="alert-box success radius">Song was saved!<a href="#" class="close">&times;</a></div>').foundation();
+                $songForm[0].reset();
                 $(window).scrollTop(0);
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -153,17 +143,10 @@ $(document).ready(function () {
         event.preventDefault();
     });
 
-    $("#artistForm").on('submit', function (event) {
-        var name = $("#artist-name").val(),
-                info = $("#artist-info").val();
-
+    $artistForm.on('submit', function (event) {
         var artistJson = {};
-        if (name !== "") {
-            artistJson.name = name;
-        }
-        if (info !== "") {
-            artistJson.info = info;
-        }
+        artistJson.name = $("#artist-name").val();
+        artistJson.info = $("#artist-info").val();
 
         $.ajax({
             url: "/artist",
@@ -172,7 +155,7 @@ $(document).ready(function () {
             contentType: 'application/json',
             success: function () {
                 $('#newArtistModal').foundation('reveal', 'close');
-                $('#artistForm')[0].reset();
+                $artistForm[0].reset();
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 var errorFormInfo = $.parseJSON(jqXHR.responseText);
@@ -182,25 +165,16 @@ $(document).ready(function () {
         event.preventDefault();
     });
 
-    $("#albumForm").on('submit', function (event) {
-        var artists = $("#album-artists").select2("val"),
-                name = $("#album-name").val(),
-                releaseYear = $("#album-releaseYear").val();
-
+    $albumForm.on('submit', function (event) {
+        var artists = $("#album-artists").select2("val");
         var albumJson = {};
-        if (artists !== "") {
-            albumJson.artists = [];
-            for (i = 0; i < artists.length; i++) {
-                var artistObj = {id_artist: artists[i]};
-                albumJson.artists[i] = artistObj;
-            }
+        albumJson.artists = [];
+        for (i = 0; i < artists.length; i++) {
+            var artistObj = {id_artist: artists[i]};
+            albumJson.artists[i] = artistObj;
         }
-        if (name !== "") {
-            albumJson.name = name;
-        }
-        if (releaseYear !== "") {
-            albumJson.releaseYear = releaseYear;
-        }
+        albumJson.name = $("#album-name").val();
+        albumJson.releaseYear = $("#album-releaseYear").val();
 
         $.ajax({
             url: "/album",
@@ -209,7 +183,32 @@ $(document).ready(function () {
             contentType: 'application/json',
             success: function () {
                 $('#newAlbumModal').foundation('reveal', 'close');
-                $('#albumForm')[0].reset();
+                $albumForm[0].reset();
+                loadAlbumsByArtists($cbArtistsInAlbum.val());
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                var errorFormInfo = $.parseJSON(jqXHR.responseText);
+                populateCustomFieldErrors(errorFormInfo);
+            }
+        });
+        event.preventDefault();
+    });
+
+    $hostingForm.on('submit', function (event) {
+        var hostingJson = {};
+        hostingJson.url = $("#hosting-url").val();
+        hostingJson.username = $("#hosting-username").val();
+        hostingJson.password = $("#hosting-password").val();
+
+        $.ajax({
+            url: "/hosting",
+            data: JSON.stringify(hostingJson),
+            type: "post",
+            contentType: 'application/json',
+            success: function () {
+                $('#newHostingModal').foundation('reveal', 'close');
+                $hostingForm[0].reset();
+                loadHostingCombo();
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 var errorFormInfo = $.parseJSON(jqXHR.responseText);

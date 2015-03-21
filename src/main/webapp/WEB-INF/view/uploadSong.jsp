@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div id="uploadSong" class="hide">
-    <form id="uploadSongForm" data-abide="ajax">                               
+    <form id="songForm" data-abide="ajax">                               
         <div id="mainContainer" class="small-12 small-centered medium-10 large-8 columns">
             <div>
                 <label for="song-track">Track Nº:</label>
@@ -25,7 +25,7 @@
                         <small id="song-artist-error" class="error"><spring:message code="NotNull-song-artist"/></small>
                     </div>
                     <div class="small-2 columns">
-                        <a href="#" class="button postfix" data-reveal-id="newArtistModal"><i class="fi-plus"></i> Add</a>
+                        <a href="#" class="button postfix" data-reveal-id="newArtistModal"><i class="fi-plus"></i></a>
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                         <small id="song-album-error" class="error"><spring:message code="NotNull-song-album"/></small>
                     </div>
                     <div class="small-2 columns">
-                        <a href="#" class="button postfix" data-reveal-id="newAlbumModal"><i class="fi-plus"></i> Add</a>
+                        <a href="#" class="button postfix" data-reveal-id="newAlbumModal"><i class="fi-plus"></i></a>
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                         <small id="song-link-hostingAccount-error" class="error"><spring:message code="NotNull-song-link-hostingAccount"/></small>
                     </div>
                     <div class="small-2 columns">
-                        <a href="#" class="button postfix" data-reveal-id="newHostingModal"><i class="fi-plus"></i> Add</a>
+                        <a href="#" class="button postfix" data-reveal-id="newHostingModal"><i class="fi-plus"></i></a>
                     </div>
                 </div>
             </div>

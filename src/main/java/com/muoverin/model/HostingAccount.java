@@ -10,6 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.URL;
 
 @Entity
 @NamedQueries({
@@ -23,10 +27,18 @@ public class HostingAccount implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id_hostingAccount;
 
+    @URL
+    @NotNull
+    @Length(min = 1, max = 250)
     private String url;
 
+    @NotNull
+    @Email
+    @Length(min = 1, max = 200)
     private String username;
 
+    @NotNull
+    @Length(min = 1, max = 200)
     private String password;
 
     @OneToMany(mappedBy = "hostingAccount", cascade = CascadeType.REMOVE)

@@ -12,7 +12,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
@@ -20,7 +19,7 @@ import org.hibernate.validator.constraints.Length;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Album.allAlbums", query = "SELECT a FROM Album a"),
-    @NamedQuery(name = "Album.albumById", query = "SELECT a FROM Album a JOIN FETCH a.songs WHERE a.id_album = :id"),
+    @NamedQuery(name = "Album.albumById", query = "SELECT a FROM Album a LEFT JOIN FETCH a.songs WHERE a.id_album = :id"),
     @NamedQuery(name = "Album.albumByName", query = "SELECT a FROM Album a WHERE UPPER(a.name) = :name"),
     @NamedQuery(name = "Album.albumsByArtists", query = "SELECT alb FROM Album alb JOIN alb.artists art "
             + "WHERE art.id_artist IN (:artists_id) "

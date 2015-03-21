@@ -35,7 +35,7 @@
             <div id="main-container">
                 <nav id="main-menu" class="menu">
                     <div>
-                        <h1 class="title"><i class="fi-record"></i> Menu</h1>
+                        <h1 class="title"><i class="fi-list"></i> Menu</h1>
                         <ul class="list list-hover">
                             <li class="first selected"><a id="playing-list-button" href="#"><i class="fi-music"></i> &nbsp;Playing</a></li>
                             <li><a id="upload"><i class="fi-upload"></i> &nbsp;Upload a Song</a></li>
