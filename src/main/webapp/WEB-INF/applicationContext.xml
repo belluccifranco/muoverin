@@ -24,7 +24,10 @@
     
     <bean id="dataPopulator" class="com.muoverin.util.DataPopulator"/>
     
-    <mvc:resources mapping="/resources/**" location="/resources/"/>    
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
+    
+    <mvc:view-controller path="/" view-name="main"/>
+    <mvc:view-controller path="/upload" view-name="uploadSong"/>
     
     <mvc:annotation-driven>
         <mvc:message-converters>
