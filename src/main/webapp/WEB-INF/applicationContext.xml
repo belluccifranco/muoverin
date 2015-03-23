@@ -15,8 +15,7 @@
        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
         
-    <context:annotation-config/> 
-    <context:property-placeholder/>        
+    <context:annotation-config/>    
     <context:component-scan base-package="com.muoverin.controller" />
     <context:component-scan base-package="com.muoverin.service" />
     <context:component-scan base-package="com.muoverin.repository" />
@@ -148,12 +147,16 @@
         <tx:annotation-driven />        
     </beans>          
     
-    <beans profile="postgresqlOpenshift">
+    <beans profile="postgresqlHeroku">
+        <bean class="java.net.URI" id="dbUrl">
+            <constructor-arg value="#{systemEnvironment['DATABASE_URL']}"/>
+        </bean>
+        
         <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
               p:driverClassName="org.postgresql.Driver"
-              p:url="jdbc:postgresql://${OPENSHIFT_POSTGRESQL_DB_HOST}:${OPENSHIFT_POSTGRESQL_DB_PORT}/${OPENSHIFT_APP_NAME}"
-              p:username="${OPENSHIFT_POSTGRESQL_DB_USERNAME}"
-              p:password="${OPENSHIFT_POSTGRESQL_DB_PASSWORD}"/>
+              p:url="#{ 'jdbc:postgresql://' + @dbUrl.getHost() + ':' + @dbUrl.getPort() + @dbUrl.getPath() }"
+              p:username="#{ @dbUrl.getUserInfo().split(':')[0] }"
+              p:password="#{ @dbUrl.getUserInfo().split(':')[1] }"/>
         
         <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
             <property name="dataSource" ref="dataSource" /> 

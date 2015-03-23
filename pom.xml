@@ -181,25 +181,14 @@
                     <path>/</path>
                 </configuration>
             </plugin>
-        </plugins>
-    </build>
-    
-    <profiles>
-        <profile>
-            <id>openshift</id>
-            <build>
-                <finalName>${project.artifactId}</finalName>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-war-plugin</artifactId>
-                        <version>2.5</version>
-                        <configuration>
-                            <outputDirectory>webapps</outputDirectory>
-                            <warName>ROOT</warName>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles> 
+            <plugin>
+                <groupId>com.heroku.sdk</groupId>
+                <artifactId>heroku-maven-plugin</artifactId>
+                <version>0.3.5</version>
+                <configuration>
+                    <appName>muoverin</appName>
+                </configuration>
+            </plugin>            
+        </plugins>        
+    </build> 
 </project>
