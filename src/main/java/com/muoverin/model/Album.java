@@ -12,9 +12,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @NamedQueries({
@@ -40,8 +40,8 @@ public class Album implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id_album;
 
-    @NotNull
-    @Length(min = 1, max = 200)
+    @NotEmpty
+    @Length(max = 250)
     private String name;
 
     @Pattern(regexp = "^\\s*\\d*\\s*$")

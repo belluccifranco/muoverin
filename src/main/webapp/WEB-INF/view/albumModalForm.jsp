@@ -14,7 +14,7 @@
                 <div>                
                     <label for="album-name">Name:</label>
                     <input id="album-name" type="text" required>
-                    <small id="album-name-error" class="error"><spring:message code="NotNull-album-name"/></small>
+                    <small id="album-name-error" class="error"><spring:message code="NotEmpty-album-name"/></small>
                 </div>
 
                 <div>

@@ -11,8 +11,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @NamedQueries({
@@ -27,8 +27,8 @@ public class Artist implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id_artist;
 
-    @NotNull
-    @Length(min = 1, max = 200)
+    @NotEmpty
+    @Length(max = 250)
     private String name;
 
     private String info;

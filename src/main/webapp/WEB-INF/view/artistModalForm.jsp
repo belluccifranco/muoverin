@@ -8,7 +8,7 @@
                 <div>                
                     <label for="artist-name">Name:</label>
                     <input id="artist-name" type="text" required>
-                    <small id="artist-name-error" class="error"><spring:message code="NotNull-artist-name"/></small>
+                    <small id="artist-name-error" class="error"><spring:message code="NotEmpty-artist-name"/></small>
                 </div>
 
                 <div>

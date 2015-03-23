@@ -25,13 +25,13 @@ public class HostingAccountController {
         this.hostingAccountService = hostingAccountService;
     }
 
-    @RequestMapping(value = "/hostings", method = RequestMethod.GET)
+    @RequestMapping(value = "/hostingAccounts", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<HostingAccount> searchAllHostingAccounts() {
         return hostingAccountService.searchAll();
     }
     
-    @RequestMapping(value = "/hosting", method = RequestMethod.POST)
+    @RequestMapping(value = "/hostingAccount", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public void addNew(@RequestBody @Valid HostingAccount hosting, HttpServletResponse response, WebRequest webRequest, BindingResult result) {
         HostingAccount createdHosting = hostingAccountService.save(hosting);

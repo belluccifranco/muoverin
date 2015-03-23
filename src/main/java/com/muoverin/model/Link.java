@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
@@ -20,8 +21,8 @@ public class Link implements Serializable {
     private long id_link;
 
     @URL
-    @NotNull
-    @Length(min = 1, max = 250)
+    @NotEmpty
+    @Length(max = 250)
     private String url;
 
     @NotNull

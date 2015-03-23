@@ -6,7 +6,7 @@ $(document).ready(function () {
             $songForm = $("#songForm"),
             $artistForm = $("#artistForm"),
             $albumForm = $("#albumForm"),
-            $hostingForm = $("#hostingForm"),
+            $hostingAccountForm = $("#hostingAccountForm"),
             artistsUrl = '/artists';
     var $artistsS2Configs = {
         width: '100%',
@@ -42,7 +42,7 @@ $(document).ready(function () {
     }
 
     function loadHostingCombo() {
-        var url = '/hostings';
+        var url = '/hostingAccounts';
         $.ajax({
             url: url,
             type: 'get',
@@ -194,20 +194,20 @@ $(document).ready(function () {
         event.preventDefault();
     });
 
-    $hostingForm.on('submit', function (event) {
+    $hostingAccountForm.on('submit', function (event) {
         var hostingJson = {};
-        hostingJson.url = $("#hosting-url").val();
-        hostingJson.username = $("#hosting-username").val();
-        hostingJson.password = $("#hosting-password").val();
+        hostingJson.url = $("#hostingAccount-url").val();
+        hostingJson.username = $("#hostingAccount-username").val();
+        hostingJson.password = $("#hostingAccount-password").val();
 
         $.ajax({
-            url: "/hosting",
+            url: "/hostingAccount",
             data: JSON.stringify(hostingJson),
             type: "post",
             contentType: 'application/json',
             success: function () {
-                $('#newHostingModal').foundation('reveal', 'close');
-                $hostingForm[0].reset();
+                $('#newHostingAccountModal').foundation('reveal', 'close');
+                $hostingAccountForm[0].reset();
                 loadHostingCombo();
             },
             error: function (jqXHR, textStatus, errorThrown) {

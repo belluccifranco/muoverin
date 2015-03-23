@@ -20,6 +20,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @NamedQueries({
@@ -41,8 +42,8 @@ public class Song implements Serializable {
     @Pattern(regexp = "^\\s*\\d*\\s*$")
     private String track;
 
-    @NotNull
-    @Length(min = 1, max = 200)
+    @NotEmpty
+    @Length(max = 250)
     private String name;
 
     @NotNull

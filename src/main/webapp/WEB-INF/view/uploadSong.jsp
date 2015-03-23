@@ -14,7 +14,7 @@
             <div>                
                 <label for="song-name">Name:</label>
                 <input id="song-name" type="text" required>
-                <small id="song-name-error" class="error"><spring:message code="NotNull-song-name"/></small>
+                <small id="song-name-error" class="error"><spring:message code="NotEmpty-song-name"/></small>
             </div>
 
             <div>
@@ -53,7 +53,7 @@
                         <small id="song-link-hostingAccount-error" class="error"><spring:message code="NotNull-song-link-hostingAccount"/></small>
                     </div>
                     <div class="small-2 columns">
-                        <a href="#" class="button postfix" data-reveal-id="newHostingModal"><i class="fi-plus"></i></a>
+                        <a href="#" class="button postfix" data-reveal-id="newHostingAccountModal"><i class="fi-plus"></i></a>
                     </div>
                 </div>
             </div>
@@ -70,5 +70,5 @@
 
     <jsp:include page="artistModalForm.jsp"/>
     <jsp:include page="albumModalForm.jsp"/>
-    <jsp:include page="hostingModalForm.jsp"/>    
+    <jsp:include page="hostingAccountModalForm.jsp"/>    
 </div>
