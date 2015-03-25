@@ -116,6 +116,13 @@
         margin-bottom: 0 !important;
     }
 
+    #main-logo {
+        width: 40px;
+        float: left;
+        margin-top: 5px;
+        margin-left: 5px;
+    }
+
     .title-main {
         float: left;
         display: inline-block;
@@ -203,6 +210,11 @@
 
     #title-text {
         display: inline;
+    }
+
+    #main-logo {
+        width: 50px;
+        float: left;
     }
 
     #main-container {
