@@ -50,7 +50,7 @@ $(document).ready(function () {
             success: function (data) {
                 var options = '';
                 $.each(data, function (i, hosting) {
-                    options += '<option value="' + hosting.id_hostingAccount + '">' + hosting.username + '</option>';
+                    options += '<option value="' + hosting.id_hostingAccount + '">' + hosting.name + '</option>';
                 });
                 $cbHosting.html(options);
             }
@@ -196,6 +196,7 @@ $(document).ready(function () {
 
     $hostingAccountForm.on('submit', function (event) {
         var hostingJson = {};
+        hostingJson.name = $("#hostingAccount-name").val();
         hostingJson.url = $("#hostingAccount-url").val();
         hostingJson.username = $("#hostingAccount-username").val();
         hostingJson.password = $("#hostingAccount-password").val();

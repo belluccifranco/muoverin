@@ -61,18 +61,11 @@ public class DataPopulator {
         customerAccounts.clear();
         customerAccounts.add(userFranco);
         customerRoles.get(0).setUserAccounts(customerAccounts);
-        accountService.save(userFranco);
-        customerRoles.clear();
-        customerRoles.add(userFacundo.getUserRoles().get(0));
-        UserAccount userTest = new UserAccount("test@test.com", "e10adc3949ba59abbe56e057f20f883e", customerRoles);
-        customerAccounts.clear();
-        customerAccounts.add(userTest);
-        customerRoles.get(0).setUserAccounts(customerAccounts);
-        accountService.save(userTest);
+        accountService.save(userFranco);        
     }
 
     private void insertHostingAccounts() {
-        HostingAccount hosting1 = new HostingAccount("https://g.api.mega.co.nz", "cuentavinilo01@gmail.com", "Ninguna01");
+        HostingAccount hosting1 = new HostingAccount("Mega", "https://g.api.mega.co.nz", "cuentavinilo01@gmail.com", "Ninguna01");
         hostingAccountService.save(hosting1);
     }
 
@@ -106,7 +99,7 @@ public class DataPopulator {
     }
 
     private void insertSongs() {
-        HostingAccount hosting1 = hostingAccountService.searchByUsername("cuentavinilo01@gmail.com");
+        HostingAccount hosting1 = hostingAccountService.searchByName("Mega");
 
         Link link1 = new Link("https://mega.co.nz/#!ilhghR7D!bXAvBGk_Z-7nFWZeHr0meC5Ce_4yFqHF38AnVmO7gew", hosting1);
         Link link2 = new Link("https://mega.co.nz/#!ipQ1HabR!eFikkFla4rIOqPpCJVgxlCSNaRoQGCadYk17qgBrFFY", hosting1);

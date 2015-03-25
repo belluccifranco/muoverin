@@ -5,20 +5,26 @@
     <div>
         <form id="hostingAccountForm" data-abide>
             <div class="small-12">
+                <div>                
+                    <label for="hostingAccount-name">Name:</label>
+                    <input id="hostingAccount-name" type="text" required>
+                    <small id="hostingAccount-name-error" class="error"><spring:message code="NotEmpty-hostingAccount-name"/></small>
+                </div>
+
                 <div>
-                    <label for="hosting-url">Site URL:</label>
+                    <label for="hostingAccount-url">Site URL:</label>
                     <input id="hostingAccount-url" type="url" required>
                     <small id="hostingAccount-url-error" class="error"><spring:message code="URL-hostingAccount-url"/></small>
                 </div>
-                
+
                 <div>                
-                    <label for="hosting-username">Username:</label>
-                    <input id="hostingAccount-username" type="email" required>
+                    <label for="hostingAccount-username">Username:</label>
+                    <input id="hostingAccount-username" type="text" required>
                     <small id="hostingAccount-username-error" class="error"><spring:message code="NotEmpty-hostingAccount-username"/></small>
                 </div>
-                
+
                 <div>                
-                    <label for="hosting-password">Password:</label>
+                    <label for="hostingAccount-password">Password:</label>
                     <input id="hostingAccount-password" type="password" required>
                     <small id="hostingAccount-password-error" class="error"><spring:message code="NotEmpty-hostingAccount-password"/></small>
                 </div>

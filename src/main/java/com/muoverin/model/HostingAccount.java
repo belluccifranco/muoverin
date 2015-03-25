@@ -19,13 +19,18 @@ import org.hibernate.validator.constraints.URL;
 @NamedQueries({
     @NamedQuery(name = "HostingAccount.searchAll", query = "SELECT ha FROM HostingAccount ha"),
     @NamedQuery(name = "HostingAccount.searchById", query = "SELECT ha FROM HostingAccount ha LEFT JOIN FETCH ha.links WHERE ha.id_hostingAccount = :id"),
-    @NamedQuery(name = "HostingAccount.searchByUsername", query = "SELECT ha FROM HostingAccount ha WHERE ha.username = :username")
+    @NamedQuery(name = "HostingAccount.searchByUsername", query = "SELECT ha FROM HostingAccount ha WHERE ha.username = :username"),
+    @NamedQuery(name = "HostingAccount.searchByName", query = "SELECT ha FROM HostingAccount ha WHERE UPPER(ha.name) = :name")
 })
 public class HostingAccount implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id_hostingAccount;
+
+    @NotEmpty
+    @Length(max = 250)
+    private String name;
 
     @URL
     @NotEmpty
@@ -47,10 +52,11 @@ public class HostingAccount implements Serializable {
     public HostingAccount() {
     }
 
-    public HostingAccount(String url, String username, String password) {        
+    public HostingAccount(String name, String url, String username, String password) {
+        this.name = name;
         this.url = url;
         this.username = username;
-        this.password = password;        
+        this.password = password;
     }
 
     public long getId_hostingAccount() {
@@ -59,6 +65,14 @@ public class HostingAccount implements Serializable {
 
     public void setId_hostingAccount(long id_hostingAccount) {
         this.id_hostingAccount = id_hostingAccount;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getUrl() {

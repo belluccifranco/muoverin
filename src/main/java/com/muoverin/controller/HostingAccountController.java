@@ -31,10 +31,11 @@ public class HostingAccountController {
         return hostingAccountService.searchAll();
     }
     
+    
     @RequestMapping(value = "/hostingAccount", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public void addNew(@RequestBody @Valid HostingAccount hosting, HttpServletResponse response, WebRequest webRequest, BindingResult result) {
-        HostingAccount createdHosting = hostingAccountService.save(hosting);
-        response.setHeader("Location", webRequest.getContextPath() + "/hosting/" + createdHosting.getId_hostingAccount());
+    public void addNew(@RequestBody @Valid HostingAccount hostingAccount, HttpServletResponse response, WebRequest webRequest, BindingResult result) {
+        HostingAccount createdHostingAccount = hostingAccountService.save(hostingAccount);
+        response.setHeader("Location", webRequest.getContextPath() + "/hostingAccount/" + createdHostingAccount.getId_hostingAccount());
     }
 }

@@ -5,5 +5,7 @@ import com.muoverin.model.HostingAccount;
 public interface HostingAccountRepository extends BaseRepository<HostingAccount> {
 
     public HostingAccount searchByUsername(String username);
+    
+    public HostingAccount searchByName(String name);
 
 }

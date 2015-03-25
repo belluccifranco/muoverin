@@ -54,4 +54,16 @@ public class HostingAccountRepositoryImpl implements HostingAccountRepository {
         }
     }
 
+    @Override
+    public HostingAccount searchByName(String name) {
+        TypedQuery<HostingAccount> query = em.createNamedQuery("HostingAccount.searchByName", HostingAccount.class);
+        query.setParameter("name", name.toUpperCase());
+        List<HostingAccount> hostingAccounts = query.getResultList();
+        if (hostingAccounts.isEmpty()) {
+            return null;
+        } else {
+            return hostingAccounts.get(0);
+        }
+    }
+
 }
