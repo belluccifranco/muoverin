@@ -1,22 +1,16 @@
 package com.muoverin.service;
 
-import com.muoverin.exception.BusinessValidationException;
 import com.muoverin.model.Artist;
 import com.muoverin.repository.ArtistRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.BeanPropertyBindingResult;
-import org.springframework.validation.BindingResult;
 
 @Service
 public class ArtistServiceImpl implements ArtistService {
 
     private final ArtistRepository artistRepository;
-    
-    @Autowired
-    private ArtistValidator artistValidator;
 
     @Autowired
     public ArtistServiceImpl(ArtistRepository artistRepository) {
@@ -38,13 +32,6 @@ public class ArtistServiceImpl implements ArtistService {
     @Override
     @Transactional
     public Artist save(Artist artist) {
-        BindingResult result = new BeanPropertyBindingResult(artist, "artist");        
-        
-        artistValidator.validate(artist, result);
-        if (result.hasErrors()) {
-            throw new BusinessValidationException(result);
-        }
-        
         return artistRepository.save(artist);
     }
 

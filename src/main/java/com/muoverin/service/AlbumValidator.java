@@ -8,15 +8,22 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
 @Service
-public class AlbumValidator {
+public class AlbumValidator implements Validator {
 
     @Autowired
     private AlbumRepository albumRepository;
 
-    public void validate(Album album, Errors errors) {
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return Album.class.equals(clazz);
+    }
 
+    @Override
+    public void validate(Object target, Errors errors) {
+        Album album = (Album) target;
         if (album.getArtists().isEmpty()) {
             errors.rejectValue("artists", "Required");
         } else {
@@ -24,7 +31,6 @@ public class AlbumValidator {
             for (Artist artist : album.getArtists()) {
                 artists_id.add(artist.getId_artist());
             }
-
             if (albumRepository.searchByNameAndArtists(album.getName(), artists_id) != null) {
                 errors.rejectValue("name", "Duplicate");
             }

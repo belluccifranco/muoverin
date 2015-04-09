@@ -10,13 +10,11 @@
                 <input id="song-track" type="text" pattern="integer">
                 <small id="song-track-error" class="error"><spring:message code="Pattern-song-track"/></small>
             </div>
-
             <div>                
                 <label for="song-name">Name:</label>
                 <input id="song-name" type="text" required>
                 <small id="song-name-error" class="error"><spring:message code="NotEmpty-song-name"/></small>
             </div>
-
             <div>
                 <label for="song-artist">Artist:</label>
                 <div class="row collapse">
@@ -29,7 +27,6 @@
                     </div>
                 </div>
             </div>
-
             <div>
                 <label for="song-album">Album:</label>
                 <div class="row collapse">
@@ -43,7 +40,6 @@
                     </div>
                 </div>
             </div>
-
             <div>
                 <label for="song-link-hostingAccount">Hosting:</label>
                 <div class="row collapse">
@@ -57,14 +53,12 @@
                     </div>
                 </div>
             </div>
-
             <div>
                 <label for="song-link-url">Link:</label>
                 <input id="song-link-url" type="url" required>
                 <small id="song-link-url-error" class="error"><spring:message code="URL-song-link-url"/></small>
             </div>
-
-            <input id="save-button" class="button radius"  type="submit" value="Save!"/>
+            <input id="save-button" class="button expand radius"  type="submit" value="Save!"/>
         </div>
     </form>
 

@@ -14,6 +14,8 @@
 
 <script src="<c:url value="/resources/scripts/public/soundmanager2/soundmanager2-nodebug-jsmin.js"/>"></script>
 
+<script src="<c:url value="/resources/scripts/public/utils.js"/>"></script>
+
 <%--
 <script src="<c:url value="/resources/scripts/public/soundmanager2/soundmanager2-jsmin.js"/>"></script>
 --%> 

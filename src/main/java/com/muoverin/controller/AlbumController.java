@@ -1,8 +1,10 @@
 package com.muoverin.controller;
 
+import com.muoverin.exception.BusinessValidationException;
 import com.muoverin.model.Album;
 import com.muoverin.model.Artist;
 import com.muoverin.service.AlbumService;
+import com.muoverin.service.AlbumValidator;
 import com.muoverin.service.ArtistService;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +28,9 @@ public class AlbumController {
     private final ArtistService artistService;
 
     @Autowired
+    private AlbumValidator albumValidator;
+
+    @Autowired
     public AlbumController(AlbumService albumService, ArtistService artistService) {
         this.albumService = albumService;
         this.artistService = artistService;
@@ -37,7 +42,7 @@ public class AlbumController {
         return albumService.searchByArtists(artists);
     }
 
-    @RequestMapping(value = "/album", method = RequestMethod.POST)
+    @RequestMapping(value = "/albums", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public void addNew(@RequestBody @Valid Album album, HttpServletResponse response, WebRequest webRequest, BindingResult result) {
         List<Artist> artists = new ArrayList<>();
@@ -47,6 +52,10 @@ public class AlbumController {
             artists.add(art);
         }
         album.setArtists(artists);
+        albumValidator.validate(album, result);
+        if (result.hasErrors()) {
+            throw new BusinessValidationException(result);
+        }
         Album createdAlbum = albumService.save(album);
         response.setHeader("Location", webRequest.getContextPath() + "/album/" + createdAlbum.getId_album());
     }

@@ -15,10 +15,15 @@ public class UserAccountRepositoryJpaImpl implements UserAccountRepository {
     private EntityManager em;
 
     @Override
-    public UserAccount searchByName(String name) {
-        TypedQuery<UserAccount> query = em.createNamedQuery("UserAccount.searchByName", UserAccount.class);
-        query.setParameter("name", name);
-        return query.getSingleResult();
+    public UserAccount searchByUsername(String username) {
+        TypedQuery<UserAccount> query = em.createNamedQuery("UserAccount.searchByUsername", UserAccount.class);
+        query.setParameter("username", username);
+        List<UserAccount> userAccounts = query.getResultList();
+        if (userAccounts.isEmpty()) {
+            return null;
+        } else {
+            return userAccounts.get(0);
+        }
     }
 
     @Override

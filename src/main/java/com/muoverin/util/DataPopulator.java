@@ -50,18 +50,18 @@ public class DataPopulator {
         UserRole roleCustomer = new UserRole("ROLE_CUSTOMER");
         List<UserRole> customerRoles = new ArrayList<>();
         customerRoles.add(roleCustomer);
-        UserAccount userFacundo = new UserAccount("fssl2004@gmail.com", "e10adc3949ba59abbe56e057f20f883e", customerRoles);
+        UserAccount userFacundo = new UserAccount("fssl2004@gmail.com", "123456", "123456", customerRoles);
         List<UserAccount> customerAccounts = new ArrayList<>();
         customerAccounts.add(userFacundo);
         roleCustomer.setUserAccounts(customerAccounts);
         userFacundo = accountService.save(userFacundo);
         customerRoles.clear();
         customerRoles.add(userFacundo.getUserRoles().get(0));
-        UserAccount userFranco = new UserAccount("belluccifranco@gmail.com", "e10adc3949ba59abbe56e057f20f883e", customerRoles);
+        UserAccount userFranco = new UserAccount("belluccifranco@gmail.com", "123456", "123456", customerRoles);
         customerAccounts.clear();
         customerAccounts.add(userFranco);
         customerRoles.get(0).setUserAccounts(customerAccounts);
-        accountService.save(userFranco);        
+        accountService.save(userFranco);
     }
 
     private void insertHostingAccounts() {
@@ -138,9 +138,9 @@ public class DataPopulator {
         links.add(link16);
         links.add(link17);
         hosting1.setLinks(links);
-        
+
         Album album1 = albumService.searchByName("Highway to Hell");
-        
+
         Song song1 = new Song("1", "Highway to Hell", album1, link1);
         Song song2 = new Song("2", "Girls Got Rhythm", album1, link2);
         Song song3 = new Song("3", "Walk All Over You", album1, link3);
@@ -151,7 +151,7 @@ public class DataPopulator {
         Song song8 = new Song("8", "If You Want Blood (You ve Got It)", album1, link8);
         Song song9 = new Song("9", "Love Hungry Man", album1, link9);
         Song song10 = new Song("10", "Night Prowler", album1, link10);
-        
+
         link1.setSong(song1);
         link2.setSong(song2);
         link3.setSong(song3);
@@ -162,7 +162,7 @@ public class DataPopulator {
         link8.setSong(song8);
         link9.setSong(song9);
         link10.setSong(song10);
-        
+
         List<Song> album1Songs = new ArrayList<>();
         album1Songs.add(song1);
         album1Songs.add(song2);
@@ -175,7 +175,7 @@ public class DataPopulator {
         album1Songs.add(song9);
         album1Songs.add(song10);
         album1.setSongs(album1Songs);
-        
+
         songService.save(song1);
         songService.save(song2);
         songService.save(song3);
@@ -185,10 +185,10 @@ public class DataPopulator {
         songService.save(song7);
         songService.save(song8);
         songService.save(song9);
-        songService.save(song10);        
-        
+        songService.save(song10);
+
         Album album2 = albumService.searchByName("Presense");
-        
+
         Song song11 = new Song("1", "Achilles Last Stand", album2, link11);
         Song song12 = new Song("2", "For Your Life", album2, link12);
         Song song13 = new Song("3", "Royal Orleans", album2, link13);
@@ -196,14 +196,14 @@ public class DataPopulator {
         Song song15 = new Song("5", "Candy Store Rock", album2, link15);
         Song song16 = new Song("6", "Hots On For Nowhere", album2, link16);
         Song song17 = new Song("7", "Tea For One", album2, link17);
-        
+
         link11.setSong(song11);
         link12.setSong(song12);
         link13.setSong(song13);
         link14.setSong(song14);
         link15.setSong(song15);
         link16.setSong(song16);
-        link17.setSong(song17);       
+        link17.setSong(song17);
 
         List<Song> album2Songs = new ArrayList<>();
         album2Songs.add(song11);

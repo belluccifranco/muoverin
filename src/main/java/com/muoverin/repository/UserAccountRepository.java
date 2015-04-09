@@ -4,6 +4,6 @@ import com.muoverin.model.UserAccount;
 
 public interface UserAccountRepository extends BaseRepository<UserAccount> {
 
-    public UserAccount searchByName(String name);
+    public UserAccount searchByUsername(String username);
 
 }

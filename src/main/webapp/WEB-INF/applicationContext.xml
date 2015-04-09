@@ -25,8 +25,8 @@
     
     <mvc:resources mapping="/resources/**" location="/resources/"/>
     
-    <mvc:view-controller path="/" view-name="main"/>
-    <mvc:view-controller path="/upload" view-name="uploadSong"/>
+    <mvc:view-controller path="/" view-name="main"/>    
+    <mvc:view-controller path="/signup" view-name="signup"/>
     
     <mvc:annotation-driven>
         <mvc:message-converters>
@@ -56,6 +56,8 @@
     <security:http pattern="/login" security="none"/>        
     <security:http pattern="/loginFailed" security="none"/>
     <security:http pattern="/logout" security="none"/>    
+    <security:http pattern="/signup" security="none"/>
+    <security:http pattern="/userAccounts" security="none"/>
     <security:http auto-config="true" entry-point-ref="authenticationEntryPoint">
         <security:form-login login-page="/login"
                              default-target-url="/"

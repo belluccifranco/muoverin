@@ -1,22 +1,16 @@
 package com.muoverin.service;
 
-import com.muoverin.exception.BusinessValidationException;
 import com.muoverin.model.Album;
 import com.muoverin.repository.AlbumRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.BeanPropertyBindingResult;
-import org.springframework.validation.BindingResult;
 
 @Service
 public class AlbumServiceImpl implements AlbumService {
 
     private final AlbumRepository albumRepository;
-    
-    @Autowired
-    private AlbumValidator albumValidator;
 
     @Autowired
     public AlbumServiceImpl(AlbumRepository albumRepository) {
@@ -38,13 +32,6 @@ public class AlbumServiceImpl implements AlbumService {
     @Override
     @Transactional
     public Album save(Album album) {
-        BindingResult result = new BeanPropertyBindingResult(album, "album");        
-        
-        albumValidator.validate(album, result);
-        if (result.hasErrors()) {
-            throw new BusinessValidationException(result);
-        }
-        
         return albumRepository.save(album);
     }
 

@@ -1,6 +1,5 @@
 package com.muoverin.service;
 
-import com.muoverin.exception.BusinessValidationException;
 import com.muoverin.model.Pagination;
 import com.muoverin.model.Song;
 import com.muoverin.repository.SongRepository;
@@ -8,21 +7,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.BeanPropertyBindingResult;
-import org.springframework.validation.BindingResult;
 
 @Service
 public class SongServiceImpl implements SongService {
 
-    private final SongRepository songRepository;    
+    private final SongRepository songRepository;
     private static final int MAX_ROWS_SEARCH = 50;
-    
-    @Autowired
-    private SongValidator songValidator;
 
     @Autowired
     public SongServiceImpl(SongRepository songRepository) {
-        this.songRepository = songRepository;        
+        this.songRepository = songRepository;
     }
 
     @Override
@@ -37,16 +31,9 @@ public class SongServiceImpl implements SongService {
         return songRepository.searchById(id);
     }
 
-    @Override        
+    @Override
     @Transactional
     public Song save(Song song) {
-        BindingResult result = new BeanPropertyBindingResult(song, "song");        
-        
-        songValidator.validate(song, result);
-        if (result.hasErrors()) {
-            throw new BusinessValidationException(result);
-        }
-        
         return songRepository.save(song);
     }
 

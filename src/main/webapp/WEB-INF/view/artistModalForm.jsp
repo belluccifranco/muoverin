@@ -16,7 +16,7 @@
                     <textarea id="artist-info" maxlength="255" rows="5"></textarea>
                 </div>
 
-                <input id="saveArtist-button" class="button radius" type="submit" value="Save!"/>
+                <input id="saveArtist-button" class="button radius expand" type="submit" value="Save!"/>
             </div>
         </form>
     </div>

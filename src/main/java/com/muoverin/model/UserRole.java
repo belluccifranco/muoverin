@@ -7,10 +7,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "UserRole.searchAll", query = "SELECT ur FROM UserRole ur"),
+    @NamedQuery(name = "UserRole.searchById", query = "SELECT ur FROM UserRole ur WHERE ur.id_userRole = :id"),
+    @NamedQuery(name = "UserRole.searchByName", query = "SELECT ur FROM UserRole ur WHERE ur.name = :name")
+})
 @Table(uniqueConstraints = {
     @UniqueConstraint(columnNames = {"name"})})
 public class UserRole implements Serializable {

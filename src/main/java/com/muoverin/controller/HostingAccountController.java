@@ -1,7 +1,9 @@
 package com.muoverin.controller;
 
+import com.muoverin.exception.BusinessValidationException;
 import com.muoverin.model.HostingAccount;
 import com.muoverin.service.HostingAccountService;
+import com.muoverin.service.HostingAccountValidator;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -19,6 +21,9 @@ import org.springframework.web.context.request.WebRequest;
 public class HostingAccountController {
 
     private final HostingAccountService hostingAccountService;
+    
+    @Autowired
+    private HostingAccountValidator hostingAccountValidator;
 
     @Autowired
     public HostingAccountController(HostingAccountService hostingAccountService) {
@@ -32,9 +37,13 @@ public class HostingAccountController {
     }
     
     
-    @RequestMapping(value = "/hostingAccount", method = RequestMethod.POST)
+    @RequestMapping(value = "/hostingAccounts", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public void addNew(@RequestBody @Valid HostingAccount hostingAccount, HttpServletResponse response, WebRequest webRequest, BindingResult result) {
+        hostingAccountValidator.validate(hostingAccount, result);
+        if (result.hasErrors()) {
+            throw new BusinessValidationException(result);
+        }
         HostingAccount createdHostingAccount = hostingAccountService.save(hostingAccount);
         response.setHeader("Location", webRequest.getContextPath() + "/hostingAccount/" + createdHostingAccount.getId_hostingAccount());
     }

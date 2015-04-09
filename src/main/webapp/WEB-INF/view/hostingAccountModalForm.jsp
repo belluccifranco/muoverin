@@ -29,7 +29,7 @@
                     <small id="hostingAccount-password-error" class="error"><spring:message code="NotEmpty-hostingAccount-password"/></small>
                 </div>
 
-                <input id="saveHosting-button" class="button radius" type="submit" value="Save!"/>
+                <input id="saveHosting-button" class="button radius expand" type="submit" value="Save!"/>
             </div>
         </form>
     </div>

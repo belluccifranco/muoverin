@@ -4,6 +4,9 @@ import com.muoverin.model.UserAccount;
 import com.muoverin.model.UserRole;
 import com.muoverin.model.SimpleGrantedAuthority;
 import com.muoverin.repository.UserAccountRepository;
+import com.muoverin.util.Utilities;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.NoResultException;
@@ -33,7 +36,7 @@ public class UserAccountServiceImpl implements UserDetailsService, UserAccountSe
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserAccount account = null;
         try {
-            account = accountRepository.searchByName(username);
+            account = accountRepository.searchByUsername(username);
         } catch (NoResultException ex) {
             logger.error(ex.getMessage());
             throw new UsernameNotFoundException("");
@@ -48,7 +51,7 @@ public class UserAccountServiceImpl implements UserDetailsService, UserAccountSe
         boolean accountNonExpired = true;
         boolean credentialsNonExpired = true;
         boolean accountNonLocked = true;
-        List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         for (UserRole role : userAccount.getUserRoles()) {
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
         }
@@ -60,6 +63,12 @@ public class UserAccountServiceImpl implements UserDetailsService, UserAccountSe
     @Override
     @Transactional
     public UserAccount save(UserAccount userAccount) {
+        try {
+            userAccount.setPassword(Utilities.applyMD5(userAccount.getPassword()));
+            userAccount.setCpassword(userAccount.getPassword());
+        } catch (NoSuchAlgorithmException ex) {
+            logger.error(ex.getMessage());
+        }        
         return accountRepository.save(userAccount);
     }
 

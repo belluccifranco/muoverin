@@ -55,16 +55,7 @@ $(document).ready(function () {
                 $cbHosting.html(options);
             }
         });
-    }
-
-    function populateCustomFieldErrors(errorFormInfo) {
-        $.each(errorFormInfo.fieldErrors, function (index, fieldErrorDTO) {
-            var errorTag = $("#" + errorFormInfo.objectName + "-" + fieldErrorDTO.fieldName + "-error");
-            errorTag.text(fieldErrorDTO.fieldError);
-            errorTag.closest('div').addClass("error");
-
-        });
-    }
+    } 
 
     $artistsS2Configs = $.extend($artistsS2Configs, {
         ajax: {
@@ -126,7 +117,7 @@ $(document).ready(function () {
         songJson.track = $("#song-track").val();
 
         $.ajax({
-            url: "/song",
+            url: "/songs",
             data: JSON.stringify(songJson),
             type: "post",
             contentType: 'application/json',
@@ -137,7 +128,7 @@ $(document).ready(function () {
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 var errorFormInfo = $.parseJSON(jqXHR.responseText);
-                populateCustomFieldErrors(errorFormInfo);
+                utils.populateCustomFieldErrors(errorFormInfo);
             }
         });
         event.preventDefault();
@@ -149,7 +140,7 @@ $(document).ready(function () {
         artistJson.info = $("#artist-info").val();
 
         $.ajax({
-            url: "/artist",
+            url: "/artists",
             data: JSON.stringify(artistJson),
             type: "post",
             contentType: 'application/json',
@@ -159,7 +150,7 @@ $(document).ready(function () {
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 var errorFormInfo = $.parseJSON(jqXHR.responseText);
-                populateCustomFieldErrors(errorFormInfo);
+                utils.populateCustomFieldErrors(errorFormInfo);
             }
         });
         event.preventDefault();
@@ -177,7 +168,7 @@ $(document).ready(function () {
         albumJson.releaseYear = $("#album-releaseYear").val();
 
         $.ajax({
-            url: "/album",
+            url: "/albums",
             data: JSON.stringify(albumJson),
             type: "post",
             contentType: 'application/json',
@@ -188,7 +179,7 @@ $(document).ready(function () {
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 var errorFormInfo = $.parseJSON(jqXHR.responseText);
-                populateCustomFieldErrors(errorFormInfo);
+                utils.populateCustomFieldErrors(errorFormInfo);
             }
         });
         event.preventDefault();
@@ -202,7 +193,7 @@ $(document).ready(function () {
         hostingJson.password = $("#hostingAccount-password").val();
 
         $.ajax({
-            url: "/hostingAccount",
+            url: "/hostingAccounts",
             data: JSON.stringify(hostingJson),
             type: "post",
             contentType: 'application/json',
@@ -213,7 +204,7 @@ $(document).ready(function () {
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 var errorFormInfo = $.parseJSON(jqXHR.responseText);
-                populateCustomFieldErrors(errorFormInfo);
+                utils.populateCustomFieldErrors(errorFormInfo);
             }
         });
         event.preventDefault();

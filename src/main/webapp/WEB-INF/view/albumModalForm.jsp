@@ -23,7 +23,7 @@
                     <small id="album-releaseYear-error" class="error"><spring:message code="Pattern-album-releaseYear"/></small>
                 </div>                
 
-                <input id="saveArtist-button" class="button radius" type="submit" value="Save!"/>
+                <input id="saveArtist-button" class="button radius expand" type="submit" value="Save!"/>
             </div>
         </form>
     </div>

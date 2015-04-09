@@ -12,7 +12,7 @@
     <body>
         <div id="container">
             <h1 id="title" class="title">
-                <img  id="main-logo" src="<c:url value="/resources/images/vinilo.png" />" alt="logo">
+                <img  id="main-logo" src="<c:url value="/resources/images/logo.png" />" alt="logo">
                 <div class="title-main">
                     <span id="menu-toggle"><i class="fi-list"></i></span><span id="title-text"><spring:message code="message-muoverin" /></span>
                 </div>
