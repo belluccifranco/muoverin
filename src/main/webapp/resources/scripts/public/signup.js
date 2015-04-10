@@ -16,7 +16,7 @@ $(document).ready(function () {
             type: "post",
             contentType: 'application/json',
             success: function () {
-                $("#container").prepend('<div data-alert class="alert-box success radius">New user was saved!<a href="#" class="close">&times;</a></div>').foundation();
+                $(".login-form").prepend('<div data-alert class="alert-box success radius">New user was saved!<a href="#" class="close">&times;</a></div>').foundation();
                 $signupForm[0].reset();
                 $(window).scrollTop(0);                
             },

@@ -10,10 +10,12 @@
     </head>
     <body>
         <div id="container">
-            <div class="small-12 small-centered medium-6 large-4 columns">
-                <h1 class="title text-center">
-                    <img src="<c:url value="/resources/images/logo.png"/>" alt="logo" style="width: 64px;"> <spring:message code="message-muoverin"/>
-                </h1>   
+            <h1 class="title text-center">
+                <img src="<c:url value="/resources/images/logo.png"/>" alt="logo" style="width: 64px;"> <spring:message code="message-muoverin"/>
+            </h1>
+            <div class="row">
+            <div class="small-12 small-centered medium-6 large-5 columns">
+                <div class="login-form">
                 <form id="signupForm" data-abide="ajax">
                     <div>
                         <label for="userAccount-username"><spring:message code="message-username"/></label>
@@ -33,6 +35,8 @@
                     <input class="button radius expand" type="submit" value="<spring:message code="message-signup"/>">
                     <a href="<c:url value="/login"/>" class="button radius expand"><spring:message code="message-back-login"/></a>
                 </form>
+                </div>
+            </div>
             </div>
         </div>    
         <jsp:include page="fragments/common-footer.jsp"/>

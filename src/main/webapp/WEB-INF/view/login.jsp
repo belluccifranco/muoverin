@@ -10,10 +10,12 @@
     </head>
     <body>
         <div id="container">
-            <div class="small-12 small-centered medium-6 large-4 columns">                
-                <h1 class="title text-center">
-                    <img src="<c:url value="/resources/images/logo.png"/>" alt="logo" style="width: 64px;"> <spring:message code="message-muoverin"/>
-                </h1>
+            <h1 class="title text-center">
+                <img src="<c:url value="/resources/images/logo.png"/>" alt="logo" style="width: 64px;"> <spring:message code="message-muoverin"/>
+            </h1>
+            <div class="row">
+            <div class="small-12 small-centered medium-6 large-5 columns">
+                <div class="login-form">
                 <c:if test="${not empty error}">
                     <div class="alert-box alert radius">
                         <spring:message code="message-errorLogin"/>
@@ -27,6 +29,8 @@
                     <input class="button expand radius" type="submit" value="<spring:message code="message-login"/>">                        
                     <a href="<c:url value="/signup"/>" class="button expand radius"><spring:message code="message-signup"/></a>
                 </form>
+                </div>
+            </div>
             </div>
         </div>
         <jsp:include page="fragments/common-footer.jsp"/>
