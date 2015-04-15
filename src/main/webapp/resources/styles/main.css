@@ -80,9 +80,9 @@
 
     span#menu-toggle {
         cursor: pointer;
-        margin-left: 0.3rem;
+        /*margin-left: 0.3rem;
         padding-right: 0.5rem;
-        padding-left: 0.5rem;
+        padding-left: 0.5rem;*/
     }
 
     span#menu-toggle.pressed {
@@ -138,7 +138,7 @@
     }
 
     .toolbar > .toolbar-button {
-        padding: 0 0.5em;
+        padding: 0 0.4em;
         display: inline-block;
         font-size: 1.7rem;
         margin-right: 0.5rem;
@@ -234,10 +234,6 @@
         top: 0;
         bottom: 3.65rem;
         width: 70%;
-    }
-
-    span#menu-toggle {
-        display: none;
     }
 
     div#main-searcher {

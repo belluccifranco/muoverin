@@ -12,9 +12,9 @@
     <body>
         <div id="container">
             <h1 id="title" class="title">
-                <img  id="main-logo" src="<c:url value="/resources/images/logo.png" />" alt="logo">
+                <span id="menu-toggle"><img  id="main-logo" src="<c:url value="/resources/images/logo.png" />" alt="logo"></span>
                 <div class="title-main">
-                    <span id="menu-toggle"><i class="fi-list"></i></span><span id="title-text"><spring:message code="message-muoverin" /></span>
+                    <span id="title-text"><spring:message code="message-muoverin" /></span>
                 </div>
                 <div class="toolbar">
                     <a class="toolbar-button" id="search-toggle">
@@ -22,13 +22,17 @@
                     </a>
                 </div>
                 <div class="toolbar">
-                    <a class="toolbar-button without-margin-right" href="#" id="jqvp-prev" class="button size1_5x prev">
+                    <a class="toolbar-button without-margin-right" href="#">
+                        <i class="fi-page-add"></i>
+                    </a><a class="toolbar-button without-margin-right" href="#">
+                        <i class="fi-minus" style="border-right: 2px solid black;"></i>
+                    </a><a class="toolbar-button without-margin-right prev" href="#" id="jqvp-prev">
                         <i class="fi-previous"></i>
-                    </a><a class="toolbar-button without-margin-right" href="#" id="jqvp-play" class="button size1_5x play">
+                    </a><a class="toolbar-button without-margin-right play" href="#" id="jqvp-play">
                         <i class="fi-play"></i>
-                    </a><a class="toolbar-button without-margin-right hide" href="#" id="jqvp-pause" class="button size1_5x pause">
+                    </a><a class="toolbar-button without-margin-right hide pause" href="#" id="jqvp-pause">
                         <i class="fi-pause"></i>
-                    </a><a class="toolbar-button" href="#" id="jqvp-next" class="button size1_5x next">
+                    </a><a class="toolbar-button next" href="#" id="jqvp-next">
                         <i class="fi-next"></i>
                     </a>
                 </div>
